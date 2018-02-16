@@ -59,6 +59,8 @@
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Drawing" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Security" />
     <Reference Include="System.Web.DynamicData" />
     <Reference Include="System.Web.Entity" />
     <Reference Include="System.Web.ApplicationServices" />
@@ -152,6 +154,39 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Models\Missions.cs">
+      <DependentUpon>RewardsForYou.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Rewards.cs">
+      <DependentUpon>RewardsForYou.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\RewardsForYou.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>RewardsForYou.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\RewardsForYou.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>RewardsForYou.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\RewardsForYou.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>RewardsForYou.edmx</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Roles.cs">
+      <DependentUpon>RewardsForYou.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Tasks.cs">
+      <DependentUpon>RewardsForYou.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Users.cs">
+      <DependentUpon>RewardsForYou.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\UsersRewards.cs">
+      <DependentUpon>RewardsForYou.tt</DependentUpon>
+    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -161,10 +196,27 @@
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
+    <Content Include="Models\RewardsForYou.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>RewardsForYou.Context.cs</LastGenOutput>
+      <DependentUpon>RewardsForYou.edmx</DependentUpon>
+    </Content>
+    <Content Include="Models\RewardsForYou.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>RewardsForYou.edmx</DependentUpon>
+      <LastGenOutput>RewardsForYou.cs</LastGenOutput>
+    </Content>
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="ApplicationInsights.config">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <EntityDeploy Include="Models\RewardsForYou.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>RewardsForYou.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <Content Include="Models\RewardsForYou.edmx.diagram">
+      <DependentUpon>RewardsForYou.edmx</DependentUpon>
     </Content>
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
@@ -194,7 +246,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Models\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />
@@ -208,6 +259,9 @@
   <ItemGroup>
     <None Include="packages.config" />
     <Content Include="Scripts\jquery-1.10.2.min.map" />
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
