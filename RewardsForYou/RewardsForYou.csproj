@@ -231,7 +231,6 @@
     <Compile Include="Models\Roles.cs">
       <DependentUpon>RewardsForYou.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\SearchRewardsforyou.cs" />
     <Compile Include="Models\Tasks.cs">
       <DependentUpon>RewardsForYou.tt</DependentUpon>
     </Compile>
