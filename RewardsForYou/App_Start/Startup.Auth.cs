@@ -52,8 +52,10 @@ namespace RewardsForYou
                             ClientCredential credential = new ClientCredential(clientId, appKey);
                             string signedInUserID = context.AuthenticationTicket.Identity.FindFirst(ClaimTypes.NameIdentifier).Value;
                             AuthenticationContext authContext = new AuthenticationContext(Authority, new ADALTokenCache(signedInUserID));
+                            //string email = context.AuthenticationTicket.Identity.FindFirst(ClaimTypes.Email).Value;
                             return authContext.AcquireTokenByAuthorizationCodeAsync(
                                code, new Uri(HttpContext.Current.Request.Url.GetLeftPart(UriPartial.Path)), credential, graphResourceId);
+
                         }
                     }
                 });
