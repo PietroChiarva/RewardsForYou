@@ -4,10 +4,7 @@
 
 <div class="jumbotron">
     <h1 class="text-center">Rewards For You</h1>
-
-
 </div>
-
 <div class="row">
     <div class="col-sm-4">
         <div class="card">
@@ -27,20 +24,20 @@
             </div>
         </div>
     </div>
-<div class="col-sm-4">
-    <div class="card">
-        <div class="card-body text-center">
-            <h5 class="card-title">Amminstrator</h5>
-            <p class="card-text">Entra nella tua pagina di amministrazione</p>
-            <a href="@Url.Action("GoToAmministrator","Home")" id="Amministrator" class="btn btn-primary">Vai</a>
+    <div class="col-sm-4">
+        <div class="card">
+            <div class="card-body text-center">
+                <h5 class="card-title">Amminstrator</h5>
+                <p class="card-text">Entra nella tua pagina di amministrazione</p>
+                <a href="@Url.Action("GoToAmministrator","Home")" id="Amministrator" class="btn btn-primary">Vai</a>
+            </div>
         </div>
     </div>
 </div>
- </div>
 
-<script language="">
+<script type="text/javascript">
     $(document).ready(function () {
-     
+
         if (ViewData["Employee"] == true) {
             $('#Employee').attr('disabled', disabled);
         }
@@ -50,5 +47,5 @@
         else if (ViewData["Amministrator"] == true) {
             $('#Amministrator').attr('disabled', disabled);
         }
-    })
+    });
 </script>
