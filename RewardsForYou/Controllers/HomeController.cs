@@ -14,12 +14,28 @@ namespace RewardsForYou.Controllers
         {
             string EMail = ((System.Security.Claims.ClaimsIdentity)HttpContext.GetOwinContext().Authentication.User.Identity).Name;
             return View();
+            using (RewardsForYouEntities db = new RewardsForYouEntities())
+            {
+                var x = db.Users.Where(l => l.EMail == EMail).FirstOrDefault();
+                if (x != null)
+                {
+                    var role = x.RoleID;
+                }
+            }
+            return View();
+
+            
         }
 
+        public ActionResult Employee()
+        {
+            return View();
 
-
+        }
     }
 }
+
+
 
 //[HttpPost]
 //[ValidateAntiForgeryToken]
