@@ -3,19 +3,52 @@
 }
 
 <div class="jumbotron">
-    @*<h1>Rewards For You</h1>
-    <p class="lead">Sign in your account</p>
-    <form>
-        <div class="form-group">
-            <label for="username">Username</label>
-            <asp:TextBox type="username" ID="TxtUsername" runat="" class="form-control" id="username" placeholder="Enter Username"></asp:TextBox>
-        </div>
-        <div class="form-group">
-            <label for="exampleInputPassword1">Password</label>
-            <asp:TextBox type="password" class="form-control" id="exampleInputPassword1" placeholder="Enter Password"></asp:TextBox>
-        </div>
-        <button type="submit" ID="TxtUsername" runat="" class="btn btn-primary">Sign in</button>
-    </form>*@
+    <h1 class="text-center">Rewards For You</h1>
+
 
 </div>
 
+<div class="row">
+    <div class="col-sm-4">
+        <div class="card">
+            <div class="card-body text-center">
+                <h5 class="card-title">Employee</h5>
+                <p class="card-text">Entra nella tua pagina personale</p>
+                <a href="@Url.Action("GoToEmployee","Home")" id="Employee" class="btn btn-primary">Vai</a>
+            </div>
+        </div>
+    </div>
+    <div class="col-sm-4">
+        <div class="card">
+            <div class="card-body text-center">
+                <h5 class="card-title">Manager</h5>
+                <p class="card-text">Entra nella tua pagina gestionale</p>
+                <a href="@Url.Action("GoToManager","Home")" id="Manager" class="btn btn-primary">Vai</a>
+            </div>
+        </div>
+    </div>
+<div class="col-sm-4">
+    <div class="card">
+        <div class="card-body text-center">
+            <h5 class="card-title">Amminstrator</h5>
+            <p class="card-text">Entra nella tua pagina di amministrazione</p>
+            <a href="@Url.Action("GoToAmministrator","Home")" id="Amministrator" class="btn btn-primary">Vai</a>
+        </div>
+    </div>
+</div>
+ </div>
+
+<script>
+    $(document).ready(function () {
+     
+        if (ViewData["Employee"] == true) {
+            $('#Employee').attr('disabled', disabled);
+        }
+        else if (ViewData["Manager"] == true) {
+            $('#Manager').attr('disabled', disabled);
+        }
+        else if (ViewData["Amministrator"] == true) {
+            $('#Amministrator').attr('disabled', disabled);
+        }
+    })
+</script>

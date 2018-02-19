@@ -12,7 +12,44 @@ namespace RewardsForYou.Controllers
     {
         public ActionResult Index()
         {
+            int roleId = 0;
             string EMail = ((System.Security.Claims.ClaimsIdentity)HttpContext.GetOwinContext().Authentication.User.Identity).Name;
+            using (RewardsForYouEntities db = new RewardsForYouEntities())
+            {
+                var d = db.Users.Where(l => l.EMail == EMail).FirstOrDefault();
+                if(d != null)
+                {
+                    roleId = d.RoleID;
+                }
+
+            }
+            ViewData["Employee"] = false;
+            ViewData["Manager"] = false;
+            ViewData["Amministrator"] = false;
+            if (roleId == 1)
+            {
+                ViewData["Employee"] = true;
+                ViewData["Manager"] = true;
+
+            }
+            else if(roleId == 2)
+            {
+                ViewData["Employee"] = true;
+                ViewData["Manager"] = true;
+            }
+            else if(roleId == 3)
+            {
+                ViewData["Manager"] = true;
+                ViewData["Amministrator"] = true;
+            }
+
+
+            return View();
+        }
+
+        public ActionResult GoToEmployee()
+        {
+
             return View();
         }
 
