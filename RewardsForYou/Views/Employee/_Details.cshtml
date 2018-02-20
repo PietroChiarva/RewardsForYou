@@ -18,9 +18,7 @@
         <th>
             @Html.DisplayNameFor(model => model.ManagerUserID)
         </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Roles.Role)
-        </th>
+       
     
         <th></th>
     </tr>
@@ -28,23 +26,21 @@
 
     <tr>
         <td>
-            @Html.DisplayFor(modelItem => item.Serial)
+            @Html.DisplayFor(modelItem => Model.Serial)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.Name)
+            @Html.DisplayFor(modelItem => Model.Name)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.Surname)
+            @Html.DisplayFor(modelItem => Model.Surname)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.EMail)
+            @Html.DisplayFor(modelItem => Model.EMail)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.ManagerUserID)
+            @Html.DisplayFor(modelItem => Model.ManagerUserID)
         </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Roles.Role)
-        </td>
+        
     </tr>
 
 

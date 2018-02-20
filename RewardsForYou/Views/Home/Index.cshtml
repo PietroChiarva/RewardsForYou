@@ -6,30 +6,30 @@
     <h1 class="text-center">Rewards For You</h1>
 </div>
 <div class="row">
-    <div class="col-sm-4">
-        <div class="card">
+    <div class="col-md-12">
+        <div class="card" id="Employee">
             <div class="card-body text-center">
                 <h5 class="card-title">Employee</h5>
                 <p class="card-text">Entra nella tua pagina personale</p>
-                <a href="@Url.Action("Index","Employee")" id="Employee" class="btn btn-primary">Vai</a>
+                <a href="@Url.Action("Index","Employee")"  class="btn btn-primary">Vai</a>
             </div>
         </div>
     </div>
-    <div class="col-sm-4">
-        <div class="card">
+    <div class="col-md-12">
+        <div class="card" id="Manager">
             <div class="card-body text-center">
                 <h5 class="card-title">Manager</h5>
                 <p class="card-text">Entra nella tua pagina gestionale</p>
-                <a href="@Url.Action("Index","Manager")" id="Manager" class="btn btn-primary">Vai</a>
+                <a href="@Url.Action("Index","Manager")"  class="btn btn-primary">Vai</a>
             </div>
         </div>
     </div>
-    <div class="col-sm-4">
-        <div class="card">
+    <div class="col-md-12">
+        <div class="card" id="Amministrator">
             <div class="card-body text-center">
                 <h5 class="card-title">Amminstrator</h5>
                 <p class="card-text">Entra nella tua pagina di amministrazione</p>
-                <a href="@Url.Action("GoToAmministrator","Home")" id="Amministrator" class="btn btn-primary">Vai</a>
+                <a href="@Url.Action("GoToAmministrator","Home")"  class="btn btn-primary">Vai</a>
             </div>
         </div>
     </div>
@@ -39,13 +39,13 @@
     $(document).ready(function () {
 
         if ("@ViewData["Employee"]" == "True") {
-            $('#Employee').attr('disabled', disabled);
+            $('#Employee').css("display", "none");
         }
         if ("@ViewData["Manager"]" == "True") {
-            $('#Manager').attr('disabled', disabled);
+            $('#Manager').css("display", "none");
         }
         if ("@ViewData["Amministrator"]" == "True") {
-            $('#Amministrator').attr('disabled', disabled);
+            $('#Amministrator').css("display", "none");
         }
     });
 </script>

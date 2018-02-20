@@ -1,4 +1,4 @@
-﻿@model RewardsForYou.Models.ListUserClass;
+﻿@model RewardsForYou.Models.Users
 @{
     ViewBag.Title = "Index";
 }
@@ -8,6 +8,6 @@
 
 <div class="container-fluid">
     <div class="container-fluid" id="DetailsUser" style="margin-top:5px;overflow-x:auto;width:100%;">
-        @{Html.RenderPartial("_Details", Model.ResultList);}
+        @{Html.RenderPartial("_Details", Model);}
     </div>
 </div>
