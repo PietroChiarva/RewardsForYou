@@ -1,4 +1,4 @@
-﻿@model IEnumerable<RewardsForYou.Models.Users>
+﻿@model RewardsForYou.Models.Users
 
 
 <table class="table">
@@ -18,45 +18,30 @@
         <th>
             @Html.DisplayNameFor(model => model.ManagerUserID)
         </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Roles.Role)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Users1.Serial)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Users2.Serial)
-        </th>
+       
+    
         <th></th>
     </tr>
 
-@foreach (var item in Model) {
+
     <tr>
         <td>
-            @Html.DisplayFor(modelItem => item.Serial)
+            @Html.DisplayFor(modelItem => Model.Serial)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.Name)
+            @Html.DisplayFor(modelItem => Model.Name)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.Surname)
+            @Html.DisplayFor(modelItem => Model.Surname)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.EMail)
+            @Html.DisplayFor(modelItem => Model.EMail)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.ManagerUserID)
+            @Html.DisplayFor(modelItem => Model.ManagerUserID)
         </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Roles.Role)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Users1.Serial)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Users2.Serial)
-        </td>
+        
     </tr>
-}
+
 
 </table>

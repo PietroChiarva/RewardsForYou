@@ -5,13 +5,13 @@ using System.Web;
 
 namespace RewardsForYou.Models
 {
-    public class ListUserClass : RewardsForYouEntities
+    public class ListUserClass : Users
     {
         public ListUserClass()
-        {
-            ResultList = new List<RewardsForYouEntities>();
-        }
-        public List<RewardsForYouEntities> ResultList { get; set; }
-
+            {
+            ResultList = new List<Users>();
+            }
+        public List<Users> ResultList { get; set; }
+        
     }
 }
