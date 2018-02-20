@@ -21,15 +21,17 @@ namespace RewardsForYou.Controllers
         {
             using (RewardsForYouEntities db = new RewardsForYouEntities())
             {
-
+                int userID = (int)Session["UserID"];
                 List<Users> users = new List<Users>();
-                users = db.Users.Where(x => x.ManagerUserID == (int) Session["UserID"]).ToList();
+                users = db.Users.Where(x => x.ManagerUserID == userID).ToList();
 
                 return View(users);
             }
         }
     }
 }
+   
+        
 
 
     //IQueryable<RewardsForYouEntities> x = null;
