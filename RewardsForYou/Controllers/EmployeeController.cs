@@ -10,15 +10,22 @@ namespace RewardsForYou.Controllers
     public class EmployeeController : Controller
     {
         // GET: Employee
-        public ActionResult Index(ListUserClass data)
+        public ActionResult Index()
         {
+            Users x = null;
+            string EMail = ((System.Security.Claims.ClaimsIdentity)HttpContext.GetOwinContext().Authentication.User.Identity).Name;
             using (RewardsForYouEntities db = new RewardsForYouEntities())
             {
-                IQueryable<RewardsForYouEntities> x = null;
 
+                
+                x = db.Users.Where(l => l.EMail == EMail).FirstOrDefault();
+                
                
+                
+                
+
             }
-                return View("Index",data);
+                return View(x);
         }
 
 
