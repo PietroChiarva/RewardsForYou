@@ -47,14 +47,10 @@ namespace RewardsForYou.Controllers
             return View();
         }
 
-    
-
-            
-        }
-
- 
+     
+      
+    }
 }
-
 
 
 
