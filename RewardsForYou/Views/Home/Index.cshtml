@@ -41,10 +41,10 @@
         if (ViewData["Employee"] == true) {
             $('#Employee').attr('disabled', disabled);
         }
-        else if (ViewData["Manager"] == true) {
+        if (ViewData["Manager"] == true) {
             $('#Manager').attr('disabled', disabled);
         }
-        else if (ViewData["Amministrator"] == true) {
+        if (ViewData["Amministrator"] == true) {
             $('#Amministrator').attr('disabled', disabled);
         }
     });

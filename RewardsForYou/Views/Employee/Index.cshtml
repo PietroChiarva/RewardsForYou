@@ -1,7 +1,13 @@
-﻿
+﻿@model RewardsForYou.Models.ListUserClass;
 @{
     ViewBag.Title = "Index";
 }
 
-<h2>Index</h2>
+<h2>Employee personal page</h2>
 
+
+<div class="container-fluid">
+    <div class="container-fluid" id="SearchViewContainer" style="margin-top:5px;overflow-x:auto;width:100%;">
+        @{Html.RenderPartial("_Details", Model.ResultList);}
+    </div>
+</div>

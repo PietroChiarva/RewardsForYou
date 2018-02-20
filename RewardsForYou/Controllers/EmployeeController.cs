@@ -1,4 +1,5 @@
-﻿using System;
+﻿using RewardsForYou.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -9,9 +10,17 @@ namespace RewardsForYou.Controllers
     public class EmployeeController : Controller
     {
         // GET: Employee
-        public ActionResult Index()
+        public ActionResult Index(ListUserClass data)
         {
-            return View();
+            using (RewardsForYouEntities db = new RewardsForYouEntities())
+            {
+                IQueryable<RewardsForYouEntities> x = null;
+
+               
+            }
+                return View("Index",data);
         }
+
+
     }
 }
