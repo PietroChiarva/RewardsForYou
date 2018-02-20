@@ -20,7 +20,7 @@ namespace RewardsForYou.Controllers
             var users = db.Users.Include(u => u.Roles).Include(u => u.Users1).Include(u => u.Users2);
             return View(users.ToList());
         }
-    }
+     } 
 }
 
 //        // GET: Manager/Details/5
