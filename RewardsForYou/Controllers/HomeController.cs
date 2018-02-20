@@ -38,7 +38,7 @@ namespace RewardsForYou.Controllers
             else if(roleId == 2)
             {
                 ViewData["Employee"] = true;
-                ViewData["Manager"] = true;
+                ViewData["Amministrator"] = true;
             }
             else if(roleId == 3)
             {

@@ -7,7 +7,7 @@
 <h2>Lista Dipendenti</h2>
 
 <p>
-    @Html.ActionLink("Create New", "Create")
+    @Html.ActionLink("Lista", "Create")
 </p>
 <table class="table">
     <tr>
@@ -26,15 +26,8 @@
         <th>
             @Html.DisplayNameFor(model => model.ManagerUserID)
         </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Roles.Role)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Users1.Serial)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Users2.Serial)
-        </th>
+       
+       
         <th></th>
     </tr>
 
@@ -56,19 +49,11 @@
             <td>
                 @Html.DisplayFor(modelItem => item.ManagerUserID)
             </td>
+           
+           
             <td>
-                @Html.DisplayFor(modelItem => item.Roles.Role)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Users1.Serial)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Users2.Serial)
-            </td>
-            <td>
-                @Html.ActionLink("Edit", "Edit", new { id = item.UserID }) |
-                @Html.ActionLink("Details", "Details", new { id = item.UserID }) |
-                @Html.ActionLink("Delete", "Delete", new { id = item.UserID })
+                <a href="@Url.Action("ListaUsers","Manager")" new { id=item.UserID }) class="btn btn-primary">+</a>
+                <a href="@Url.Action("ListaUsers","Manager")" new { id=item.UserID }) class="btn btn-primary">Details Employee</a>
             </td>
         </tr>
     }

@@ -11,6 +11,7 @@ namespace RewardsForYou.Controllers
 {
     public class AccountController : Controller
     {
+        [AllowAnonymous]
         public void SignIn()
         {
             // Send an OpenID Connect sign-in request.
