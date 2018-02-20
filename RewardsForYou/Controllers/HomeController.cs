@@ -12,6 +12,7 @@ namespace RewardsForYou.Controllers
     {
         public ActionResult Index()
         {
+            int userId = 0;
             int roleId = 0;
             string EMail = ((System.Security.Claims.ClaimsIdentity)HttpContext.GetOwinContext().Authentication.User.Identity).Name;
             using (RewardsForYouEntities db = new RewardsForYouEntities())
@@ -19,7 +20,9 @@ namespace RewardsForYou.Controllers
                 var d = db.Users.Where(l => l.EMail == EMail).FirstOrDefault();
                 if(d != null)
                 {
+                    Session["UserID"] = d.UserID;
                     roleId = d.RoleID;
+                    userId = d.UserID;
                 }
 
             }
