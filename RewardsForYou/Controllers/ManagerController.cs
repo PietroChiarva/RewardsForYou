@@ -1,142 +1,73 @@
-﻿using System;
+﻿using RewardsForYou.Models;
+using System;
 using System.Collections.Generic;
-using System.Data;
-using System.Data.Entity;
 using System.Linq;
-using System.Net;
 using System.Web;
 using System.Web.Mvc;
-using RewardsForYou.Models;
 
 namespace RewardsForYou.Controllers
 {
     public class ManagerController : Controller
     {
-        private RewardsForYouEntities db = new RewardsForYouEntities();
+        public object Serial { get; private set; }
 
         // GET: Manager
         public ActionResult Index()
         {
-            var users = db.Users.Include(u => u.Roles).Include(u => u.Users1).Include(u => u.Users2);
-            return View(users.ToList());
+            return View();
         }
-     } 
+
+        public ActionResult ListaUsers()
+        {
+            using (RewardsForYouEntities db = new RewardsForYouEntities())
+            {
+
+                List<Users> users = new List<Users>();
+                users = db.Users.Where(x => x.ManagerUserID == (int) Session["UserID"]).ToList();
+
+                return View(users);
+            }
+        }
+    }
 }
 
-//        // GET: Manager/Details/5
-//        public ActionResult Details(int? id)
-//        {
-//            if (id == null)
-//            {
-//                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-//            }
-//            Users users = db.Users.Find(id);
-//            if (users == null)
-//            {
-//                return HttpNotFound();
-//            }
-//            return View(users);
-//        }
 
-//        // GET: Manager/Create
-//        public ActionResult Create()
-//        {
-//            ViewBag.RoleID = new SelectList(db.Roles, "RoleID", "Role");
-//            ViewBag.UserID = new SelectList(db.Users, "UserID", "Serial");
-//            ViewBag.UserID = new SelectList(db.Users, "UserID", "Serial");
-//            return View();
-//        }
+    //IQueryable<RewardsForYouEntities> x = null;
 
-//        // POST: Manager/Create
-//        // Per proteggere da attacchi di overposting, abilitare le proprietà a cui eseguire il binding. 
-//        // Per ulteriori dettagli, vedere https://go.microsoft.com/fwlink/?LinkId=317598.
-//        [HttpPost]
-//        [ValidateAntiForgeryToken]
-//        public ActionResult Create([Bind(Include = "UserID,Serial,Name,Surname,EMail,RoleID,ManagerUserID")] Users users)
-//        {
-//            if (ModelState.IsValid)
-//            {
-//                db.Users.Add(users);
-//                db.SaveChanges();
-//                return RedirectToAction("Index");
-//            }
+    //            if (Models.users.UsersID != 0)
+    //            {
+    //                x = db.RewardsForYouEntities.Where((object l) => l.UsersID == users.UsersID);
+    //            }
+    //            else
+    //            {
+    //                x = db.RewardsForYouEntities;
+    //            }
 
-//            ViewBag.RoleID = new SelectList(db.Roles, "RoleID", "Role", users.RoleID);
-//            ViewBag.UserID = new SelectList(db.Users, "UserID", "Serial", users.UserID);
-//            ViewBag.UserID = new SelectList(db.Users, "UserID", "Serial", users.UserID);
-//            return View(users);
-//        }
+    //            if (users.Serial != null)
+    //            {
+    //                x = x.Where(l => Serial == users.Serial);
+    //            }
+    //            if (users.Name != null)
+    //            {
+    //                x = x.Where(p => p.Name == users.Name);
+    //            }
+    //            if (users.Surname != null)
+    //            {
+    //                x = x.Where(p => p.Surname == users.Surname);
+    //            }
+    //            if (users.EMail!= null)
+    //            {
+    //                x = x.Where(p => p.EMail == users.EMail);
+    //            }
+    //            if (users.RoleID != null)
+    //            {
+    //                x = x.Where(p => p.RoleID == users.RoleID);
+    //            }
+    //            if (users.ManagerUserID != null)
+    //            {
+    //                x = x.Where(p => p.ManagerUserID == users.ManagerUserID);
+    //            }
 
-//        // GET: Manager/Edit/5
-//        public ActionResult Edit(int? id)
-//        {
-//            if (id == null)
-//            {
-//                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-//            }
-//            Users users = db.Users.Find(id);
-//            if (users == null)
-//            {
-//                return HttpNotFound();
-//            }
-//            ViewBag.RoleID = new SelectList(db.Roles, "RoleID", "Role", users.RoleID);
-//            ViewBag.UserID = new SelectList(db.Users, "UserID", "Serial", users.UserID);
-//            ViewBag.UserID = new SelectList(db.Users, "UserID", "Serial", users.UserID);
-//            return View(users);
-//        }
 
-//        // POST: Manager/Edit/5
-//        // Per proteggere da attacchi di overposting, abilitare le proprietà a cui eseguire il binding. 
-//        // Per ulteriori dettagli, vedere https://go.microsoft.com/fwlink/?LinkId=317598.
-//        [HttpPost]
-//        [ValidateAntiForgeryToken]
-//        public ActionResult Edit([Bind(Include = "UserID,Serial,Name,Surname,EMail,RoleID,ManagerUserID")] Users users)
-//        {
-//            if (ModelState.IsValid)
-//            {
-//                db.Entry(users).State = EntityState.Modified;
-//                db.SaveChanges();
-//                return RedirectToAction("Index");
-//            }
-//            ViewBag.RoleID = new SelectList(db.Roles, "RoleID", "Role", users.RoleID);
-//            ViewBag.UserID = new SelectList(db.Users, "UserID", "Serial", users.UserID);
-//            ViewBag.UserID = new SelectList(db.Users, "UserID", "Serial", users.UserID);
-//            return View(users);
-//        }
-
-//        // GET: Manager/Delete/5
-//        public ActionResult Delete(int? id)
-//        {
-//            if (id == null)
-//            {
-//                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-//            }
-//            Users users = db.Users.Find(id);
-//            if (users == null)
-//            {
-//                return HttpNotFound();
-//            }
-//            return View(users);
-//        }
-
-//        // POST: Manager/Delete/5
-//        [HttpPost, ActionName("Delete")]
-//        [ValidateAntiForgeryToken]
-//        public ActionResult DeleteConfirmed(int id)
-//        {
-//            Users users = db.Users.Find(id);
-//            db.Users.Remove(users);
-//            db.SaveChanges();
-//            return RedirectToAction("Index");
-//        }
-
-//        protected override void Dispose(bool disposing)
-//        {
-//            if (disposing)
-//            {
-//                db.Dispose();
-//            }
-//            base.Dispose(disposing);
-//        }
-//    }
-//}
+    //            users.ResultList = x.ToList();
+    //        }

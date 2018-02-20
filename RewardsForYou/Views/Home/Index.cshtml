@@ -38,13 +38,13 @@
 <script type="text/javascript">
     $(document).ready(function () {
 
-        if (ViewData["Employee"] == true) {
+        if ("@ViewData["Employee"]" == "True") {
             $('#Employee').attr('disabled', disabled);
         }
-        if (ViewData["Manager"] == true) {
+        if ("@ViewData["Manager"]" == "True") {
             $('#Manager').attr('disabled', disabled);
         }
-        if (ViewData["Amministrator"] == true) {
+        if ("@ViewData["Amministrator"]" == "True") {
             $('#Amministrator').attr('disabled', disabled);
         }
     });
