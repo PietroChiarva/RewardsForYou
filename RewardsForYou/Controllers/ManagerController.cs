@@ -7,6 +7,7 @@ using System.Web.Mvc;
 
 namespace RewardsForYou.Controllers
 {
+    [Authorize]
     public class ManagerController : Controller
     {
         public object Serial { get; private set; }
