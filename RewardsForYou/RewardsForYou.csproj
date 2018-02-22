@@ -20,7 +20,7 @@
     <MvcBuildViews>false</MvcBuildViews>
     <UseIISExpress>true</UseIISExpress>
     <Use64BitIISExpress />
-    <IISExpressSSLPort>44317</IISExpressSSLPort>
+    <IISExpressSSLPort>44358</IISExpressSSLPort>
     <IISExpressAnonymousAuthentication />
     <IISExpressWindowsAuthentication />
     <IISExpressUseClassicPipelineMode />
@@ -244,6 +244,7 @@
     <Compile Include="Models\UsersRewards.cs">
       <DependentUpon>RewardsForYou.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\ViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
   </ItemGroup>
@@ -336,7 +337,6 @@
     <Content Include="Views\UserProfile\Relogin.cshtml" />
     <Content Include="Views\Account\SignOutCallback.cshtml" />
     <Content Include="Views\Employee\Index.cshtml" />
-    <Content Include="Views\Employee\_Details.cshtml" />
     <Content Include="Views\Manager\ListaUsers.cshtml" />
     <Content Include="Scripts\jquery-3.0.0.slim.min.map" />
     <Content Include="Scripts\jquery-3.0.0.min.map" />
@@ -350,6 +350,7 @@
     <Content Include="Scripts\popper-utils.min.js.map" />
     <Content Include="Scripts\popper-utils.js.map" />
     <Content Include="Views\Manager\Index.cshtml" />
+    <Content Include="Views\Employee\_UserRewards.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
