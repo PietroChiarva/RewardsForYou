@@ -1,13 +1,153 @@
-﻿@model RewardsForYou.Models.Users
+﻿@model RewardsForYou.Models.ViewModel
 @{
     ViewBag.Title = "Index";
 }
 
 <h2>Employee personal page</h2>
 
-
+<!--User details-->
+<h4>Employee Details</h4>
 <div class="container-fluid">
     <div class="container-fluid" id="DetailsUser" style="margin-top:5px;overflow-x:auto;width:100%;">
-        @{Html.RenderPartial("_Details", Model);}
+        <table class="table">
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.User.Serial)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.User.Name)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.User.Surname)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.User.EMail)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.User.ManagerUserID)
+                </th>
+
+
+                <th></th>
+            </tr>
+
+
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => Model.User.Serial)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => Model.User.Name)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => Model.User.Surname)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => Model.User.EMail)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => Model.User.ManagerUserID)
+                </td>
+
+            </tr>
+
+
+        </table>
+    </div>
+</div>
+
+<!--User Task details-->
+<h4>Employee Tasks</h4>
+<div class="container-fluid">
+    <div class="container-fluid" id="UserTasks" style="margin-top:5px;overflow-x:auto;width:100%;">
+        <table class="table">
+            @foreach (var item in Model.Mission)
+            {
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => item.Type)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => item.Description)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => item.ExpiryDate)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => item.Points)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => item.Finished)
+            </th>
+            <th></th>
+        </tr>
+            }
+
+        @foreach (var item in Model.Mission)
+{
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Type)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Description)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ExpiryDate)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Points)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Finished)
+            </td>
+
+        </tr>
+}
+
+        </table>
+    </div>
+</div>
+
+<!--User Rewards details-->
+<h4>Employee Rewards</h4>
+<div class="container-fluid">
+    <div class="container-fluid" id="UserRewards" style="margin-top:5px;overflow-x:auto;width:100%;">
+        <table class="table">
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.Reward.Type)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Reward.Description)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Reward.Points)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Reward.Availability)
+                </th>
+                <th></th>
+            </tr>
+
+
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => Model.Reward.Type)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => Model.Reward.Description)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => Model.Reward.Points)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => Model.Reward.Availability)
+                </td>
+
+            </tr>
+
+
+        </table>
     </div>
 </div>
