@@ -1,0 +1,48 @@
+﻿@model RewardsForYou.Models.Missions
+
+<div>
+<h4>Missions</h4>
+
+    @using (Html.BeginForm("ListaUsers", "Manager", null, FormMethod.Get))
+    {
+        <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.EndDate)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.EndDate)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Note)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Note)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Tasks.Type)
+        </dt>
+
+        @*<dd>
+            @Html.DisplayFor(model => model.Tasks.Type)
+        </dd>*@
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Users.Serial)
+        </dt>
+
+        @*<dd>
+            @Html.DisplayFor(model => model.Users.Serial)
+        </dd>*@
+
+    </dl>
+    }
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { /* id = Model.PrimaryKey */ }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

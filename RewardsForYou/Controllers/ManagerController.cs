@@ -11,6 +11,8 @@ namespace RewardsForYou.Controllers
     public class ManagerController : Controller
     {
         public object Serial { get; private set; }
+        public int MissionID { get; private set; }
+        public int TaskID { get; private set; }
 
         // GET: Manager
         public ActionResult Index()
@@ -27,6 +29,27 @@ namespace RewardsForYou.Controllers
                 users = db.Users.Where(x => x.ManagerUserID == userID).ToList();
 
                 return View(users);
+            }
+        }
+
+        public ActionResult _PartialMission(int UserID, string Name, string Surname, string EMail, int ManagerUserID)
+        {
+            Missions x = null;
+            using (RewardsForYouEntities db = new RewardsForYouEntities())
+            {
+                x = db.Missions.Where(l => l.UserID == UserID).FirstOrDefault();
+                x = db.Missions.Where(l => l.TaskID == TaskID).FirstOrDefault();
+
+                return PartialView(x);
+            }
+        }
+
+        public ActionResult DetailEmployee()
+        {
+            using (RewardsForYouEntities db = new RewardsForYouEntities())
+            {
+
+                return View();
             }
         }
     }

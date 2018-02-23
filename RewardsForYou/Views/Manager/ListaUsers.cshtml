@@ -26,8 +26,8 @@
         <th>
             @Html.DisplayNameFor(model => model.ManagerUserID)
         </th>
-       
-       
+
+
         <th></th>
     </tr>
 
@@ -49,13 +49,38 @@
             <td>
                 @Html.DisplayFor(modelItem => item.ManagerUserID)
             </td>
-           
-           
+
+
             <td>
-                <a href="@Url.Action("ListaUsers","Manager")" new { id=item.UserID }) class="btn btn-primary">+</a>
-                <a href="@Url.Action("ListaUsers","Manager")" new { id=item.UserID }) class="btn btn-primary">Details Employee</a>
+                @*<a href="@Url.Action("ListaUsers","Manager")" new { id=item.UserID }) class="btn btn-primary">+</a>
+                    <a href="@Url.Action("ListaUsers","Manager")" new { id=item.UserID }) class="btn btn-primary">Details Employee</a>*@
+      
+                <a class="btn btn-primary" onclick="ShowMissionModal ('@item.UserID', '@item.Name', '@item.Surname', '@item.EMail','@item.ManagerUserID')">Details Employee</a>
+                <a class="btn btn-primary" onclick="ShowDetailModal ({ id=item.UserID })">+</a>
             </td>
         </tr>
     }
 
 </table>
+
+<script type="text/javascript">
+    function ShowMissionModal(UserID, Name, Surname, EMail, ManagerUserID) {
+
+        $('#showModal .modal-body').load(Router.action('Manager', '_PartialMission', { UserID: UserID, Name: Name, Surname: Surname, EMail: EMail, ManagerUserID: ManagerUserID }));
+        $('#showModal').modal("show");
+
+
+    }
+
+    function ShowDeleteModal(idModulo, labelFor, lingua, label) {
+
+        $('#showModal .modal-body').load(Router.action('Label', '_PartialDelete', { idModulo: idModulo, labelFor: labelFor, lingua: lingua, label: label }));
+        $('#showModal').modal("show");
+
+
+    }
+
+
+
+</script>
+
