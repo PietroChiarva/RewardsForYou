@@ -10,6 +10,8 @@ namespace RewardsForYou.Controllers
     [Authorize]
     public class ManagerController : Controller
     {
+        private Tasks t;
+
         public object Serial { get; private set; }
         public int MissionID { get; private set; }
         public int TaskID { get; private set; }
@@ -34,14 +36,50 @@ namespace RewardsForYou.Controllers
 
         public ActionResult _PartialMission(int UserID, string Name, string Surname, string EMail, int ManagerUserID)
         {
+            ViewModel viewModel = new ViewModel();
             Missions x = null;
+            IQueryable<Tasks> t = null;
+                  
             using (RewardsForYouEntities db = new RewardsForYouEntities())
             {
+                //get tasks of the user
                 x = db.Missions.Where(l => l.UserID == UserID).FirstOrDefault();
-                x = db.Missions.Where(l => l.TaskID == TaskID).FirstOrDefault();
+                t = db.Tasks.Where(l => l.TaskID == TaskID);
 
-                return PartialView(x);
+                viewModel.Mission = t.ToList();
+                
+
+                
             }
+
+            return PartialView(viewModel);
+        }
+
+        public ActionResult AddTask()
+        {
+            using (RewardsForYouEntities db = new RewardsForYouEntities())
+            {
+
+                return View();
+            }
+        }
+
+        public ActionResult DoAddTask(int TaskID, string Type, string Description, DateTime ExpiryDate, int Points, string Finished )
+        {
+
+            if (TaskID != 0 && !string.IsNullOrEmpty(Type) && !string.IsNullOrEmpty(Description) && !DateTime.ExpiryDate && Points != 0 && !string.IsNullOrEmpty(Finished))
+            {
+                using (RewardsForYouEntities db = new RewardsForYouEntities())
+                {
+                    //db.Tasks.Add();
+
+                    db.SaveChanges();
+
+                    
+                }
+            }
+
+            return View("Index");
         }
 
         public ActionResult DetailEmployee()
@@ -52,48 +90,10 @@ namespace RewardsForYou.Controllers
                 return View();
             }
         }
-    }
+   
 }
    
         
 
 
-    //IQueryable<RewardsForYouEntities> x = null;
-
-    //            if (Models.users.UsersID != 0)
-    //            {
-    //                x = db.RewardsForYouEntities.Where((object l) => l.UsersID == users.UsersID);
-    //            }
-    //            else
-    //            {
-    //                x = db.RewardsForYouEntities;
-    //            }
-
-    //            if (users.Serial != null)
-    //            {
-    //                x = x.Where(l => Serial == users.Serial);
-    //            }
-    //            if (users.Name != null)
-    //            {
-    //                x = x.Where(p => p.Name == users.Name);
-    //            }
-    //            if (users.Surname != null)
-    //            {
-    //                x = x.Where(p => p.Surname == users.Surname);
-    //            }
-    //            if (users.EMail!= null)
-    //            {
-    //                x = x.Where(p => p.EMail == users.EMail);
-    //            }
-    //            if (users.RoleID != null)
-    //            {
-    //                x = x.Where(p => p.RoleID == users.RoleID);
-    //            }
-    //            if (users.ManagerUserID != null)
-    //            {
-    //                x = x.Where(p => p.ManagerUserID == users.ManagerUserID);
-    //            }
-
-
-    //            users.ResultList = x.ToList();
-    //        }
+    

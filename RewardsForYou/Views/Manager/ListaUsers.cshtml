@@ -1,4 +1,4 @@
-﻿@model IEnumerable<RewardsForYou.Models.Users>
+﻿ @model IEnumerable<RewardsForYou.Models.Users>
 
 @{
     ViewBag.Title = "ListaDipendenti";
@@ -56,7 +56,7 @@
                     <a href="@Url.Action("ListaUsers","Manager")" new { id=item.UserID }) class="btn btn-primary">Details Employee</a>*@
       
                 <a class="btn btn-primary" onclick="ShowMissionModal ('@item.UserID', '@item.Name', '@item.Surname', '@item.EMail','@item.ManagerUserID')">Details Employee</a>
-                <a class="btn btn-primary" onclick="ShowDetailModal ({ id=item.UserID })">+</a>
+                <a class="btn btn-primary" onclick="ShowAddlModal ('@item.TaskID', '@item.Type','@item.Description', '@item.ExpiryDate', '@item.Points', '@item.Finished')">+</a>
             </td>
         </tr>
     }
@@ -72,9 +72,9 @@
 
     }
 
-    function ShowDeleteModal(idModulo, labelFor, lingua, label) {
+    function ShowAddModal(TaskID, Type, Description, ExpiryDate, Points, Finished) {
 
-        $('#showModal .modal-body').load(Router.action('Label', '_PartialDelete', { idModulo: idModulo, labelFor: labelFor, lingua: lingua, label: label }));
+        $('#showModal .modal-body').load(Router.action('Manager', 'DoAddTask', { TaskID: TaskID, Type: Type, Description: Description, ExpiryDate: ExpiryDate, Points: Points, Finished: Finished}));
         $('#showModal').modal("show");
 
 

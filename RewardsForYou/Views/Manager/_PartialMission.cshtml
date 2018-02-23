@@ -1,48 +1,50 @@
-﻿@model RewardsForYou.Models.Missions
+﻿@model RewardsForYou.Models.ViewModel
 
-<div>
-<h4>Missions</h4>
-
-    @using (Html.BeginForm("ListaUsers", "Manager", null, FormMethod.Get))
-    {
-        <hr />
-    <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.EndDate)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.EndDate)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Note)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Note)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Tasks.Type)
-        </dt>
-
-        @*<dd>
-            @Html.DisplayFor(model => model.Tasks.Type)
-        </dd>*@
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Users.Serial)
-        </dt>
-
-        @*<dd>
-            @Html.DisplayFor(model => model.Users.Serial)
-        </dd>*@
-
-    </dl>
-    }
-</div>
 <p>
-    @Html.ActionLink("Edit", "Edit", new { /* id = Model.PrimaryKey */ }) |
-    @Html.ActionLink("Back to List", "Index")
+    @Html.ActionLink("Create New", "Create")
 </p>
+
+@using (Html.BeginForm("ListaUsers", "Manager", null, FormMethod.Post))
+{
+    <table class="table">
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.EndDate)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Note)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Tasks.Type)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Users.Serial)
+            </th>
+            <th></th>
+        </tr>
+
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.EndDate)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Note)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Tasks.Type)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Users.Serial)
+                </td>
+                <td>
+                    @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
+                    @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
+                    @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
+                </td>
+            </tr>
+        }
+
+    </table>
+}
