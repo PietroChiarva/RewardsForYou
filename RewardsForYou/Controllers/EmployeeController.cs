@@ -33,7 +33,7 @@ namespace RewardsForYou.Controllers
                 {
                     //missionModel.Mission = db.Missions.Where(l => l.TaskID == t[i].TaskID).ToList();
                     
-                    task = db.Tasks.AsEnumerable().Where(l => l.TaskID == t[i].TaskID).ToList();
+                    task.Add(db.Tasks.AsEnumerable().Where(l => l.TaskID == t[i].TaskID);
                 }
                 
                 //get rewards of the user
