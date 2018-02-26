@@ -220,6 +220,7 @@
     <Compile Include="Models\AdalTokenCache.cs" />
     <Compile Include="Models\ApplicationDbContext.cs" />
     <Compile Include="Models\ListUserClass.cs" />
+    <Compile Include="Models\MissionModel.cs" />
     <Compile Include="Models\Missions.cs">
       <DependentUpon>RewardsForYou.tt</DependentUpon>
     </Compile>
