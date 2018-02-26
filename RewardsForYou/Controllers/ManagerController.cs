@@ -34,18 +34,21 @@ namespace RewardsForYou.Controllers
             }
         }
 
-        public ActionResult _PartialTaskDetails(int UserID, string Name, string Surname, string EMail, int ManagerUserID)
+        public ActionResult _PartialTaskDetails(int UserID)
         {
             ViewModel viewModel = new ViewModel();
             Missions x = null;
+            Users u = null;
             IQueryable<Tasks> t = null;
 
             using (RewardsForYouEntities db = new RewardsForYouEntities())
             {
                 //get tasks of the user
+                u= db.Users.Where(l => l.EMail == EMail).FirstOrDefault();
                 x = db.Missions.Where(l => l.UserID == UserID).FirstOrDefault();
                 t = db.Tasks.Where(l => l.TaskID == x.TaskID);
 
+                viewModel.User = u;
                 viewModel.Mission = t.ToList();
 
 

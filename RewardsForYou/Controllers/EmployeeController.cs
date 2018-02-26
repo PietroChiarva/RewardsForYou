@@ -16,11 +16,11 @@ namespace RewardsForYou.Controllers
             ViewModel viewModel = new ViewModel();
             MissionModel missionModel = new MissionModel();
             Users x = null;
-           List<Missions> t = null;
-           List<Tasks> task = null;
+            List<Missions> t = null;
+            List<Tasks> task = null;
             UsersRewards u = null;
             Rewards r = null;
-            
+
             string EMail = ((System.Security.Claims.ClaimsIdentity)HttpContext.GetOwinContext().Authentication.User.Identity).Name;
             using (RewardsForYouEntities db = new RewardsForYouEntities())
             {
@@ -29,12 +29,12 @@ namespace RewardsForYou.Controllers
                 x = db.Users.Where(l => l.EMail == EMail).FirstOrDefault();
                 //get tasks of the user
                 t = db.Missions.Where(l => l.UserID == x.UserID).ToList();
-                for(int i=0; i<t.Count; i++)
+                for (int i = 0; i < t.Count; i++)
                 {
                     missionModel.Mission = db.Missions.Where(l => l.TaskID == t[i].TaskID).ToList();
                     task = db.Tasks.Where(l => l.TaskID == missionModel.Mission[i].TaskID).ToList();
                 }
-                
+
                 //get rewards of the user
                 u = db.UsersRewards.Where(l => l.UserID == x.UserID).FirstOrDefault();
                 r = db.Rewards.Where(l => l.RewardsID == u.RewardsID).FirstOrDefault();
@@ -46,8 +46,8 @@ namespace RewardsForYou.Controllers
 
 
             }
-            
-        
+
+
             return View(viewModel);
         }
 
@@ -100,10 +100,10 @@ namespace RewardsForYou.Controllers
         //    }
         //    return PartialView(r);
 
-            
+
         //}
 
-        
+
 
 
     }

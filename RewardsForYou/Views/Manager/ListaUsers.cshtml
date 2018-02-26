@@ -55,7 +55,7 @@
                 @*<a href="@Url.Action("ListaUsers","Manager")" new { id=item.UserID }) class="btn btn-primary">+</a>
                     <a href="@Url.Action("ListaUsers","Manager")" new { id=item.UserID }) class="btn btn-primary">Details Employee</a>*@
       
-                <a class="btn btn-primary" onclick="ShowMissionModal ('@item.UserID', '@item.Name', '@item.Surname', '@item.EMail','@item.ManagerUserID')">Details Employee</a>
+                <a class="btn btn-primary" onclick="ShowMissionModal ('@item.UserID')">Details Employee</a>
                 @*<a class="btn btn-primary" onclick="ShowAddlModal ('@item.TaskID', '@item.Type','@item.Description', '@item.ExpiryDate', '@item.Points', '@item.Finished')">+</a>*@
             </td>
         </tr>
@@ -64,9 +64,9 @@
 </table>
 
 <script type="text/javascript">
-    function ShowMissionModal(UserID, Name, Surname, EMail, ManagerUserID) {
+    function ShowMissionModal(UserID) {
 
-        $('#showModal .modal-body').load(Router.action('Manager', '_PartialTaskDetails', { UserID: UserID, Name: Name, Surname: Surname, EMail: EMail, ManagerUserID: ManagerUserID }));
+        $('#showModal .modal-body').load(Router.action('Employee', 'Index', { UserID: UserID}));
         $('#showModal').modal("show");
 
 
