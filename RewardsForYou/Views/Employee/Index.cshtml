@@ -61,8 +61,14 @@
 <div class="container-fluid">
     <div class="container-fluid" id="UserTasks" style="margin-top:5px;overflow-x:auto;width:100%;">
         <table class="table">
+
+
+
+
             @foreach (var item in Model.Mission)
             {
+                if (Model.Mission.IndexOf(item) == 0 || Model.Mission.Count == 0)
+                {
         <tr>
             <th>
                 @Html.DisplayNameFor(model => item.Type)
@@ -81,10 +87,7 @@
             </th>
             <th></th>
         </tr>
-            }
-
-        @foreach (var item in Model.Mission)
-{
+                }
         <tr>
             <td>
                 @Html.DisplayFor(modelItem => item.Type)
@@ -114,40 +117,54 @@
 <div class="container-fluid">
     <div class="container-fluid" id="UserRewards" style="margin-top:5px;overflow-x:auto;width:100%;">
         <table class="table">
+           
+
+     @foreach (var item in Model.Reward)
+      {
+
+        if (Model.Reward.Count == 0 || Model.Reward.IndexOf(item) == 0)
+        {
             <tr>
                 <th>
-                    @Html.DisplayNameFor(model => model.Reward.Type)
+                    @Html.DisplayNameFor(model =>   item.Type)
                 </th>
                 <th>
-                    @Html.DisplayNameFor(model => model.Reward.Description)
+                    @Html.DisplayNameFor(model => item.Description)
                 </th>
                 <th>
-                    @Html.DisplayNameFor(model => model.Reward.Points)
+                    @Html.DisplayNameFor(model => item.Points)
                 </th>
                 <th>
-                    @Html.DisplayNameFor(model => model.Reward.Availability)
+                    @Html.DisplayNameFor(model => item.Availability)
                 </th>
                 <th></th>
             </tr>
+        }
 
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Type)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Description)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Points)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Availability)
+            </td>
 
-            <tr>
-                <td>
-                    @Html.DisplayFor(modelItem => Model.Reward.Type)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => Model.Reward.Description)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => Model.Reward.Points)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => Model.Reward.Availability)
-                </td>
-
-            </tr>
-
+        </tr>
+      }
 
         </table>
+    </div>
+</div>
+
+<h4>Available Rewards</h4>
+<div class="container-fluid">
+    <div class="container-fluid" id="ChooseRewardsContainer" style="margin-top:5px;overflow-x:auto;width:100%;">
+        @{Html.RenderPartial("_ChooseRewards", Model.Reward);}
     </div>
 </div>

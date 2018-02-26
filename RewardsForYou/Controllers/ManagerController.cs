@@ -67,18 +67,15 @@ namespace RewardsForYou.Controllers
             }
         }
 
-        public ActionResult DoAddTask(int TaskID, string Type, string Description, DateTime ExpiryDate, int Points, string Finished)
+        public ActionResult DoAddTask(int TaskID, string Type, string Description, DateTime ExpiryDate, int Points, bool Finished)
         {
 
-            if (TaskID != 0 && !string.IsNullOrEmpty(Type) && !string.IsNullOrEmpty(Description)  && Points != 0 && !string.IsNullOrEmpty(Finished))
+            if (TaskID != 0 && !string.IsNullOrEmpty(Type) && !string.IsNullOrEmpty(Description)  && Points != 0 )
             {
                 using (RewardsForYouEntities db = new RewardsForYouEntities())
                 {
-                    //db.Tasks.Add();
-
+                    
                     db.SaveChanges();
-
-
                 }
             }
 

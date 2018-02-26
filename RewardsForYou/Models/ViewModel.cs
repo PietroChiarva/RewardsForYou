@@ -8,8 +8,8 @@ namespace RewardsForYou.Models
     public class ViewModel
     {
         public Users User { get; set; }
-        public IEnumerable<Tasks>Mission { get; set; }
-        public Rewards Reward { get; set; }
-        public List<Tasks> Tasks { get; internal set; }
+        public List<Tasks> Mission { get; set; }
+        public List<Rewards> Reward { get; set; }
+        
     }
 }
