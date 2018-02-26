@@ -4,13 +4,13 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using System.Data.Entity;
 
 namespace RewardsForYou.Controllers
 {
     [Authorize]
     public class ManagerController : Controller
-    {
-        private Tasks t;
+    { 
 
         public object Serial { get; private set; }
         public int MissionID { get; private set; }
@@ -34,31 +34,26 @@ namespace RewardsForYou.Controllers
             }
         }
 
-        //public ActionResult _PartialTaskDetails(int UserID)
-        //{
-        //    ViewModel viewModel = new ViewModel();
-        //    Missions x = null;
-        //    Users u = null;
-        //    IQueryable<Tasks> t = null;
+        public ActionResult ViewTask(int? UserID = null)
+        {
+            ViewModel viewModel = new ViewModel();
+            Users x = null;
+            List<Missions> t = null;
+            List<Tasks> task = new List<Tasks>();
+            using (RewardsForYouEntities db = new RewardsForYouEntities())
+            {
+                x = db.Users.Where(l => l.UserID == UserID).FirstOrDefault();
+                t = db.Missions.Include(m => m.Tasks).Where(l => l.UserID == UserID).ToList();
 
-        //    using (RewardsForYouEntities db = new RewardsForYouEntities())
-        //    {
-        //        //get tasks of the user
-        //        u= db.Users.Where(l => l.EMail == EMail).FirstOrDefault();
-        //        x = db.Missions.Where(l => l.UserID == UserID).FirstOrDefault();
-        //        t = db.Tasks.Where(l => l.TaskID == x.TaskID);
+                viewModel.User = x;
+                viewModel.Mission = task;
 
-        //        viewModel.User = u;
-        //        viewModel.Mission = t.ToList();
+                
+            }
+            return View(viewModel);
+        }
 
-
-
-        //    }
-
-        //    return PartialView(viewModel);
-        //}
-
-        public ActionResult AddTask()
+        public ActionResult AddTask(Tasks DatiTask)
         {
             using (RewardsForYouEntities db = new RewardsForYouEntities())
             {
@@ -67,22 +62,43 @@ namespace RewardsForYou.Controllers
             }
         }
 
-        public ActionResult DoAddTask(int TaskID, string Type, string Description, DateTime ExpiryDate, int Points, string Finished)
+        //public ActionResult DoAddTask(Tasks DatiTask)
+        //{
+            
+        //    if (DatiTask.TaskID != 0 && !string.IsNullOrEmpty(DatiTask.Type) && !string.IsNullOrEmpty(DatiTask.Description) && DatiTask.Points != 0)
+        //    {
+        //        using (RewardsForYouEntities db = new RewardsForYouEntities())
+        //        {
+        //            db.Tasks.Add(DatiTask);
+
+        //            db.SaveChanges();
+
+
+        //        }
+        //    }
+
+        //    return View("Index");
+        //}
+
+        public ActionResult DoAddTaskJson(Tasks DatiTask)
         {
 
-            if (TaskID != 0 && !string.IsNullOrEmpty(Type) && !string.IsNullOrEmpty(Description)  && Points != 0 && !string.IsNullOrEmpty(Finished))
+            if (DatiTask.TaskID != 0 && !string.IsNullOrEmpty(DatiTask.Type) && !string.IsNullOrEmpty(DatiTask.Description) && DatiTask.Points != 0)
             {
+               
+
                 using (RewardsForYouEntities db = new RewardsForYouEntities())
                 {
-                    //db.Tasks.Add();
+                    db.Tasks.Add(DatiTask);
+                  
 
                     db.SaveChanges();
 
 
                 }
             }
-
-            return View("Index");
+        
+        return Json(new { messaggio = $"Manager {DatiTask.TaskID} aggiunta con successo" });
         }
 
         public ActionResult DetailEmployee()
@@ -96,6 +112,30 @@ namespace RewardsForYou.Controllers
 
     }
 }
+
+//public ActionResult _PartialTaskDetails(int UserID)
+//{
+//    ViewModel viewModel = new ViewModel();
+//    Missions x = null;
+//    Users u = null;
+//    IQueryable<Tasks> t = null;
+
+//    using (RewardsForYouEntities db = new RewardsForYouEntities())
+//    {
+//        //get tasks of the user
+//        u= db.Users.Where(l => l.EMail == EMail).FirstOrDefault();
+//        x = db.Missions.Where(l => l.UserID == UserID).FirstOrDefault();
+//        t = db.Tasks.Where(l => l.TaskID == x.TaskID);
+
+//        viewModel.User = u;
+//        viewModel.Mission = t.ToList();
+
+
+
+//    }
+
+//    return PartialView(viewModel);
+//}
 
 
 
