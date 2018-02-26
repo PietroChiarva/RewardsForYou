@@ -17,7 +17,7 @@ namespace RewardsForYou.Controllers
             MissionModel missionModel = new MissionModel();
             Users x = null;
            List<Missions> t = null;
-           List<Tasks> task = null;
+           List<Tasks> task = new List<Tasks>();
             UsersRewards u = null;
             Rewards r = null;
             
@@ -31,8 +31,9 @@ namespace RewardsForYou.Controllers
                 t = db.Missions.Where(l => l.UserID == x.UserID).ToList();
                 for(int i=0; i<t.Count; i++)
                 {
-                    missionModel.Mission = db.Missions.Where(l => l.TaskID == t[i].TaskID).ToList();
-                    task = db.Tasks.Where(l => l.TaskID == missionModel.Mission[i].TaskID).ToList();
+                    //missionModel.Mission = db.Missions.Where(l => l.TaskID == t[i].TaskID).ToList();
+                    
+                    task = db.Tasks.AsEnumerable().Where(l => l.TaskID == t[i].TaskID).ToList();
                 }
                 
                 //get rewards of the user
