@@ -19,8 +19,8 @@ namespace RewardsForYou.Controllers
             Users x = null;
             List<Missions> t = null;
             List<Tasks> task = new List<Tasks>();
-            UsersRewards u = null;
-            Rewards r = null;
+            List<UsersRewards> u = null;
+            List<Rewards> r = new List<Rewards>();
 
             if (!UserID.HasValue)
             {
@@ -56,9 +56,11 @@ namespace RewardsForYou.Controllers
                 }
 
                 //get rewards of the user
-                u = db.UsersRewards.Where(l => l.UserID == UserID).FirstOrDefault();
-                r = db.Rewards.Where(l => l.RewardsID == u.RewardsID).FirstOrDefault();
-
+                u = db.UsersRewards.Include(m => m.Rewards).Where(l => l.UserID == UserID).ToList();
+                foreach (UsersRewards re in u)
+                {
+                    r.Add(re.Rewards);
+                }
                 //save the data in the viewModel class
                 viewModel.User = x;
                 viewModel.Mission = task;
@@ -68,60 +70,15 @@ namespace RewardsForYou.Controllers
             return View(viewModel);
         }
 
-        //public ActionResult _UserDetails()
-        //{
-        //    Users x = null;
-        //    string EMail = ((System.Security.Claims.ClaimsIdentity)HttpContext.GetOwinContext().Authentication.User.Identity).Name;
-        //    using (RewardsForYouEntities db = new RewardsForYouEntities())
-        //    {
+        public ActionResult _ChooseRewards()
+        {
+           
+            RewardsForYouEntities rewards = new RewardsForYouEntities();
 
-
-        //        x = db.Users.Where(l => l.EMail == EMail).FirstOrDefault();
-
-        //    }
-        //    return PartialView(x);
-        //}
-
-        //public ActionResult _UserTasks()
-        //{
-        //    Users x = null;
-        //    Missions t = null;
-        //    string EMail = ((System.Security.Claims.ClaimsIdentity)HttpContext.GetOwinContext().Authentication.User.Identity).Name;
-        //    using (RewardsForYouEntities db = new RewardsForYouEntities())
-        //    {
-
-
-        //        x = db.Users.Where(l => l.EMail == EMail).FirstOrDefault();
-
-        //        t = db.Missions.Where(l => l.UserID == x.UserID).FirstOrDefault();
-        //    }
-        //    return View(t);
-        //}
-
-        //public ActionResult _UserRewards()
-        //{
-        //    Users x = null;
-        //    UsersRewards u = null;
-        //    Rewards r = null;
-        //    string EMail = ((System.Security.Claims.ClaimsIdentity)HttpContext.GetOwinContext().Authentication.User.Identity).Name;
-        //    using (RewardsForYouEntities db = new RewardsForYouEntities())
-        //    {
-
-
-        //        x = db.Users.Where(l => l.EMail == EMail).FirstOrDefault();
-
-        //        u = db.UsersRewards.Where(l => l.UserID == x.UserID).FirstOrDefault();
-
-        //        r = db.Rewards.Where(l => l.RewardsID == u.RewardsID).FirstOrDefault();
-
-        //    }
-        //    return PartialView(r);
-
-
-        //}
-
-
-
-
+                return PartialView(from Rewards in rewards.Rewards
+                                   select rewards);
+        }
     }
+
+   
 }
