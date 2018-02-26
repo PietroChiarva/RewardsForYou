@@ -10,7 +10,11 @@ namespace RewardsForYou.Controllers
     [Authorize]
     public class ManagerController : Controller
     {
+        private Tasks t;
+
         public object Serial { get; private set; }
+        public int MissionID { get; private set; }
+        public int TaskID { get; private set; }
 
         // GET: Manager
         public ActionResult Index()
@@ -29,48 +33,105 @@ namespace RewardsForYou.Controllers
                 return View(users);
             }
         }
+
+        //public ActionResult _PartialTaskDetails(int UserID)
+        //{
+        //    ViewModel viewModel = new ViewModel();
+        //    Missions x = null;
+        //    Users u = null;
+        //    IQueryable<Tasks> t = null;
+
+        //    using (RewardsForYouEntities db = new RewardsForYouEntities())
+        //    {
+        //        //get tasks of the user
+        //        u= db.Users.Where(l => l.EMail == EMail).FirstOrDefault();
+        //        x = db.Missions.Where(l => l.UserID == UserID).FirstOrDefault();
+        //        t = db.Tasks.Where(l => l.TaskID == x.TaskID);
+
+        //        viewModel.User = u;
+        //        viewModel.Mission = t.ToList();
+
+
+
+        //    }
+
+        //    return PartialView(viewModel);
+        //}
+
+        public ActionResult AddTask()
+        {
+            using (RewardsForYouEntities db = new RewardsForYouEntities())
+            {
+
+                return View();
+            }
+        }
+
+        public ActionResult DoAddTask(int TaskID, string Type, string Description, DateTime ExpiryDate, int Points, string Finished)
+        {
+
+            if (TaskID != 0 && !string.IsNullOrEmpty(Type) && !string.IsNullOrEmpty(Description)  && Points != 0 && !string.IsNullOrEmpty(Finished))
+            {
+                using (RewardsForYouEntities db = new RewardsForYouEntities())
+                {
+                    //db.Tasks.Add();
+
+                    db.SaveChanges();
+
+
+                }
+            }
+
+            return View("Index");
+        }
+
+        public ActionResult DetailEmployee()
+        {
+            using (RewardsForYouEntities db = new RewardsForYouEntities())
+            {
+
+                return View();
+            }
+        }
+
     }
 }
-   
-        
 
 
-    //IQueryable<RewardsForYouEntities> x = null;
 
-    //            if (Models.users.UsersID != 0)
-    //            {
-    //                x = db.RewardsForYouEntities.Where((object l) => l.UsersID == users.UsersID);
-    //            }
-    //            else
-    //            {
-    //                x = db.RewardsForYouEntities;
-    //            }
+/*
+ * @using (Html.BeginForm("ListaUsers", "Manager", null, FormMethod.Post))
+ * 
+ 
+     <a class="btn btn-primary" onclick="ShowMissionModal ('@item.UserID', '@item.Name', '@item.Surname', '@item.EMail','@item.ManagerUserID')">Details Employee</a>
+                @*<a class="btn btn-primary" onclick="ShowAddlModal ('@item.TaskID', '@item.Type','@item.Description', '@item.ExpiryDate', '@item.Points', '@item.Finished')">+</a>*@
+            </td>
+        </tr>
+    }
 
-    //            if (users.Serial != null)
-    //            {
-    //                x = x.Where(l => Serial == users.Serial);
-    //            }
-    //            if (users.Name != null)
-    //            {
-    //                x = x.Where(p => p.Name == users.Name);
-    //            }
-    //            if (users.Surname != null)
-    //            {
-    //                x = x.Where(p => p.Surname == users.Surname);
-    //            }
-    //            if (users.EMail!= null)
-    //            {
-    //                x = x.Where(p => p.EMail == users.EMail);
-    //            }
-    //            if (users.RoleID != null)
-    //            {
-    //                x = x.Where(p => p.RoleID == users.RoleID);
-    //            }
-    //            if (users.ManagerUserID != null)
-    //            {
-    //                x = x.Where(p => p.ManagerUserID == users.ManagerUserID);
-    //            }
+</table>
+
+<script type="text/javascript">
+    function ShowMissionModal(UserID, Name, Surname, EMail, ManagerUserID) {
+
+        $('#showModal .modal-body').load(Router.action('Manager', '_PartialMission', { UserID: UserID, Name: Name, Surname: Surname, EMail: EMail, ManagerUserID: ManagerUserID }));
+        $('#showModal').modal("show");
 
 
-    //            users.ResultList = x.ToList();
-    //        }
+    }
+
+    function ShowAddModal(TaskID, Type, Description, ExpiryDate, Points, Finished) {
+
+        $('#showModal .modal-body').load(Router.action('Manager', 'DoAddTask', { TaskID: TaskID, Type: Type, Description: Description, ExpiryDate: ExpiryDate, Points: Points, Finished: Finished}));
+        $('#showModal').modal("show");
+
+
+    }
+
+
+
+</script>
+     
+     
+     */
+

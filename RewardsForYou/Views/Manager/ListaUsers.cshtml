@@ -1,4 +1,4 @@
-﻿@model IEnumerable<RewardsForYou.Models.Users>
+﻿ @model IEnumerable<RewardsForYou.Models.Users>
 
 @{
     ViewBag.Title = "ListaDipendenti";
@@ -26,8 +26,8 @@
         <th>
             @Html.DisplayNameFor(model => model.ManagerUserID)
         </th>
-       
-       
+
+
         <th></th>
     </tr>
 
@@ -49,13 +49,39 @@
             <td>
                 @Html.DisplayFor(modelItem => item.ManagerUserID)
             </td>
-           
-           
+
+
             <td>
-                <a href="@Url.Action("ListaUsers","Manager")" new { id=item.UserID }) class="btn btn-primary">+</a>
-                <a href="@Url.Action("ListaUsers","Manager")" new { id=item.UserID }) class="btn btn-primary">Details Employee</a>
+                @*<a href="@Url.Action("ListaUsers","Manager")" new { id=item.UserID }) class="btn btn-primary">+</a>
+                    <a href="@Url.Action("ListaUsers","Manager")" new { id=item.UserID }) class="btn btn-primary">Details Employee</a>*@
+      
+                <a class="btn btn-primary" onclick="ShowMissionModal ('@item.UserID')">Details Employee</a>
+                @*<a class="btn btn-primary" onclick="ShowAddlModal ('@item.TaskID', '@item.Type','@item.Description', '@item.ExpiryDate', '@item.Points', '@item.Finished')">+</a>*@
             </td>
         </tr>
     }
 
 </table>
+
+<script type="text/javascript">
+    function ShowMissionModal(UserID) {
+
+        window.open(Router.action('Employee', 'Index', { UserID: UserID }));
+        //$('#showModal .modal-body').load(Router.action('Employee', 'Index', { UserID: UserID}));
+        //$('#showModal').modal("show");
+
+
+    }
+
+    function ShowAddModal(TaskID, Type, Description, ExpiryDate, Points, Finished) {
+
+        $('#showModal .modal-body').load(Router.action('Manager', 'DoAddTask', { TaskID: TaskID, Type: Type, Description: Description, ExpiryDate: ExpiryDate, Points: Points, Finished: Finished}));
+        $('#showModal').modal("show");
+
+
+    }
+
+
+
+</script>
+
