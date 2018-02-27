@@ -1,29 +1,26 @@
-﻿@model RewardsForYou.Models.ViewModel
+﻿@model IEnumerable<RewardsForYou.Models.Tasks>
 
-<p>
-    @Html.ActionLink("Create New", "Create")
-</p>
+
 <table class="table">
     <tr>
         <th>
-            @Html.DisplayNameFor(model => model.Mission.Type)
+            @Html.DisplayNameFor(model => model.Type)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.Mission.Description)
+            @Html.DisplayNameFor(model => model.Description)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.Mission.ExpiryDate)
+            @Html.DisplayNameFor(model => model.ExpiryDate)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.Mission.Points)
+            @Html.DisplayNameFor(model => model.Points)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.Mission.Finished)
+            @Html.DisplayNameFor(model => model.Finished)
         </th>
-        <th></th>
     </tr>
 
-@foreach (var item in Model.Mission) {
+@foreach (var item in Model) {
     <tr>
         <td>
             @Html.DisplayFor(modelItem => item.Type)
@@ -39,11 +36,6 @@
         </td>
         <td>
             @Html.DisplayFor(modelItem => item.Finished)
-        </td>
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.TaskID }) |
-            @Html.ActionLink("Details", "Details", new { id=item.TaskID }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.TaskID })
         </td>
     </tr>
 }

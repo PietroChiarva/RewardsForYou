@@ -36,21 +36,41 @@ namespace RewardsForYou.Controllers
 
         public ActionResult ViewTask(int? UserID = null)
         {
-            ViewModel viewModel = new ViewModel();
-            Users x = null;
-            List<Missions> t = null;
-            List<Tasks> task = new List<Tasks>();
+   
             using (RewardsForYouEntities db = new RewardsForYouEntities())
             {
-                x = db.Users.Where(l => l.UserID == UserID).FirstOrDefault();
+                
+                List<Tasks> task = new List<Tasks>();
+                List<Missions> t = null;
+
+                //task = db.Tasks.Where(l => l.TaskID == UserID).ToList();
+
+                //t = db.Missions.Include(m => m.Tasks).Where(l => l.UserID == UserID).ToList();
+
                 t = db.Missions.Include(m => m.Tasks).Where(l => l.UserID == UserID).ToList();
 
-                viewModel.User = x;
-                viewModel.Mission = task;
+                foreach (Missions m in t)
+                {
+                    task.Add(m.Tasks);
+                }
 
-                
+                return View(task); 
             }
-            return View(viewModel);
+            
+        }
+
+        public ActionResult AssegnaTask()
+        {
+           
+            using (RewardsForYouEntities db = new RewardsForYouEntities())
+            {
+
+                List<Tasks> task = new List<Tasks>();
+
+                task = db.Tasks.Where(l => l.TaskID == TaskID).ToList();
+
+                return View(task);
+            }
         }
 
         public ActionResult AddTask(Tasks DatiTask)

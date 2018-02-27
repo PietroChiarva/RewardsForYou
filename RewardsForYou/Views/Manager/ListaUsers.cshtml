@@ -4,11 +4,8 @@
     ViewBag.Title = "ListaDipendenti";
 }
 
-<h2>Lista Dipendenti</h2>
+<h2>List of Employee</h2>
 
-<p>
-    @Html.ActionLink("Lista", "Create")
-</p>
 <table class="table">
     <tr>
         <th>
@@ -58,6 +55,7 @@
                 <a class="btn btn-primary" onclick="ShowMissionModal ('@item.UserID')">Details Employee</a>
                 @*<a class="btn btn-primary" onclick="ShowAddModal ('@item.UserID')">Add Task</a>*@
                 <a class="btn btn-primary" onclick="ShowViewModal ('@item.UserID')">View Task</a>
+                <a class="btn btn-primary" onclick="ShowAssegnaModal ('@item.UserID')">+</a>
             </td>
         </tr>
     }
@@ -87,6 +85,12 @@
         $('#showModal .modal-body').load(Router.action('Manager', 'ViewTask', { UserID: UserID }));
         $('#showModal').modal("show");
 
+    }
+
+    function ShowAssegnaModal(UserID) {
+
+        $('#showModal .modal-body').load(Router.action('Manager', 'AssegnaTask', { UserID: UserID }));
+        $('#showModal').modal("show");
 
     }
 
