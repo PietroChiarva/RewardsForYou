@@ -1,8 +1,8 @@
 ﻿@model RewardsForYou.Models.Tasks
 
-@using (Html.BeginForm("DoAddTask", "Manager", null, FormMethod.Post))
+@using (Html.BeginForm("DoAddTaskJson", "Manager", null, FormMethod.Post))
 {
-    @Html.AntiForgeryToken()
+    @*@Html.AntiForgeryToken()*@
 
     <div class="form-horizontal">
         <h4>Tasks</h4>
@@ -65,6 +65,47 @@
         </div>
     </div>
 }
+
+<a class="btn btn-default" onclick="AjaxInsert()">Insert</a>
+
+
+
+
+<script type="text/javascript">
+
+        function AjaxInsert() {
+            //creo l'oggetto associando le variabili
+      
+            var DatiTask = {
+                TaskID : $('#TaskID').val(),
+                UserID : $('#UserID').val(),
+                Description: $('#Description').val(),
+                ExpiryDate: new Date(),
+                Points: $('Points').val(),
+            };
+            //chiamata ajax
+            $.ajax({
+                //imposto il tipo di invio dati (GET O POST)
+                type: "POST",
+                //Dove devo inviare i dati recuperati dal form?
+                url: "@Url.Action("DoAddTaskJson", "Tasks")",
+                //Quali dati devo inviare? e che tipo
+                data: DatiTask,
+                success: function (data) {
+                    alert(data.messaggio);
+                },
+                error: function () {
+                    alert("Chiamata fallita, riprova");
+                    //sempre meglio impostare una callback in caso di fallimento
+                }
+
+            });
+        };
+
+</script>
+
+
+
 
 <div>
     @Html.ActionLink("Back to List", "Index")

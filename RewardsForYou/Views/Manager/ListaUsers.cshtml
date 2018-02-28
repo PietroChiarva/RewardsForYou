@@ -1,14 +1,11 @@
-﻿ @model IEnumerable<RewardsForYou.Models.Users>
+﻿@model IEnumerable<RewardsForYou.Models.Users>
 
 @{
     ViewBag.Title = "ListaDipendenti";
 }
 
-<h2>Lista Dipendenti</h2>
+<h2>List of Employee</h2>
 
-<p>
-    @Html.ActionLink("Lista", "Create")
-</p>
 <table class="table">
     <tr>
         <th>
@@ -53,10 +50,12 @@
 
             <td>
                 @*<a href="@Url.Action("ListaUsers","Manager")" new { id=item.UserID }) class="btn btn-primary">+</a>
-                    <a href="@Url.Action("ListaUsers","Manager")" new { id=item.UserID }) class="btn btn-primary">Details Employee</a>*@
-      
+        <a href="@Url.Action("ListaUsers","Manager")" new { id=item.UserID }) class="btn btn-primary">Details Employee</a>*@
+
                 <a class="btn btn-primary" onclick="ShowMissionModal ('@item.UserID')">Details Employee</a>
-                @*<a class="btn btn-primary" onclick="ShowAddlModal ('@item.TaskID', '@item.Type','@item.Description', '@item.ExpiryDate', '@item.Points', '@item.Finished')">+</a>*@
+                @*<a class="btn btn-primary" onclick="ShowAddModal ('@item.UserID')">Add Task</a>*@
+                <a class="btn btn-primary" onclick="ShowViewModal ('@item.UserID')">View Task</a>
+                <a class="btn btn-primary" onclick="ShowAssegnaModal ('@item.UserID')">+</a>
             </td>
         </tr>
     }
@@ -66,18 +65,32 @@
 <script type="text/javascript">
     function ShowMissionModal(UserID) {
 
-        window.open(Router.action('Employee', 'Index', { UserID: UserID }));
-        //$('#showModal .modal-body').load(Router.action('Employee', 'Index', { UserID: UserID}));
-        //$('#showModal').modal("show");
+        // window.open(Router.action('Employee', 'Index', { UserID: UserID }));
+        $('#showModal .modal-body').load(Router.action('Employee', 'Index', { UserID: UserID }));
+        $('#showModal').modal("show");
 
 
     }
 
-    function ShowAddModal(TaskID, Type, Description, ExpiryDate, Points, Finished) {
+    //function ShowAddModal(UserID) {
 
-        $('#showModal .modal-body').load(Router.action('Manager', 'DoAddTask', { TaskID: TaskID, Type: Type, Description: Description, ExpiryDate: ExpiryDate, Points: Points, Finished: Finished}));
+    //    $('#showModal .modal-body').load(Router.action('Manager', 'AddTask', { UserID: UserID}));
+    //    $('#showModal').modal("show");
+
+
+    //}
+
+    function ShowViewModal(UserID) {
+
+        $('#showModal .modal-body').load(Router.action('Manager', 'ViewTask', { UserID: UserID }));
         $('#showModal').modal("show");
 
+    }
+
+    function ShowAssegnaModal(UserID) {
+
+        $('#showModal .modal-body').load(Router.action('Manager', 'AssegnaTask', { UserID: UserID }));
+        $('#showModal').modal("show");
 
     }
 
@@ -85,3 +98,4 @@
 
 </script>
 
+ @*TaskID: TaskID, Type: Type, Description: Description, ExpiryDate: ExpiryDate, Points: Points, Finished: Finished*@

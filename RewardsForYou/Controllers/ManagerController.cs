@@ -4,13 +4,13 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using System.Data.Entity;
 
 namespace RewardsForYou.Controllers
 {
     [Authorize]
     public class ManagerController : Controller
-    {
-        private Tasks t;
+    { 
 
         public object Serial { get; private set; }
         public int MissionID { get; private set; }
@@ -34,52 +34,100 @@ namespace RewardsForYou.Controllers
             }
         }
 
-        //public ActionResult _PartialTaskDetails(int UserID)
-        //{
-        //    ViewModel viewModel = new ViewModel();
-        //    Missions x = null;
-        //    Users u = null;
-        //    IQueryable<Tasks> t = null;
-
-        //    using (RewardsForYouEntities db = new RewardsForYouEntities())
-        //    {
-        //        //get tasks of the user
-        //        u= db.Users.Where(l => l.EMail == EMail).FirstOrDefault();
-        //        x = db.Missions.Where(l => l.UserID == UserID).FirstOrDefault();
-        //        t = db.Tasks.Where(l => l.TaskID == x.TaskID);
-
-        //        viewModel.User = u;
-        //        viewModel.Mission = t.ToList();
-
-
-
-        //    }
-
-        //    return PartialView(viewModel);
-        //}
-
-        public ActionResult AddTask()
+        public ActionResult ViewTask(int? UserID = null)
         {
+   
             using (RewardsForYouEntities db = new RewardsForYouEntities())
             {
+                
+                List<Tasks> task = new List<Tasks>();
+                List<Missions> t = null;
+
+                //task = db.Tasks.Where(l => l.TaskID == UserID).ToList();
+
+                //t = db.Missions.Include(m => m.Tasks).Where(l => l.UserID == UserID).ToList();
+
+                t = db.Missions.Include(m => m.Tasks).Where(l => l.UserID == UserID).ToList();
+
+                foreach (Missions m in t)
+                {
+                    task.Add(m.Tasks);
+                }
+
+                return View(task); 
+            }
+            
+        }
+
+        public ActionResult AssegnaTask()
+        {
+            TasksUsersModel tasksUsers = new TasksUsersModel();
+            using (RewardsForYouEntities db = new RewardsForYouEntities())
+            {
+                tasksUsers.task = db.Tasks.Where(l => l.TaskID == TaskID).ToList();
+
+                
+
+
+                
+            }
+
+            return View(tasksUsers);
+        }
+
+        public ActionResult AddTask(int? UserID = null)
+        {
+            List<Tasks> task = new List<Tasks>();
+            List<Missions> t = null;
+            
+            
+            using (RewardsForYouEntities db = new RewardsForYouEntities())
+            {
+
+              
+
 
                 return View();
             }
         }
 
-        public ActionResult DoAddTask(int TaskID, string Type, string Description, DateTime ExpiryDate, int Points, bool Finished)
+        //public ActionResult DoAddTask(Tasks DatiTask)
+        //{
+            
+        //    if (DatiTask.TaskID != 0 && !string.IsNullOrEmpty(DatiTask.Type) && !string.IsNullOrEmpty(DatiTask.Description) && DatiTask.Points != 0)
+        //    {
+        //        using (RewardsForYouEntities db = new RewardsForYouEntities())
+        //        {
+        //            db.Tasks.Add(DatiTask);
+
+        //            db.SaveChanges();
+
+
+        //        }
+        //    }
+
+        //    return View("Index");
+        //}
+
+        public ActionResult DoAddTaskJson(Tasks DatiTask)
         {
 
-            if (TaskID != 0 && !string.IsNullOrEmpty(Type) && !string.IsNullOrEmpty(Description)  && Points != 0 )
+            if (DatiTask.TaskID != 0 && !string.IsNullOrEmpty(DatiTask.Type) && !string.IsNullOrEmpty(DatiTask.Description) && DatiTask.Points != 0)
             {
+               
+
                 using (RewardsForYouEntities db = new RewardsForYouEntities())
                 {
-                    
+                    db.Tasks.Add(DatiTask);
+                  
+
                     db.SaveChanges();
+
+
                 }
             }
-
-            return View("Index");
+        
+        return Json(new { messaggio = $"Task {DatiTask.TaskID} assegnato con successo" });
         }
 
         public ActionResult DetailEmployee()
@@ -93,6 +141,30 @@ namespace RewardsForYou.Controllers
 
     }
 }
+
+//public ActionResult _PartialTaskDetails(int UserID)
+//{
+//    ViewModel viewModel = new ViewModel();
+//    Missions x = null;
+//    Users u = null;
+//    IQueryable<Tasks> t = null;
+
+//    using (RewardsForYouEntities db = new RewardsForYouEntities())
+//    {
+//        //get tasks of the user
+//        u= db.Users.Where(l => l.EMail == EMail).FirstOrDefault();
+//        x = db.Missions.Where(l => l.UserID == UserID).FirstOrDefault();
+//        t = db.Tasks.Where(l => l.TaskID == x.TaskID);
+
+//        viewModel.User = u;
+//        viewModel.Mission = t.ToList();
+
+
+
+//    }
+
+//    return PartialView(viewModel);
+//}
 
 
 

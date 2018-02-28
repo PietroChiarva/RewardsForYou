@@ -1,0 +1,72 @@
+﻿@model IEnumerable<RewardsForYou.Models.Tasks>
+
+<p>
+    <h2>Add the Task at employee </h2>
+</p>
+
+@using (Html.BeginForm("DoAddTaskJson", "ListaUsers", null, FormMethod.Post))
+{
+    <table class="table">
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Type)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Description)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ExpiryDate)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Points)
+            </th>
+            @*<th>
+                    @Html.DisplayNameFor(model => model.Finished)
+                </th>*@
+            <th></th>
+        </tr>
+
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Type)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Description)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ExpiryDate)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Points)
+                </td>
+                <td>
+                    <a class="btn btn-primary" onclick="AddMission ('@item.TaskID')">Add</a>
+                </td>
+                @*<td>
+                        @Html.DisplayFor(modelItem => item.Finished)
+                    </td>*@
+            </tr>
+        }
+
+    </table>
+}
+
+<script type="text/javascript">
+
+    function AddMission(TaskID) {
+
+       
+
+    }
+
+    //function ShowAddModal(TaskID) {
+
+    //    $('#showModal .modal-body').load(Router.action('Manager', 'AddTask', { TaskID: TaskID }));
+    //    $('#showModal').modal("show");
+
+
+    //}
+
+</script>
