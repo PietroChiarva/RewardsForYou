@@ -78,7 +78,7 @@
       
             var DatiTask = {
                 TaskID : $('#TaskID').val(),
-                Type : $('#Type').val(),
+                UserID : $('#UserID').val(),
                 Description: $('#Description').val(),
                 ExpiryDate: new Date(),
                 Points: $('Points').val(),
@@ -88,7 +88,7 @@
                 //imposto il tipo di invio dati (GET O POST)
                 type: "POST",
                 //Dove devo inviare i dati recuperati dal form?
-                url: "@Url.Action("DoAddTaskJson", "Manager")",
+                url: "@Url.Action("DoAddTaskJson", "Tasks")",
                 //Quali dati devo inviare? e che tipo
                 data: DatiTask,
                 success: function (data) {

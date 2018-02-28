@@ -4,6 +4,8 @@
     <h2>Add the Task at employee </h2>
 </p>
 
+@using (Html.BeginForm("DoAddTaskJson", "ListaUsers", null, FormMethod.Post))
+{
     <table class="table">
         <tr>
             <th>
@@ -18,9 +20,9 @@
             <th>
                 @Html.DisplayNameFor(model => model.Points)
             </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Finished)
-            </th>
+            @*<th>
+                    @Html.DisplayNameFor(model => model.Finished)
+                </th>*@
             <th></th>
         </tr>
 
@@ -40,26 +42,31 @@
                     @Html.DisplayFor(modelItem => item.Points)
                 </td>
                 <td>
-                    @Html.DisplayFor(modelItem => item.Finished)
+                    <a class="btn btn-primary" onclick="AddMission ('@item.TaskID')">Add</a>
                 </td>
-                <td>
-
-                    <a class="btn btn-primary" onclick="ShowAddModal ('@item.TaskID')">Add Task</a>
+                @*<td>
+                        @Html.DisplayFor(modelItem => item.Finished)
+                    </td>*@
             </tr>
         }
 
     </table>
-
+}
 
 <script type="text/javascript">
 
-    function ShowAddModal(TaskID) {
+    function AddMission(TaskID) {
 
-        $('#showModal .modal-body').load(Router.action('ListaUsers', 'AddTask', { TaskID: TaskID }));
-        $('#showModal').modal("show");
-
+       
 
     }
 
+    //function ShowAddModal(TaskID) {
+
+    //    $('#showModal .modal-body').load(Router.action('Manager', 'AddTask', { TaskID: TaskID }));
+    //    $('#showModal').modal("show");
+
+
+    //}
 
 </script>

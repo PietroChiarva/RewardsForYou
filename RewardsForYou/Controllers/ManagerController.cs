@@ -61,22 +61,31 @@ namespace RewardsForYou.Controllers
 
         public ActionResult AssegnaTask()
         {
-           
+            TasksUsersModel tasksUsers = new TasksUsersModel();
             using (RewardsForYouEntities db = new RewardsForYouEntities())
             {
+                tasksUsers.task = db.Tasks.Where(l => l.TaskID == TaskID).ToList();
 
-                List<Tasks> task = new List<Tasks>();
+                
 
-                task = db.Tasks.Where(l => l.TaskID == TaskID).ToList();
 
-                return View(task);
+                
             }
+
+            return View(tasksUsers);
         }
 
-        public ActionResult AddTask(Tasks DatiTask)
+        public ActionResult AddTask(int? UserID = null)
         {
+            List<Tasks> task = new List<Tasks>();
+            List<Missions> t = null;
+            
+            
             using (RewardsForYouEntities db = new RewardsForYouEntities())
             {
+
+              
+
 
                 return View();
             }
@@ -118,7 +127,7 @@ namespace RewardsForYou.Controllers
                 }
             }
         
-        return Json(new { messaggio = $"Manager {DatiTask.TaskID} aggiunta con successo" });
+        return Json(new { messaggio = $"Task {DatiTask.TaskID} assegnato con successo" });
         }
 
         public ActionResult DetailEmployee()

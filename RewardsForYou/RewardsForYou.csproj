@@ -248,6 +248,7 @@
     <Compile Include="Models\Tasks.cs">
       <DependentUpon>RewardsForYou.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\TasksUsersModel.cs" />
     <Compile Include="Models\Users.cs">
       <DependentUpon>RewardsForYou.tt</DependentUpon>
     </Compile>
@@ -360,7 +361,7 @@
     <Content Include="Scripts\popper.js.map" />
     <Content Include="Scripts\popper-utils.min.js.map" />
     <Content Include="Scripts\popper-utils.js.map" />
-    <Content Include="Views\Manager\AddTask.cshtml" />
+    <Content Include="Views\Manager\AddTaskform.cshtml" />
     <Content Include="Views\Manager\_PartialTaskDetails.cshtml" />
     <Content Include="Views\Manager\ViewTask.cshtml" />
     <Content Include="Views\Manager\AssegnaTask.cshtml" />
