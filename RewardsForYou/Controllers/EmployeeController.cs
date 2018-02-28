@@ -47,11 +47,10 @@ namespace RewardsForYou.Controllers
             {
                 //get tasks of the user
                 t = db.Missions.Include(m => m.Tasks).Where(l => l.UserID == UserID).ToList();
-
-                //t = db.Missions.Where(l => l.UserID == UserID).ToList();
+                
                 foreach (Missions m in t)
                 {
-                    // missionModel.Mission = db.Missions.Where(l => l.TaskID == t[i].TaskID).ToList();
+                    
                     task.Add(m.Tasks);
                 }
 
@@ -72,11 +71,29 @@ namespace RewardsForYou.Controllers
 
         public ActionResult _ChooseRewards()
         {
-           
-            RewardsForYouEntities rewards = new RewardsForYouEntities();
+            //take all the rewards
+            List<Rewards> rew = null;
+            using (RewardsForYouEntities db = new RewardsForYouEntities())
+            {
+                rew = db.Rewards.ToList();
+                
+            }
+            return PartialView(rew);
+        }
 
-                return PartialView(from Rewards in rewards.Rewards
-                                   select rewards);
+        public ActionResult _PartialTakeReward(int RewardsID)
+        {
+            Rewards reward = null;
+            using (RewardsForYouEntities db = new RewardsForYouEntities())
+            {
+                reward = db.Rewards.Where(l => l.RewardsID == RewardsID).FirstOrDefault();
+            }
+                return View(reward);
+        }
+
+        public ActionResult Take(int RewardID)
+        {
+            return View("Index");
         }
     }
 

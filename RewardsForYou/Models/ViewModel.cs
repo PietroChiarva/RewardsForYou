@@ -5,7 +5,7 @@ using System.Web;
 
 namespace RewardsForYou.Models
 {
-    public class ViewModel
+    public class ViewModel : RewardsForYouEntities
     {
         public Users User { get; set; }
         public List<Tasks> Mission { get; set; }

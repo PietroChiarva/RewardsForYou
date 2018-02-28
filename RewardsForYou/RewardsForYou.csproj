@@ -364,6 +364,7 @@
     <Content Include="Views\Manager\AddTask.cshtml" />
     <Content Include="Views\Manager\_PartialTaskDetails.cshtml" />
     <Content Include="Views\Employee\_ChooseRewards.cshtml" />
+    <Content Include="Views\Employee\_PartialTakeReward.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

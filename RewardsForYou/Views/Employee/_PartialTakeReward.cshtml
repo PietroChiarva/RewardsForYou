@@ -1,0 +1,45 @@
+﻿@model RewardsForYou.Models.Rewards
+
+
+@using (Html.BeginForm("_PartialTakeReward", "Employee", null, FormMethod.Post))
+{
+    <table class="table">
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Type)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Description)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Points)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Availability)
+            </th>
+            <th></th>
+        </tr>
+
+
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => Model.Type)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => Model.Description)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => ModelPoints)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => Model.Availability)
+            </td>
+            <td>
+                @Html.ActionLink("Take", "Take", new { id = Model }) |
+
+            </td>
+        </tr>
+
+
+    </table>
+}

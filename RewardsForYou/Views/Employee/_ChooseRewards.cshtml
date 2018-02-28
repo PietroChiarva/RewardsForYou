@@ -32,8 +32,18 @@
         <td>
             @Html.DisplayFor(modelItem => item.Availability)
         </td>
+        <td>
+          <a onclick="ShowTakeRewardsModal( '@item.RewardsID')"
+               class="btn btn-primary">Take the rewards</a>
+        </td>
        
     </tr>
 }
 
 </table>
+<script>
+    function ShowTakeRewardsModal(RewardsID) {
+        $('#showModal .modal-body').load(Router.action('Employee', '_PartialTakeReward', { RewardsID: RewardsID }));
+        $('#showModal').modal("show");
+    }
+</script>
