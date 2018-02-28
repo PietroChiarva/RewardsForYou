@@ -59,21 +59,16 @@ namespace RewardsForYou.Controllers
             
         }
 
-        public ActionResult AssegnaTask()
-        {
-            TasksUsersModel tasksUsers = new TasksUsersModel();
-            using (RewardsForYouEntities db = new RewardsForYouEntities())
-            {
-                tasksUsers.task = db.Tasks.Where(l => l.TaskID == TaskID).ToList();
+        //public ActionResult AssegnaTask()
+        //{
+        //    TasksUsersModel tasksUsers = new TasksUsersModel();
+        //    using (RewardsForYouEntities db = new RewardsForYouEntities())
+        //    {
+        //        tasksUsers.task = db.Tasks.Where(l => l.TaskID == TaskID).ToList();
+        //    }
 
-                
-
-
-                
-            }
-
-            return View(tasksUsers);
-        }
+        //    return View(tasksUsers);
+        //}
 
         public ActionResult AddTask(int? UserID = null)
         {

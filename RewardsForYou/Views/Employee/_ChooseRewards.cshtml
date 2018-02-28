@@ -1,24 +1,24 @@
-﻿@model IEnumerable<RewardsForYou.Models.Rewards>
+﻿@model RewardsForYou.Models.UserRewardModel
 
 
 <table class="table">
     <tr>
         <th>
-            @Html.DisplayNameFor(model => model.Type)
+            @Html.DisplayNameFor(model => model.rewards.Type)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.Description)
+            @Html.DisplayNameFor(model => model.rewards.Description)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.Points)
+            @Html.DisplayNameFor(model => model.rewards.Points)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.Availability)
+            @Html.DisplayNameFor(model => model.rewards.Availability)
         </th>
         <th></th>
     </tr>
 
-@foreach (var item in Model) {
+@foreach (var item in Model.rewards) {
     <tr>
         <td>
             @Html.DisplayFor(modelItem => item.Type)
@@ -33,7 +33,7 @@
             @Html.DisplayFor(modelItem => item.Availability)
         </td>
         <td>
-          <a onclick="ShowTakeRewardsModal( '@item.RewardsID')"
+          <a onclick="TakeRewards( '@item.RewardsID', '@Model.UserID')"
                class="btn btn-primary">Take the rewards</a>
         </td>
        
@@ -42,8 +42,24 @@
 
 </table>
 <script>
-    function ShowTakeRewardsModal(RewardsID) {
-        $('#showModal .modal-body').load(Router.action('Employee', '_PartialTakeReward', { RewardsID: RewardsID }));
-        $('#showModal').modal("show");
+    function TakeRewards(RewardsID, UserID) {
+        var Data = {
+            RewardsID: RewardsID,
+            UserID: UserID
+        };
+
+        $.ajax({
+                type: "POST",
+                url: "@Url.Action("_PartialTakeReward", "Employee")",
+                data: JSON.stringify(Data),
+                contentType: "application/json; charset=utf-8",
+                success: function (data) {
+                    alert(data.messaggio);
+                },
+                error: function () {
+                    alert("Error!");
+                }
+
+            });
     }
 </script>

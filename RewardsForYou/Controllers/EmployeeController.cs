@@ -12,8 +12,9 @@ namespace RewardsForYou.Controllers
     public class EmployeeController : Controller
     {
         // GET: Employee
-        public ActionResult Index(int? UserID = null)
+        public ActionResult Index(int? UserID)
         {
+            Session["UserID"] = UserID;
             ViewModel viewModel = new ViewModel();
             MissionModel missionModel = new MissionModel();
             Users x = null;
@@ -71,30 +72,69 @@ namespace RewardsForYou.Controllers
 
         public ActionResult _ChooseRewards()
         {
+            int UserID = 3;
+            if (Session["UserID"] != null)
+            {
+                UserID = (int)Session["UserID"];
+            }
             //take all the rewards
-            List<Rewards> rew = null;
+            UserRewardModel userReward = new UserRewardModel();
             using (RewardsForYouEntities db = new RewardsForYouEntities())
             {
-                rew = db.Rewards.ToList();
+                userReward.rewards = db.Rewards.ToList();
                 
             }
-            return PartialView(rew);
+            userReward.UserID = UserID;
+            return PartialView(userReward);
         }
 
-        public ActionResult _PartialTakeReward(int RewardsID)
+        public ActionResult _PartialTakeReward(int RewardsID, int UserID)
         {
             Rewards reward = null;
+            Users user = null;
+            UsersRewards userReward = null;
+            int newUserPoint = 0;
+            Users userUpdated = null;
             using (RewardsForYouEntities db = new RewardsForYouEntities())
             {
                 reward = db.Rewards.Where(l => l.RewardsID == RewardsID).FirstOrDefault();
+                user = db.Users.Where(l => l.UserID == UserID).FirstOrDefault();
+
+                //check if the points of the user are enough for the selected reward
+                if(user.UserPoints >= reward.Points)
+                {
+                    //sottrazione dei punti allo user
+                    newUserPoint = (int)user.UserPoints - reward.Points;
+                    userUpdated = new Users();
+                    userUpdated.UserPoints = newUserPoint;
+                    userUpdated.Serial = user.Serial;
+                    userUpdated.Name = user.Name;
+                    userUpdated.Surname = user.Surname;
+                    userUpdated.UserID = user.UserID;
+                    userUpdated.RoleID = user.RoleID;
+                    userUpdated.ManagerUserID = user.ManagerUserID;
+                    userUpdated.EMail = user.EMail;
+                    db.Users.Add(userUpdated);
+
+                    //Inserisco il nuovo reward dell'utente nel db
+                    userReward.UserID = user.UserID;
+                    userReward.RewardsID = reward.RewardsID;
+                    userReward.Note = "";
+                    userReward.RewardsDate = new DateTime();
+                    db.UsersRewards.Add(userReward);
+                    db.SaveChanges();
+                    return Json(new { messaggio = $"{reward.Type} aggiunto/a con successo" });
+                }
+
+                else
+                {
+                    return Json(new { messaggio = $"I punti non sono sufficienti" });
+                }
             }
-                return View(reward);
+                
         }
 
-        public ActionResult Take(int RewardID)
-        {
-            return View("Index");
-        }
+        
     }
 
    

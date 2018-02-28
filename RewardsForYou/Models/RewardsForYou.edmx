@@ -62,6 +62,7 @@ avviso 6002: Nessuna chiave primaria definita per la tabella/visualizzazione 'Re
           <Property Name="EMail" Type="nvarchar" MaxLength="300" Nullable="false" />
           <Property Name="RoleID" Type="int" Nullable="false" />
           <Property Name="ManagerUserID" Type="int" />
+          <Property Name="UserPoints" Type="int" />
         </EntityType>
         <EntityType Name="UsersRewards">
           <Key>
@@ -270,6 +271,7 @@ avviso 6002: Nessuna chiave primaria definita per la tabella/visualizzazione 'Re
           <NavigationProperty Name="Users1" Relationship="RewardsForYouModel.FK_Users_Users" FromRole="Users" ToRole="Users1" />
           <NavigationProperty Name="Users2" Relationship="RewardsForYouModel.FK_Users_Users" FromRole="Users1" ToRole="Users" />
           <NavigationProperty Name="UsersRewards" Relationship="RewardsForYouModel.FK_UsersRewards_Users" FromRole="Users" ToRole="UsersRewards" />
+          <Property Name="UserPoints" Type="Int32" />
         </EntityType>
         <EntityType Name="UsersRewards">
           <Key>
@@ -413,6 +415,7 @@ avviso 6002: Nessuna chiave primaria definita per la tabella/visualizzazione 'Re
           <EntitySetMapping Name="Users">
             <EntityTypeMapping TypeName="RewardsForYouModel.Users">
               <MappingFragment StoreEntitySet="Users">
+                <ScalarProperty Name="UserPoints" ColumnName="UserPoints" />
                 <ScalarProperty Name="ManagerUserID" ColumnName="ManagerUserID" />
                 <ScalarProperty Name="RoleID" ColumnName="RoleID" />
                 <ScalarProperty Name="EMail" ColumnName="EMail" />
