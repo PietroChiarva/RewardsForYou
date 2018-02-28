@@ -59,20 +59,26 @@ namespace RewardsForYou.Controllers
             
         }
 
-        public ActionResult AssegnaTask()
+        public ActionResult AssegnaTask(int UserID)
         {
-            TasksUsersModel tasksUsers = new TasksUsersModel();
+           
+            TaskUserView tasksUsers = new TaskUserView();
+            
+            List<Tasks> task= null;
+
             using (RewardsForYouEntities db = new RewardsForYouEntities())
             {
-                tasksUsers.task = db.Tasks.Where(l => l.TaskID == TaskID).ToList();
 
-                
+                task  = db.Tasks.ToList();
 
+                // tasksUsers.task= db.Tasks.ToList();
 
-                
             }
+            tasksUsers.UsersID = UserID;
+            
 
-            return View(tasksUsers);
+            return View(task);
+            //return View(tasksUsers.task);
         }
 
         public ActionResult AddTask(int? UserID = null)
@@ -109,16 +115,22 @@ namespace RewardsForYou.Controllers
         //    return View("Index");
         //}
 
-        public ActionResult DoAddTaskJson(Tasks DatiTask)
+        public ActionResult DoAddTaskJson(Missions DatiTask, int UserID)
         {
+            
+            TaskUserView tasksUsers = new TaskUserView();
+            Missions mission = null;
 
-            if (DatiTask.TaskID != 0 && !string.IsNullOrEmpty(DatiTask.Type) && !string.IsNullOrEmpty(DatiTask.Description) && DatiTask.Points != 0)
+            if (DatiTask.MissionID != 0 && DatiTask.UserID != 0 && DatiTask.TaskID != 0  && DatiTask.Status!= 0)
             {
                
 
                 using (RewardsForYouEntities db = new RewardsForYouEntities())
                 {
-                    db.Tasks.Add(DatiTask);
+
+                    mission = db.Missions.Where(l => l.TaskID == TaskID && l.UserID == UserID).FirstOrDefault();
+                  
+                    db.Missions.Add(DatiTask);
                   
 
                     db.SaveChanges();

@@ -20,7 +20,7 @@
     <MvcBuildViews>false</MvcBuildViews>
     <UseIISExpress>true</UseIISExpress>
     <Use64BitIISExpress />
-    <IISExpressSSLPort>44358</IISExpressSSLPort>
+    <IISExpressSSLPort>44317</IISExpressSSLPort>
     <IISExpressAnonymousAuthentication />
     <IISExpressWindowsAuthentication />
     <IISExpressUseClassicPipelineMode />
@@ -248,6 +248,7 @@
     <Compile Include="Models\Tasks.cs">
       <DependentUpon>RewardsForYou.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\TaskUserView.cs" />
     <Compile Include="Models\Users.cs">
       <DependentUpon>RewardsForYou.tt</DependentUpon>
     </Compile>
@@ -361,10 +362,10 @@
     <Content Include="Scripts\popper-utils.min.js.map" />
     <Content Include="Scripts\popper-utils.js.map" />
     <Content Include="Views\Manager\Index.cshtml" />
-    <Content Include="Views\Manager\AddTask.cshtml" />
     <Content Include="Views\Manager\_PartialTaskDetails.cshtml" />
     <Content Include="Views\Employee\_ChooseRewards.cshtml" />
     <Content Include="Views\Employee\_PartialTakeReward.cshtml" />
+    <Content Include="Views\Manager\AssegnaTask.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

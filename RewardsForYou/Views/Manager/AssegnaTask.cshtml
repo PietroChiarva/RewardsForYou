@@ -20,8 +20,9 @@
             <th>
                 @Html.DisplayNameFor(model => model.Points)
             </th>
-            @*<th>
-                    @Html.DisplayNameFor(model => model.Finished)
+            @*
+                <th>
+                    @Html.DisplayNameFor(model => model.task.Finished)
                 </th>*@
             <th></th>
         </tr>
@@ -44,7 +45,8 @@
                 <td>
                     <a class="btn btn-primary" onclick="AddMission ('@item.TaskID')">Add</a>
                 </td>
-                @*<td>
+                @*
+                    <td>
                         @Html.DisplayFor(modelItem => item.Finished)
                     </td>*@
             </tr>
@@ -53,20 +55,35 @@
     </table>
 }
 
-<script type="text/javascript">
+    <script type="text/javascript">
 
-    function AddMission(TaskID) {
+    
+    function AddTask(TaskID, UserID) {
+            //creo l'oggetto associando le variabili
+        var DatiTask = {
+            TaskID: TaskID,
+            UserID: UserID
+              
+            };
+            //chiamata ajax
+            $.ajax({
+                //imposto il tipo di invio dati (GET O POST)
+                type: "POST",
+                //Dove devo inviare i dati recuperati dal form?
+                url: "@Url.Action("DoInsertJson", "Manager")",
+                //Quali dati devo inviare? e che tipo
+                data: DatiTask,
+                success: function (data) {
+                    alert(data.messaggio);
+                },
+                error: function () {
+                    alert("Chiamata fallita, riprova");
+                    //sempre meglio impostare una callback in caso di fallimento
+                }
 
-       
+            });
+        };
+        
 
-    }
+    </script>
 
-    //function ShowAddModal(TaskID) {
-
-    //    $('#showModal .modal-body').load(Router.action('Manager', 'AddTask', { TaskID: TaskID }));
-    //    $('#showModal').modal("show");
-
-
-    //}
-
-</script>
