@@ -2,45 +2,52 @@
 
 
 <table class="table">
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.rewards.Type)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.rewards.Description)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.rewards.Points)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.rewards.Availability)
-        </th>
-        <th></th>
-    </tr>
+    @foreach (var item in Model.rewards)
+    {
 
-@foreach (var item in Model.rewards) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.Type)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Description)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Points)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Availability)
-        </td>
-        <td>
-          <a onclick="TakeRewards( '@item.RewardsID', '@Model.UserID')"
-               class="btn btn-primary">Take the rewards</a>
-        </td>
-       
-    </tr>
-}
+        if (Model.rewards.Count == 0 || Model.rewards.IndexOf(item) == 0)
+        {
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => item.Type)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => item.Description)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => item.Points)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => item.Availability)
+                </th>
+                <th></th>
+            </tr>
+        }
+    }
+            @foreach (var item in Model.rewards)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Type)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Description)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Points)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Availability)
+                    </td>
+                    <td>
+                        <a onclick="TakeRewards( '@item.RewardsID', '@Model.UserID')"
+                           class="btn btn-primary">Take the rewards</a>
+                    </td>
 
-</table>
+                </tr>
+            }
+
+        </table>
 <script>
     function TakeRewards(RewardsID, UserID) {
         var Data = {

@@ -92,11 +92,12 @@ namespace RewardsForYou.Controllers
         {
             Rewards reward = null;
             Users user = null;
-            UsersRewards userReward = null;
+            UsersRewards userReward = new UsersRewards();
             int newUserPoint = 0;
-            Users userUpdated = null;
+           
             using (RewardsForYouEntities db = new RewardsForYouEntities())
             {
+                Users userUpdated = db.Users.Find(UserID);
                 reward = db.Rewards.Where(l => l.RewardsID == RewardsID).FirstOrDefault();
                 user = db.Users.Where(l => l.UserID == UserID).FirstOrDefault();
 
@@ -104,23 +105,14 @@ namespace RewardsForYou.Controllers
                 if(user.UserPoints >= reward.Points)
                 {
                     //sottrazione dei punti allo user
-                    newUserPoint = (int)user.UserPoints - reward.Points;
-                    userUpdated = new Users();
-                    userUpdated.UserPoints = newUserPoint;
-                    userUpdated.Serial = user.Serial;
-                    userUpdated.Name = user.Name;
-                    userUpdated.Surname = user.Surname;
-                    userUpdated.UserID = user.UserID;
-                    userUpdated.RoleID = user.RoleID;
-                    userUpdated.ManagerUserID = user.ManagerUserID;
-                    userUpdated.EMail = user.EMail;
-                    db.Users.Add(userUpdated);
+                    userUpdated.UserPoints = user.UserPoints - reward.Points;
+                    
 
                     //Inserisco il nuovo reward dell'utente nel db
                     userReward.UserID = user.UserID;
                     userReward.RewardsID = reward.RewardsID;
                     userReward.Note = "";
-                    userReward.RewardsDate = new DateTime();
+                    userReward.RewardsDate = DateTime.Now;
                     db.UsersRewards.Add(userReward);
                     db.SaveChanges();
                     return Json(new { messaggio = $"{reward.Type} aggiunto/a con successo" });
