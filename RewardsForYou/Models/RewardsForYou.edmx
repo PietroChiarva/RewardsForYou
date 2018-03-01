@@ -5,15 +5,9 @@
     <!-- SSDL content -->
     <edmx:StorageModels>
     <Schema Namespace="RewardsForYouModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012.Azure" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
-        <!--Errori trovati durante la generazione:
-avviso 6002: Nessuna chiave primaria definita per la tabella/visualizzazione 'RewardsForYou.dbo.Missions'. La chiave è stata dedotta e la definizione è stata creata come tabella/visualizzazione di sola lettura.-->
         <EntityType Name="Missions">
           <Key>
             <PropertyRef Name="MissionID" />
-            <PropertyRef Name="UserID" />
-            <PropertyRef Name="TaskID" />
-            <PropertyRef Name="StartDate" />
-            <PropertyRef Name="Status" />
           </Key>
           <Property Name="MissionID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="UserID" Type="int" Nullable="false" />
@@ -147,22 +141,12 @@ avviso 6002: Nessuna chiave primaria definita per la tabella/visualizzazione 'Re
           </ReferentialConstraint>
         </Association>
         <EntityContainer Name="RewardsForYouModelStoreContainer">
+          <EntitySet Name="Missions" EntityType="Self.Missions" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Rewards" EntityType="Self.Rewards" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Roles" EntityType="Self.Roles" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Tasks" EntityType="Self.Tasks" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Users" EntityType="Self.Users" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="UsersRewards" EntityType="Self.UsersRewards" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="Missions" EntityType="Self.Missions" store:Type="Tables" store:Schema="dbo">
-            <DefiningQuery>SELECT 
-    [Missions].[MissionID] AS [MissionID], 
-    [Missions].[UserID] AS [UserID], 
-    [Missions].[TaskID] AS [TaskID], 
-    [Missions].[StartDate] AS [StartDate], 
-    [Missions].[EndDate] AS [EndDate], 
-    [Missions].[Note] AS [Note], 
-    [Missions].[Status] AS [Status]
-    FROM [dbo].[Missions] AS [Missions]</DefiningQuery>
-          </EntitySet>
           <AssociationSet Name="FK_Missions_Tasks" Association="Self.FK_Missions_Tasks">
             <End Role="Tasks" EntitySet="Tasks" />
             <End Role="Missions" EntitySet="Missions" />
@@ -198,7 +182,6 @@ avviso 6002: Nessuna chiave primaria definita per la tabella/visualizzazione 'Re
           <EntitySet Name="Tasks" EntityType="RewardsForYouModel.Tasks" />
           <EntitySet Name="Users" EntityType="RewardsForYouModel.Users" />
           <EntitySet Name="UsersRewards" EntityType="RewardsForYouModel.UsersRewards" />
-          <EntitySet Name="Missions" EntityType="RewardsForYouModel.Missions" />
           <AssociationSet Name="FK_UsersRewards_Rewards" Association="RewardsForYouModel.FK_UsersRewards_Rewards">
             <End Role="Rewards" EntitySet="Rewards" />
             <End Role="UsersRewards" EntitySet="UsersRewards" />
@@ -206,14 +189,6 @@ avviso 6002: Nessuna chiave primaria definita per la tabella/visualizzazione 'Re
           <AssociationSet Name="FK_Users_Roles" Association="RewardsForYouModel.FK_Users_Roles">
             <End Role="Roles" EntitySet="Roles" />
             <End Role="Users" EntitySet="Users" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Missions_Tasks" Association="RewardsForYouModel.FK_Missions_Tasks">
-            <End Role="Tasks" EntitySet="Tasks" />
-            <End Role="Missions" EntitySet="Missions" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Missions_Users" Association="RewardsForYouModel.FK_Missions_Users">
-            <End Role="Users" EntitySet="Users" />
-            <End Role="Missions" EntitySet="Missions" />
           </AssociationSet>
           <AssociationSet Name="FK_Users_Users" Association="RewardsForYouModel.FK_Users_Users">
             <End Role="Users" EntitySet="Users" />
@@ -223,7 +198,16 @@ avviso 6002: Nessuna chiave primaria definita per la tabella/visualizzazione 'Re
             <End Role="Users" EntitySet="Users" />
             <End Role="UsersRewards" EntitySet="UsersRewards" />
           </AssociationSet>
-        </EntityContainer>
+          <EntitySet Name="Missions" EntityType="RewardsForYouModel.Missions" />
+          <AssociationSet Name="FK_Missions_Tasks" Association="RewardsForYouModel.FK_Missions_Tasks">
+            <End Role="Tasks" EntitySet="Tasks" />
+            <End Role="Missions" EntitySet="Missions" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Missions_Users" Association="RewardsForYouModel.FK_Missions_Users">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="Missions" EntitySet="Missions" />
+          </AssociationSet>
+          </EntityContainer>
         <EntityType Name="Rewards">
           <Key>
             <PropertyRef Name="RewardsID" />
@@ -267,11 +251,11 @@ avviso 6002: Nessuna chiave primaria definita per la tabella/visualizzazione 'Re
           <Property Name="RoleID" Type="Int32" Nullable="false" />
           <Property Name="ManagerUserID" Type="Int32" />
           <NavigationProperty Name="Roles" Relationship="RewardsForYouModel.FK_Users_Roles" FromRole="Users" ToRole="Roles" />
-          <NavigationProperty Name="Missions" Relationship="RewardsForYouModel.FK_Missions_Users" FromRole="Users" ToRole="Missions" />
           <NavigationProperty Name="Users1" Relationship="RewardsForYouModel.FK_Users_Users" FromRole="Users" ToRole="Users1" />
           <NavigationProperty Name="Users2" Relationship="RewardsForYouModel.FK_Users_Users" FromRole="Users1" ToRole="Users" />
           <NavigationProperty Name="UsersRewards" Relationship="RewardsForYouModel.FK_UsersRewards_Users" FromRole="Users" ToRole="UsersRewards" />
           <Property Name="UserPoints" Type="Int32" />
+          <NavigationProperty Name="Missions" Relationship="RewardsForYouModel.FK_Missions_Users" FromRole="Users" ToRole="Missions" />
         </EntityType>
         <EntityType Name="UsersRewards">
           <Key>
@@ -284,24 +268,6 @@ avviso 6002: Nessuna chiave primaria definita per la tabella/visualizzazione 'Re
           <Property Name="Note" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="Rewards" Relationship="RewardsForYouModel.FK_UsersRewards_Rewards" FromRole="UsersRewards" ToRole="Rewards" />
           <NavigationProperty Name="Users" Relationship="RewardsForYouModel.FK_UsersRewards_Users" FromRole="UsersRewards" ToRole="Users" />
-        </EntityType>
-        <EntityType Name="Missions">
-          <Key>
-            <PropertyRef Name="MissionID" />
-            <PropertyRef Name="UserID" />
-            <PropertyRef Name="TaskID" />
-            <PropertyRef Name="StartDate" />
-            <PropertyRef Name="Status" />
-          </Key>
-          <Property Name="MissionID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="UserID" Type="Int32" Nullable="false" />
-          <Property Name="TaskID" Type="Int32" Nullable="false" />
-          <Property Name="StartDate" Type="DateTime" Nullable="false" Precision="0" />
-          <Property Name="EndDate" Type="DateTime" Precision="0" />
-          <Property Name="Note" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
-          <Property Name="Status" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="Tasks" Relationship="RewardsForYouModel.FK_Missions_Tasks" FromRole="Missions" ToRole="Tasks" />
-          <NavigationProperty Name="Users" Relationship="RewardsForYouModel.FK_Missions_Users" FromRole="Missions" ToRole="Users" />
         </EntityType>
         <Association Name="FK_UsersRewards_Rewards">
           <End Type="RewardsForYouModel.Rewards" Role="Rewards" Multiplicity="1" />
@@ -324,30 +290,6 @@ avviso 6002: Nessuna chiave primaria definita per la tabella/visualizzazione 'Re
             </Principal>
             <Dependent Role="Users">
               <PropertyRef Name="RoleID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_Missions_Tasks">
-          <End Type="RewardsForYouModel.Tasks" Role="Tasks" Multiplicity="1" />
-          <End Type="RewardsForYouModel.Missions" Role="Missions" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Tasks">
-              <PropertyRef Name="TaskID" />
-            </Principal>
-            <Dependent Role="Missions">
-              <PropertyRef Name="TaskID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_Missions_Users">
-          <End Type="RewardsForYouModel.Users" Role="Users" Multiplicity="1" />
-          <End Type="RewardsForYouModel.Missions" Role="Missions" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Users">
-              <PropertyRef Name="UserID" />
-            </Principal>
-            <Dependent Role="Missions">
-              <PropertyRef Name="UserID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -375,7 +317,45 @@ avviso 6002: Nessuna chiave primaria definita per la tabella/visualizzazione 'Re
             </Dependent>
           </ReferentialConstraint>
         </Association>
-      </Schema>
+        <EntityType Name="Missions">
+          <Key>
+            <PropertyRef Name="MissionID" />
+          </Key>
+          <Property Name="MissionID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="UserID" Type="Int32" Nullable="false" />
+          <Property Name="TaskID" Type="Int32" Nullable="false" />
+          <Property Name="StartDate" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="EndDate" Type="DateTime" Precision="0" />
+          <Property Name="Note" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="Status" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Tasks" Relationship="RewardsForYouModel.FK_Missions_Tasks" FromRole="Missions" ToRole="Tasks" />
+          <NavigationProperty Name="Users" Relationship="RewardsForYouModel.FK_Missions_Users" FromRole="Missions" ToRole="Users" />
+        </EntityType>
+        <Association Name="FK_Missions_Tasks">
+          <End Type="RewardsForYouModel.Tasks" Role="Tasks" Multiplicity="1" />
+          <End Type="RewardsForYouModel.Missions" Role="Missions" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Tasks">
+              <PropertyRef Name="TaskID" />
+            </Principal>
+            <Dependent Role="Missions">
+              <PropertyRef Name="TaskID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Missions_Users">
+          <End Type="RewardsForYouModel.Users" Role="Users" Multiplicity="1" />
+          <End Type="RewardsForYouModel.Missions" Role="Missions" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="UserID" />
+            </Principal>
+            <Dependent Role="Missions">
+              <PropertyRef Name="UserID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
     <edmx:Mappings>

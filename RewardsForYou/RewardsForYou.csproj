@@ -249,6 +249,7 @@
       <DependentUpon>RewardsForYou.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\TaskUserView.cs" />
+    <Compile Include="Models\UserRewardModel.cs" />
     <Compile Include="Models\Users.cs">
       <DependentUpon>RewardsForYou.tt</DependentUpon>
     </Compile>

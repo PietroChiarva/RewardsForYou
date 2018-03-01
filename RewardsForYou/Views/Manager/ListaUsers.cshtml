@@ -30,6 +30,7 @@
 
     @foreach (var item in Model)
     {
+       
         <tr>
             <td>
                 @Html.DisplayFor(modelItem => item.Serial)
@@ -65,9 +66,9 @@
 <script type="text/javascript">
     function ShowMissionModal(UserID) {
 
-        // window.open(Router.action('Employee', 'Index', { UserID: UserID }));
-        $('#showModal .modal-body').load(Router.action('Employee', 'Index', { UserID: UserID }));
-        $('#showModal').modal("show");
+         window.open(Router.action('Employee', 'Index', { UserID: UserID }));
+        //$('#showModal .modal-body').load(Router.action('Employee', 'Index', { UserID: UserID }));
+        //$('#showModal').modal("show");
 
 
     }
