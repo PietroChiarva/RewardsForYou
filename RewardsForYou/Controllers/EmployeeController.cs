@@ -14,7 +14,14 @@ namespace RewardsForYou.Controllers
         // GET: Employee
         public ActionResult Index(int? UserID)
         {
-            Session["UserID"] = UserID;
+            if (UserID.HasValue)
+            {
+                Session["UserID"] = UserID;
+            }
+            else
+            {
+                UserID = (int)Session["UserID"];
+            }
             ViewModel viewModel = new ViewModel();
             MissionModel missionModel = new MissionModel();
             Users x = null;
@@ -72,7 +79,7 @@ namespace RewardsForYou.Controllers
 
         public ActionResult _ChooseRewards()
         {
-            int UserID = 3;
+            int UserID = 0;
             if (Session["UserID"] != null)
             {
                 UserID = (int)Session["UserID"];
@@ -93,11 +100,11 @@ namespace RewardsForYou.Controllers
             Rewards reward = null;
             Users user = null;
             UsersRewards userReward = new UsersRewards();
-            int newUserPoint = 0;
-           
+            Rewards availabilityReward = new Rewards();           
             using (RewardsForYouEntities db = new RewardsForYouEntities())
             {
                 Users userUpdated = db.Users.Find(UserID);
+                availabilityReward = db.Rewards.Find(RewardsID);
                 reward = db.Rewards.Where(l => l.RewardsID == RewardsID).FirstOrDefault();
                 user = db.Users.Where(l => l.UserID == UserID).FirstOrDefault();
 
@@ -106,7 +113,9 @@ namespace RewardsForYou.Controllers
                 {
                     //sottrazione dei punti allo user
                     userUpdated.UserPoints = user.UserPoints - reward.Points;
-                    
+
+                    //diminuzione dell'availability del reward
+                    availabilityReward.Availability = availabilityReward.Availability - 1;
 
                     //Inserisco il nuovo reward dell'utente nel db
                     userReward.UserID = user.UserID;
@@ -115,12 +124,12 @@ namespace RewardsForYou.Controllers
                     userReward.RewardsDate = DateTime.Now;
                     db.UsersRewards.Add(userReward);
                     db.SaveChanges();
-                    return Json(new { messaggio = $"{reward.Type} aggiunto/a con successo" });
+                    return Json(new { messaggio = $"{reward.Type} aggiunto/a con successo", flag = true });
                 }
 
                 else
                 {
-                    return Json(new { messaggio = $"I punti non sono sufficienti" });
+                    return Json(new { messaggio = $"I punti non sono sufficienti", flag = false });
                 }
             }
                 

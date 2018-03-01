@@ -62,6 +62,10 @@
                 contentType: "application/json; charset=utf-8",
                 success: function (data) {
                     alert(data.messaggio);
+                    if (data.flag == true) {
+                        window.location.reload();
+                    }
+                    
                 },
                 error: function () {
                     alert("Error!");
