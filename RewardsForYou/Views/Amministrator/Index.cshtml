@@ -1,0 +1,36 @@
+﻿@{
+    ViewBag.Title = "Home Page";
+}
+
+<div class="jumbotron">
+    <h1 class="text-center">Rewards For You</h1>
+</div>
+<div class="row">
+    <div class="col-md-12">
+        <div class="card" id="Employee">
+            <div class="card-body text-center">
+                <h5 class="card-title">Insert New User</h5>
+                <p class="card-text">Entra nella tua pagina personale</p>
+                <a href="@Url.Action("InsertNewUsers","Amministrator")" class="btn btn-primary">Go</a>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-12">
+        <div class="card" id="Manager">
+            <div class="card-body text-center">
+                <h5 class="card-title">Add Rewards</h5>
+                <p class="card-text">Entra nella tua pagina gestionale</p>
+                <a href="@Url.Action("AddRewards","Amministrator")" class="btn btn-primary">Go</a>
+            </div>
+        </div>
+    </div>
+    @*<div class="col-md-12">
+        <div class="card" id="Amministrator">
+            <div class="card-body text-center">
+                <h5 class="card-title"></h5>
+                <p class="card-text">Entra nella tua pagina di amministrazione</p>
+                <a href="@Url.Action("","")" class="btn btn-primary">Go</a>
+            </div>
+        </div>
+    </div>
+</div>*@

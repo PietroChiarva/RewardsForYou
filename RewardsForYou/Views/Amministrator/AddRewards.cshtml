@@ -1,0 +1,91 @@
+﻿@model RewardsForYou.Models.Rewards
+
+@using (Html.BeginForm("_JsonAddRewards", "Amministrator", null, FormMethod.Post))
+{
+    @*@Html.AntiForgeryToken()*@
+
+    <div class="form-horizontal">
+        <h4>Rewards</h4>
+        <hr />
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        <div class="form-group">
+            @Html.LabelFor(model => model.Type, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Type, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Type, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Description, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Description, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Description, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Points, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Points, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Points, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Availability, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Availability, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Availability, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" onclick="InsertRewards()" value="Insert" class="btn btn-default" />
+            </div>
+        </div>
+    </div>
+}
+@*<a class="btn btn-default" onclick="InsertRewards()">Insert</a>*@
+
+
+
+
+<script type="text/javascript">
+
+        function InsertRewards() {
+            //creo l'oggetto associando le variabili
+            var DatiRewards = {
+                RewardsID: $('#RewardsID').val(),
+                Type : $('Type').val(),
+                Description: $('#Name ').val(),
+                Points: $('Points').val(),
+                Availability: $('Availability').val(),
+            };
+            //chiamata ajax
+            $.ajax({
+                //imposto il tipo di invio dati (GET O POST)
+                type: "POST",
+                //Dove devo inviare i dati recuperati dal form?
+                url: "@Url.Action("_JsonAddRewards", "Amministrator")",
+                //Quali dati devo inviare? e che tipo
+                data: DatiRewards,
+                success: function (data) {
+                    alert(data.messaggio);
+                },
+                error: function () {
+                    alert("Chiamata fallita, riprova");
+                    //sempre meglio impostare una callback in caso di fallimento
+                }
+
+            });
+        };
+
+</script>
+
+
+
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>
