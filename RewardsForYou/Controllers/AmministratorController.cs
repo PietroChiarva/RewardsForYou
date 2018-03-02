@@ -29,11 +29,16 @@ namespace RewardsForYou.Controllers
         {
             List<Users> user = new List<Users>();
             List<Roles> role = new List<Roles>();
-          using (RewardsForYouEntities db = new RewardsForYouEntities())
-                {
+            using (RewardsForYouEntities db = new RewardsForYouEntities())
+            {
 
-                ViewBag.RoleId = new SelectList(role, "Id", "Name");
+                //var a = new SelectList()   new SelectListItem() { Text = "A", Value = "1" } );
+                //var b = new SelectListItem() { Text = "A", Value = "1" };
 
+                // ViewBag.RoleList = new SelectList();
+
+                //ViewBag.RoleList = new SelectList(db.Roles.Select(r=> new { Value = r.RoleID.ToString(), Text = r.Role }).ToList(), null);
+                ViewBag.RoleList = db.Roles.Select(r => new SelectListItem() { Value = r.RoleID.ToString(), Text = r.Role }).ToList();
             }
             return View();
         }
@@ -67,7 +72,7 @@ namespace RewardsForYou.Controllers
 
         public ActionResult _JsonAddRewards(Rewards DatiRewards)
         {
-            if (DatiRewards.RewardsID != 0 && !string.IsNullOrEmpty(DatiRewards.Type) && !string.IsNullOrEmpty(DatiRewards.Description) && DatiRewards.Points !=0 && DatiRewards.Availability !=0)
+            if (DatiRewards.RewardsID != 0 && !string.IsNullOrEmpty(DatiRewards.Type) && !string.IsNullOrEmpty(DatiRewards.Description) && DatiRewards.Points != 0 && DatiRewards.Availability != 0)
             {
                 using (RewardsForYouEntities db = new RewardsForYouEntities())
                 {
