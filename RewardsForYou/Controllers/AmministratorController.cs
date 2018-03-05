@@ -1,11 +1,18 @@
 ﻿using RewardsForYou.Models;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
+using System.Text;
 using System.Web;
 using System.Web.Mvc;
+using System.Web.Mvc.Filters;
 using System.Data.Entity;
 using Microsoft.Ajax.Utilities;
+using System.Web.Routing;
+
+
+
 
 namespace RewardsForYou.Controllers
 {
@@ -97,7 +104,35 @@ namespace RewardsForYou.Controllers
             }
         }
 
-        
+        public ActionResult SearchDeleteUser(SearchDeleteUser data)
+        {
+            
+            using (RewardsForYouEntities db = new RewardsForYouEntities())
+            {
+              
+                    IQueryable<Users> x = null;
+                    if (data.Serial != null)
+                    {
+                    x = x.Where(l => l.Serial == data.Serial); 
+                    }
+                    else
+                    {
+                        x = db.Users;
+                    }
+
+                    if (data.EMail!= null)
+                    {
+                        x = x.Where(l => l.EMail == data.EMail);
+                    }
+                    
+
+                data.Lista = x.ToList();
+
+                
+
+                return View("SearchDeleteUser", data);
+            }
+        }
 
 
 
