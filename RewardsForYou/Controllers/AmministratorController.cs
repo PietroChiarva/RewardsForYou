@@ -45,16 +45,8 @@ namespace RewardsForYou.Controllers
 
         public ActionResult _JsonInsertNewUsers(Users data)
         {
-            Users userID = null;
-
-            using (RewardsForYouEntities db = new RewardsForYouEntities())
-            {
-                userID = db.Users.Find(Session["UserID"]);
-                data.UserID = userID.UserID;
-
-
-            }
-            if (data.UserID != 0 && !string.IsNullOrEmpty(data.Serial) && !string.IsNullOrEmpty(data.Name) && !string.IsNullOrEmpty(data.Surname) && !string.IsNullOrEmpty(data.EMail) && data.RoleID != 0 && data.ManagerUserID != 0)
+          
+            if (!string.IsNullOrEmpty(data.Serial) && !string.IsNullOrEmpty(data.Name) && !string.IsNullOrEmpty(data.Surname) && !string.IsNullOrEmpty(data.EMail) && data.RoleID != 0 && data.ManagerUserID != 0)
             {
                 using (RewardsForYouEntities db = new RewardsForYouEntities())
                 {
@@ -83,21 +75,26 @@ namespace RewardsForYou.Controllers
             }
         }
 
-        public ActionResult _JsonAddRewards(Rewards DatiRewards)
+        public ActionResult _JsonAddRewards(Rewards data)
         {
-            if (DatiRewards.RewardsID != 0 && !string.IsNullOrEmpty(DatiRewards.Type) && !string.IsNullOrEmpty(DatiRewards.Description) && DatiRewards.Points != 0 && DatiRewards.Availability != 0)
+           
+            if (!string.IsNullOrEmpty(data.Type) && !string.IsNullOrEmpty(data.Description) && data.Points != 0 && data.Availability != 0)
             {
                 using (RewardsForYouEntities db = new RewardsForYouEntities())
                 {
-                    db.Rewards.Add(DatiRewards);
+                    db.Rewards.Add(data);
 
                     db.SaveChanges();
 
 
 
                 }
+                return Json(new { messaggio = $"Rewards {data.RewardsID} aggiunto/a con successo" });
             }
-            return Json(new { messaggio = $"Rewards {DatiRewards.RewardsID} aggiunto/a con successo" });
+            else
+            {
+                return Json(new { messaggio = $"Dati mancanti o non validi" });
+            }
         }
 
 
