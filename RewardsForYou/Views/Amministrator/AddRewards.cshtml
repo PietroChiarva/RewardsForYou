@@ -74,6 +74,8 @@
                 data: DatiRewards,
                 success: function (data) {
                     alert(data.messaggio);
+                    if (flag == true)
+                        window.location.reload();
                 },
                 error: function () {
                     alert("Chiamata fallita, riprova");
