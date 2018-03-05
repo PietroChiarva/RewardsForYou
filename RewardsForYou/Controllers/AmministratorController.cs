@@ -43,34 +43,34 @@ namespace RewardsForYou.Controllers
             return View();
         }
 
-        public ActionResult _JsonInsertNewUsers(Users DatiUsers)
+        public ActionResult _JsonInsertNewUsers(Users data)
         {
             Users userID = null;
-            
+
             using (RewardsForYouEntities db = new RewardsForYouEntities())
             {
                 userID = db.Users.Find(Session["UserID"]);
-                DatiUsers.UserID = userID.UserID;
-                
+                data.UserID = userID.UserID;
+
 
             }
-            if (DatiUsers.UserID != 0 && !string.IsNullOrEmpty(DatiUsers.Serial) && !string.IsNullOrEmpty(DatiUsers.Name) && !string.IsNullOrEmpty(DatiUsers.Surname) && !string.IsNullOrEmpty(DatiUsers.EMail) && DatiUsers.RoleID != 0 && DatiUsers.ManagerUserID != 0)
+            if (data.UserID != 0 && !string.IsNullOrEmpty(data.Serial) && !string.IsNullOrEmpty(data.Name) && !string.IsNullOrEmpty(data.Surname) && !string.IsNullOrEmpty(data.EMail) && data.RoleID != 0 && data.ManagerUserID != 0)
             {
                 using (RewardsForYouEntities db = new RewardsForYouEntities())
                 {
-                    db.Users.Add(DatiUsers);
+                    db.Users.Add(data);
 
                     db.SaveChanges();
-
+                    
 
 
                 }
-                
-               
+                return Json(new { messaggio = $"Users {data.UserID} aggiunto/a con successo" });
             }
-           
-            return View("Index");
-         
+            else
+            {
+                return Json(new { messaggio = $"Dati mancanti o non validi" });
+            }
         }
 
 

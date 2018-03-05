@@ -3,9 +3,10 @@
 
 <h2>Insert Users</h2>
 
-
 @using (Html.BeginForm("_JsonInsertNewUsers", "Amministrator", null, FormMethod.Post))
+
 {
+
     <div class="form-horizontal">
         <h4>Users</h4>
         <hr />
@@ -68,13 +69,13 @@
 
         <div class="form-group">
             <div class="col-md-offset-2 col-md-10">
-                <input type="submit"  value="Insert" class="btn btn-default" />
+                <a class="btn btn-default" onclick="InsertUsers()">Insert</a>
+                @*<input type="submit" onclick="InsertUsers()" value="Insert" class="btn btn-default" />*@
             </div>
         </div>
     </div>
-    <div>
-        @ViewBag.Message
-    </div>
+
+    @*<a class="btn btn-default" onclick="InsertUsers()">Insert</a>*@
 
 }
 
@@ -83,13 +84,14 @@
 
 
 
-@*<script type="text/javascript">
+<script type="text/javascript">
 
         function InsertUsers() {
             //creo l'oggetto associando le variabili
             var DatiUsers = {
+                UserID: $('#UserID').val(),
                 Serial : $('#Serial').val(),
-                Name: $('#Name').val(),
+                Name: $('#Name ').val(),
                 Surname: $('#Surname').val(),
                 EMail: $('#EMail').val(),
                 RoleID: $('#RoleID').val(),
@@ -115,7 +117,7 @@
             });
         };
 
-</script>*@
+</script>
 
 
 
