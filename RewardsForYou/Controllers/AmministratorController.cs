@@ -52,7 +52,7 @@ namespace RewardsForYou.Controllers
                     db.Users.Add(DatiUsers);
 
                     db.SaveChanges();
-
+                    
 
 
                 }

@@ -87,11 +87,13 @@
             //creo l'oggetto associando le variabili
             var DatiUsers = {
                 UserID: $('#UserID').val(),
-                Serial : $('Serial').val(),
+                Serial : $('#Serial').val(),
                 Name: $('#Name ').val(),
-                EMail: $('EMail').val(),
-                RoleID: $('RoleID').val(),
-                ManagerID: $('ManagerID').val(),
+                Surname: $('#Surname'),
+                EMail: $('#EMail').val(),
+                RoleID: $('#RoleID').val(),
+                ManagerUserID: $('#ManagerUserID').val(),
+                UserPoints: 0,
             };
             //chiamata ajax
             $.ajax({
