@@ -37,5 +37,7 @@ namespace RewardsForYou.Models
         public virtual ICollection<UsersRewards> UsersRewards { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Missions> Missions { get; set; }
+
+      
     }
 }
