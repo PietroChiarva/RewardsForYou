@@ -45,15 +45,15 @@ namespace RewardsForYou.Controllers
 
         public ActionResult _JsonInsertNewUsers(Users data)
         {
-            Users userID = null;
+            //Users userID = null;
 
-            using (RewardsForYouEntities db = new RewardsForYouEntities())
-            {
-                userID = db.Users.Find(Session["UserID"]);
-                data.UserID = userID.UserID;
+            //using (RewardsForYouEntities db = new RewardsForYouEntities())
+            //{
+            //    userID = db.Users.Find(Session["UserID"]);
+            //    data.UserID = userID.UserID;
 
 
-            }
+            //}
             if (!string.IsNullOrEmpty(data.Serial) && !string.IsNullOrEmpty(data.Name) && !string.IsNullOrEmpty(data.Surname) && !string.IsNullOrEmpty(data.EMail) && data.RoleID != 0 && data.ManagerUserID != 0)
             {
                 using (RewardsForYouEntities db = new RewardsForYouEntities())
