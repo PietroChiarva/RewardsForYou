@@ -65,12 +65,12 @@ namespace RewardsForYou.Controllers
 
 
                 }
-                return Json(new { messaggio = $"Users {DatiUsers.UserID} aggiunto/a con successo" });
+                
+               
             }
-            else
-            {
-                return Json(new { messaggio = $"Dati mancanti o non validi" });
-            }
+           
+            return View("Index");
+         
         }
 
 
