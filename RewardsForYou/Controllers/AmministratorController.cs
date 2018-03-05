@@ -86,7 +86,7 @@ namespace RewardsForYou.Controllers
         public ActionResult _JsonAddRewards(Rewards data)
         {
             
-            if (data.RewardsID != 0 && !string.IsNullOrEmpty(data.Type) && !string.IsNullOrEmpty(data.Description) && data.Points != 0 && data.Availability != 0)
+            if (!string.IsNullOrEmpty(data.Type) && !string.IsNullOrEmpty(data.Description) && data.Points != 0 && data.Availability != 0)
             {
                 using (RewardsForYouEntities db = new RewardsForYouEntities())
                 {
