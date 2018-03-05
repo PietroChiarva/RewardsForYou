@@ -108,6 +108,9 @@
                 data: DatiUsers,
                 success: function (data) {
                     alert(data.messaggio);
+                    if (data.flag == true) {
+                        window.location.reload();
+                    }
                 },
                 error: function () {
                     alert("Chiamata fallita, riprova");

@@ -57,11 +57,11 @@ namespace RewardsForYou.Controllers
 
 
                 }
-                return Json(new { messaggio = $"Users {data.UserID} aggiunto/a con successo" });
+                return Json(new { messaggio = $"Users {data.UserID} aggiunto/a con successo", flag = true });
             }
             else
             {
-                return Json(new { messaggio = $"Dati mancanti o non validi" });
+                return Json(new { messaggio = $"Dati mancanti o non validi" , flag = false});
             }
         }
 
@@ -89,11 +89,11 @@ namespace RewardsForYou.Controllers
 
 
                 }
-                return Json(new { messaggio = $"Rewards {data.RewardsID} aggiunto/a con successo" });
+                return Json(new { messaggio = $"Rewards {data.RewardsID} aggiunto/a con successo",flag = true });
             }
             else
             {
-                return Json(new { messaggio = $"Dati mancanti o non validi" });
+                return Json(new { messaggio = $"Dati mancanti o non validi", flag = false });
             }
         }
 

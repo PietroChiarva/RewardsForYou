@@ -1,7 +1,7 @@
 ﻿@model RewardsForYou.Models.Rewards
 
-@using (Html.BeginForm("_JsonAddRewards", "Amministrator", null, FormMethod.Post))
-{
+@*@using (Html.BeginForm("_JsonAddRewards", "Amministrator", null, FormMethod.Post))
+{*@
    
 
     <div class="form-horizontal">
@@ -47,7 +47,7 @@
             </div>
         </div>
     </div>
-}
+
 @*<a class="btn btn-default" onclick="InsertRewards()">Insert</a>*@
 
 
@@ -74,6 +74,9 @@
                 data: DatiRewards,
                 success: function (data) {
                     alert(data.messaggio);
+                    if (data.flag == true) {
+                        window.location.reload();
+                    }
                 },
                 error: function () {
                     alert("Chiamata fallita, riprova");
