@@ -2,7 +2,7 @@
 
 @using (Html.BeginForm("_JsonAddRewards", "Amministrator", null, FormMethod.Post))
 {
-    @*@Html.AntiForgeryToken()*@
+   
 
     <div class="form-horizontal">
         <h4>Rewards</h4>
@@ -42,7 +42,8 @@
 
         <div class="form-group">
             <div class="col-md-offset-2 col-md-10">
-                <input type="submit" onclick="InsertRewards()" value="Insert" class="btn btn-default" />
+                <a class="btn btn-default" onclick="InsertRewards()">Insert</a>
+                @*<input type="submit" onclick="InsertRewards()" value="Insert" class="btn btn-default" />*@
             </div>
         </div>
     </div>
@@ -59,7 +60,7 @@
             var DatiRewards = {
                 RewardsID: $('#RewardsID').val(),
                 Type : $('#Type').val(),
-                Description: $('#Name ').val(),
+                Description: $('#Description').val(),
                 Points: $('#Points').val(),
                 Availability: $('#Availability').val(),
             };
