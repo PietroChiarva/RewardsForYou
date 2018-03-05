@@ -45,6 +45,15 @@ namespace RewardsForYou.Controllers
 
         public ActionResult _JsonInsertNewUsers(Users DatiUsers)
         {
+            Users userID = null;
+            
+            using (RewardsForYouEntities db = new RewardsForYouEntities())
+            {
+                userID = db.Users.Find(Session["UserID"]);
+                DatiUsers.UserID = userID.UserID;
+                
+
+            }
             if (DatiUsers.UserID != 0 && !string.IsNullOrEmpty(DatiUsers.Serial) && !string.IsNullOrEmpty(DatiUsers.Name) && !string.IsNullOrEmpty(DatiUsers.Surname) && !string.IsNullOrEmpty(DatiUsers.EMail) && DatiUsers.RoleID != 0 && DatiUsers.ManagerUserID != 0)
             {
                 using (RewardsForYouEntities db = new RewardsForYouEntities())
@@ -56,8 +65,12 @@ namespace RewardsForYou.Controllers
 
 
                 }
+                return Json(new { messaggio = $"Users {DatiUsers.UserID} aggiunto/a con successo" });
             }
-            return Json(new { messaggio = $"Users {DatiUsers.UserID} aggiunto/a con successo" });
+            else
+            {
+                return Json(new { messaggio = $"Dati mancanti o non validi" });
+            }
         }
 
 
