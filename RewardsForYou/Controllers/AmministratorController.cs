@@ -128,13 +128,48 @@ namespace RewardsForYou.Controllers
 
                 data.Lista = x.ToList();
 
+                foreach(Users item in x)
+                {
+                    if(item.FiredDate != null)  
+                    {
+                        data.Lista.Remove(item);
+                    }
+                }
+
                 
 
                 return View("SearchDeleteUser", data);
             }
         }
 
+        public ActionResult _PartialDelete(string Serial, string EMail)
+        {
+            Users userDelete = null;
+            using (RewardsForYouEntities db = new RewardsForYouEntities())
+            {
+                userDelete = db.Users.Where(l => l.Serial == Serial && l.EMail == EMail).FirstOrDefault();
 
+            }
+                return PartialView(userDelete);
+        }
+
+        public ActionResult DoDelete(string Serial, string EMail)
+        { 
+
+            Users deletedUser = null;
+
+            using (RewardsForYouEntities db = new RewardsForYouEntities())
+            {
+                deletedUser = db.Users.Where(l => l.Serial == Serial && l.EMail == EMail).FirstOrDefault();
+
+                if(deletedUser != null)
+                {
+                    deletedUser.FiredDate = DateTime.Now;
+                    db.SaveChanges();
+                }
+            }
+                return SearchDeleteUser(new SearchDeleteUser());
+        }
 
 
     }

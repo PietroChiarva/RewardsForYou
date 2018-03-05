@@ -247,6 +247,7 @@
     <Compile Include="Models\Roles.cs">
       <DependentUpon>RewardsForYou.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\SearchDeleteUser.cs" />
     <Compile Include="Models\Tasks.cs">
       <DependentUpon>RewardsForYou.tt</DependentUpon>
     </Compile>
@@ -374,6 +375,8 @@
     <Content Include="Views\Amministrator\InsertNewUsers.cshtml" />
     <Content Include="Views\Amministrator\AddRewards.cshtml" />
     <Content Include="Views\Amministrator\SearchDeleteUser.cshtml" />
+    <Content Include="Views\Amministrator\_SearchDelete.cshtml" />
+    <Content Include="Views\Amministrator\_PartialDelete.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
