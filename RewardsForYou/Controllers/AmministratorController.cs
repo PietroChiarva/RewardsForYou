@@ -52,15 +52,7 @@ namespace RewardsForYou.Controllers
 
         public ActionResult _JsonInsertNewUsers(Users data)
         {
-            //Users userID = null;
-
-            //using (RewardsForYouEntities db = new RewardsForYouEntities())
-            //{
-            //    userID = db.Users.Find(Session["UserID"]);
-            //    data.UserID = userID.UserID;
-
-
-            //}
+          
             if (!string.IsNullOrEmpty(data.Serial) && !string.IsNullOrEmpty(data.Name) && !string.IsNullOrEmpty(data.Surname) && !string.IsNullOrEmpty(data.EMail) && data.RoleID != 0 && data.ManagerUserID != 0)
             {
                 using (RewardsForYouEntities db = new RewardsForYouEntities())
@@ -76,7 +68,7 @@ namespace RewardsForYou.Controllers
             }
             else
             {
-                return Json(new { messaggio = $"Dati mancanti o non validi", flag = false });
+                return Json(new { messaggio = $"Dati mancanti o non validi" , flag = false});
             }
         }
 
@@ -92,7 +84,7 @@ namespace RewardsForYou.Controllers
 
         public ActionResult _JsonAddRewards(Rewards data)
         {
-            
+           
             if (!string.IsNullOrEmpty(data.Type) && !string.IsNullOrEmpty(data.Description) && data.Points != 0 && data.Availability != 0)
             {
                 using (RewardsForYouEntities db = new RewardsForYouEntities())
@@ -104,7 +96,7 @@ namespace RewardsForYou.Controllers
 
 
                 }
-                     return Json(new { messaggio = $"Rewards {data.RewardsID} aggiunto/a con successo", flag = true });
+                return Json(new { messaggio = $"Rewards {data.RewardsID} aggiunto/a con successo",flag = true });
             }
             else
             {
