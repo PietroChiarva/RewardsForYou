@@ -113,7 +113,7 @@ namespace RewardsForYou.Controllers
                     IQueryable<Users> x = null;
                     if (data.Serial != null)
                     {
-                    x = x.Where(l => l.Serial == data.Serial); 
+                    x = db.Users.Where(l => l.Serial == data.Serial); 
                     }
                     else
                     {
@@ -122,7 +122,7 @@ namespace RewardsForYou.Controllers
 
                     if (data.EMail!= null)
                     {
-                        x = x.Where(l => l.EMail == data.EMail);
+                        x = db.Users.Where(l => l.EMail == data.EMail);
                     }
                     
 

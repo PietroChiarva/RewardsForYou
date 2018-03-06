@@ -14,7 +14,7 @@ namespace RewardsForYou.Models
 
         public List<Users> Lista{ get; set; }
 
-        public new string Serial { get; set; }
+       
 
 
 
