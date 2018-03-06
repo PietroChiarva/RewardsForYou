@@ -128,10 +128,35 @@ namespace RewardsForYou.Controllers
 
                 data.Lista = x.ToList();
 
+                foreach(Users item in x)
+                {
+                    if(item.FiredDate != null)
+                    {
+                        data.Lista.Remove(item);
+                    }
+                }
+
                 
 
                 return View("SearchDeleteUser", data);
             }
+        }
+
+        public ActionResult DoDelete(string serial, string EMail)
+        {
+            Users deletedUser = null;
+
+            using (RewardsForYouEntities db = new RewardsForYouEntities())
+            {
+                deletedUser = db.Users.Where(l => l.Serial == serial && l.EMail == EMail).FirstOrDefault();
+
+                if(deletedUser != null)
+                {
+                    deletedUser.FiredDate = DateTime.Now;
+                    db.SaveChanges();
+                }
+            }
+            return SearchDeleteUser(new SearchDeleteUser());
         }
 
 

@@ -17,6 +17,7 @@
         <EntityTypeShape EntityType="RewardsForYouModel.Missions" Width="1.5" PointX="5.25" PointY="3.875" />
         <AssociationConnector Association="RewardsForYouModel.FK_Missions_Tasks" />
         <AssociationConnector Association="RewardsForYouModel.FK_Missions_Users" />
+        <AssociationConnector Association="RewardsForYouModel.FK_Users_Users1" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>
