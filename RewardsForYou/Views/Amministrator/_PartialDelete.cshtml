@@ -1,0 +1,21 @@
+﻿@model RewardsForYou.Models.Users
+
+@{
+    ViewBag.Title = "Delete";
+}
+
+
+
+<h4>Are you sure you want to delete this?</h4>
+<div>
+    @using (Html.BeginForm("DoDelete", "Amministrator", null, FormMethod.Post))
+    {
+        
+        @Html.HiddenFor(model => model.Serial)
+        @Html.HiddenFor(model => model.EMail)
+        <div class="form-actions no-color">
+            <input type="submit" value="Delete" class="btn btn-default" />
+        </div>
+    }
+</div>
+

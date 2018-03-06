@@ -65,12 +65,20 @@
             @Html.DisplayFor(modelItem => item.Users2.Serial)
         </td>*@
         <td>
-            @*@Html.ActionLink("Edit", "Edit", new { id=item.UserID }) |*@
-            @Html.ActionLink("Details", "Details", new { id = item.UserID }) |
-            @Html.ActionLink("Delete", "Delete", new { id = item.UserID })
+
+            @*@Html.ActionLink("Delete", "Delete", new { id = item.UserID })*@
+            <a onclick="ShowDeleteModal( '@item.Serial', '@item.EMail')"
+               class="btn btn-primary">Delete</a>
 
         </td>
     </tr>
 }
 
 </table>
+
+<script>
+    function ShowDeleteModal(Serial, EMail) {
+        $('#showModal .modal-body').load(Router.action('Amministrator', '_PartialDelete', { Serial: Serial, EMail: EMail }));
+        $('#showModal').modal("show");
+    }
+</script>

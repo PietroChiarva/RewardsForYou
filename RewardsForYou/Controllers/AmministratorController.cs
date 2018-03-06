@@ -128,9 +128,10 @@ namespace RewardsForYou.Controllers
 
                 data.Lista = x.ToList();
 
+                //controllo se lo user è stato eliminato
                 foreach(Users item in x)
                 {
-                    if(item.FiredDate != null)
+                    if(item.FiredDate != null)  
                     {
                         data.Lista.Remove(item);
                     }
@@ -142,24 +143,35 @@ namespace RewardsForYou.Controllers
             }
         }
 
-        public ActionResult DoDelete(string serial, string EMail)
+        public ActionResult _PartialDelete(string Serial, string EMail)
         {
+            Users userDelete = null;
+            using (RewardsForYouEntities db = new RewardsForYouEntities())
+            {
+                userDelete = db.Users.Where(l => l.Serial == Serial && l.EMail == EMail).FirstOrDefault();
+
+            }
+                return PartialView(userDelete);
+        }
+
+        public ActionResult DoDelete(string Serial, string EMail)
+        { 
+
             Users deletedUser = null;
 
             using (RewardsForYouEntities db = new RewardsForYouEntities())
             {
-                deletedUser = db.Users.Where(l => l.Serial == serial && l.EMail == EMail).FirstOrDefault();
-
+                deletedUser = db.Users.Where(l => l.Serial == Serial && l.EMail == EMail).FirstOrDefault();
+                
+                //elimino(si contrassegna come licenziato) lo user selezionato
                 if(deletedUser != null)
                 {
                     deletedUser.FiredDate = DateTime.Now;
                     db.SaveChanges();
                 }
             }
-            return SearchDeleteUser(new SearchDeleteUser());
+                return SearchDeleteUser(new SearchDeleteUser());
         }
-
-
 
 
     }

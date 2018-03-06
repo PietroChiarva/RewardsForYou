@@ -20,7 +20,7 @@
     <MvcBuildViews>false</MvcBuildViews>
     <UseIISExpress>true</UseIISExpress>
     <Use64BitIISExpress />
-    <IISExpressSSLPort>44317</IISExpressSSLPort>
+    <IISExpressSSLPort>44358</IISExpressSSLPort>
     <IISExpressAnonymousAuthentication />
     <IISExpressWindowsAuthentication />
     <IISExpressUseClassicPipelineMode />
@@ -376,6 +376,7 @@
     <Content Include="Views\Amministrator\AddRewards.cshtml" />
     <Content Include="Views\Amministrator\SearchDeleteUser.cshtml" />
     <Content Include="Views\Amministrator\_SearchDelete.cshtml" />
+    <Content Include="Views\Amministrator\_PartialDelete.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
