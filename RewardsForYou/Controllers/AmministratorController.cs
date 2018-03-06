@@ -128,6 +128,7 @@ namespace RewardsForYou.Controllers
 
                 data.Lista = x.ToList();
 
+                //controllo se lo user è stato eliminato
                 foreach(Users item in x)
                 {
                     if(item.FiredDate != null)  
@@ -161,7 +162,8 @@ namespace RewardsForYou.Controllers
             using (RewardsForYouEntities db = new RewardsForYouEntities())
             {
                 deletedUser = db.Users.Where(l => l.Serial == Serial && l.EMail == EMail).FirstOrDefault();
-
+                
+                //elimino(si contrassegna come licenziato) lo user selezionato
                 if(deletedUser != null)
                 {
                     deletedUser.FiredDate = DateTime.Now;
