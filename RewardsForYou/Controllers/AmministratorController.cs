@@ -192,14 +192,14 @@ namespace RewardsForYou.Controllers
                     if ((u.Serial == Serial || u.EMail == EMail) || (u.Serial == Serial && u.EMail == EMail))
                     {
 
-                        return Json(new { message = $"L'utente è stato licenziato in data: {u.FiredDate}", flag = true });
+                        return Json(new { message = $"L'utente è stato licenziato in data: {u.FiredDate}"});
                     }
 
                 }
 
             }
-            return Json(new { message = $"L'utente è stato trovato", flag = false });
-
+            //return Json(new { message = $"L'utente è stato trovato", flag = false });
+            return SearchDeleteUser(new SearchDeleteUser());
         }
 
     }
