@@ -12,7 +12,7 @@ namespace RewardsForYou.Controllers
     public class EmployeeDetailController : Controller
     {
         // GET: Employee
-        public ActionResult Index(int? UserID)
+        public ActionResult Index(int? UserIDò
         {
             if (UserID.HasValue)
             {
