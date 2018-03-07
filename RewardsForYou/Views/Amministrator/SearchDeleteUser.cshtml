@@ -52,25 +52,22 @@
             Serial: $('#Serial').val(),
             EMail: $('#EMail').val()
         };
-       
-        $.ajax({
-            type: "POST",
-            url: "@Url.Action("TakeJsonUsers", "Amministrator")",
-            contentType: "application/json; charset=utf-8",
-            dataType: "json",
-            data: JSON.stringify(Data),
-            success: function (data) {
-                alert(data.message);
-                //if (data.flag == true) {
-                //    window.location.reload();
-                //}
-            },
-            failure: function () {
-                alert("The call is failed");
-            },
-            error: function () {
-                alert("Error!");
-            }
-        });
-    }
+
+            console.log("ok");
+            $.ajax({
+                type: "POST",
+                url: "@Url.Action("TakeJsonUsers", "Amministrator")",
+                contentType: "application/json; charset=utf-8",
+                dataType: "json",
+                data: JSON.stringify(Data),
+                success: function (data) {
+                    alert(data.message);
+                    window.location.href = '@Url.Action("SearchDeleteUser", "Amministrator")/';
+                },
+                failure: function () {
+                    alert("The call is failed");
+                }
+            });
+        }
+
 </script>
