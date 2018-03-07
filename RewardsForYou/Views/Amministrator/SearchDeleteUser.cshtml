@@ -26,7 +26,7 @@
 
         <div class="form-group">
             <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Search" class="btn btn-default" />
+                <input type="submit" value="Search" onclick="CheckUser()" class="btn btn-default" />
             </div>
         </div>
     </div>
@@ -34,6 +34,7 @@
 
 
 }
+
 
 
 <div class="container-fluid">
@@ -45,3 +46,28 @@
 <div>
     @Html.ActionLink("Back to List", "Index")
 </div>
+
+<script>
+    function CheckUser() {
+        var Data = {
+            serial: $('#Serial').val(),
+            email: $('#EMail').val()
+        };
+        $.ajax({
+            type: "POST",
+            url: "@Url.Action("TakeJsonUsers", "Amministrator")",
+            contentType: "application/json; charset=utf-8",
+            dataType: "json",
+            data: Data,
+            success: function (data) {
+                alert(data.message);
+            },
+            failure: function () {
+                alert("The call is failed");
+            },
+            error: function () {
+                alert("Error!");
+            }
+        });
+    }
+</script>
