@@ -202,5 +202,59 @@ namespace RewardsForYou.Controllers
             return SearchDeleteUser(new SearchDeleteUser());
         }
 
+        public ActionResult SearchDeleteRewards(SearchDeleteReward data)
+        {
+
+            using (RewardsForYouEntities db = new RewardsForYouEntities())
+            {
+
+                IQueryable<Rewards> x = null;
+                if (data.Description != null)
+                {
+                    x = db.Rewards.Where(l => l.Description == data.Description);
+                }
+                else
+                {
+                    x = db.Rewards;
+                }
+
+               
+
+                data.Lista = x.ToList();
+
+               
+
+
+
+
+                return View("SearchDeleteRewards", data);
+            }
+        }
+
+       public ActionResult _PartialDeleteRewards(string Description)
+        {
+            Rewards reward = null;
+            using (RewardsForYouEntities db = new RewardsForYouEntities())
+            {
+                reward = db.Rewards.Where(l => l.Description == Description).FirstOrDefault();
+            }
+                return PartialView(reward);
+        }
+
+        public ActionResult DoDeleteReward(string Description)
+        {
+            Rewards rewardDeleteted = null;
+            using (RewardsForYouEntities db = new RewardsForYouEntities())
+            {
+                rewardDeleteted = db.Rewards.Where(l => l.Description == Description).FirstOrDefault();
+                if(rewardDeleteted != null)
+                {
+                    db.Rewards.Remove(rewardDeleteted);
+                    db.SaveChanges();
+                }
+            }
+                return SearchDeleteUser(new SearchDeleteUser());
+        }
+
     }
 }

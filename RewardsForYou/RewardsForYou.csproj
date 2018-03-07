@@ -255,6 +255,7 @@
     <Compile Include="Models\Roles.cs">
       <DependentUpon>RewardsForYou.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\SearchDeleteReward.cs" />
     <Compile Include="Models\SearchDeleteUser.cs" />
     <Compile Include="Models\SearchRewardsforyou.cs" />
     <Compile Include="Models\Tasks.cs">
@@ -353,6 +354,9 @@
     <Content Include="Views\Employee\_UserRewards.cshtml" />
     <Content Include="Views\Manager\ViewTask.cshtml" />
     <Content Include="Views\Manager\AddTaskform.cshtml" />
+    <Content Include="Views\Amministrator\SearchDeleteRewards.cshtml" />
+    <Content Include="Views\Amministrator\_SearchDeleteRewards.cshtml" />
+    <Content Include="Views\Amministrator\_PartialDeleteRewards.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

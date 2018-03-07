@@ -1,0 +1,13 @@
+﻿@model RewardsForYou.Models.Rewards
+
+<h3>Are you sure you want to delete this?</h3>
+<div>
+   
+    @using (Html.BeginForm("DoDeleteReward", "Amministrator", null, FormMethod.Post)) {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value="Delete" class="btn btn-default" /> 
+        </div>
+    }
+</div>
