@@ -50,17 +50,21 @@
 <script>
     function CheckUser() {
         var Data = {
-            serial: $('#Serial').val(),
-            email: $('#EMail').val()
+            Serial: $('#Serial').val(),
+            EMail: $('#EMail').val()
         };
+       
         $.ajax({
             type: "POST",
             url: "@Url.Action("TakeJsonUsers", "Amministrator")",
             contentType: "application/json; charset=utf-8",
             dataType: "json",
-            data: Data,
+            data: JSON.stringify(Data),
             success: function (data) {
                 alert(data.message);
+                //if (data.flag == true) {
+                //    window.location.reload();
+                //}
             },
             failure: function () {
                 alert("The call is failed");
