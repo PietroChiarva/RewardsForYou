@@ -29,9 +29,6 @@ namespace RewardsForYou.Controllers
             }
         }
 
-
-
-
         public ActionResult InsertNewUsers()
         {
             List<Users> user = new List<Users>();
@@ -72,7 +69,6 @@ namespace RewardsForYou.Controllers
             }
         }
 
-
         public ActionResult AddRewards()
         {
             using (RewardsForYouEntities db = new RewardsForYouEntities())
@@ -84,8 +80,10 @@ namespace RewardsForYou.Controllers
 
         public ActionResult _JsonAddRewards(Rewards data)
         {
-           
-            if (!string.IsNullOrEmpty(data.Type) && !string.IsNullOrEmpty(data.Description) && data.Points != 0 && data.Availability != 0)
+
+            
+            
+            if (!string.IsNullOrEmpty(data.Type) && !string.IsNullOrEmpty(data.Description)  && data.Points != 0 && data.Availability != 0)
             {
                 using (RewardsForYouEntities db = new RewardsForYouEntities())
                 {
@@ -146,8 +144,6 @@ namespace RewardsForYou.Controllers
             }
         }
 
-       
-
         public ActionResult _PartialDelete(string Serial, string EMail)
         {
             Users userDelete = null;
@@ -201,6 +197,40 @@ namespace RewardsForYou.Controllers
             
             return SearchDeleteUser(new SearchDeleteUser());
         }
+
+        public ActionResult AddTask()
+        {
+            using (RewardsForYouEntities db = new RewardsForYouEntities())
+
+                return View();
+        }
+
+        public ActionResult JsonAddTask(Tasks data)
+        {
+
+            if (!string.IsNullOrEmpty(data.Type) && !string.IsNullOrEmpty(data.Description) && data.Points != 0)
+            {
+                using (RewardsForYouEntities db = new RewardsForYouEntities())
+                {
+                    db.Tasks.Add(data);
+
+                    db.SaveChanges();
+
+
+                }
+
+                return Json(new { messaggio = $"Task {data.TaskID} aggiunto/a con successo", flag = true });
+            }
+
+            
+            else
+            {
+                return Json(new { messaggio = $"Dati mancanti o non validi", flag = false });
+            }
+
+        }
+
+
 
     }
 }
