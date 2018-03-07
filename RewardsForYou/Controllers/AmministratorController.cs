@@ -109,7 +109,7 @@ namespace RewardsForYou.Controllers
             
             using (RewardsForYouEntities db = new RewardsForYouEntities())
             {
-              
+             
                     IQueryable<Users> x = null;
                     if (data.Serial != null)
                     {
