@@ -198,7 +198,7 @@ namespace RewardsForYou.Controllers
                 }
 
             }
-            //return Json(new { message = $"L'utente è stato trovato", flag = false });
+            
             return SearchDeleteUser(new SearchDeleteUser());
         }
 
