@@ -123,23 +123,6 @@ namespace RewardsForYou.Controllers
 }
 
 
-//public ActionResult DoAddTask(Tasks DatiTask)
-//{
-
-//    if (DatiTask.TaskID != 0 && !string.IsNullOrEmpty(DatiTask.Type) && !string.IsNullOrEmpty(DatiTask.Description) && DatiTask.Points != 0)
-//    {
-//        using (RewardsForYouEntities db = new RewardsForYouEntities())
-//        {
-//            db.Tasks.Add(DatiTask);
-
-//            db.SaveChanges();
-
-
-//        }
-//    }
-
-//    return View("Index");
-//}
 
 
 
