@@ -134,14 +134,19 @@ namespace RewardsForYou.Controllers
                     if(item.FiredDate != null)  
                     {
                         data.Lista.Remove(item);
+                        
+                        
                     }
                 }
+                
 
                 
 
                 return View("SearchDeleteUser", data);
             }
         }
+
+       
 
         public ActionResult _PartialDelete(string Serial, string EMail)
         {
@@ -173,6 +178,29 @@ namespace RewardsForYou.Controllers
                 return SearchDeleteUser(new SearchDeleteUser());
         }
 
+        public ActionResult TakeJsonUsers(string Serial, string EMail)
+        {
+            List<Users> users = null;
+           
+            using (RewardsForYouEntities db = new RewardsForYouEntities())
+            {
+                users = db.Users.Where(l => l.FiredDate != null).ToList();
+                
+
+                foreach (Users u in users)
+                {
+                    if ((u.Serial == Serial || u.EMail == EMail) || (u.Serial == Serial && u.EMail == EMail))
+                    {
+                       
+                        return Json(new { message = $"L'utente è stato licenziato in data: {u.FiredDate}" });
+                    }
+
+                }
+
+            }
+            return Json(new { message = $"L'utente è stato trovato" });
+
+        }
 
     }
 }
