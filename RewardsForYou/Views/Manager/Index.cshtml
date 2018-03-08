@@ -1,0 +1,84 @@
+﻿<html>
+<head>
+    <style>
+
+        .button {
+            display: inline-block;
+            border-radius: 4px;
+            background-color: DodgerBlue;
+            border: none;
+            color: #FFFFFF;
+            text-align: center;
+            font-size: 28px;
+            padding: 20px;
+            width: 200px;
+            transition: all 0.5s;
+            cursor: pointer;
+            margin: 5px;
+        }
+
+            .button span {
+                cursor: pointer;
+                display: inline-block;
+                position: relative;
+                transition: 0.5s;
+            }
+
+                .button span:after {
+                    content: '\00bb';
+                    position: absolute;
+                    opacity: 0;
+                    top: 0;
+                    right: -20px;
+                    transition: 0.5s;
+                }
+
+            .button:hover span {
+                padding-right: 25px;
+            }
+
+                .button:hover span:after {
+                    opacity: 1;
+                    right: 0;
+                }
+
+    </style>
+
+    </head>
+<body>
+
+
+
+    <div class="jumbotron">
+        <h1 class="text-center">Rewards For You</h1>
+    </div>
+    <div class="jumbotron">
+        <div class="row">
+            <div class="col-sm-4">
+                <div class="card">
+                    <div class="card-body">
+                        <a href="@Url.Action("ListaUsers","Manager")" class="button" style="vertical-align:middle"><span>Manager Profile</span></a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-sm-4">
+                <div class="card">
+                    <div class="card-body">
+                        <a href="@Url.Action("Index","Myemployee")" class="button" style="vertical-align:middle"><span>My Employee</span></a>
+                    </div>
+                </div>
+            </div>
+
+
+            <div class="col-sm-4">
+                <div class="card">
+                    <div class="card-body">
+                        <a href="@Url.Action("Index","TaskandReward")" class="button" style="vertical-align: middle"><span>Tasks and Rewards</span></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

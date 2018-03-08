@@ -154,7 +154,7 @@ namespace RewardsForYou.Controllers
             }
                 return PartialView(userDelete);
         }
-
+        
         public ActionResult DoDelete(string Serial, string EMail)
         { 
 

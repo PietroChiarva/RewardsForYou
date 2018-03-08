@@ -81,11 +81,6 @@ namespace RewardsForYou.Controllers
 
         }
 
-
-
-
-
-
         public ActionResult _DoAddTaskJson(Tasks DatiTask, int TaskID, int UserID)
         {
 
@@ -118,6 +113,32 @@ namespace RewardsForYou.Controllers
                 db.SaveChanges();
             }
             return Json(new { messaggio = $"Task : {DatiTask.TaskID} assegnato con successo" });
+        }
+
+        public ActionResult ManagerTaskandReward()
+        {
+            List<Tasks> t = new List<Tasks>();
+            using (RewardsForYouEntities db = new RewardsForYouEntities())
+            {
+
+                t = db.Tasks.ToList();
+
+
+                return View(t);
+            }
+        }
+
+        public ActionResult ListReward()
+        {
+            List<Rewards> t = new List<Rewards>();
+            using (RewardsForYouEntities db = new RewardsForYouEntities())
+            {
+
+                t = db.Rewards.ToList();
+
+
+                return View(t);
+            }
         }
     }
 }

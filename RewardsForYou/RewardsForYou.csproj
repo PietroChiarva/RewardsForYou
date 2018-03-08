@@ -20,7 +20,7 @@
     <MvcBuildViews>false</MvcBuildViews>
     <UseIISExpress>true</UseIISExpress>
     <Use64BitIISExpress />
-    <IISExpressSSLPort>44358</IISExpressSSLPort>
+    <IISExpressSSLPort>44317</IISExpressSSLPort>
     <IISExpressAnonymousAuthentication />
     <IISExpressWindowsAuthentication />
     <IISExpressUseClassicPipelineMode />
@@ -338,7 +338,6 @@
     <Content Include="Views\Employee\Index.cshtml" />
     <Content Include="Views\Employee\_Details.cshtml" />
     <Content Include="Views\Manager\ListaUsers.cshtml" />
-    <Content Include="Views\Manager\Index.cshtml" />
     <Content Include="Views\Manager\_PartialTaskDetails.cshtml" />
     <Content Include="Views\Employee\_ChooseRewards.cshtml" />
     <Content Include="Views\Employee\_PartialTakeReward.cshtml" />
@@ -361,6 +360,8 @@
     <Content Include="Views\Amministrator\CRUDTasks\_SearchDeleteTasks.cshtml" />
     <Content Include="Views\Amministrator\CRUDTasks\_PartialDeleteTasks.cshtml" />
     <Content Include="Views\Amministrator\CRUDTasks\SearchDeleteTasks.cshtml" />
+    <Content Include="Views\Manager\Index.cshtml" />
+    <Content Include="Views\Manager\ManagerTaskandReward.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
