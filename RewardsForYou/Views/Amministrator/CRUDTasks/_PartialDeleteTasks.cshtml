@@ -1,0 +1,16 @@
+﻿@model RewardsForYou.Models.Tasks
+
+<h3>Are you sure you want to delete this?</h3>
+<div>
+
+    @using (Html.BeginForm("DoDeleteTask", "Amministrator", null, FormMethod.Post))
+    {
+
+        @Html.HiddenFor(model => model.Description)
+        @Html.HiddenFor(model => model.Type)
+        <div class="form-actions no-color">
+            <input type="submit" value="Delete" class="btn btn-default" /> |
+            
+        </div>
+    }
+</div>
