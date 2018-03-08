@@ -1,7 +1,7 @@
 ﻿@model RewardsForYou.Models.Tasks
 
-@using (Html.BeginForm())
-{
+
+    
 
     <div class="form-horizontal">
         <h4>Tasks</h4>
@@ -26,7 +26,7 @@
         <div class="form-group">
             @Html.LabelFor(model => model.ExpiryDate, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.ExpiryDate, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.EditorFor(model => model.ExpiryDate, new { htmlAttributes = new {type="date",@class = "form-control" } })
                 @Html.ValidationMessageFor(model => model.ExpiryDate, "", new { @class = "text-danger" })
             </div>
         </div>
@@ -43,31 +43,27 @@
 
         <div class="form-group">
             <div class="col-md-offset-2 col-md-10">
-                @*<input type="submit" value="Create" class="btn btn-default" />*@
                 <a class="btn btn-default" onclick="InsertTask()">Insert</a>
             </div>
         </div>
     </div>
-}
 
 
-
-
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>
 
 
 <script type="text/javascript">
 
         function InsertTask() {
             //creo l'oggetto associando le variabili
-
-            
-
             var DatiTask = {
                 TaskID: $('#TaskID').val(),
                 Type: $('#Type').val(),
                 Description: $('#Description').val(),
-                ExpiryDate: $('#ExpiryDate').val() ,
-                Point: $('#Point').val(),
+                ExpiryDate: $('#ExpiryDate').val(),
+                Points: $('#Points').val(),
             };
 
             //chiamata ajax
@@ -95,6 +91,3 @@
 </script>
 
 
-<div>
-    @Html.ActionLink("Back to List", "Index")
-</div>
