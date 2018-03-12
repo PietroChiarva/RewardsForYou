@@ -117,6 +117,7 @@ namespace RewardsForYou.Controllers
 
         public ActionResult ManagerTaskandReward()
         {
+            ViewModel viewModel = new ViewModel();
             List<Tasks> t = new List<Tasks>();
             using (RewardsForYouEntities db = new RewardsForYouEntities())
             {
@@ -130,14 +131,15 @@ namespace RewardsForYou.Controllers
 
         public ActionResult ListReward()
         {
-            List<Rewards> t = new List<Rewards>();
+            ViewModel viewModel = new ViewModel();
+            List<Rewards> r = new List<Rewards>();
             using (RewardsForYouEntities db = new RewardsForYouEntities())
             {
 
-                t = db.Rewards.ToList();
+                r = db.Rewards.ToList();
 
 
-                return View(t);
+                return View(r);
             }
         }
     }
