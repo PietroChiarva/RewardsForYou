@@ -29,9 +29,6 @@ namespace RewardsForYou.Controllers
             }
         }
 
-
-
-
         public ActionResult InsertNewUsers()
         {
             List<Users> user = new List<Users>();
@@ -78,7 +75,6 @@ namespace RewardsForYou.Controllers
             }
         }
 
-
         public ActionResult AddRewards()
         {
             using (RewardsForYouEntities db = new RewardsForYouEntities())
@@ -90,8 +86,10 @@ namespace RewardsForYou.Controllers
 
         public ActionResult _JsonAddRewards(Rewards data)
         {
-           
-            if (!string.IsNullOrEmpty(data.Type) && !string.IsNullOrEmpty(data.Description) && data.Points != 0 && data.Availability != 0)
+
+            
+            
+            if (!string.IsNullOrEmpty(data.Type) && !string.IsNullOrEmpty(data.Description)  && data.Points != 0 && data.Availability != 0)
             {
                 using (RewardsForYouEntities db = new RewardsForYouEntities())
                 {
@@ -152,8 +150,6 @@ namespace RewardsForYou.Controllers
             }
         }
 
-       
-
         public ActionResult _PartialDelete(string Serial, string EMail)
         {
             Users userDelete = null;
@@ -164,12 +160,12 @@ namespace RewardsForYou.Controllers
             }
                 return PartialView(userDelete);
         }
-
+        
         public ActionResult DoDelete(string Serial, string EMail)
         { 
 
             Users deletedUser = null;
-            SearchDeleteUser users = new SearchDeleteUser();
+
             using (RewardsForYouEntities db = new RewardsForYouEntities())
             {
                 deletedUser = db.Users.Where(l => l.Serial == Serial && l.EMail == EMail).FirstOrDefault();
@@ -180,9 +176,8 @@ namespace RewardsForYou.Controllers
                     deletedUser.FiredDate = DateTime.Now;
                     db.SaveChanges();
                 }
-                users.Lista = db.Users.ToList();
             }
-            return RedirectToAction("SearchDeleteUser", users);
+                return SearchDeleteUser(new SearchDeleteUser());
         }
 
         public ActionResult TakeJsonUsers(string Serial, string EMail)
@@ -209,123 +204,40 @@ namespace RewardsForYou.Controllers
             return SearchDeleteUser(new SearchDeleteUser());
         }
 
-        public ActionResult SearchDeleteRewards(SearchDeleteReward data)
+        public ActionResult AddTask()
         {
-
             using (RewardsForYouEntities db = new RewardsForYouEntities())
             {
+                return View();
+            }
+        }
 
-                IQueryable<Rewards> x = null;
-                if (data.Description != null)
+        public ActionResult JsonAddTask(Tasks data)
+        {
+
+            if (!string.IsNullOrEmpty(data.Type) && !string.IsNullOrEmpty(data.Description) && data.ExpiryDate.HasValue && data.Points != 0 )
+            {
+                using (RewardsForYouEntities db = new RewardsForYouEntities())
                 {
-                    x = db.Rewards.Where(l => l.Description == data.Description);
+                    db.Tasks.Add(data);
+
+                    db.SaveChanges();
+
+
                 }
-                else
-                {
-                    x = db.Rewards;
-                }
+
+                return Json(new { messaggio = $"Task {data.TaskID} aggiunto/a con successo", flag = true });
+            }
+
             
-                data.Lista = x.ToList();
-
-                
-            }
-            return View("SearchDeleteRewards", data);
-        }
-
-       public ActionResult _PartialDeleteRewards(string Description)
-        {
-            Rewards reward = null;
-            using (RewardsForYouEntities db = new RewardsForYouEntities())
+            else
             {
-                reward = db.Rewards.Where(l => l.Description == Description).FirstOrDefault();
+                return Json(new { messaggio = $"Dati mancanti o non validi", flag = false });
             }
-                return PartialView(reward);
-        }
 
-        public ActionResult DoDeleteReward(string Description)
-        {
-            Rewards rewardDeleteted = null;
-            List<UsersRewards> usersRewards = null;
-            SearchDeleteReward rewards = new SearchDeleteReward();
-            using (RewardsForYouEntities db = new RewardsForYouEntities())
-            {
-                rewardDeleteted = db.Rewards.Where(l => l.Description == Description).FirstOrDefault();
-                usersRewards = db.UsersRewards.Where(l => l.RewardsID == rewardDeleteted.RewardsID).ToList();
-               
-                if(rewardDeleteted != null && usersRewards != null)
-                {
-                    db.Rewards.Remove(rewardDeleteted);
-                    foreach (UsersRewards item in usersRewards)
-                    {
-                        db.UsersRewards.Remove(item);
-                    }
-                    db.SaveChanges();
-                }
-                rewards.Lista = db.Rewards.ToList();
-            }
-                return RedirectToAction("SearchDeleteRewards",rewards);
         }
 
 
-        public ActionResult SearchDeleteTasks(SearchDeleteTask data)
-        {
-
-            using (RewardsForYouEntities db = new RewardsForYouEntities())
-            {
-
-                IQueryable<Tasks> x = null;
-                if (data.Description != null)
-                {
-                    x = db.Tasks.Where(l => l.Description == data.Description);
-                }
-                else
-                {
-                    x = db.Tasks;
-                }
-                if(data.Type != null)
-                {
-                    x = db.Tasks.Where(l => l.Type == data.Type);
-                }
-                data.Lista = x.ToList();
-
-
-            }
-            return View("SearchDeleteTasks", data);
-        }
-
-        public ActionResult _PartialDeleteTasks(string Description, string Type)
-        {
-            Tasks task = null;
-            using (RewardsForYouEntities db = new RewardsForYouEntities())
-            {
-                task = db.Tasks.Where(l => l.Description == Description && l.Type == Type).FirstOrDefault();
-            }
-            return PartialView(task);
-        }
-
-        public ActionResult DoDeleteTask(string Description, string Type)
-        {
-            Tasks taskDeleted = null;
-            List<Missions> mission = null;
-            SearchDeleteTask task = new SearchDeleteTask();
-            using (RewardsForYouEntities db = new RewardsForYouEntities())
-            {
-                taskDeleted = db.Tasks.Where(l => l.Description == Description && l.Type == Type).FirstOrDefault();
-                mission = db.Missions.Where(l => l.TaskID == taskDeleted.TaskID).ToList();
-
-                if (taskDeleted != null && mission != null)
-                {
-                    db.Tasks.Remove(taskDeleted);
-                    foreach (Missions item in mission)
-                    {
-                        db.Missions.Remove(item);
-                    }
-                    db.SaveChanges();
-                }
-                task.Lista = db.Tasks.ToList();
-            }
-            return RedirectToAction("SearchDeleteTasks", task);
-        }
 
     }
 }

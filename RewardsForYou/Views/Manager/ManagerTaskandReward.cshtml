@@ -1,0 +1,127 @@
+﻿@model IEnumerable<RewardsForYou.Models.Tasks>
+
+
+
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="/lib/bootstrap.min.css">
+    <script src="/lib/jquery-1.12.2.min.js"></script>
+    <script src="/lib/bootstrap.min.js"></script>
+</head>
+
+
+
+
+<h2>Manager page</h2>
+
+<!--User details-->
+<div class="container">
+    <div class="panel-group">
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <h4 class="panel-title">
+                    <a data-toggle="collapse" href="#collapse1"  class="list-group-item active" align="center"><h4>List's Tasks</h4></a>
+                </h4>
+            </div>
+            <div id="collapse1" class="panel-collapse collapse">
+                <div class="panel-body" >
+                    <table class="table">
+                        <tr>
+
+                            <th>
+                                @Html.DisplayNameFor(model => model.Type)
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.Description)
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.ExpiryDate)
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.Points)
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.Finished)
+                            </th>
+                            <th></th>
+                        </tr>
+
+                        @foreach (var item in Model)
+        {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Type)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Description)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.ExpiryDate)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Points)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Finished)
+                    </td>
+
+                </tr>
+}
+
+                    </table>
+                    </div>
+                </div>
+        </div>
+
+        </div>
+    </div>
+
+
+    @*<h4>Employee Rewards</h4>
+        <div class="container-fluid">
+            <div class="container-fluid" id="ListRewards" style="margin-top:5px;overflow-x:auto;width:100%;">
+                <table class="table">
+
+
+                    @foreach (var item in Model.Reward)
+                    {
+
+                        if (Model.Reward.Count == 0 || Model.Reward.IndexOf(item) == 0)
+                        {
+                            <tr>
+                                <th>
+                                    @Html.DisplayNameFor(model => item.Type)
+                                </th>
+                                <th>
+                                    @Html.DisplayNameFor(model => item.Description)
+                                </th>
+                                <th>
+                                    @Html.DisplayNameFor(model => item.Points)
+                                </th>
+                                <th>
+                                    @Html.DisplayNameFor(model => item.Availability)
+                                </th>
+                                <th></th>
+                            </tr>
+                        }
+
+                        <tr>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Type)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Description)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Points)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Availability)
+                            </td>
+
+                        </tr>
+                    }
+
+                </table>
+            </div>
+        </div>*@

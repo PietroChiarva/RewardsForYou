@@ -9,42 +9,47 @@
     <div class="col-md-12">
         <div class="card" id="Employee">
             <div class="card-body text-center">
-                <h5 class="card-title">Insert New User</h5>
+                <h5 class="card-title"></h5>
                 <p class="card-text">Inserisci un nuovo utente</p>
-                <a href="@Url.Action("InsertNewUsers","Amministrator")" class="btn btn-primary">Go</a>
-            </div>
-        </div>
-    </div>
-    <div class="col-md-12">
-        <div class="card" id="Manager">
-            <div class="card-body text-center">
-                <h5 class="card-title">Add Rewards</h5>
-                <p class="card-text">Aggiungi un nuovo reward</p>
-                <a href="@Url.Action("AddRewards","Amministrator")" class="btn btn-primary">Go</a>
-                <h5 class="card-title">Search and Delete Rewards</h5>
-                <p class="card-text">Cerca e elimina un reward</p>
-                <a href="@Url.Action("SearchDeleteRewards","Amministrator")" class="btn btn-primary">Go</a>
-            </div>
-        </div>
-    </div>
-    <div class="col-md-12">
-        <div class="card" id="Amministrator">
-            <div class="card-body text-center">
-                <h5 class="card-title">Search and Delete Users</h5>
-                <p class="card-text">Cerca ed elimina gli utenti</p>
-                <a href="@Url.Action("SearchDeleteUser","Amministrator")" class="btn btn-primary">Go</a>
+                <a href="@Url.Action("InsertNewUsers","Amministrator")" class="btn btn-primary">Insert New User</a>
             </div>
         </div>
     </div>
 
+  
     <div class="col-md-12">
-        <div class="card" id="Amministrator">
-            <div class="card-body text-center">
-                <h5 class="card-title">Search and Delete Tasks</h5>
-                <p class="card-text">Cerca ed elimina i task</p>
-                <a href="@Url.Action("SearchDeleteTasks","Amministrator")" class="btn btn-primary">Go</a>
+            <div class="card" id="Employee">
+                <div class="card-body text-center">
+                    <h5 class="card-title"></h5>
+                    <p class="card-text">Inserisci i nuovi Task</p>
+                    <a href="@Url.Action("AddTask","Amministrator")" class="btn btn-primary">Insert New Task</a>
+                </div>
             </div>
         </div>
-    </div>
+
+
+    <div class="col-md-12">
+            <div class="card" id="Manager">
+                <div class="card-body text-center">
+                    <h5 class="card-title"></h5>
+                    <p class="card-text">Aggiungi un nuovo reward</p>
+                    <a href="@Url.Action("AddRewards","Amministrator")" class="btn btn-primary">Add Rewards</a>
+                    <h5 class="card-title">Search and Delete Rewards</h5>
+                    <p class="card-text">Cerca e elimina un reward</p>
+                    <a href="@Url.Action("AddRewards","Amministrator")" class="btn btn-primary">Go</a>
+                </div>
+            </div>
+        </div>
+
+
+    <div class="col-md-12">
+            <div class="card" id="Amministrator">
+                <div class="card-body text-center">
+                    <h5 class="card-title"></h5>
+                    <p class="card-text">Entra nella tua pagina personale</p>
+                    <a href="@Url.Action("SearchDeleteUser","Amministrator")" class="btn btn-primary">Search and Delete</a>
+                </div>
+            </div>
+        </div>
 
 </div>
