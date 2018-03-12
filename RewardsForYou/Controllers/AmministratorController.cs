@@ -36,8 +36,11 @@ namespace RewardsForYou.Controllers
         {
             List<Users> user = new List<Users>();
             List<Roles> role = new List<Roles>();
+            List<Users> usermanager = new List<Users>();
+            //Users managerName = null;
             using (RewardsForYouEntities db = new RewardsForYouEntities())
             {
+                usermanager = db.Users.Where(l => l.RoleID == 2).ToList();
 
                 //var a = new SelectList()   new SelectListItem() { Text = "A", Value = "1" } );
                 //var b = new SelectListItem() { Text = "A", Value = "1" };
@@ -46,7 +49,10 @@ namespace RewardsForYou.Controllers
 
                 //ViewBag.RoleList = new SelectList(db.Roles.Select(r=> new { Value = r.RoleID.ToString(), Text = r.Role }).ToList(), null);
                 ViewBag.RoleList = db.Roles.Select(r => new SelectListItem() { Value = r.RoleID.ToString(), Text = r.Role }).ToList();
-            }
+               
+                ViewBag.ManagerList = usermanager.Select(r=> new SelectListItem() { Value = r.UserID.ToString(), Text = r.Name }).ToList();
+                
+                }
             return View();
         }
 

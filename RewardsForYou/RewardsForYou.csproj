@@ -345,22 +345,22 @@
     <Content Include="Views\Manager\AssegnaTask.cshtml" />
     <Content Include="Views\EmployeeDetail\Index.cshtml" />
     <Content Include="Views\Amministrator\Index.cshtml" />
-    <Content Include="Views\Amministrator\CRUDUsers\InsertNewUsers.cshtml" />
-    <Content Include="Views\Amministrator\CRUDRewards\AddRewards.cshtml" />
-    <Content Include="Views\Amministrator\CRUDUsers\SearchDeleteUser.cshtml" />
-    <Content Include="Views\Amministrator\CRUDUsers\_SearchDelete.cshtml" />
-    <Content Include="Views\Amministrator\CRUDUsers\_PartialDelete.cshtml" />
+    <Content Include="Views\Amministrator\InsertNewUsers.cshtml" />
+    <Content Include="Views\Amministrator\AddRewards.cshtml" />
+    <Content Include="Views\Amministrator\SearchDeleteUser.cshtml" />
+    <Content Include="Views\Amministrator\_SearchDelete.cshtml" />
+    <Content Include="Views\Amministrator\_PartialDelete.cshtml" />
     <Content Include="Scripts\jquery-3.3.1.slim.min.map" />
     <Content Include="Scripts\jquery-3.3.1.min.map" />
     <Content Include="Views\Employee\_UserRewards.cshtml" />
     <Content Include="Views\Manager\ViewTask.cshtml" />
     <Content Include="Views\Manager\AddTaskform.cshtml" />
-    <Content Include="Views\Amministrator\CRUDRewards\SearchDeleteRewards.cshtml" />
-    <Content Include="Views\Amministrator\CRUDRewards\_SearchDeleteRewards.cshtml" />
-    <Content Include="Views\Amministrator\CRUDRewards\_PartialDeleteRewards.cshtml" />
-    <Content Include="Views\Amministrator\CRUDTasks\_SearchDeleteTasks.cshtml" />
-    <Content Include="Views\Amministrator\CRUDTasks\_PartialDeleteTasks.cshtml" />
-    <Content Include="Views\Amministrator\CRUDTasks\SearchDeleteTasks.cshtml" />
+    <Content Include="Views\Amministrator\SearchDeleteRewards.cshtml" />
+    <Content Include="Views\Amministrator\_SearchDeleteRewards.cshtml" />
+    <Content Include="Views\Amministrator\_PartialDeleteRewards.cshtml" />
+    <Content Include="Views\Amministrator\_SearchDeleteTasks.cshtml" />
+    <Content Include="Views\Amministrator\_PartialDeleteTasks.cshtml" />
+    <Content Include="Views\Amministrator\SearchDeleteTasks.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

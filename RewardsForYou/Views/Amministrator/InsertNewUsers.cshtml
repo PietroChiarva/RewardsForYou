@@ -52,9 +52,9 @@
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(model => model.ManagerUserID, htmlAttributes: new { @class = "control-label col-md-2" })
+            @Html.LabelFor(model => model.ManagerUserID,"Manager Name", htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.ManagerUserID, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.DropDownListFor(model => model.ManagerUserID, new SelectList(ViewBag.ManagerList, "Value", "Text"), "Select a...", new { @style = "width:500px" })
                 @Html.ValidationMessageFor(model => model.ManagerUserID, "", new { @class = "text-danger" })
             </div>
         </div>
