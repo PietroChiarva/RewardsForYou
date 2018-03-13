@@ -23,7 +23,7 @@ namespace RewardsForYou.Controllers
         public ActionResult Index()
         {
             using (RewardsForYouEntities db = new RewardsForYouEntities())
-            {
+            { 
                 int userID = (int)Session["UserID"];
                 return View();
             }
