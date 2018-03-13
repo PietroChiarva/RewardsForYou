@@ -11,6 +11,7 @@ namespace RewardsForYou.Models
         public List<Tasks> Mission { get; set; }
         public List<Tasks> Task { get; set; }
         public List<Rewards> Reward { get; set; }
+        public String ManagerName { get; set; }
         
     }
 }

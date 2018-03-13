@@ -47,7 +47,7 @@ namespace RewardsForYou.Controllers
                 //ViewBag.RoleList = new SelectList(db.Roles.Select(r=> new { Value = r.RoleID.ToString(), Text = r.Role }).ToList(), null);
                 ViewBag.RoleList = db.Roles.Select(r => new SelectListItem() { Value = r.RoleID.ToString(), Text = r.Role }).ToList();
                
-                ViewBag.ManagerList = usermanager.Select(r=> new SelectListItem() { Value = r.UserID.ToString(), Text = r.Name }).ToList();
+                ViewBag.ManagerList = usermanager.Select(r=> new SelectListItem() { Value = r.UserID.ToString(), Text = r.Name + " "+ r.Surname }).ToList();
                 
                 }
             return View();

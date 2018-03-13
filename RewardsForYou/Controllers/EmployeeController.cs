@@ -29,6 +29,8 @@ namespace RewardsForYou.Controllers
             List<Tasks> task = new List<Tasks>();
             List<UsersRewards> u = null;
             List<Rewards> r = new List<Rewards>();
+            Users manager = null;
+            String managerUser = null;
 
             if (!UserID.HasValue)
             {
@@ -68,10 +70,16 @@ namespace RewardsForYou.Controllers
                 {
                     r.Add(re.Rewards);
                 }
+                manager = db.Users.Where(l => l.UserID == x.ManagerUserID).FirstOrDefault();
+                managerUser = manager.Name+ " "+ manager.Surname;
+                
+              
+
                 //save the data in the viewModel class
                 viewModel.User = x;
                 viewModel.Mission = task;
                 viewModel.Reward = r;
+                viewModel.ManagerName = managerUser;
             }
 
             return View(viewModel);
