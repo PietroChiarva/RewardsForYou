@@ -70,6 +70,8 @@ namespace RewardsForYou.Controllers
                 {
                     r.Add(re.Rewards);
                 }
+
+                //get the name of the manager
                 manager = db.Users.Where(l => l.UserID == x.ManagerUserID).FirstOrDefault();
                 managerUser = manager.Name+ " "+ manager.Surname;
                 
