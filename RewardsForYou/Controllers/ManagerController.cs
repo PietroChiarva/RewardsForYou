@@ -90,29 +90,41 @@ namespace RewardsForYou.Controllers
 
             Tasks task = null;
             Users user = null;
-
+            List<Missions> missions = null;
+            Missions m = null;
 
 
             using (RewardsForYouEntities db = new RewardsForYouEntities())
             {
                 task = db.Tasks.Where(l => l.TaskID == TaskID).FirstOrDefault();
                 user = db.Users.Where(l => l.UserID == UserID).FirstOrDefault();
+                missions = db.Missions.ToList();
 
-                Missions mission = new Missions
+                //controllo se il task è stato gia assegnato
+                m = db.Missions.Where(l => l.TaskID == task.TaskID && l.UserID == user.UserID && l.Status == 0).FirstOrDefault();
+
+                if (m != null)
                 {
+                    return Json(new { messaggio = $"Il task è stato già assegnato" });
+                }
+                else
+                {
+                    Missions mission = new Missions
+                    {
 
-                    Tasks = task,
-                    Users = user,
-                    UserID = user.UserID,
-                    TaskID = task.TaskID,
-                    StartDate = DateTime.Now,
-                    EndDate = task.ExpiryDate,
-                    Note = "",
-                    Status = 0
-                };
+                        Tasks = task,
+                        Users = user,
+                        UserID = user.UserID,
+                        TaskID = task.TaskID,
+                        StartDate = DateTime.Now,
+                        EndDate = task.ExpiryDate,
+                        Note = "",
+                        Status = 0
+                    };
 
-                db.Missions.Add(mission);
-                db.SaveChanges();
+                    db.Missions.Add(mission);
+                    db.SaveChanges();
+                }
             }
             return Json(new { messaggio = $"Task : {DatiTask.TaskID} assegnato con successo" });
         }
@@ -120,8 +132,8 @@ namespace RewardsForYou.Controllers
         public ActionResult ManagerTaskandReward()
         {
             ViewModel viewModel = new ViewModel();
-            List<Tasks> t = new List<Tasks>();
-            List<Rewards> r = new List<Rewards>();
+            List<Tasks> t = null;
+            List<Rewards> r = null;
             using (RewardsForYouEntities db = new RewardsForYouEntities())
             {
 
