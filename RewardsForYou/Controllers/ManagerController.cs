@@ -124,6 +124,7 @@ namespace RewardsForYou.Controllers
                 }
                 else
                 {
+                    DateTime start = DateTime.Now.Date;
                     Missions mission = new Missions
                     {
 
@@ -134,7 +135,8 @@ namespace RewardsForYou.Controllers
                         StartDate = DateTime.Now,
                         EndDate = task.ExpiryDate,
                         Note = "",
-                        Status = 0
+                        Status = 0,
+                        DesiredEndDate = start.AddMonths(task.TimeSpan)
                     };
 
                     db.Missions.Add(mission);
