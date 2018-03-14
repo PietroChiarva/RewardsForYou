@@ -43,7 +43,7 @@
           <Property Name="Type" Type="varchar" MaxLength="50" Nullable="false" />
           <Property Name="Description" Type="varchar" MaxLength="100" Nullable="false" />
           <Property Name="ExpiryDate" Type="date" />
-          <Property Name="TimeSpan" Type="int" />
+          <Property Name="TimeSpan" Type="int" Nullable="false" />
           <Property Name="Points" Type="int" Nullable="false" />
           <Property Name="Finished" Type="bit" Nullable="false" />
         </EntityType>
@@ -245,7 +245,7 @@
           <Property Name="Points" Type="Int32" Nullable="false" />
           <Property Name="Finished" Type="Boolean" Nullable="false" />
           <NavigationProperty Name="Missions" Relationship="RewardsForYouModel.FK_Missions_Tasks" FromRole="Tasks" ToRole="Missions" />
-          <Property Name="TimeSpan" Type="Int32" />
+          <Property Name="TimeSpan" Type="Int32" Nullable="false" />
         </EntityType>
         <EntityType Name="Users">
           <Key>
