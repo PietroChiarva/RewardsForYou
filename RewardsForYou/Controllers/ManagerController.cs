@@ -43,17 +43,7 @@ namespace RewardsForYou.Controllers
             
         }
 
-        public ActionResult OrderByName()
-        {
-            using (RewardsForYouEntities db = new RewardsForYouEntities())
-            {
-                var users = from p in db.Users
-                        orderby p.Name ascending
-                        select p;
-
-                return View(users);
-            }
-        }
+      
 
         public ActionResult ViewTask(int? UserID = null)
         {
@@ -136,7 +126,7 @@ namespace RewardsForYou.Controllers
                         EndDate = task.ExpiryDate,
                         Note = "",
                         Status = 0,
-                        DesiredEndDate = start.AddMonths(task.TimeSpan)
+                        DesiredEndDate= start.AddMonths(task.TimeSpan)
                     };
 
                     db.Missions.Add(mission);
