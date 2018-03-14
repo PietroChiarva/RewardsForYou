@@ -24,6 +24,9 @@ namespace RewardsForYou.Controllers
 
         public ActionResult ListaUsers()
         {
+
+           
+            
             using (RewardsForYouEntities db = new RewardsForYouEntities())
             {
                 int userID = (int)Session["UserID"];
@@ -31,7 +34,10 @@ namespace RewardsForYou.Controllers
                 users = db.Users.Where(x => x.ManagerUserID == userID).ToList();
 
                 return View(users);
+
             }
+         
+            
         }
 
         public ActionResult ViewTask(int? UserID = null)
@@ -69,10 +75,6 @@ namespace RewardsForYou.Controllers
             using (RewardsForYouEntities db = new RewardsForYouEntities())
             {
                 tasksUsers.task = db.Tasks.ToList();
-
-
-
-                // tasksUsers.task= db.Tasks.ToList();
 
             }
             tasksUsers.UsersID = UserID;
