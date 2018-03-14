@@ -13,5 +13,8 @@ namespace RewardsForYou.Models
         public List<Rewards> Reward { get; set; }
         public String ManagerName { get; set; }
         public List<Missions> MissionDesiredDate { get; set; }
+
+
+
     }
 }
