@@ -31,9 +31,11 @@ namespace RewardsForYou.Controllers
             ViewData["Amministrator"] = false;
             if (roleId == 1)
             {
+               
                 ViewData["Employee"] = true;
                 ViewData["Manager"] = true;
                 return RedirectToAction("Index", "Amministrator");
+
             }
             else if(roleId == 2)
             {

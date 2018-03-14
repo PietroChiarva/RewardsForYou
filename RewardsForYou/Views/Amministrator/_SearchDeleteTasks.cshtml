@@ -18,6 +18,9 @@
         <th>
             @Html.DisplayNameFor(model => model.Finished)
         </th>
+        <th>
+            @Html.DisplayNameFor(model => model.TimeSpan)
+        </th>
         <th></th>
     </tr>
 
@@ -37,6 +40,9 @@
         </td>
         <td>
             @Html.DisplayFor(modelItem => item.Finished)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.TimeSpan) month
         </td>
         <td>
             <a onclick="ShowDeleteModal( '@item.Description', '@item.Type')"

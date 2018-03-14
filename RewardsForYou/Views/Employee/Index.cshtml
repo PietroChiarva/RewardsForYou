@@ -101,59 +101,76 @@
                                 @foreach (var item in Model.Mission)
                                 {
                                     if (Model.Mission.IndexOf(item) == 0 || Model.Mission.Count == 0)
-                                    {
-                                <tr>
-                                    <th>
-                                        @Html.DisplayNameFor(model => item.Type)
-                                    </th>
-                                    <th>
-                                        @Html.DisplayNameFor(model => item.Description)
-                                    </th>
-                                    <th>
-                                        @Html.DisplayNameFor(model => item.ExpiryDate)
-                                    </th>
-                                    <th>
-                                        @Html.DisplayNameFor(model => item.TimeSpan)
-                                    </th>
-                                    <th>
-                                        @Html.DisplayNameFor(model => item.Points)
-                                    </th>
-                                    <th>
-                                        @Html.DisplayNameFor(model => item.Finished)
-                                    </th>
-                                    <th></th>
-                                </tr>
+                                    { 
+                            <tr>
+                                <th>
+                                    @Html.DisplayNameFor(model => item.Type)
+                                </th>
+                                <th>
+                                    @Html.DisplayNameFor(model => item.Description)
+                                </th>
+                                <th>
+                                    @Html.DisplayNameFor(model => item.ExpiryDate)
+                                </th>
+                                <th>
+                                    @Html.DisplayNameFor(model => item.Points)
+                                </th>
+                                <th>
+                                    @Html.DisplayNameFor(model => item.Finished)
+                                </th>
+
+                                <th></th>
+                            </tr>
                                     }
-                                        <tr>
-                                            <td>
-                                                @Html.DisplayFor(modelItem => item.Type)
-                                            </td>
-                                            <td>
-                                                @Html.DisplayFor(modelItem => item.Description)
-                                            </td>
-                                            <td>
-                                                @Html.DisplayFor(modelItem => item.ExpiryDate)
-                                            </td>
-                                            <td>
-                                                @Html.DisplayFor(modelItem => item.TimeSpan)
-                                            </td>
-                                            <td>
-                                                @Html.DisplayFor(modelItem => item.Points)
-                                            </td>
-                                            <td>
-                                                @Html.DisplayFor(modelItem => item.Finished)
-                                            </td>
+                            <tr>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.Type)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.Description)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.ExpiryDate)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.Points)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.Finished)
+                                </td>
+                            </tr>
+                                 }
 
-                                            <td>
-                                                <a class="btn btn-primary" onclick="ShowInvioModal ('@item.TaskID')">Send Notice</a>
+                                @*Spostare a destra*@
+                                    @foreach (var item in Model.MissionDesiredDate)
+                                    {
+                                     if (Model.MissionDesiredDate.IndexOf(item) == 0 || Model.MissionDesiredDate.Count == 0)
+                                        {
+                        <tr>
+                            <th>
+                                @Html.DisplayNameFor(model => item.StartDate)
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => item.DesiredEndDate)
+                            </th>
 
-                                            </td>
 
-                                        </tr>
-                                }
+                            <th></th>
+                        </tr>
+                                         }
+                        <tr>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.StartDate)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.DesiredEndDate)
+                            </td>
 
-                            </table>
-                        </div>
+                        </tr>
+                                    }
+
+                                </table>
+                            </div>
                     </div>
                 </div>
             </div>
@@ -239,15 +256,3 @@
     </div>
 </div>
 
-
-
-<script type="text/javascript">
-
-    function ShowInvioModal(TaskID) {
-
-        $('#showModal .modal-body').load(Router.action('Employee', 'InvioTask', { TaskID: TaskID }));
-        $('#showModal').modal("show");
-
-    }
-
-</script>

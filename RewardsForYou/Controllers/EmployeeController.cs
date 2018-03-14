@@ -23,9 +23,11 @@ namespace RewardsForYou.Controllers
                 UserID = (int)Session["UserID"];
             }
             ViewModel viewModel = new ViewModel();
-            MissionModel missionModel = new MissionModel();
+            //MissionModel missionModel = new MissionModel();
             Users x = null;
             List<Missions> t = null;
+            List<Missions> g = null;
+            List<Missions> mission = new List<Missions>();
             List<Tasks> task = new List<Tasks>();
             List<UsersRewards> u = null;
             List<Rewards> r = new List<Rewards>();
@@ -57,11 +59,15 @@ namespace RewardsForYou.Controllers
             {
                 //get tasks of the user
                 t = db.Missions.Include(m => m.Tasks).Where(l => l.UserID == UserID).ToList();
-                
+                g = db.Missions.Where(k => k.UserID == UserID).ToList();
                 foreach (Missions m in t)
                 {
                     
                     task.Add(m.Tasks);
+                }
+                foreach(Missions m in g)
+                {
+                    mission.Add(m);
                 }
 
                 //get rewards of the user
@@ -75,13 +81,14 @@ namespace RewardsForYou.Controllers
                 manager = db.Users.Where(l => l.UserID == x.ManagerUserID).FirstOrDefault();
                 managerUser = manager.Name+ " "+ manager.Surname;
                 
-              
+                
 
                 //save the data in the viewModel class
                 viewModel.User = x;
                 viewModel.Mission = task;
                 viewModel.Reward = r;
                 viewModel.ManagerName = managerUser;
+                viewModel.MissionDesiredDate = mission;
             }
 
             return View(viewModel);
