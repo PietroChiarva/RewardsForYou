@@ -215,7 +215,7 @@ namespace RewardsForYou.Controllers
         public ActionResult JsonAddTask(Tasks data)
         {
 
-            if (!string.IsNullOrEmpty(data.Type) && !string.IsNullOrEmpty(data.Description) && data.ExpiryDate.HasValue && data.Points != 0 )
+            if (!string.IsNullOrEmpty(data.Type) && !string.IsNullOrEmpty(data.Description) && data.ExpiryDate.HasValue && data.TimeSpan != 0 && data.Points != 0 )
             {
                 using (RewardsForYouEntities db = new RewardsForYouEntities())
                 {

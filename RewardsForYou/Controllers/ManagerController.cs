@@ -29,15 +29,30 @@ namespace RewardsForYou.Controllers
             
             using (RewardsForYouEntities db = new RewardsForYouEntities())
             {
+
                 int userID = (int)Session["UserID"];
                 List<Users> users = new List<Users>();
                 users = db.Users.Where(x => x.ManagerUserID == userID).ToList();
+
+                
 
                 return View(users);
 
             }
          
             
+        }
+
+        public ActionResult OrderByName()
+        {
+            using (RewardsForYouEntities db = new RewardsForYouEntities())
+            {
+                var users = from p in db.Users
+                        orderby p.Name ascending
+                        select p;
+
+                return View(users);
+            }
         }
 
         public ActionResult ViewTask(int? UserID = null)
