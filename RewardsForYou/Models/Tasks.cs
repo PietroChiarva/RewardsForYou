@@ -26,6 +26,7 @@ namespace RewardsForYou.Models
         public Nullable<System.DateTime> ExpiryDate { get; set; }
         public int Points { get; set; }
         public bool Finished { get; set; }
+        public Nullable<int> TimeSpan { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Missions> Missions { get; set; }

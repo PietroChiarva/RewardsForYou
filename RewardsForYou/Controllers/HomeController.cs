@@ -33,17 +33,19 @@ namespace RewardsForYou.Controllers
             {
                 ViewData["Employee"] = true;
                 ViewData["Manager"] = true;
-
+                return RedirectToAction("Index", "Amministrator");
             }
             else if(roleId == 2)
             {
                 ViewData["Employee"] = true;
                 ViewData["Amministrator"] = true;
+                return RedirectToAction("Index", "Manager");
             }
             else if(roleId == 3)
             {
                 ViewData["Manager"] = true;
                 ViewData["Amministrator"] = true;
+                return RedirectToAction("Index", "Employee");
             }
 
 
