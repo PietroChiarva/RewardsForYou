@@ -56,7 +56,7 @@
     </div>
     <div class="jumbotron">
         <div class="row">
-            <div class="col-md-12">
+            @*<div class="col-md-12">
                 <div class="card" id="Employee">
                     <div class="card-body text-center">
                         <h5 class="card-title">Employee</h5>
@@ -64,7 +64,7 @@
                         <a href="@Url.Action("Index","Employee")" class="button" style="vertical-align: middle"><span>Vai</span></a>
                     </div>
                 </div>
-            </div>
+            </div>*@
 
             <div id="Manager">
                 <div class="col-sm-4">
@@ -108,16 +108,18 @@
 </body>
 </html>
 <script type="text/javascript">
-    $(document).ready(function () {
+    @*$(document).ready(function () {
 
         if ("@ViewData["Employee"]" == "True") {
-            $('#Employee').css("display", "none");
+            "@Url";
+            // $('#Employee').css("display", "none");
         }
         if ("@ViewData["Manager"]" == "True") {
-            $('#Manager').css("display", "none");
+            "@Url.Action"
+            //$('#Manager').css("display", "none");
         }
         if ("@ViewData["Amministrator"]" == "True") {
             $('#Amministrator').css("display", "none");
         }
-    });
+    });*@
 </script>

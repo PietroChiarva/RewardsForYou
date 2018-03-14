@@ -13,39 +13,45 @@
     {
         if (Model.task.IndexOf(item) == 0 || Model.task.Count == 0)
         {
-            <tr>
-                <th>
-                    @Html.DisplayNameFor(model => item.Type)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => item.Description)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => item.ExpiryDate)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => item.Points)
-                </th>
-            </tr>
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => item.Type)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => item.Description)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => item.ExpiryDate)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => item.Points)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => item.TimeSpan)
+        </th>
+    </tr>
 
         }
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.Type)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Description)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.ExpiryDate)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Points)
-            </td>
-            <td>
-                <a class="btn btn-primary" onclick="AddTask ('@item.TaskID', '@Model.UsersID')">Add</a>
-            </td>
-        </tr>
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Type)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Description)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ExpiryDate)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Points)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.TimeSpan) month
+        </td>
+        <td>
+            <a class="btn btn-primary" onclick="AddTask ('@item.TaskID', '@Model.UsersID')">Add</a>
+        </td>
+    </tr>
     }
 
 </table>

@@ -362,6 +362,7 @@
     <Content Include="Views\Amministrator\_PartialDeleteTasks.cshtml" />
     <Content Include="Views\Amministrator\SearchDeleteTasks.cshtml" />
     <Content Include="Views\Manager\ManagerTaskandReward.cshtml" />
+    <Content Include="Views\Amministrator\AddTask.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

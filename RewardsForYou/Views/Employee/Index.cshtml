@@ -101,48 +101,76 @@
                                 @foreach (var item in Model.Mission)
                                 {
                                     if (Model.Mission.IndexOf(item) == 0 || Model.Mission.Count == 0)
-                                    {
-                                        <tr>
-                                            <th>
-                                                @Html.DisplayNameFor(model => item.Type)
-                                            </th>
-                                            <th>
-                                                @Html.DisplayNameFor(model => item.Description)
-                                            </th>
-                                            <th>
-                                                @Html.DisplayNameFor(model => item.ExpiryDate)
-                                            </th>
-                                            <th>
-                                                @Html.DisplayNameFor(model => item.Points)
-                                            </th>
-                                            <th>
-                                                @Html.DisplayNameFor(model => item.Finished)
-                                            </th>
-                                            <th></th>
-                                        </tr>
+                                    { 
+                            <tr>
+                                <th>
+                                    @Html.DisplayNameFor(model => item.Type)
+                                </th>
+                                <th>
+                                    @Html.DisplayNameFor(model => item.Description)
+                                </th>
+                                <th>
+                                    @Html.DisplayNameFor(model => item.ExpiryDate)
+                                </th>
+                                <th>
+                                    @Html.DisplayNameFor(model => item.Points)
+                                </th>
+                                <th>
+                                    @Html.DisplayNameFor(model => item.Finished)
+                                </th>
+
+                                <th></th>
+                            </tr>
                                     }
-                                    <tr>
-                                        <td>
-                                            @Html.DisplayFor(modelItem => item.Type)
-                                        </td>
-                                        <td>
-                                            @Html.DisplayFor(modelItem => item.Description)
-                                        </td>
-                                        <td>
-                                            @Html.DisplayFor(modelItem => item.ExpiryDate)
-                                        </td>
-                                        <td>
-                                            @Html.DisplayFor(modelItem => item.Points)
-                                        </td>
-                                        <td>
-                                            @Html.DisplayFor(modelItem => item.Finished)
-                                        </td>
+                            <tr>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.Type)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.Description)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.ExpiryDate)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.Points)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.Finished)
+                                </td>
+                            </tr>
+                                 }
 
-                                    </tr>
-                                }
+                                @*Spostare a destra*@
+                                    @foreach (var item in Model.MissionDesiredDate)
+                                    {
+                                     if (Model.MissionDesiredDate.IndexOf(item) == 0 || Model.MissionDesiredDate.Count == 0)
+                                        {
+                        <tr>
+                            <th>
+                                @Html.DisplayNameFor(model => item.StartDate)
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => item.DesiredEndDate)
+                            </th>
 
-                            </table>
-                        </div>
+
+                            <th></th>
+                        </tr>
+                                         }
+                        <tr>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.StartDate)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.DesiredEndDate)
+                            </td>
+
+                        </tr>
+                                    }
+
+                                </table>
+                            </div>
                     </div>
                 </div>
             </div>

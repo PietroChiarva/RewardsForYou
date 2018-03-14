@@ -21,6 +21,7 @@ namespace RewardsForYou.Models
         public Nullable<System.DateTime> EndDate { get; set; }
         public string Note { get; set; }
         public int Status { get; set; }
+        public System.DateTime DesiredEndDate { get; set; }
     
         public virtual Tasks Tasks { get; set; }
         public virtual Users Users { get; set; }

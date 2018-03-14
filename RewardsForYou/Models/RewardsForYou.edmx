@@ -16,6 +16,7 @@
           <Property Name="EndDate" Type="date" />
           <Property Name="Note" Type="varchar(max)" />
           <Property Name="Status" Type="int" Nullable="false" />
+          <Property Name="DesiredEndDate" Type="date" Nullable="false" />
         </EntityType>
         <EntityType Name="Rewards">
           <Key>
@@ -42,6 +43,7 @@
           <Property Name="Type" Type="varchar" MaxLength="50" Nullable="false" />
           <Property Name="Description" Type="varchar" MaxLength="100" Nullable="false" />
           <Property Name="ExpiryDate" Type="date" />
+          <Property Name="TimeSpan" Type="int" />
           <Property Name="Points" Type="int" Nullable="false" />
           <Property Name="Finished" Type="bit" Nullable="false" />
         </EntityType>
@@ -243,6 +245,7 @@
           <Property Name="Points" Type="Int32" Nullable="false" />
           <Property Name="Finished" Type="Boolean" Nullable="false" />
           <NavigationProperty Name="Missions" Relationship="RewardsForYouModel.FK_Missions_Tasks" FromRole="Tasks" ToRole="Missions" />
+          <Property Name="TimeSpan" Type="Int32" />
         </EntityType>
         <EntityType Name="Users">
           <Key>
@@ -338,6 +341,7 @@
           <Property Name="Status" Type="Int32" Nullable="false" />
           <NavigationProperty Name="Tasks" Relationship="RewardsForYouModel.FK_Missions_Tasks" FromRole="Missions" ToRole="Tasks" />
           <NavigationProperty Name="Users" Relationship="RewardsForYouModel.FK_Missions_Users" FromRole="Missions" ToRole="Users" />
+          <Property Name="DesiredEndDate" Type="DateTime" Nullable="false" Precision="0" />
         </EntityType>
         <Association Name="FK_Missions_Tasks">
           <End Type="RewardsForYouModel.Tasks" Role="Tasks" Multiplicity="1" />
@@ -403,6 +407,7 @@
           <EntitySetMapping Name="Tasks">
             <EntityTypeMapping TypeName="RewardsForYouModel.Tasks">
               <MappingFragment StoreEntitySet="Tasks">
+                <ScalarProperty Name="TimeSpan" ColumnName="TimeSpan" />
                 <ScalarProperty Name="Finished" ColumnName="Finished" />
                 <ScalarProperty Name="Points" ColumnName="Points" />
                 <ScalarProperty Name="ExpiryDate" ColumnName="ExpiryDate" />
@@ -441,6 +446,7 @@
           <EntitySetMapping Name="Missions">
             <EntityTypeMapping TypeName="RewardsForYouModel.Missions">
               <MappingFragment StoreEntitySet="Missions">
+                <ScalarProperty Name="DesiredEndDate" ColumnName="DesiredEndDate" />
                 <ScalarProperty Name="Status" ColumnName="Status" />
                 <ScalarProperty Name="Note" ColumnName="Note" />
                 <ScalarProperty Name="EndDate" ColumnName="EndDate" />
