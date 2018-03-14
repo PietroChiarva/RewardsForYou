@@ -5,6 +5,9 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using System.Data.Entity;
+using System.Data.SqlClient;
+using System.IO;
+using System.Drawing.Imaging;
 
 namespace RewardsForYou.Controllers
 {
@@ -152,7 +155,7 @@ namespace RewardsForYou.Controllers
                 
         }
 
-        
+      
     }
 
    
