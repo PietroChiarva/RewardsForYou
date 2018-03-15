@@ -1,0 +1,53 @@
+﻿@model RewardsForYou.Models.ViewModel
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.User.Serial)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.User.Name)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.User.Surname)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.User.EMail)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.User.UserPoints)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.User.FiredDate)
+        </th>
+        
+       
+    </tr>
+
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => Model.User.Serial)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => Model.User.Name)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => Model.User.Surname)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => Model.User.EMail)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => Model.User.UserPoints)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => Model.User.FiredDate)
+        </td>
+        
+       
+    </tr>
+
+</table>

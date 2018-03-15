@@ -319,6 +319,8 @@
     <Content Include="Scripts\jquery-3.3.1.slim.min.js" />
     <Content Include="Scripts\modernizr-2.6.2.js" />
     <Content Include="Scripts\modernizr-2.8.3.js" />
+    <Content Include="Views\Home\Index.cshtml" />
+    <Content Include="Views\Manager\ManagerProfile.cshtml" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
@@ -332,7 +334,6 @@
     <Content Include="Views\Shared\_Layout.cshtml" />
     <Content Include="Views\Home\About.cshtml" />
     <Content Include="Views\Home\Contact.cshtml" />
-    <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
     <Content Include="Views\UserProfile\Index.cshtml" />
     <Content Include="Views\UserProfile\Relogin.cshtml" />
@@ -345,7 +346,6 @@
     <Content Include="Views\Employee\_ChooseRewards.cshtml" />
     <Content Include="Views\Employee\_PartialTakeReward.cshtml" />
     <Content Include="Views\Manager\AssegnaTask.cshtml" />
-    <Content Include="Views\EmployeeDetail\Index.cshtml" />
     <Content Include="Views\Amministrator\Index.cshtml" />
     <Content Include="Views\Amministrator\InsertNewUsers.cshtml" />
     <Content Include="Views\Amministrator\AddRewards.cshtml" />
