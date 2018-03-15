@@ -70,6 +70,7 @@ namespace RewardsForYou.Controllers
 
         }
 
+        //View The Task
         public ActionResult AssegnaTask(int UserID)
         {
 
@@ -88,6 +89,7 @@ namespace RewardsForYou.Controllers
 
         }
 
+        //Add the Task at Employee
         public ActionResult _DoAddTaskJson(Tasks DatiTask, int TaskID, int UserID)
         {
 
@@ -136,6 +138,7 @@ namespace RewardsForYou.Controllers
             return Json(new { messaggio = $"Task : {DatiTask.TaskID} assegnato con successo" });
         }
 
+        //View The Task and Rewards
         public ActionResult ManagerTaskandReward()
         {
             ViewModel viewModel = new ViewModel();
@@ -154,7 +157,39 @@ namespace RewardsForYou.Controllers
             return View(viewModel);
         }
 
-       
+       public ActionResult ManagerProfile(int? UserID)
+        {
+            ViewModel viewModel = new ViewModel();
+            Users x = null;
+
+            {
+
+                if (UserID.HasValue)
+                {
+                    string EMail = ((System.Security.Claims.ClaimsIdentity)HttpContext.GetOwinContext().Authentication.User.Identity).Name;
+                    using (RewardsForYouEntities db = new RewardsForYouEntities())
+                    {
+
+                        //get the user from the db
+                        x = db.Users.Where(l => l.EMail == EMail).FirstOrDefault();
+                        UserID = x.UserID;
+                    }
+                }
+                else
+                {
+                    using (RewardsForYouEntities db = new RewardsForYouEntities())
+                    {
+
+                        //get the user from the db
+                        x = db.Users.Where(l => l.UserID == UserID).FirstOrDefault();
+                    }
+
+                    viewModel.User = x;
+                }
+
+            }
+            return View(viewModel);
+        }
     }
 }
 

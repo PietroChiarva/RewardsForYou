@@ -227,13 +227,6 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Insertimage.aspx.cs">
-      <DependentUpon>Insertimage.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="Insertimage.aspx.designer.cs">
-      <DependentUpon>Insertimage.aspx</DependentUpon>
-    </Compile>
     <Compile Include="Models\AdalTokenCache.cs" />
     <Compile Include="Models\ApplicationDbContext.cs" />
     <Compile Include="Models\ListUserClass.cs" />
@@ -467,7 +460,8 @@
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
-    <Content Include="Insertimage.aspx" />
+    <Content Include="Images\loading.gif" />
+    <Content Include="Images\noUserImage.png" />
     <Content Include="Models\RewardsForYou.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>RewardsForYou.Context.cs</LastGenOutput>
@@ -514,6 +508,8 @@
     <Content Include="Scripts\jquery-3.3.1.slim.min.js" />
     <Content Include="Scripts\modernizr-2.6.2.js" />
     <Content Include="Scripts\modernizr-2.8.3.js" />
+    <Content Include="Views\Home\Index.cshtml" />
+    <Content Include="Views\Manager\ManagerProfile.cshtml" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
@@ -527,7 +523,6 @@
     <Content Include="Views\Shared\_Layout.cshtml" />
     <Content Include="Views\Home\About.cshtml" />
     <Content Include="Views\Home\Contact.cshtml" />
-    <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
     <Content Include="Views\UserProfile\Index.cshtml" />
     <Content Include="Views\UserProfile\Relogin.cshtml" />
@@ -540,7 +535,6 @@
     <Content Include="Views\Employee\_ChooseRewards.cshtml" />
     <Content Include="Views\Employee\_PartialTakeReward.cshtml" />
     <Content Include="Views\Manager\AssegnaTask.cshtml" />
-    <Content Include="Views\EmployeeDetail\Index.cshtml" />
     <Content Include="Views\Amministrator\Index.cshtml" />
     <Content Include="Views\Amministrator\InsertNewUsers.cshtml" />
     <Content Include="Views\Amministrator\AddRewards.cshtml" />
