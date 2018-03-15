@@ -259,6 +259,7 @@
     <Compile Include="Models\SearchDeleteTask.cs" />
     <Compile Include="Models\SearchDeleteUser.cs" />
     <Compile Include="Models\SearchRewardsforyou.cs" />
+    <Compile Include="Models\TaskDesiredDate.cs" />
     <Compile Include="Models\Tasks.cs">
       <DependentUpon>RewardsForYou.tt</DependentUpon>
     </Compile>
@@ -283,6 +284,8 @@
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
+    <Content Include="Images\loading.gif" />
+    <Content Include="Images\noUserImage.png" />
     <Content Include="Models\RewardsForYou.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>RewardsForYou.Context.cs</LastGenOutput>
