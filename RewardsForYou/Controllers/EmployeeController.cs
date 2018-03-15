@@ -34,12 +34,12 @@ namespace RewardsForYou.Controllers
             List<Missions> t = null;
             List<Missions> g = null;
             List<Missions> mission = new List<Missions>();
-            List<Tasks> task = new List<Tasks>();
+            List<MissionExtended> task = new List<MissionExtended>();
             List<UsersRewards> u = null;
             List<Rewards> r = new List<Rewards>();
             Users manager = null;
             String managerUser = null;
-            List<object> list = new List<object>();
+            
             if (!UserID.HasValue)
             {
                 string EMail = ((System.Security.Claims.ClaimsIdentity)HttpContext.GetOwinContext().Authentication.User.Identity).Name;
@@ -64,18 +64,16 @@ namespace RewardsForYou.Controllers
             using (RewardsForYouEntities db = new RewardsForYouEntities())
             {
                 //get tasks of the user
-                t = db.Missions.Include(m => m.Tasks).Where(l => l.UserID == UserID).ToList();
+                task = db.Missions.Include(m => m.Tasks).Where(l => l.UserID == UserID).Select(l => new MissionExtended() { Type = l.Tasks.Type,
+                    Description = l.Tasks.Description, StartDate = l.StartDate, EndDate = l.EndDate, DesiredEndDate = l.DesiredEndDate,
+                    IsFinished = l.Tasks.Finished, Points = l.Tasks.Points, Note = l.Note}).ToList();
                 g = db.Missions.Where(k => k.UserID == UserID).ToList();
-                foreach (Missions m in t)
-                {
-                    
-                    task.Add(m.Tasks);
-                }
-                foreach(Missions m in g)
-                {
-                    mission.Add(m);
-                }
-
+               
+                //foreach(Missions m in g)
+                //{
+                //    mission.Add(m);
+                //}
+                
                 //get rewards of the user
                 u = db.UsersRewards.Include(m => m.Rewards).Where(l => l.UserID == UserID).ToList();
                 foreach (UsersRewards re in u)
@@ -94,7 +92,8 @@ namespace RewardsForYou.Controllers
                 viewModel.Mission = task;
                 viewModel.Reward = r;
                 viewModel.ManagerName = managerUser;
-                viewModel.MissionDesiredDate = mission;
+                //viewModel.MissionDesiredDate = mission;
+                
                 
                 
                 

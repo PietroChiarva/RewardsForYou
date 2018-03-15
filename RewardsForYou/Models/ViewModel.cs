@@ -8,8 +8,8 @@ namespace RewardsForYou.Models
     public class ViewModel : RewardsForYouEntities
     {
         public Users User { get; set; }
-        public List<Tasks> Mission { get; set; }
-        public List<TaskDesiredDate> Task { get; set; }
+        public List<MissionExtended> Mission { get; set; }
+        public List<Tasks> Task { get; set; }
         public List<Rewards> Reward { get; set; }
         public String ManagerName { get; set; }
         public List<Missions> MissionDesiredDate { get; set; }
