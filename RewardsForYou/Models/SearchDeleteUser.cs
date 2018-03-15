@@ -13,8 +13,8 @@ namespace RewardsForYou.Models
         }
 
         public List<Users> Lista{ get; set; }
+        //public List<String> Manager { get; set; }
 
-       
 
 
 
