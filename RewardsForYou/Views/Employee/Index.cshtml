@@ -94,64 +94,64 @@
                             {
                                 if (Model.Mission.IndexOf(item) == 0 || Model.Mission.Count == 0)
                                 {
-                            <tr>
-                                <th>
-                                    @Html.DisplayNameFor(model => item.Type)
-                                </th>
-                                <th>
-                                    @Html.DisplayNameFor(model => item.Description)
-                                </th>
-                                <th>
-                                    @Html.DisplayNameFor(model => item.StartDate)
-                                </th>
-                                <th>
-                                    @Html.DisplayNameFor(model => item.EndDate)
-                                </th>
-                                <th>
-                                    @Html.DisplayNameFor(model => item.DesiredEndDate)
-                                </th>
-                                <th>
-                                    @Html.DisplayNameFor(model => item.Note)
-                                </th>
-                                <th>
-                                    @Html.DisplayNameFor(model => item.Points)
-                                </th>
-                                <th>
-                                    @Html.DisplayNameFor(model => item.IsFinished)
-                                </th>
+                                    <tr>
+                                        <th>
+                                            @Html.DisplayNameFor(model => item.Type)
+                                        </th>
+                                        <th>
+                                            @Html.DisplayNameFor(model => item.Description)
+                                        </th>
+                                        <th>
+                                            @Html.DisplayNameFor(model => item.StartDate)
+                                        </th>
+                                        <th>
+                                            @Html.DisplayNameFor(model => item.EndDate)
+                                        </th>
+                                        <th>
+                                            @Html.DisplayNameFor(model => item.DesiredEndDate)
+                                        </th>
+                                        <th>
+                                            @Html.DisplayNameFor(model => item.Note)
+                                        </th>
+                                        <th>
+                                            @Html.DisplayNameFor(model => item.Points)
+                                        </th>
+                                        <th>
+                                            @Html.DisplayNameFor(model => item.IsFinished)
+                                        </th>
 
-                                <th></th>
-                            </tr>
+                                        <th></th>
+                                    </tr>
                                 }
-                            <tr>
-                                <td>
-                                    @Html.DisplayFor(modelItem => item.Type)
-                                </td>
-                                <td>
-                                    @Html.DisplayFor(modelItem => item.Description)
-                                </td>
-                                <td>
-                                    @Html.DisplayFor(modelItem => item.StartDate)
-                                </td>
-                                <td>
-                                    @Html.DisplayFor(modelItem => item.EndDate)
-                                </td>
-                                <td>
-                                    @Html.DisplayFor(modelItem => item.DesiredEndDate)
-                                </td>
-                                <td>
-                                    @Html.DisplayFor(modelItem => item.Note)
-                                </td>
-                                <td>
-                                    @Html.DisplayFor(modelItem => item.Points)
-                                </td>
-                                <td>
-                                    @Html.DisplayFor(modelItem => item.IsFinished)
-                                </td>
-                            </tr>
+                                <tr>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.Type)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.Description)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.StartDate)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.EndDate)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.DesiredEndDate)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.Note)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.Points)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.IsFinished)
+                                    </td>
+                                </tr>
                             }
 
-                           
+
 
                         </table>
                     </div>
@@ -175,28 +175,28 @@
                         <table class="table">
 
 
+
+
+                            
+                            @{RewardsForYou.Models.Rewards rewards = new RewardsForYou.Models.Rewards(); 
+                                <tr>
+                                    <th>
+                                        @Html.DisplayNameFor(model => rewards.Type)
+                                    </th>
+                                    <th>
+                                        @Html.DisplayNameFor(model => rewards.Description)
+                                    </th>
+                                    <th>
+                                        @Html.DisplayNameFor(model => rewards.Points)
+                                    </th>
+                                    <th>
+                                        @Html.DisplayNameFor(model => rewards.Availability)
+                                    </th>
+                                    <th></th>
+                                </tr>
+                            }
                             @foreach (var item in Model.Reward)
                             {
-
-                                if (Model.Reward.Count == 0 || Model.Reward.IndexOf(item) == 0)
-                                {
-                                    <tr>
-                                        <th>
-                                            @Html.DisplayNameFor(model => item.Type)
-                                        </th>
-                                        <th>
-                                            @Html.DisplayNameFor(model => item.Description)
-                                        </th>
-                                        <th>
-                                            @Html.DisplayNameFor(model => item.Points)
-                                        </th>
-                                        <th>
-                                            @Html.DisplayNameFor(model => item.Availability)
-                                        </th>
-                                        <th></th>
-                                    </tr>
-                                }
-
                                 <tr>
                                     <td>
                                         @Html.DisplayFor(modelItem => item.Type)
@@ -237,22 +237,22 @@
             </div>
         </div>
     </div>
-    </div>
+</div>
 
-    <script type="text/javascript">
-        $(document).ready(function () {
-            $data = {};
-            $.ajax({
-                type: "POST",
-                url: Router.action('Employee', 'GetAADUserImageAsync'),
-                data: $data
-            }).done(function (responseData, textStatus, jqXHR) {
-                if (responseData.Success) {
-                    $("#userImage")[0].src = responseData.Base64StringImage;
-                }
-                else {
-                    $("#userImage")[0].src = "Images/noUserImage.png"
-                }
-            })
-        });
-    </script>
+<script type="text/javascript">
+    $(document).ready(function () {
+        $data = {};
+        $.ajax({
+            type: "POST",
+            url: Router.action('Employee', 'GetAADUserImageAsync'),
+            data: $data
+        }).done(function (responseData, textStatus, jqXHR) {
+            if (responseData.Success) {
+                $("#userImage")[0].src = responseData.Base64StringImage;
+            }
+            else {
+                $("#userImage")[0].src = "Images/noUserImage.png"
+            }
+        })
+    });
+</script>
