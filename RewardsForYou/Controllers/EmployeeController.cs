@@ -5,14 +5,12 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using System.Data.Entity;
-using System.Data.SqlClient;
-using System.IO;
-using System.Drawing.Imaging;
-using System.Data.Services.Client;
-using Microsoft.IdentityModel.Clients.ActiveDirectory;
-using Microsoft.Azure.ActiveDirectory.GraphClient;
-using System.Security.Claims;
 using System.Threading.Tasks;
+using System.Security.Claims;
+using Microsoft.Azure.ActiveDirectory.GraphClient;
+using System.Data.Services.Client;
+using System.IO;
+using Microsoft.IdentityModel.Clients.ActiveDirectory;
 
 namespace RewardsForYou.Controllers
 {
@@ -36,12 +34,12 @@ namespace RewardsForYou.Controllers
             List<Missions> t = null;
             List<Missions> g = null;
             List<Missions> mission = new List<Missions>();
-            List<Tasks> task = new List<Tasks>();
+            List<MissionExtended> task = new List<MissionExtended>();
             List<UsersRewards> u = null;
             List<Rewards> r = new List<Rewards>();
             Users manager = null;
             String managerUser = null;
-
+            
             if (!UserID.HasValue)
             {
                 string EMail = ((System.Security.Claims.ClaimsIdentity)HttpContext.GetOwinContext().Authentication.User.Identity).Name;
@@ -66,18 +64,16 @@ namespace RewardsForYou.Controllers
             using (RewardsForYouEntities db = new RewardsForYouEntities())
             {
                 //get tasks of the user
-                t = db.Missions.Include(m => m.Tasks).Where(l => l.UserID == UserID).ToList();
+                task = db.Missions.Include(m => m.Tasks).Where(l => l.UserID == UserID).Select(l => new MissionExtended() { Type = l.Tasks.Type,
+                    Description = l.Tasks.Description, StartDate = l.StartDate, EndDate = l.EndDate, DesiredEndDate = l.DesiredEndDate,
+                    IsFinished = l.Tasks.Finished, Points = l.Tasks.Points, Note = l.Note}).ToList();
                 g = db.Missions.Where(k => k.UserID == UserID).ToList();
-                foreach (Missions m in t)
-                {
-                    
-                    task.Add(m.Tasks);
-                }
-                foreach(Missions m in g)
-                {
-                    mission.Add(m);
-                }
-
+               
+                //foreach(Missions m in g)
+                //{
+                //    mission.Add(m);
+                //}
+                
                 //get rewards of the user
                 u = db.UsersRewards.Include(m => m.Rewards).Where(l => l.UserID == UserID).ToList();
                 foreach (UsersRewards re in u)
@@ -88,17 +84,23 @@ namespace RewardsForYou.Controllers
                 //get the name of the manager
                 manager = db.Users.Where(l => l.UserID == x.ManagerUserID).FirstOrDefault();
                 managerUser = manager.Name+ " "+ manager.Surname;
-                
-                
+
+               
 
                 //save the data in the viewModel class
                 viewModel.User = x;
                 viewModel.Mission = task;
                 viewModel.Reward = r;
                 viewModel.ManagerName = managerUser;
-                viewModel.MissionDesiredDate = mission;
+                //viewModel.MissionDesiredDate = mission;
+                
+                
+                
+                
+                
             }
 
+           
             return View(viewModel);
         }
 
@@ -160,7 +162,6 @@ namespace RewardsForYou.Controllers
                 
         }
 
-
         [HttpPost]
         public async Task<JsonResult> GetAADUserImageAsync()
         {
@@ -215,6 +216,7 @@ namespace RewardsForYou.Controllers
             }
             return ret;
         }
+
 
     }
 

@@ -220,7 +220,6 @@
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\AmministratorController.cs" />
     <Compile Include="Controllers\EmployeeController.cs" />
-    <Compile Include="Controllers\EmployeeDetailController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManagerController.cs" />
     <Compile Include="Controllers\UserProfileController.cs" />
@@ -259,7 +258,7 @@
     <Compile Include="Models\SearchDeleteTask.cs" />
     <Compile Include="Models\SearchDeleteUser.cs" />
     <Compile Include="Models\SearchRewardsforyou.cs" />
-    <Compile Include="Models\TaskDesiredDate.cs" />
+    <Compile Include="Models\MissionExtended.cs" />
     <Compile Include="Models\Tasks.cs">
       <DependentUpon>RewardsForYou.tt</DependentUpon>
     </Compile>
