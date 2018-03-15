@@ -35,10 +35,6 @@
                             <th>
                                 @Html.DisplayNameFor(model => model.EMail)
                             </th>
-                           
-
-
-                            <th></th>
                         </tr>
 
                         @foreach (var item in Model)
@@ -58,8 +54,6 @@
                                     @Html.DisplayFor(modelItem => item.EMail)
                                 </td>
                                
-
-
                                 <td>
                                     @*<a href="@Url.Action("ListaUsers","Manager")" new { id=item.UserID }) class="btn btn-primary">+</a>
                                         <a href="@Url.Action("ListaUsers","Manager")" new { id=item.UserID }) class="btn btn-primary">Details Employee</a>*@

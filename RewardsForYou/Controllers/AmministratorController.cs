@@ -111,7 +111,10 @@ namespace RewardsForYou.Controllers
         //Search and Delete Users
         public ActionResult SearchDeleteUser(SearchDeleteUser data)
         {
-            
+            //ViewModel viewModel = new ViewModel();
+            //List<String> manager = new List<String>();
+            //String managerUser = null;
+
             using (RewardsForYouEntities db = new RewardsForYouEntities())
             {
              
@@ -129,7 +132,12 @@ namespace RewardsForYou.Controllers
                     {
                         x = db.Users.Where(l => l.EMail == data.EMail);
                     }
-                    
+
+                //get the name of the manager
+                //manager = db.Users.Where(l => l.UserID == l.ManagerUserID).ToList().Select(l=> string.Format("{0} {1}",l.Name,l.Surname)).ToList();
+                
+
+            
 
                 data.Lista = x.ToList();
 

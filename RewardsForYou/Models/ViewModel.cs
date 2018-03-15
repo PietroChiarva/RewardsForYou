@@ -9,9 +9,10 @@ namespace RewardsForYou.Models
     {
         public Users User { get; set; }
         public List<Tasks> Mission { get; set; }
-        public List<TaskDesiredDate> Task { get; set; }
+        public List<Tasks> Task { get; set; }
         public List<Rewards> Reward { get; set; }
         public String ManagerName { get; set; }
+        public List<Users> ManagerNome { get; set; }
         public List<Missions> MissionDesiredDate { get; set; }
         public List<object> MissionArray { get; set; }
 
