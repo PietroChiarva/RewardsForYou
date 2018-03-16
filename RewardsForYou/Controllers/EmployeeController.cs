@@ -64,7 +64,7 @@ namespace RewardsForYou.Controllers
             using (RewardsForYouEntities db = new RewardsForYouEntities())
             {
                 //get tasks of the user
-                task = db.Missions.Include(m => m.Tasks).Where(l => l.UserID == UserID).Select(l => new MissionExtended() { Type = l.Tasks.Type,
+                task = db.Missions.Include(m => m.Tasks).Where(l => l.UserID == UserID).Select(l => new MissionExtended() { TaskID = l.TaskID ,Type = l.Tasks.Type,
                     Description = l.Tasks.Description, StartDate = l.StartDate, EndDate = l.EndDate, DesiredEndDate = l.DesiredEndDate,
                     IsFinished = l.Tasks.Finished, Points = l.Tasks.Points, Note = l.Note}).ToList();
                 g = db.Missions.Where(k => k.UserID == UserID).ToList();

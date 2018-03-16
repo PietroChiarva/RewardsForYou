@@ -8,6 +8,7 @@ namespace RewardsForYou.Models
 {
     public class MissionExtended
     {
+        public int TaskID { get; set; }
         public String Type { get; set; }
         public String Description {get; set;}
         [DisplayFormat(DataFormatString = "{0:d}")]

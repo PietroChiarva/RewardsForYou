@@ -123,32 +123,36 @@
                                         <th></th>
                                     </tr>
                                 }
-                                <tr>
-                                    <td>
-                                        @Html.DisplayFor(modelItem => item.Type)
-                                    </td>
-                                    <td>
-                                        @Html.DisplayFor(modelItem => item.Description)
-                                    </td>
-                                    <td>
-                                        @Html.DisplayFor(modelItem => item.StartDate)
-                                    </td>
-                                    <td>
-                                        @Html.DisplayFor(modelItem => item.EndDate)
-                                    </td>
-                                    <td>
-                                        @Html.DisplayFor(modelItem => item.DesiredEndDate)
-                                    </td>
-                                    <td>
-                                        @Html.DisplayFor(modelItem => item.Note)
-                                    </td>
-                                    <td>
-                                        @Html.DisplayFor(modelItem => item.Points)
-                                    </td>
-                                    <td>
-                                        @Html.DisplayFor(modelItem => item.IsFinished)
-                                    </td>
-                                </tr>
+                                    <tr>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.Type)
+                                        </td>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.Description)
+                                        </td>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.StartDate)
+                                        </td>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.EndDate)
+                                        </td>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.DesiredEndDate)
+                                        </td>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.Note)
+                                        </td>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.Points)
+                                        </td>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.IsFinished)
+                                        </td>
+
+                                        <td>
+                                            <a class="btn btn-primary" onclick="NoticeMission ('@item.TaskID', '@Model.User.UserID')">Finish the mission</a>
+                                        </td>
+                                    </tr>
                             }
 
 
