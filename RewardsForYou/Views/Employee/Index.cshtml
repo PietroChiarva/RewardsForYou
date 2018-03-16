@@ -39,9 +39,6 @@
                         @Html.DisplayNameFor(model => model.User.UserPoints)
                     </th>
 
-
-
-                    <th></th>
                 </tr>
 
 
@@ -64,7 +61,6 @@
                     <td>
                         @Html.DisplayFor(modelItem => Model.User.UserPoints)
                     </td>
-
 
                 </tr>
 
@@ -120,35 +116,35 @@
                                             @Html.DisplayNameFor(model => item.IsFinished)
                                         </th>
 
-                                        <th></th>
                                     </tr>
                                 }
-                                <tr>
-                                    <td>
-                                        @Html.DisplayFor(modelItem => item.Type)
-                                    </td>
-                                    <td>
-                                        @Html.DisplayFor(modelItem => item.Description)
-                                    </td>
-                                    <td>
-                                        @Html.DisplayFor(modelItem => item.StartDate)
-                                    </td>
-                                    <td>
-                                        @Html.DisplayFor(modelItem => item.EndDate)
-                                    </td>
-                                    <td>
-                                        @Html.DisplayFor(modelItem => item.DesiredEndDate)
-                                    </td>
-                                    <td>
-                                        @Html.DisplayFor(modelItem => item.Note)
-                                    </td>
-                                    <td>
-                                        @Html.DisplayFor(modelItem => item.Points)
-                                    </td>
-                                    <td>
-                                        @Html.DisplayFor(modelItem => item.IsFinished)
-                                    </td>
-                                </tr>
+                                    <tr>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.Type)
+                                        </td>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.Description)
+                                        </td>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.StartDate)
+                                        </td>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.EndDate)
+                                        </td>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.DesiredEndDate)
+                                        </td>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.Note)
+                                        </td>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.Points)
+                                        </td>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.IsFinished)
+                                        </td>
+
+                                    </tr>
                             }
 
 
@@ -238,6 +234,8 @@
         </div>
     </div>
 </div>
+
+
 
 <script type="text/javascript">
     $(document).ready(function () {
