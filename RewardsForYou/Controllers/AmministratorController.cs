@@ -182,6 +182,7 @@ namespace RewardsForYou.Controllers
                 //elimino(si contrassegna come licenziato) lo user selezionato
                 if (deletedUser != null)
                 {
+
                     deletedUser.FiredDate = DateTime.Now;
                     db.SaveChanges();
                 }

@@ -41,6 +41,7 @@ namespace RewardsForYou.Controllers
             String managerUser = null;
             
             if (!UserID.HasValue)
+
             {
                 string EMail = ((System.Security.Claims.ClaimsIdentity)HttpContext.GetOwinContext().Authentication.User.Identity).Name;
                 using (RewardsForYouEntities db = new RewardsForYouEntities())

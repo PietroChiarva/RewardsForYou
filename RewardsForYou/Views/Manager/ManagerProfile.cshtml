@@ -1,49 +1,68 @@
 ﻿@model RewardsForYou.Models.ViewModel
 
 <p>
-    @Html.ActionLink("Create New", "Create")
+   <h4>Manager Profile</h4>
 </p>
-<table class="table">
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.User.Serial)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.User.Name)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.User.Surname)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.User.EMail)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.User.UserPoints)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.User.FiredDate)
-        </th>
-    </tr>
 
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => Model.User.Serial)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => Model.User.Name)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => Model.User.Surname)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => Model.User.EMail)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => Model.User.UserPoints)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => Model.User.FiredDate)
-        </td> 
-    </tr>
 
-</table>
+<div class="container">
+    <span class="helper"><img id="userImage" src="~/Images/loading.gif" class="img" /></span>
+    <div class="container-fluid">
+        <div class="container-fluid" id="DetailsUser" style="margin-top:5px;overflow-x:auto;width:100%;">
+            <table class="table">
+                <tr>
+                    <th>
+                        @Html.DisplayNameFor(model => model.User.Serial)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.User.Name)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.User.Surname)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.User.EMail)
+                    </th>
+                 
+
+                </tr>
+
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => Model.User.Serial)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => Model.User.Name)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => Model.User.Surname)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => Model.User.EMail)
+                    </td>
+                  
+
+                </tr>
+
+            </table>
+        </div>
+    </div>
+</div>
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        $data = {};
+        $.ajax({
+            type: "POST",
+            url: Router.action('Manager', 'GetAADUserImageAsync'),
+            data: $data
+        }).done(function (responseData, textStatus, jqXHR) {
+            if (responseData.Success) {
+                $("#userImage")[0].src = responseData.Base64StringImage;
+            }
+            else {
+                $("#userImage")[0].src = "Images/noUserImage.png"
+            }
+        })
+    });
+</script>

@@ -159,6 +159,14 @@ namespace RewardsForYou.Controllers
 
        public ActionResult ManagerProfile(int? UserID)
         {
+            if (UserID.HasValue)
+            {
+                Session["UserID"] = UserID;
+            }
+            else
+            {
+                UserID = (int)Session["UserID"];
+            }
             ViewModel viewModel = new ViewModel();
             Users x = null;
 
@@ -184,9 +192,9 @@ namespace RewardsForYou.Controllers
                         x = db.Users.Where(l => l.UserID == UserID).FirstOrDefault();
                     }
 
-                    viewModel.User = x;
+                    
                 }
-
+                viewModel.User = x;
             }
             return View(viewModel);
         }
