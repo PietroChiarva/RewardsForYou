@@ -39,6 +39,9 @@
                         @Html.DisplayNameFor(model => model.User.UserPoints)
                     </th>
 
+
+
+                    <th></th>
                 </tr>
 
 
@@ -61,6 +64,7 @@
                     <td>
                         @Html.DisplayFor(modelItem => Model.User.UserPoints)
                     </td>
+
 
                 </tr>
 
@@ -116,6 +120,7 @@
                                             @Html.DisplayNameFor(model => item.IsFinished)
                                         </th>
 
+                                        <th></th>
                                     </tr>
                                 }
                                     <tr>
@@ -144,6 +149,9 @@
                                             @Html.DisplayFor(modelItem => item.IsFinished)
                                         </td>
 
+                                        <td>
+                                            <a class="btn btn-primary" onclick="NoticeMission ('@item.TaskID', '@Model.User.UserID')">Finish the mission</a>
+                                        </td>
                                     </tr>
                             }
 
@@ -234,8 +242,6 @@
         </div>
     </div>
 </div>
-
-
 
 <script type="text/javascript">
     $(document).ready(function () {
