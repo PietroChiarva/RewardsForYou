@@ -150,7 +150,7 @@
                                         </td>
 
                                         <td>
-                                            <a class="btn btn-primary" onclick="NoticeMission ('@item.TaskID', '@Model.User.UserID')">Finish the mission</a>
+                                            <a class="btn btn-primary" id="NoticeButton" onclick="NoticeMission ('@item.TaskID', '@Model.User.UserID')">Finish the mission</a>
                                         </td>
                                     </tr>
                             }
@@ -259,4 +259,31 @@
             }
         })
     });
+
+    function NoticeMission(var TaskID, var UserID){
+        var data = {
+        TaskID: TaskID,
+        UserID: UserID
+        };
+
+     $.ajax({
+                //imposto il tipo di invio dati (GET O POST)
+                type: "POST",
+                //Dove devo inviare i dati recuperati dal form?
+                url: "@Url.Action("SendMissionNotify", "Employee")",
+                //Quali dati devo inviare? e che tipo
+                data: data,
+                success: function (data) {
+                    alert(data.messaggio);
+                    if (data.flag == true) {
+                        $('#NoticeButton').enable("false");
+                    }
+                },
+                error: function () {
+                    alert("Chiamata fallita, riprova");
+                    //sempre meglio impostare una callback in caso di fallimento
+                }
+
+            });
+    }
 </script>
