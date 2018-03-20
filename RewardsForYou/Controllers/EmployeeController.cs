@@ -40,7 +40,7 @@ namespace RewardsForYou.Controllers
             List<Rewards> r = new List<Rewards>();
             Users manager = null;
             String managerUser = null;
-            
+
             if (!UserID.HasValue)
 
             {
@@ -66,16 +66,25 @@ namespace RewardsForYou.Controllers
             using (RewardsForYouEntities db = new RewardsForYouEntities())
             {
                 //get tasks of the user
-                task = db.Missions.Include(m => m.Tasks).Where(l => l.UserID == UserID).Select(l => new MissionExtended() { TaskID = l.TaskID ,Type = l.Tasks.Type,
-                    Description = l.Tasks.Description, StartDate = l.StartDate, EndDate = l.EndDate, DesiredEndDate = l.DesiredEndDate,
-                    IsFinished = l.Tasks.Finished, Points = l.Tasks.Points, Note = l.Note}).ToList();
+                task = db.Missions.Include(m => m.Tasks).Where(l => l.UserID == UserID).Select(l => new MissionExtended()
+                {
+                    TaskID = l.TaskID,
+                    Type = l.Tasks.Type,
+                    Description = l.Tasks.Description,
+                    StartDate = l.StartDate,
+                    EndDate = l.EndDate,
+                    DesiredEndDate = l.DesiredEndDate,
+                    IsFinished = l.Tasks.Finished,
+                    Points = l.Tasks.Points,
+                    Note = l.Note
+                }).ToList();
                 g = db.Missions.Where(k => k.UserID == UserID).ToList();
-               
+
                 //foreach(Missions m in g)
                 //{
                 //    mission.Add(m);
                 //}
-                
+
                 //get rewards of the user
                 u = db.UsersRewards.Include(m => m.Rewards).Where(l => l.UserID == UserID).ToList();
                 foreach (UsersRewards re in u)
@@ -85,9 +94,9 @@ namespace RewardsForYou.Controllers
 
                 //get the name of the manager
                 manager = db.Users.Where(l => l.UserID == x.ManagerUserID).FirstOrDefault();
-                managerUser = manager.Name+ " "+ manager.Surname;
+                managerUser = manager.Name + " " + manager.Surname;
 
-               
+
 
                 //save the data in the viewModel class
                 viewModel.User = x;
@@ -95,14 +104,14 @@ namespace RewardsForYou.Controllers
                 viewModel.Reward = r;
                 viewModel.ManagerName = managerUser;
                 //viewModel.MissionDesiredDate = mission;
-                
-                
-                
-                
-                
+
+
+
+
+
             }
 
-           
+
             return View(viewModel);
         }
 
@@ -118,7 +127,7 @@ namespace RewardsForYou.Controllers
             using (RewardsForYouEntities db = new RewardsForYouEntities())
             {
                 userReward.rewards = db.Rewards.ToList();
-                
+
             }
             userReward.UserID = UserID;
             return PartialView(userReward);
@@ -129,39 +138,74 @@ namespace RewardsForYou.Controllers
             Rewards reward = null;
             Users user = null;
             UsersRewards userReward = new UsersRewards();
-            Rewards availabilityReward = new Rewards();           
+            Rewards availabilityReward = new Rewards();
+            Users userEmail = null;
+            Users managerEmail = null;
+            Rewards userRewards = null;
+
+            NoticeRewardsTake noticeRewards = new NoticeRewardsTake();
+
             using (RewardsForYouEntities db = new RewardsForYouEntities())
             {
+
+
                 Users userUpdated = db.Users.Find(UserID);
                 availabilityReward = db.Rewards.Find(RewardsID);
                 reward = db.Rewards.Where(l => l.RewardsID == RewardsID).FirstOrDefault();
                 user = db.Users.Where(l => l.UserID == UserID).FirstOrDefault();
+                userEmail = db.Users.Where(l => l.UserID == UserID).FirstOrDefault();
+                managerEmail = db.Users.Where(l => l.UserID == userEmail.ManagerUserID).FirstOrDefault();
+                userRewards = db.Rewards.Where(l => l.RewardsID == RewardsID).FirstOrDefault();
+                userReward = db.UsersRewards.Where(l => l.UserID == UserID && l.RewardsID == RewardsID).FirstOrDefault();
+                noticeRewards.UsersRewarsdsID = userReward.UserRewardsID;
+                noticeRewards.UserID = UserID;
+                noticeRewards.Date = DateTime.Now;
+                noticeRewards.Status = 1;
+                db.NoticeRewardsTake.Add(noticeRewards);
+                db.SaveChanges();
 
                 //check if the points of the user are enough for the selected reward
-                if(user.UserPoints >= reward.Points)
+                if (user.UserPoints >= reward.Points)
                 {
-                    //sottrazione dei punti allo user
-                    userUpdated.UserPoints = user.UserPoints - reward.Points;
-
-                    //diminuzione dell'availability del reward
-                    availabilityReward.Availability = availabilityReward.Availability - 1;
-
-                    //Inserisco il nuovo reward dell'utente nel db
-                    userReward.UserID = user.UserID;
-                    userReward.RewardsID = reward.RewardsID;
-                    userReward.Note = "";
-                    userReward.RewardsDate = DateTime.Now;
-                    db.UsersRewards.Add(userReward);
-                    db.SaveChanges();
-                    return Json(new { messaggio = $"{reward.Type} aggiunto/a con successo", flag = true });
+                    if (Settings.SmtpHost != null)
+                    {
+                        EmailSender.SendEmail(new EmailSender.Email
+                        {
+                            SenderAddress = userEmail.EMail,
+                            Subject = "Richiesta fine missione",
+                            Body = "Richiedo Il Rewards: " + reward.Description + ".\r\n" +
+                            "Grazie " + userEmail.Name + userEmail.Surname + "."
+                        });
+                    }
+                    return Json(new { messaggio = $"Richiesta inviata con successo", flag = true });
                 }
-
                 else
                 {
-                    return Json(new { messaggio = $"I punti non sono sufficienti", flag = false });
+                    return Json(new { messaggio = $"Richiesta(senza Email) inviata con successo", flag = true });
+
+                    //sottrazione dei punti allo user
+                    //userUpdated.UserPoints = user.UserPoints - reward.Points;
+
+                    ////diminuzione dell'availability del reward
+                    //availabilityReward.Availability = availabilityReward.Availability - 1;
+
+                    ////Inserisco il nuovo reward dell'utente nel db
+                    //userReward.UserID = user.UserID;
+                    //userReward.RewardsID = reward.RewardsID;
+                    //userReward.Note = "";
+                    //userReward.RewardsDate = DateTime.Now;
+                    //db.UsersRewards.Add(userReward);
+                    //db.SaveChanges();
+                    //return Json(new { messaggio = $"{reward.Type} aggiunto/a con successo", flag = true });
+                    //}
+
+                    //else
+                    //{
+                    //    return Json(new { messaggio = $"I punti non sono sufficienti", flag = false });
+                    //}
                 }
             }
-                
+
         }
 
         //Send email notify to the manager
@@ -170,12 +214,22 @@ namespace RewardsForYou.Controllers
             Users userEmail = null;
             Users managerEmail = null;
             Tasks userTask = null;
+            Missions mission = null;
 
+            NoticeMissionEnded notice = new NoticeMissionEnded();
             using (RewardsForYouEntities db = new RewardsForYouEntities())
             {
                 userEmail = db.Users.Where(l => l.UserID == UserID).FirstOrDefault();
                 managerEmail = db.Users.Where(l => l.UserID == userEmail.ManagerUserID).FirstOrDefault();
                 userTask = db.Tasks.Where(l => l.TaskID == TaskID).FirstOrDefault();
+                mission = db.Missions.Where(l => l.UserID == UserID && l.TaskID== TaskID).FirstOrDefault();
+                notice.MissionID = mission.MissionID;
+                notice.UserID = UserID;
+                notice.Date = DateTime.Now;
+                notice.Status = 1;
+                db.NoticeMissionEnded.Add(notice);
+                db.SaveChanges();
+
             }
 
             if (Settings.SmtpHost != null)
@@ -193,26 +247,10 @@ namespace RewardsForYou.Controllers
             {
                 return Json(new { messaggio = $"Richiesta(senza Email) inviata con successo", flag = true });
             }
-
-                //emailSender emailSender = new emailSender();
-                //emailInfo emailInfo = new emailInfo();
-                //emailSmtpConfig emailSmtpConfig = new emailSmtpConfig();
-                //Users userEmail = null;
-                //Users managerEmail = null;
-                //Tasks userTask = null;
-                //using (RewardsForYouEntities db = new RewardsForYouEntities())
-                //{
-                //    userEmail = db.Users.Where(l => l.UserID == UserID).FirstOrDefault();
-                //    managerEmail = db.Users.Where(l => l.UserID == userEmail.ManagerUserID).FirstOrDefault();
-                //    userTask = db.Tasks.Where(l => l.TaskID == TaskID).FirstOrDefault();
-                //}
-                //emailInfo.from = userEmail.EMail;
-                //emailInfo.to[0] = managerEmail.EMail;
-                //emailInfo.subject = "Richiesta fine missione";
-                //emailInfo.body = "Richiedo l'accettazione della fine della missione: " + userTask.Description + ".\r\n" +
-                //    "Grazie " + userEmail.Name + userEmail.Surname + ".";
-                //emailSender.sendMail(emailInfo, new emailSmtpConfig());
         }
+
+
+
 
 
 
@@ -271,9 +309,11 @@ namespace RewardsForYou.Controllers
             }
             return ret;
         }
-
-
     }
+}
+
+
+
+
 
    
-}

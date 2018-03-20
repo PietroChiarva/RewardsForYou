@@ -18,6 +18,7 @@ namespace RewardsForYou.Models
         public Rewards()
         {
             this.UsersRewards = new HashSet<UsersRewards>();
+            this.NoticeRewardsTake = new HashSet<NoticeRewardsTake>();
         }
     
         public int RewardsID { get; set; }
@@ -28,5 +29,7 @@ namespace RewardsForYou.Models
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<UsersRewards> UsersRewards { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<NoticeRewardsTake> NoticeRewardsTake { get; set; }
     }
 }
