@@ -25,11 +25,11 @@ namespace RewardsForYou.Models
             throw new UnintentionalCodeFirstException();
         }
     
+        public virtual DbSet<Missions> Missions { get; set; }
         public virtual DbSet<Rewards> Rewards { get; set; }
         public virtual DbSet<Roles> Roles { get; set; }
         public virtual DbSet<Tasks> Tasks { get; set; }
         public virtual DbSet<Users> Users { get; set; }
         public virtual DbSet<UsersRewards> UsersRewards { get; set; }
-        public virtual DbSet<Missions> Missions { get; set; }
     }
 }

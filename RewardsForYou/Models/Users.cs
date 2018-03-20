@@ -17,9 +17,9 @@ namespace RewardsForYou.Models
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Users()
         {
-            this.UsersRewards = new HashSet<UsersRewards>();
             this.Missions = new HashSet<Missions>();
-            this.Users11 = new HashSet<Users>();
+            this.Users1 = new HashSet<Users>();
+            this.UsersRewards = new HashSet<UsersRewards>();
         }
     
         public int UserID { get; set; }
@@ -32,15 +32,13 @@ namespace RewardsForYou.Models
         public Nullable<int> UserPoints { get; set; }
         public Nullable<System.DateTime> FiredDate { get; set; }
     
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Missions> Missions { get; set; }
         public virtual Roles Roles { get; set; }
-        public virtual Users Users1 { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Users> Users1 { get; set; }
         public virtual Users Users2 { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<UsersRewards> UsersRewards { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Missions> Missions { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Users> Users11 { get; set; }
-        public virtual Users Users21 { get; set; }
     }
 }
