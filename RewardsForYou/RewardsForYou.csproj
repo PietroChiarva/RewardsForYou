@@ -20,7 +20,7 @@
     <MvcBuildViews>false</MvcBuildViews>
     <UseIISExpress>true</UseIISExpress>
     <Use64BitIISExpress />
-    <IISExpressSSLPort>44358</IISExpressSSLPort>
+    <IISExpressSSLPort>44337</IISExpressSSLPort>
     <IISExpressAnonymousAuthentication />
     <IISExpressWindowsAuthentication />
     <IISExpressUseClassicPipelineMode />
@@ -228,6 +228,9 @@
     </Compile>
     <Compile Include="Models\AdalTokenCache.cs" />
     <Compile Include="Models\ApplicationDbContext.cs" />
+    <Compile Include="Models\NoticeMissionEnded.cs">
+      <DependentUpon>RewardsForYou.tt</DependentUpon>
+    </Compile>
     <Compile Include="SendEmail\emailSender.cs" />
     <Compile Include="Models\ListUserClass.cs" />
     <Compile Include="Models\MissionModel.cs" />

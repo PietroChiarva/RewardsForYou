@@ -17,7 +17,10 @@
         <AssociationConnector Association="RewardsForYouModel.FK_Users_Roles" />
         <AssociationConnector Association="RewardsForYouModel.FK_Users_Users" />
         <AssociationConnector Association="RewardsForYouModel.FK_UsersRewards_Users" />
-      </Diagram>
+        <EntityTypeShape EntityType="RewardsForYouModel.NoticeMissionEnded" Width="1.5" PointX="4.75" PointY="9.375" />
+        <AssociationConnector Association="RewardsForYouModel.FK_NoticeMissionEnded_Missions1" />
+        <AssociationConnector Association="RewardsForYouModel.FK_NoticeMissionEnded_Users" />
+        </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>
 </edmx:Edmx>
