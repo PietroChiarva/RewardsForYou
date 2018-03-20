@@ -11,7 +11,6 @@ using Microsoft.Azure.ActiveDirectory.GraphClient;
 using System.Data.Services.Client;
 using System.IO;
 using Microsoft.IdentityModel.Clients.ActiveDirectory;
-
 using RewardsForYou.Domain;
 
 namespace RewardsForYou.Controllers
@@ -171,54 +170,48 @@ namespace RewardsForYou.Controllers
             Users userEmail = null;
             Users managerEmail = null;
             Tasks userTask = null;
-            
+
             using (RewardsForYouEntities db = new RewardsForYouEntities())
             {
                 userEmail = db.Users.Where(l => l.UserID == UserID).FirstOrDefault();
                 managerEmail = db.Users.Where(l => l.UserID == userEmail.ManagerUserID).FirstOrDefault();
                 userTask = db.Tasks.Where(l => l.TaskID == TaskID).FirstOrDefault();
-                
-
             }
+
             if (Settings.SmtpHost != null)
             {
                 EmailSender.SendEmail(new EmailSender.Email
                 {
                     SenderAddress = userEmail.EMail,
-                    RecipientEmails = managerEmail.EMail,
                     Subject = "Richiesta fine missione",
                     Body = "Richiedo l'accettazione della fine della missione: " + userTask.Description + ".\r\n" +
-                    "Grazie " + userEmail.Name + " " + userEmail.Surname + "."
+                    "Grazie " + userEmail.Name + userEmail.Surname + "."
                 });
-
-                return Json(new { messaggio = $"Richiesta Email inviata con successo", flag = true });
+                return Json(new { messaggio = $"Richiesta inviata con successo", flag = true });
             }
             else
             {
-
-                return Json(new { messaggio = $"Richiesta(senza email) inviata con successo", flag = true });
+                return Json(new { messaggio = $"Richiesta(senza Email) inviata con successo", flag = true });
             }
-            //emailSender emailSender = new emailSender();
-            //emailInfo emailInfo = new emailInfo();
-            //emailSmtpConfig emailSmtpConfig = new emailSmtpConfig();
-            //Users userEmail = null;
-            //Users managerEmail = null;
-            //Tasks userTask = null;
-            //using (RewardsForYouEntities db = new RewardsForYouEntities())
-            //{
-            //    userEmail = db.Users.Where(l => l.UserID == UserID).FirstOrDefault();
-            //    managerEmail = db.Users.Where(l => l.UserID == userEmail.ManagerUserID).FirstOrDefault();
-            //    userTask = db.Tasks.Where(l => l.TaskID == TaskID).FirstOrDefault();
-            //}
-            //emailInfo.from = userEmail.EMail;
-            //emailInfo.to[0] = managerEmail.EMail;
-            //emailInfo.subject = "Richiesta fine missione";
-            //emailInfo.body = "Richiedo l'accettazione della fine della missione: " + userTask.Description + ".\r\n" +
-            //    "Grazie " + userEmail.Name + userEmail.Surname + ".";
-            //emailSender.sendMail(emailInfo, new emailSmtpConfig());
 
-
-           
+                //emailSender emailSender = new emailSender();
+                //emailInfo emailInfo = new emailInfo();
+                //emailSmtpConfig emailSmtpConfig = new emailSmtpConfig();
+                //Users userEmail = null;
+                //Users managerEmail = null;
+                //Tasks userTask = null;
+                //using (RewardsForYouEntities db = new RewardsForYouEntities())
+                //{
+                //    userEmail = db.Users.Where(l => l.UserID == UserID).FirstOrDefault();
+                //    managerEmail = db.Users.Where(l => l.UserID == userEmail.ManagerUserID).FirstOrDefault();
+                //    userTask = db.Tasks.Where(l => l.TaskID == TaskID).FirstOrDefault();
+                //}
+                //emailInfo.from = userEmail.EMail;
+                //emailInfo.to[0] = managerEmail.EMail;
+                //emailInfo.subject = "Richiesta fine missione";
+                //emailInfo.body = "Richiedo l'accettazione della fine della missione: " + userTask.Description + ".\r\n" +
+                //    "Grazie " + userEmail.Name + userEmail.Surname + ".";
+                //emailSender.sendMail(emailInfo, new emailSmtpConfig());
         }
 
 
