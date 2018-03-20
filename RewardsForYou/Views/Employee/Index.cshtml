@@ -260,8 +260,8 @@
         })
     });
 
-    function NoticeMission(var TaskID, var UserID){
-        var data = {
+    function NoticeMission(TaskID, UserID){
+        var Data = {
         TaskID: TaskID,
         UserID: UserID
         };
@@ -272,7 +272,7 @@
                 //Dove devo inviare i dati recuperati dal form?
                 url: "@Url.Action("SendMissionNotify", "Employee")",
                 //Quali dati devo inviare? e che tipo
-                data: data,
+                data: Data,
                 success: function (data) {
                     alert(data.messaggio);
                     if (data.flag == true) {
