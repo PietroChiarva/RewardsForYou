@@ -21,7 +21,8 @@ namespace RewardsForYou.Models
             this.Users1 = new HashSet<Users>();
             this.UsersRewards = new HashSet<UsersRewards>();
             this.NoticeMissionEnded = new HashSet<NoticeMissionEnded>();
-            this.NoticeRewardsTake = new HashSet<NoticeRewardsTake>();
+            this.NoticeMissionEnded1 = new HashSet<NoticeMissionEnded>();
+            this.NoticeRewardsTakes = new HashSet<NoticeRewardsTakes>();
         }
     
         public int UserID { get; set; }
@@ -45,6 +46,8 @@ namespace RewardsForYou.Models
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<NoticeMissionEnded> NoticeMissionEnded { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<NoticeRewardsTake> NoticeRewardsTake { get; set; }
+        public virtual ICollection<NoticeMissionEnded> NoticeMissionEnded1 { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<NoticeRewardsTakes> NoticeRewardsTakes { get; set; }
     }
 }

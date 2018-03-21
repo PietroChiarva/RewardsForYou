@@ -143,7 +143,7 @@ namespace RewardsForYou.Controllers
             Users managerEmail = null;
             Rewards userRewards = null;
 
-            NoticeRewardsTake noticeRewards = new NoticeRewardsTake();
+            NoticeRewardsTakes noticeRewards = new NoticeRewardsTakes();
 
             using (RewardsForYouEntities db = new RewardsForYouEntities())
             {
@@ -153,20 +153,23 @@ namespace RewardsForYou.Controllers
                 availabilityReward = db.Rewards.Find(RewardsID);
                 reward = db.Rewards.Where(l => l.RewardsID == RewardsID).FirstOrDefault();
                 user = db.Users.Where(l => l.UserID == UserID).FirstOrDefault();
-                userEmail = db.Users.Where(l => l.UserID == UserID).FirstOrDefault();
-                managerEmail = db.Users.Where(l => l.UserID == userEmail.ManagerUserID).FirstOrDefault();
-                userRewards = db.Rewards.Where(l => l.RewardsID == RewardsID).FirstOrDefault();
-                userReward = db.UsersRewards.Where(l => l.UserID == UserID && l.RewardsID == RewardsID).FirstOrDefault();
-                noticeRewards.UsersRewarsdsID = userReward.UserRewardsID;
-                noticeRewards.UserID = UserID;
-                noticeRewards.Date = DateTime.Now;
-                noticeRewards.Status = 1;
-                db.NoticeRewardsTake.Add(noticeRewards);
-                db.SaveChanges();
 
                 //check if the points of the user are enough for the selected reward
                 if (user.UserPoints >= reward.Points)
                 {
+                    
+                    userEmail = db.Users.Where(l => l.UserID == UserID).FirstOrDefault();
+                    managerEmail = db.Users.Where(l => l.UserID == userEmail.ManagerUserID).FirstOrDefault();
+                    userRewards = db.Rewards.Where(l => l.RewardsID == RewardsID).FirstOrDefault();
+                    userReward = db.UsersRewards.Where(l => l.UserID == UserID && l.RewardsID == RewardsID).FirstOrDefault();
+                    noticeRewards.UserID = UserID;
+                    noticeRewards.UsersRewardsID = userReward.UserRewardsID;
+                    noticeRewards.Date = DateTime.Now;
+                    noticeRewards.Status = 1;
+                    db.NoticeRewardsTakes.Add(noticeRewards);
+                    db.SaveChanges();
+
+
                     if (Settings.SmtpHost != null)
                     {
                         EmailSender.SendEmail(new EmailSender.Email
@@ -181,7 +184,7 @@ namespace RewardsForYou.Controllers
                 }
                 else
                 {
-                    return Json(new { messaggio = $"Richiesta(senza Email) inviata con successo", flag = true });
+                    return Json(new {  messaggio = $"Richiest invalida,i tuoi punti non sono sufficienti", flag = true });
 
                     //sottrazione dei punti allo user
                     //userUpdated.UserPoints = user.UserPoints - reward.Points;
@@ -215,6 +218,8 @@ namespace RewardsForYou.Controllers
             Users managerEmail = null;
             Tasks userTask = null;
             Missions mission = null;
+           
+            
 
             NoticeMissionEnded notice = new NoticeMissionEnded();
             using (RewardsForYouEntities db = new RewardsForYouEntities())
@@ -227,6 +232,7 @@ namespace RewardsForYou.Controllers
                 notice.UserID = UserID;
                 notice.Date = DateTime.Now;
                 notice.Status = 1;
+                notice.ManagerID = notice.ManagerID;
                 db.NoticeMissionEnded.Add(notice);
                 db.SaveChanges();
 

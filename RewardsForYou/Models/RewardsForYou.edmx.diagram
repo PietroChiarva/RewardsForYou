@@ -20,11 +20,11 @@
         <EntityTypeShape EntityType="RewardsForYouModel.NoticeMissionEnded" Width="1.5" PointX="7.5" PointY="8" />
         <AssociationConnector Association="RewardsForYouModel.FK_NoticeMissionEnded_Missions1" />
         <AssociationConnector Association="RewardsForYouModel.FK_NoticeMissionEnded_Users" />
-        <EntityTypeShape EntityType="RewardsForYouModel.NoticeRewardsTake" Width="1.5" PointX="10.5" PointY="3.375" />
-        <AssociationConnector Association="RewardsForYouModel.FK_NoticeRewardsTake_Rewards" />
-        <AssociationConnector Association="RewardsForYouModel.FK_NoticeRewardsTake_Users" />
-        <AssociationConnector Association="RewardsForYouModel.FK_NoticeRewardsTake_UsersRewards" />
-      </Diagram>
+        <AssociationConnector Association="RewardsForYouModel.FK_NoticeMissionEnded_Users1" />
+        <EntityTypeShape EntityType="RewardsForYouModel.NoticeRewardsTakes" Width="1.5" PointX="10.5" PointY="5.125" />
+        <AssociationConnector Association="RewardsForYouModel.FK_NoticeRewardsTakes_Users" />
+        <AssociationConnector Association="RewardsForYouModel.FK_NoticeRewardsTakes_UsersRewards" />
+        </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>
 </edmx:Edmx>

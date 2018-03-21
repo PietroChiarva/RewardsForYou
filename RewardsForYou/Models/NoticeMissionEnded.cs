@@ -18,8 +18,10 @@ namespace RewardsForYou.Models
         public int MissionID { get; set; }
         public System.DateTime Date { get; set; }
         public Nullable<int> Status { get; set; }
+        public int ManagerID { get; set; }
     
         public virtual Missions Missions { get; set; }
         public virtual Users Users { get; set; }
+        public virtual Users Users1 { get; set; }
     }
 }

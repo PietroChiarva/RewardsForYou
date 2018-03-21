@@ -27,18 +27,17 @@
           <Property Name="MissionID" Type="int" Nullable="false" />
           <Property Name="Date" Type="datetime" Nullable="false" />
           <Property Name="Status" Type="int" />
+          <Property Name="ManagerID" Type="int" Nullable="false" />
         </EntityType>
-        <!--Errori trovati durante la generazione:
-avviso 6002: Nessuna chiave primaria definita per la tabella/visualizzazione 'RewardsForYou.dbo.NoticeRewardsTake'. La chiave è stata dedotta e la definizione è stata creata come tabella/visualizzazione di sola lettura.-->
-        <EntityType Name="NoticeRewardsTake">
+        <EntityType Name="NoticeRewardsTakes">
           <Key>
-            <PropertyRef Name="UserID" />
-            <PropertyRef Name="UsersRewarsdsID" />
+            <PropertyRef Name="NoticeRewardsTakesID" />
           </Key>
+          <Property Name="NoticeRewardsTakesID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="UserID" Type="int" Nullable="false" />
-          <Property Name="UsersRewarsdsID" Type="int" Nullable="false" />
-          <Property Name="Date" Type="datetime" />
-          <Property Name="Status" Type="int" />
+          <Property Name="UsersRewardsID" Type="int" Nullable="false" />
+          <Property Name="Date" Type="datetime" Nullable="false" />
+          <Property Name="Status" Type="int" Nullable="false" />
         </EntityType>
         <EntityType Name="Rewards">
           <Key>
@@ -141,51 +140,39 @@ avviso 6002: Nessuna chiave primaria definita per la tabella/visualizzazione 'Re
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_NoticeRewardsTake_Rewards">
-          <End Role="Rewards" Type="Self.Rewards" Multiplicity="1" />
-          <End Role="NoticeRewardsTake" Type="Self.NoticeRewardsTake" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Rewards">
-              <PropertyRef Name="RewardsID" />
-            </Principal>
-            <Dependent Role="NoticeRewardsTake">
-              <PropertyRef Name="UsersRewarsdsID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_NoticeRewardsTake_Users">
+        <Association Name="FK_NoticeMissionEnded_Users1">
           <End Role="Users" Type="Self.Users" Multiplicity="1" />
-          <End Role="NoticeRewardsTake" Type="Self.NoticeRewardsTake" Multiplicity="*" />
+          <End Role="NoticeMissionEnded" Type="Self.NoticeMissionEnded" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Users">
               <PropertyRef Name="UserID" />
             </Principal>
-            <Dependent Role="NoticeRewardsTake">
+            <Dependent Role="NoticeMissionEnded">
+              <PropertyRef Name="ManagerID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_NoticeRewardsTakes_Users">
+          <End Role="Users" Type="Self.Users" Multiplicity="1" />
+          <End Role="NoticeRewardsTakes" Type="Self.NoticeRewardsTakes" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="UserID" />
+            </Principal>
+            <Dependent Role="NoticeRewardsTakes">
               <PropertyRef Name="UserID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_NoticeRewardsTake_UsersRewards">
+        <Association Name="FK_NoticeRewardsTakes_UsersRewards">
           <End Role="UsersRewards" Type="Self.UsersRewards" Multiplicity="1" />
-          <End Role="NoticeRewardsTake" Type="Self.NoticeRewardsTake" Multiplicity="*" />
+          <End Role="NoticeRewardsTakes" Type="Self.NoticeRewardsTakes" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="UsersRewards">
               <PropertyRef Name="UserRewardsID" />
             </Principal>
-            <Dependent Role="NoticeRewardsTake">
-              <PropertyRef Name="UsersRewarsdsID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_NoticeRewardsTake_UsersRewards1">
-          <End Role="UsersRewards" Type="Self.UsersRewards" Multiplicity="1" />
-          <End Role="NoticeRewardsTake" Type="Self.NoticeRewardsTake" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="UsersRewards">
-              <PropertyRef Name="UserRewardsID" />
-            </Principal>
-            <Dependent Role="NoticeRewardsTake">
-              <PropertyRef Name="UsersRewarsdsID" />
+            <Dependent Role="NoticeRewardsTakes">
+              <PropertyRef Name="UsersRewardsID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -240,19 +227,12 @@ avviso 6002: Nessuna chiave primaria definita per la tabella/visualizzazione 'Re
         <EntityContainer Name="RewardsForYouModelStoreContainer">
           <EntitySet Name="Missions" EntityType="Self.Missions" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="NoticeMissionEnded" EntityType="Self.NoticeMissionEnded" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="NoticeRewardsTakes" EntityType="Self.NoticeRewardsTakes" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Rewards" EntityType="Self.Rewards" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Roles" EntityType="Self.Roles" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Tasks" EntityType="Self.Tasks" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Users" EntityType="Self.Users" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="UsersRewards" EntityType="Self.UsersRewards" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="NoticeRewardsTake" EntityType="Self.NoticeRewardsTake" store:Type="Tables" store:Schema="dbo">
-            <DefiningQuery>SELECT 
-    [NoticeRewardsTake].[UserID] AS [UserID], 
-    [NoticeRewardsTake].[UsersRewarsdsID] AS [UsersRewarsdsID], 
-    [NoticeRewardsTake].[Date] AS [Date], 
-    [NoticeRewardsTake].[Status] AS [Status]
-    FROM [dbo].[NoticeRewardsTake] AS [NoticeRewardsTake]</DefiningQuery>
-          </EntitySet>
           <AssociationSet Name="FK_Missions_Tasks" Association="Self.FK_Missions_Tasks">
             <End Role="Tasks" EntitySet="Tasks" />
             <End Role="Missions" EntitySet="Missions" />
@@ -269,21 +249,17 @@ avviso 6002: Nessuna chiave primaria definita per la tabella/visualizzazione 'Re
             <End Role="Users" EntitySet="Users" />
             <End Role="NoticeMissionEnded" EntitySet="NoticeMissionEnded" />
           </AssociationSet>
-          <AssociationSet Name="FK_NoticeRewardsTake_Rewards" Association="Self.FK_NoticeRewardsTake_Rewards">
-            <End Role="Rewards" EntitySet="Rewards" />
-            <End Role="NoticeRewardsTake" EntitySet="NoticeRewardsTake" />
-          </AssociationSet>
-          <AssociationSet Name="FK_NoticeRewardsTake_Users" Association="Self.FK_NoticeRewardsTake_Users">
+          <AssociationSet Name="FK_NoticeMissionEnded_Users1" Association="Self.FK_NoticeMissionEnded_Users1">
             <End Role="Users" EntitySet="Users" />
-            <End Role="NoticeRewardsTake" EntitySet="NoticeRewardsTake" />
+            <End Role="NoticeMissionEnded" EntitySet="NoticeMissionEnded" />
           </AssociationSet>
-          <AssociationSet Name="FK_NoticeRewardsTake_UsersRewards" Association="Self.FK_NoticeRewardsTake_UsersRewards">
-            <End Role="UsersRewards" EntitySet="UsersRewards" />
-            <End Role="NoticeRewardsTake" EntitySet="NoticeRewardsTake" />
+          <AssociationSet Name="FK_NoticeRewardsTakes_Users" Association="Self.FK_NoticeRewardsTakes_Users">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="NoticeRewardsTakes" EntitySet="NoticeRewardsTakes" />
           </AssociationSet>
-          <AssociationSet Name="FK_NoticeRewardsTake_UsersRewards1" Association="Self.FK_NoticeRewardsTake_UsersRewards1">
+          <AssociationSet Name="FK_NoticeRewardsTakes_UsersRewards" Association="Self.FK_NoticeRewardsTakes_UsersRewards">
             <End Role="UsersRewards" EntitySet="UsersRewards" />
-            <End Role="NoticeRewardsTake" EntitySet="NoticeRewardsTake" />
+            <End Role="NoticeRewardsTakes" EntitySet="NoticeRewardsTakes" />
           </AssociationSet>
           <AssociationSet Name="FK_Users_Roles" Association="Self.FK_Users_Roles">
             <End Role="Roles" EntitySet="Roles" />
@@ -346,20 +322,20 @@ avviso 6002: Nessuna chiave primaria definita per la tabella/visualizzazione 'Re
             <End Role="Users" EntitySet="Users" />
             <End Role="NoticeMissionEnded" EntitySet="NoticeMissionEnded" />
           </AssociationSet>
-          <EntitySet Name="NoticeRewardsTake" EntityType="RewardsForYouModel.NoticeRewardsTake" />
-          <AssociationSet Name="FK_NoticeRewardsTake_Rewards" Association="RewardsForYouModel.FK_NoticeRewardsTake_Rewards">
-            <End Role="Rewards" EntitySet="Rewards" />
-            <End Role="NoticeRewardsTake" EntitySet="NoticeRewardsTake" />
-          </AssociationSet>
-          <AssociationSet Name="FK_NoticeRewardsTake_Users" Association="RewardsForYouModel.FK_NoticeRewardsTake_Users">
+          <AssociationSet Name="FK_NoticeMissionEnded_Users1" Association="RewardsForYouModel.FK_NoticeMissionEnded_Users1">
             <End Role="Users" EntitySet="Users" />
-            <End Role="NoticeRewardsTake" EntitySet="NoticeRewardsTake" />
+            <End Role="NoticeMissionEnded" EntitySet="NoticeMissionEnded" />
           </AssociationSet>
-          <AssociationSet Name="FK_NoticeRewardsTake_UsersRewards" Association="RewardsForYouModel.FK_NoticeRewardsTake_UsersRewards">
+          <EntitySet Name="NoticeRewardsTakes" EntityType="RewardsForYouModel.NoticeRewardsTakes" />
+          <AssociationSet Name="FK_NoticeRewardsTakes_Users" Association="RewardsForYouModel.FK_NoticeRewardsTakes_Users">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="NoticeRewardsTakes" EntitySet="NoticeRewardsTakes" />
+          </AssociationSet>
+          <AssociationSet Name="FK_NoticeRewardsTakes_UsersRewards" Association="RewardsForYouModel.FK_NoticeRewardsTakes_UsersRewards">
             <End Role="UsersRewards" EntitySet="UsersRewards" />
-            <End Role="NoticeRewardsTake" EntitySet="NoticeRewardsTake" />
+            <End Role="NoticeRewardsTakes" EntitySet="NoticeRewardsTakes" />
           </AssociationSet>
-        </EntityContainer>
+          </EntityContainer>
         <EntityType Name="Missions">
           <Key>
             <PropertyRef Name="MissionID" />
@@ -386,7 +362,6 @@ avviso 6002: Nessuna chiave primaria definita per la tabella/visualizzazione 'Re
           <Property Name="Points" Type="Int32" Nullable="false" />
           <Property Name="Availability" Type="Decimal" Precision="18" Scale="0" />
           <NavigationProperty Name="UsersRewards" Relationship="RewardsForYouModel.FK_UsersRewards_Rewards" FromRole="Rewards" ToRole="UsersRewards" />
-          <NavigationProperty Name="NoticeRewardsTake" Relationship="RewardsForYouModel.FK_NoticeRewardsTake_Rewards" FromRole="Rewards" ToRole="NoticeRewardsTake" />
         </EntityType>
         <EntityType Name="Roles">
           <Key>
@@ -428,7 +403,8 @@ avviso 6002: Nessuna chiave primaria definita per la tabella/visualizzazione 'Re
           <NavigationProperty Name="Users2" Relationship="RewardsForYouModel.FK_Users_Users" FromRole="Users1" ToRole="Users" />
           <NavigationProperty Name="UsersRewards" Relationship="RewardsForYouModel.FK_UsersRewards_Users" FromRole="Users" ToRole="UsersRewards" />
           <NavigationProperty Name="NoticeMissionEnded" Relationship="RewardsForYouModel.FK_NoticeMissionEnded_Users" FromRole="Users" ToRole="NoticeMissionEnded" />
-          <NavigationProperty Name="NoticeRewardsTake" Relationship="RewardsForYouModel.FK_NoticeRewardsTake_Users" FromRole="Users" ToRole="NoticeRewardsTake" />
+          <NavigationProperty Name="NoticeMissionEnded1" Relationship="RewardsForYouModel.FK_NoticeMissionEnded_Users1" FromRole="Users" ToRole="NoticeMissionEnded" />
+          <NavigationProperty Name="NoticeRewardsTakes" Relationship="RewardsForYouModel.FK_NoticeRewardsTakes_Users" FromRole="Users" ToRole="NoticeRewardsTakes" />
         </EntityType>
         <EntityType Name="UsersRewards">
           <Key>
@@ -441,7 +417,7 @@ avviso 6002: Nessuna chiave primaria definita per la tabella/visualizzazione 'Re
           <Property Name="Note" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="Rewards" Relationship="RewardsForYouModel.FK_UsersRewards_Rewards" FromRole="UsersRewards" ToRole="Rewards" />
           <NavigationProperty Name="Users" Relationship="RewardsForYouModel.FK_UsersRewards_Users" FromRole="UsersRewards" ToRole="Users" />
-          <NavigationProperty Name="NoticeRewardsTake" Relationship="RewardsForYouModel.FK_NoticeRewardsTake_UsersRewards" FromRole="UsersRewards" ToRole="NoticeRewardsTake" />
+          <NavigationProperty Name="NoticeRewardsTakes" Relationship="RewardsForYouModel.FK_NoticeRewardsTakes_UsersRewards" FromRole="UsersRewards" ToRole="NoticeRewardsTakes" />
         </EntityType>
         <Association Name="FK_Missions_Tasks">
           <End Type="RewardsForYouModel.Tasks" Role="Tasks" Multiplicity="1" />
@@ -526,6 +502,8 @@ avviso 6002: Nessuna chiave primaria definita per la tabella/visualizzazione 'Re
           <Property Name="Status" Type="Int32" />
           <NavigationProperty Name="Missions" Relationship="RewardsForYouModel.FK_NoticeMissionEnded_Missions1" FromRole="NoticeMissionEnded" ToRole="Missions" />
           <NavigationProperty Name="Users" Relationship="RewardsForYouModel.FK_NoticeMissionEnded_Users" FromRole="NoticeMissionEnded" ToRole="Users" />
+          <Property Name="ManagerID" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Users1" Relationship="RewardsForYouModel.FK_NoticeMissionEnded_Users1" FromRole="NoticeMissionEnded" ToRole="Users" />
         </EntityType>
         <Association Name="FK_NoticeMissionEnded_Missions1">
           <End Type="RewardsForYouModel.Missions" Role="Missions" Multiplicity="1" />
@@ -551,52 +529,51 @@ avviso 6002: Nessuna chiave primaria definita per la tabella/visualizzazione 'Re
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <EntityType Name="NoticeRewardsTake">
-          <Key>
-            <PropertyRef Name="UserID" />
-            <PropertyRef Name="UsersRewarsdsID" />
-          </Key>
-          <Property Name="UserID" Type="Int32" Nullable="false" />
-          <Property Name="UsersRewarsdsID" Type="Int32" Nullable="false" />
-          <Property Name="Date" Type="DateTime" Precision="3" />
-          <Property Name="Status" Type="Int32" />
-          <NavigationProperty Name="Rewards" Relationship="RewardsForYouModel.FK_NoticeRewardsTake_Rewards" FromRole="NoticeRewardsTake" ToRole="Rewards" />
-          <NavigationProperty Name="Users" Relationship="RewardsForYouModel.FK_NoticeRewardsTake_Users" FromRole="NoticeRewardsTake" ToRole="Users" />
-          <NavigationProperty Name="UsersRewards" Relationship="RewardsForYouModel.FK_NoticeRewardsTake_UsersRewards" FromRole="NoticeRewardsTake" ToRole="UsersRewards" />
-        </EntityType>
-        <Association Name="FK_NoticeRewardsTake_Rewards">
-          <End Type="RewardsForYouModel.Rewards" Role="Rewards" Multiplicity="1" />
-          <End Type="RewardsForYouModel.NoticeRewardsTake" Role="NoticeRewardsTake" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Rewards">
-              <PropertyRef Name="RewardsID" />
-            </Principal>
-            <Dependent Role="NoticeRewardsTake">
-              <PropertyRef Name="UsersRewarsdsID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_NoticeRewardsTake_Users">
+        <Association Name="FK_NoticeMissionEnded_Users1">
           <End Type="RewardsForYouModel.Users" Role="Users" Multiplicity="1" />
-          <End Type="RewardsForYouModel.NoticeRewardsTake" Role="NoticeRewardsTake" Multiplicity="*" />
+          <End Type="RewardsForYouModel.NoticeMissionEnded" Role="NoticeMissionEnded" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Users">
               <PropertyRef Name="UserID" />
             </Principal>
-            <Dependent Role="NoticeRewardsTake">
+            <Dependent Role="NoticeMissionEnded">
+              <PropertyRef Name="ManagerID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="NoticeRewardsTakes">
+          <Key>
+            <PropertyRef Name="NoticeRewardsTakesID" />
+          </Key>
+          <Property Name="NoticeRewardsTakesID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="UserID" Type="Int32" Nullable="false" />
+          <Property Name="UsersRewardsID" Type="Int32" Nullable="false" />
+          <Property Name="Date" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="Status" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Users" Relationship="RewardsForYouModel.FK_NoticeRewardsTakes_Users" FromRole="NoticeRewardsTakes" ToRole="Users" />
+          <NavigationProperty Name="UsersRewards" Relationship="RewardsForYouModel.FK_NoticeRewardsTakes_UsersRewards" FromRole="NoticeRewardsTakes" ToRole="UsersRewards" />
+        </EntityType>
+        <Association Name="FK_NoticeRewardsTakes_Users">
+          <End Type="RewardsForYouModel.Users" Role="Users" Multiplicity="1" />
+          <End Type="RewardsForYouModel.NoticeRewardsTakes" Role="NoticeRewardsTakes" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="UserID" />
+            </Principal>
+            <Dependent Role="NoticeRewardsTakes">
               <PropertyRef Name="UserID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_NoticeRewardsTake_UsersRewards">
+        <Association Name="FK_NoticeRewardsTakes_UsersRewards">
           <End Type="RewardsForYouModel.UsersRewards" Role="UsersRewards" Multiplicity="1" />
-          <End Type="RewardsForYouModel.NoticeRewardsTake" Role="NoticeRewardsTake" Multiplicity="*" />
+          <End Type="RewardsForYouModel.NoticeRewardsTakes" Role="NoticeRewardsTakes" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="UsersRewards">
               <PropertyRef Name="UserRewardsID" />
             </Principal>
-            <Dependent Role="NoticeRewardsTake">
-              <PropertyRef Name="UsersRewarsdsID" />
+            <Dependent Role="NoticeRewardsTakes">
+              <PropertyRef Name="UsersRewardsID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -681,6 +658,7 @@ avviso 6002: Nessuna chiave primaria definita per la tabella/visualizzazione 'Re
           <EntitySetMapping Name="NoticeMissionEnded">
             <EntityTypeMapping TypeName="RewardsForYouModel.NoticeMissionEnded">
               <MappingFragment StoreEntitySet="NoticeMissionEnded">
+                <ScalarProperty Name="ManagerID" ColumnName="ManagerID" />
                 <ScalarProperty Name="Status" ColumnName="Status" />
                 <ScalarProperty Name="Date" ColumnName="Date" />
                 <ScalarProperty Name="MissionID" ColumnName="MissionID" />
@@ -688,13 +666,14 @@ avviso 6002: Nessuna chiave primaria definita per la tabella/visualizzazione 'Re
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="NoticeRewardsTake">
-            <EntityTypeMapping TypeName="RewardsForYouModel.NoticeRewardsTake">
-              <MappingFragment StoreEntitySet="NoticeRewardsTake">
+          <EntitySetMapping Name="NoticeRewardsTakes">
+            <EntityTypeMapping TypeName="RewardsForYouModel.NoticeRewardsTakes">
+              <MappingFragment StoreEntitySet="NoticeRewardsTakes">
                 <ScalarProperty Name="Status" ColumnName="Status" />
                 <ScalarProperty Name="Date" ColumnName="Date" />
-                <ScalarProperty Name="UsersRewarsdsID" ColumnName="UsersRewarsdsID" />
+                <ScalarProperty Name="UsersRewardsID" ColumnName="UsersRewardsID" />
                 <ScalarProperty Name="UserID" ColumnName="UserID" />
+                <ScalarProperty Name="NoticeRewardsTakesID" ColumnName="NoticeRewardsTakesID" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

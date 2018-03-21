@@ -12,14 +12,14 @@ namespace RewardsForYou.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class NoticeRewardsTake
+    public partial class NoticeRewardsTakes
     {
+        public int NoticeRewardsTakesID { get; set; }
         public int UserID { get; set; }
-        public int UsersRewarsdsID { get; set; }
-        public Nullable<System.DateTime> Date { get; set; }
-        public Nullable<int> Status { get; set; }
+        public int UsersRewardsID { get; set; }
+        public System.DateTime Date { get; set; }
+        public int Status { get; set; }
     
-        public virtual Rewards Rewards { get; set; }
         public virtual Users Users { get; set; }
         public virtual UsersRewards UsersRewards { get; set; }
     }

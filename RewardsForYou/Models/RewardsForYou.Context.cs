@@ -32,6 +32,6 @@ namespace RewardsForYou.Models
         public virtual DbSet<Users> Users { get; set; }
         public virtual DbSet<UsersRewards> UsersRewards { get; set; }
         public virtual DbSet<NoticeMissionEnded> NoticeMissionEnded { get; set; }
-        public virtual DbSet<NoticeRewardsTake> NoticeRewardsTake { get; set; }
+        public virtual DbSet<NoticeRewardsTakes> NoticeRewardsTakes { get; set; }
     }
 }
