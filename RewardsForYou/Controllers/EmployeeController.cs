@@ -236,11 +236,11 @@ namespace RewardsForYou.Controllers
                     notice.Date = DateTime.Now;
                     notice.Status = 2;
                     notice.ManagerID = notice.ManagerID;
-                db.NoticeMissionEnded.Add(notice);
-                db.SaveChanges();
+                    db.NoticeMissionEnded.Add(notice);
+                    db.SaveChanges();
 
+                }
             }
-
             if (Settings.SmtpHost != null)
             {
                 EmailSender.SendEmail(new EmailSender.Email

@@ -5,6 +5,14 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using System.Data.Entity;
+using System.Threading.Tasks;
+using System.Security.Claims;
+using Microsoft.Azure.ActiveDirectory.GraphClient;
+using System.Data.Services.Client;
+using System.IO;
+using Microsoft.IdentityModel.Clients.ActiveDirectory;
+using RewardsForYou.Domain;
+using RewardsForYou.Controllers;
 
 namespace RewardsForYou.Controllers
 {
@@ -199,7 +207,7 @@ namespace RewardsForYou.Controllers
             }
             using (RewardsForYouEntities db = new RewardsForYouEntities())
             {
-           
+
 
 
                 mission = db.NoticeMissionEnded.Include(n => n.Missions)
@@ -219,7 +227,7 @@ namespace RewardsForYou.Controllers
                         UserID = l.Users.UserID
                     })
                     .ToList();
-                    
+
 
             }
             viewModel.User = x;
@@ -323,105 +331,89 @@ namespace RewardsForYou.Controllers
             NoticeMissionEnded noticeMission = null;
             Tasks task = null;
             Users user = null;
-            
+
             using (RewardsForYouEntities db = new RewardsForYouEntities())
             {
                 mission = db.Missions.Where(l => l.TaskID == TaskID && l.UserID == UserID).FirstOrDefault();
                 noticeMission = db.NoticeMissionEnded.Where(l => l.MissionID == mission.MissionID && l.UserID == UserID).FirstOrDefault();
                 task = db.Tasks.Where(l => l.TaskID == TaskID).FirstOrDefault();
                 user = db.Users.Where(l => l.UserID == UserID).FirstOrDefault();
-                if(mission != null && noticeMission != null)
+                if (mission != null && noticeMission != null)
                 {
                     user.UserPoints = user.UserPoints + task.Points;
                     db.Missions.Remove(mission);
                     db.NoticeMissionEnded.Remove(noticeMission);
                     db.SaveChanges();
                     return Json(new { message = $"Missione accettata con successo", flag = true });
-                    
+
                 }
             }
 
-                return Json(new {message = $"Missione non accettata per qualche problema", flag = false });
+            return Json(new { message = $"Missione non accettata per qualche problema", flag = false });
         }
+
+
+
+
+        //UserImage
+        [HttpPost]
+        public async Task<JsonResult> GetAADUserImageAsync()
+        {
+            JsonResult ret = null;
+            string tenantID = ClaimsPrincipal.Current.FindFirst("http://schemas.microsoft.com/identity/claims/tenantid").Value;
+            string userObjectID = ClaimsPrincipal.Current.FindFirst("http://schemas.microsoft.com/identity/claims/objectidentifier").Value;
+            try
+            {
+                string graphResourceID = "https://graph.windows.net/";
+                UserProfileController userProfileController = new UserProfileController();
+
+                Uri servicePointUri = new Uri(graphResourceID);
+                Uri serviceRoot = new Uri(servicePointUri, tenantID);
+                ActiveDirectoryClient activeDirectoryClient = new ActiveDirectoryClient(serviceRoot,
+                      async () => await userProfileController.GetTokenForApplication());
+
+                // use the token for querying the graph to get the user details
+
+                var result = await activeDirectoryClient.Users
+                    .Where(u => u.ObjectId.Equals(userObjectID))
+                    .ExecuteAsync();
+                IUser user = result.CurrentPage.ToList().First();
+
+                DataServiceStreamResponse photo = await user.ThumbnailPhoto.DownloadAsync();
+                using (MemoryStream s = new MemoryStream())
+                {
+                    photo.Stream.CopyTo(s);
+                    var encodedImage = Convert.ToBase64String(s.ToArray());
+                    ret = Json(new
+                    {
+                        Success = true,
+                        Base64StringImage = String.Format("data:image/gif;base64,{0}", encodedImage)
+                    });
+                }
+            }
+            catch (AdalException e)
+            {
+                ret = Json(new
+                {
+                    Success = false,
+                    Message = e.Message
+                });
+            }
+            // if the above failed, the user needs to explicitly re-authenticate for the app to obtain the required token
+            catch (Exception e)
+            {
+                ret = Json(new
+                {
+                    Success = false,
+                    Message = e.Message
+                });
+            }
+            return ret;
+        }
+
+
     }
 }
 
 
-
-
-
-
-//public ActionResult DetailEmployee()
-//{
-//    using (RewardsForYouEntities db = new RewardsForYouEntities())
-//    {
-
-//        return View();
-//    }
-//}
-
-
-
-
-//public ActionResult _PartialTaskDetails(int UserID)
-//{
-//    ViewModel viewModel = new ViewModel();
-//    Missions x = null;
-//    Users u = null;
-//    IQueryable<Tasks> t = null;
-
-//    using (RewardsForYouEntities db = new RewardsForYouEntities())
-//    {
-//        //get tasks of the user
-//        u= db.Users.Where(l => l.EMail == EMail).FirstOrDefault();
-//        x = db.Missions.Where(l => l.UserID == UserID).FirstOrDefault();
-//        t = db.Tasks.Where(l => l.TaskID == x.TaskID);
-
-//        viewModel.User = u;
-//        viewModel.Mission = t.ToList();
-
-
-
-//    }
-
-//    return PartialView(viewModel);
-//}
-
-
-
-/*
- * @using (Html.BeginForm("ListaUsers", "Manager", null, FormMethod.Post))
- * 
- 
-     <a class="btn btn-primary" onclick="ShowMissionModal ('@item.UserID', '@item.Name', '@item.Surname', '@item.EMail','@item.ManagerUserID')">Details Employee</a>
-                @*<a class="btn btn-primary" onclick="ShowAddlModal ('@item.TaskID', '@item.Type','@item.Description', '@item.ExpiryDate', '@item.Points', '@item.Finished')">+</a>*@
-            </td>
-        </tr>
-    }
-
-</table>
-
-<script type="text/javascript">
-    function ShowMissionModal(UserID, Name, Surname, EMail, ManagerUserID) {
-
-        $('#showModal .modal-body').load(Router.action('Manager', '_PartialMission', { UserID: UserID, Name: Name, Surname: Surname, EMail: EMail, ManagerUserID: ManagerUserID }));
-        $('#showModal').modal("show");
-
-
-    }
-
-    function ShowAddModal(TaskID, Type, Description, ExpiryDate, Points, Finished) {
-
-        $('#showModal .modal-body').load(Router.action('Manager', 'DoAddTask', { TaskID: TaskID, Type: Type, Description: Description, ExpiryDate: ExpiryDate, Points: Points, Finished: Finished}));
-        $('#showModal').modal("show");
-
-
-    }
-
-
-
-</script>
-     
-     
-     */
 
