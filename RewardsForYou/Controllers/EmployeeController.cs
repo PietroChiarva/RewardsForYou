@@ -218,21 +218,24 @@ namespace RewardsForYou.Controllers
             Users managerEmail = null;
             Tasks userTask = null;
             Missions mission = null;
-           
-            
-
             NoticeMissionEnded notice = new NoticeMissionEnded();
+            NoticeMissionEnded controlNotice = null;
+
             using (RewardsForYouEntities db = new RewardsForYouEntities())
             {
                 userEmail = db.Users.Where(l => l.UserID == UserID).FirstOrDefault();
                 managerEmail = db.Users.Where(l => l.UserID == userEmail.ManagerUserID).FirstOrDefault();
                 userTask = db.Tasks.Where(l => l.TaskID == TaskID).FirstOrDefault();
-                mission = db.Missions.Where(l => l.UserID == UserID && l.TaskID== TaskID).FirstOrDefault();
-                notice.MissionID = mission.MissionID;
-                notice.UserID = UserID;
-                notice.Date = DateTime.Now;
-                notice.Status = 1;
-                notice.ManagerID = notice.ManagerID;
+                mission = db.Missions.Where(l => l.UserID == UserID && l.TaskID == TaskID).FirstOrDefault();
+                controlNotice = db.NoticeMissionEnded.Where(l => l.MissionID == mission.MissionID && l.UserID == UserID).FirstOrDefault();
+                if (controlNotice == null)
+                {
+
+                    notice.MissionID = mission.MissionID;
+                    notice.UserID = UserID;
+                    notice.Date = DateTime.Now;
+                    notice.Status = 2;
+                    notice.ManagerID = notice.ManagerID;
                 db.NoticeMissionEnded.Add(notice);
                 db.SaveChanges();
 
