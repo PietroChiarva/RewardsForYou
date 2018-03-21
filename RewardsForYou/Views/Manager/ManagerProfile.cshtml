@@ -169,7 +169,7 @@
                 //Quali dati devo inviare? e che tipo
                 data: Data,
                 success: function (data) {
-                    alert(data.messaggio);
+                    alert(data.message);
                     if (data.flag == true) {
                         window.location.reload();
                     }
@@ -183,7 +183,7 @@
         }
 
         function RefuseMission(TaskID, UserID) {
-            $('#showModal .modal-body').load(Router.action('Manager', 'RefuseModalNote', { TaskID: TaskID , UserID: UserID }));
+            $('#showModal .modal-body').load(Router.action('Manager', 'RefuseNote', { TaskID: TaskID , UserID: UserID }));
             $('#showModal').modal("show");
         }
 

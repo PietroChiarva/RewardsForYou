@@ -341,8 +341,9 @@ namespace RewardsForYou.Controllers
                 if (mission != null && noticeMission != null)
                 {
                     user.UserPoints = user.UserPoints + task.Points;
-                    db.Missions.Remove(mission);
-                    db.NoticeMissionEnded.Remove(noticeMission);
+                    mission.Status = 0;
+                    task.Finished = true;
+                    noticeMission.Status = 0;
                     db.SaveChanges();
                     return Json(new { message = $"Missione accettata con successo", flag = true });
 
@@ -350,6 +351,31 @@ namespace RewardsForYou.Controllers
             }
 
             return Json(new { message = $"Missione non accettata per qualche problema", flag = false });
+        }
+
+        public ActionResult RefuseNote(int TaskID, int UserID)
+        {
+            NoticeMissionEnded notice = null;
+            Missions mission = null;
+            using (RewardsForYouEntities db = new RewardsForYouEntities())
+            {
+                mission = db.Missions.Where(l => l.TaskID == TaskID && l.UserID == UserID).FirstOrDefault();
+                notice = db.NoticeMissionEnded.Where(l => l.UserID == UserID && l.MissionID == mission.MissionID).FirstOrDefault();
+            }
+                return PartialView(notice);
+        }
+
+        public ActionResult DoRefuse(int MissionID, int UserID)
+        {
+            NoticeMissionEnded notice = null;
+            using (RewardsForYouEntities db = new RewardsForYouEntities())
+            {
+                notice = db.NoticeMissionEnded.Where(l => l.MissionID == MissionID && l.UserID == UserID).FirstOrDefault();
+                notice.Status = 1;
+                db.SaveChanges();
+            }
+
+            return RedirectToAction("ManagerProfile", notice.ManagerID);
         }
 
 
