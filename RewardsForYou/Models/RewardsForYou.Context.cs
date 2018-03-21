@@ -31,5 +31,6 @@ namespace RewardsForYou.Models
         public virtual DbSet<Tasks> Tasks { get; set; }
         public virtual DbSet<Users> Users { get; set; }
         public virtual DbSet<UsersRewards> UsersRewards { get; set; }
+        public virtual DbSet<NoticeMissionEnded> NoticeMissionEnded { get; set; }
     }
 }

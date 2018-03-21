@@ -20,6 +20,8 @@ namespace RewardsForYou.Models
         public int Points { get; set; }
         public Boolean IsFinished { get; set; }
         public String Note { get; set; }
+        public String UserName { get; set; }
+        public int UserID { get; set; }
        
     }
 }

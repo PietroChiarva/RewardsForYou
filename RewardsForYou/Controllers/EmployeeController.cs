@@ -171,13 +171,27 @@ namespace RewardsForYou.Controllers
             Users userEmail = null;
             Users managerEmail = null;
             Tasks userTask = null;
-            
+            Missions mission = null;
+            NoticeMissionEnded notice = new NoticeMissionEnded();
+            NoticeMissionEnded controlNotice = null;
+
             using (RewardsForYouEntities db = new RewardsForYouEntities())
             {
                 userEmail = db.Users.Where(l => l.UserID == UserID).FirstOrDefault();
                 managerEmail = db.Users.Where(l => l.UserID == userEmail.ManagerUserID).FirstOrDefault();
                 userTask = db.Tasks.Where(l => l.TaskID == TaskID).FirstOrDefault();
-                
+                mission = db.Missions.Where(l => l.UserID == UserID && l.TaskID == TaskID).FirstOrDefault();
+                controlNotice = db.NoticeMissionEnded.Where(l => l.MissionID == mission.MissionID && l.UserID == UserID).FirstOrDefault();
+                if (controlNotice == null)
+                {
+
+                    notice.MissionID = mission.MissionID;
+                    notice.UserID = UserID;
+                    notice.Date = DateTime.Now;
+                    notice.Status = 2;
+                    db.NoticeMissionEnded.Add(notice);
+                    db.SaveChanges();
+                }
 
             }
             if (Settings.SmtpHost != null)
@@ -198,24 +212,7 @@ namespace RewardsForYou.Controllers
 
                 return Json(new { messaggio = $"Richiesta(senza email) inviata con successo", flag = true });
             }
-            //emailSender emailSender = new emailSender();
-            //emailInfo emailInfo = new emailInfo();
-            //emailSmtpConfig emailSmtpConfig = new emailSmtpConfig();
-            //Users userEmail = null;
-            //Users managerEmail = null;
-            //Tasks userTask = null;
-            //using (RewardsForYouEntities db = new RewardsForYouEntities())
-            //{
-            //    userEmail = db.Users.Where(l => l.UserID == UserID).FirstOrDefault();
-            //    managerEmail = db.Users.Where(l => l.UserID == userEmail.ManagerUserID).FirstOrDefault();
-            //    userTask = db.Tasks.Where(l => l.TaskID == TaskID).FirstOrDefault();
-            //}
-            //emailInfo.from = userEmail.EMail;
-            //emailInfo.to[0] = managerEmail.EMail;
-            //emailInfo.subject = "Richiesta fine missione";
-            //emailInfo.body = "Richiedo l'accettazione della fine della missione: " + userTask.Description + ".\r\n" +
-            //    "Grazie " + userEmail.Name + userEmail.Surname + ".";
-            //emailSender.sendMail(emailInfo, new emailSmtpConfig());
+            
 
 
            

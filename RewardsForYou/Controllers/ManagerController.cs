@@ -25,8 +25,8 @@ namespace RewardsForYou.Controllers
         public ActionResult ListaUsers()
         {
 
-           
-            
+
+
             using (RewardsForYouEntities db = new RewardsForYouEntities())
             {
 
@@ -34,16 +34,16 @@ namespace RewardsForYou.Controllers
                 List<Users> users = new List<Users>();
                 users = db.Users.Where(x => x.ManagerUserID == userID).ToList();
 
-                
+
 
                 return View(users);
 
             }
-         
-            
+
+
         }
 
-      
+
 
         public ActionResult ViewTask(int? UserID = null)
         {
@@ -128,7 +128,7 @@ namespace RewardsForYou.Controllers
                         EndDate = task.ExpiryDate,
                         Note = "",
                         Status = 0,
-                        DesiredEndDate= start.AddMonths(task.TimeSpan)
+                        DesiredEndDate = start.AddMonths(task.TimeSpan)
                     };
 
                     db.Missions.Add(mission);
@@ -150,14 +150,14 @@ namespace RewardsForYou.Controllers
                 t = db.Tasks.ToList();
                 r = db.Rewards.ToList();
 
-               
+
             }
             viewModel.Task = t;
             viewModel.Reward = r;
             return View(viewModel);
         }
 
-       public ActionResult ManagerProfile(int? UserID)
+        public ActionResult ManagerProfile(int? UserID)
         {
             if (UserID.HasValue)
             {
@@ -170,32 +170,61 @@ namespace RewardsForYou.Controllers
             ViewModel viewModel = new ViewModel();
             Users x = null;
 
+            List<MissionExtended> mission = new List<MissionExtended>();
+
+
+
+
+            if (UserID.HasValue)
             {
-
-                if (UserID.HasValue)
+                string EMail = ((System.Security.Claims.ClaimsIdentity)HttpContext.GetOwinContext().Authentication.User.Identity).Name;
+                using (RewardsForYouEntities db = new RewardsForYouEntities())
                 {
-                    string EMail = ((System.Security.Claims.ClaimsIdentity)HttpContext.GetOwinContext().Authentication.User.Identity).Name;
-                    using (RewardsForYouEntities db = new RewardsForYouEntities())
-                    {
 
-                        //get the user from the db
-                        x = db.Users.Where(l => l.EMail == EMail).FirstOrDefault();
-                        UserID = x.UserID;
-                    }
+                    //get the user from the db
+                    x = db.Users.Where(l => l.EMail == EMail).FirstOrDefault();
+                    UserID = x.UserID;
                 }
-                else
-                {
-                    using (RewardsForYouEntities db = new RewardsForYouEntities())
-                    {
-
-                        //get the user from the db
-                        x = db.Users.Where(l => l.UserID == UserID).FirstOrDefault();
-                    }
-
-                    
-                }
-                viewModel.User = x;
             }
+            else
+            {
+                using (RewardsForYouEntities db = new RewardsForYouEntities())
+                {
+
+                    //get the user from the db
+                    x = db.Users.Where(l => l.UserID == UserID).FirstOrDefault();
+                }
+
+
+            }
+            using (RewardsForYouEntities db = new RewardsForYouEntities())
+            {
+           
+
+
+                mission = db.NoticeMissionEnded.Include(n => n.Missions)
+                    .Include(n => n.Users).Where(l => l.ManagerID == UserID && l.Status == 2)
+                    .Select(l => new MissionExtended()
+                    {
+                        TaskID = l.Missions.Tasks.TaskID,
+                        Type = l.Missions.Tasks.Type,
+                        Description = l.Missions.Tasks.Description,
+                        StartDate = l.Missions.StartDate,
+                        EndDate = l.Missions.EndDate,
+                        DesiredEndDate = l.Missions.DesiredEndDate,
+                        IsFinished = l.Missions.Tasks.Finished,
+                        Points = l.Missions.Tasks.Points,
+                        Note = l.Missions.Note,
+                        UserName = l.Users.Name + " " + l.Users.Surname,
+                        UserID = l.Users.UserID
+                    })
+                    .ToList();
+                    
+
+            }
+            viewModel.User = x;
+            viewModel.Mission = mission;
+
             return View(viewModel);
         }
 
@@ -286,6 +315,33 @@ namespace RewardsForYou.Controllers
 
             }
             return View(viewModel);
+        }
+
+        public ActionResult AcceptMission(int TaskID, int UserID)
+        {
+            Missions mission = null;
+            NoticeMissionEnded noticeMission = null;
+            Tasks task = null;
+            Users user = null;
+            
+            using (RewardsForYouEntities db = new RewardsForYouEntities())
+            {
+                mission = db.Missions.Where(l => l.TaskID == TaskID && l.UserID == UserID).FirstOrDefault();
+                noticeMission = db.NoticeMissionEnded.Where(l => l.MissionID == mission.MissionID && l.UserID == UserID).FirstOrDefault();
+                task = db.Tasks.Where(l => l.TaskID == TaskID).FirstOrDefault();
+                user = db.Users.Where(l => l.UserID == UserID).FirstOrDefault();
+                if(mission != null && noticeMission != null)
+                {
+                    user.UserPoints = user.UserPoints + task.Points;
+                    db.Missions.Remove(mission);
+                    db.NoticeMissionEnded.Remove(noticeMission);
+                    db.SaveChanges();
+                    return Json(new { message = $"Missione accettata con successo", flag = true });
+                    
+                }
+            }
+
+                return Json(new {message = $"Missione non accettata per qualche problema", flag = false });
         }
     }
 }

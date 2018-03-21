@@ -14,6 +14,12 @@ namespace RewardsForYou.Models
     
     public partial class Missions
     {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public Missions()
+        {
+            this.NoticeMissionEnded = new HashSet<NoticeMissionEnded>();
+        }
+    
         public int MissionID { get; set; }
         public int UserID { get; set; }
         public int TaskID { get; set; }
@@ -25,5 +31,7 @@ namespace RewardsForYou.Models
     
         public virtual Tasks Tasks { get; set; }
         public virtual Users Users { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<NoticeMissionEnded> NoticeMissionEnded { get; set; }
     }
 }

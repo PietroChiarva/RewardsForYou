@@ -276,7 +276,7 @@
                 success: function (data) {
                     alert(data.messaggio);
                     if (data.flag == true) {
-                        $('#NoticeButton').enable("false");
+                        $('#NoticeButton').attr("disabled", "disabled");
                     }
                 },
                 error: function () {

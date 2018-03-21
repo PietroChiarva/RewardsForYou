@@ -1,7 +1,7 @@
 ﻿@model RewardsForYou.Models.ViewModel
 
 <p>
-   <h4>Manager Profile</h4>
+    <h4>Manager Profile</h4>
 </p>
 
 
@@ -23,7 +23,7 @@
                     <th>
                         @Html.DisplayNameFor(model => model.User.EMail)
                     </th>
-                 
+
 
                 </tr>
 
@@ -40,34 +40,153 @@
                     <td>
                         @Html.DisplayFor(modelItem => Model.User.EMail)
                     </td>
-                  
+
 
                 </tr>
 
             </table>
         </div>
     </div>
-</div>
 
-<script type="text/javascript">
-    $(document).ready(function () {
-        $data = {};
-        $.ajax({
-            type: "POST",
-            url: Router.action('Manager', 'GetAADUserImageAsync'),
-            data: $data
-        }).done(function (responseData, textStatus, jqXHR) {
-            if (responseData.Success) {
-                $("#userImage")[0].src = responseData.Base64StringImage;
-            }
-            else {
-                $("#userImage")[0].src = "Images/noUserImage.png"
-            }
-        })
-    });
+    <div class="panel-group">
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <h4 class="panel-title">
+                    <a data-toggle="collapse" href="#collapse2" class="list-group-item active" align="center"> <h4>Mission Notify</h4></a>
+                </h4>
+            </div>
+            <div id="collapse2" class="panel-collapse collapse">
+                <div class="panel-body">
+                    <div class="container-fluid">
+                        <div class="container-fluid" id="ManagerNotice" style="margin-top:5px;overflow-x:auto;width:100%;">
+                            <table class="table">
+                                @foreach (var item in Model.Mission)
+                                {
+                                    if (Model.Mission.IndexOf(item) == 0 || Model.Mission.Count == 0)
+                                    {
+                                        <tr>
+                                            <th>
+                                                @Html.DisplayNameFor(model => item.Type)
+                                            </th>
+                                            <th>
+                                                @Html.DisplayNameFor(model => item.Description)
+                                            </th>
+                                            <th>
+                                                @Html.DisplayNameFor(model => item.StartDate)
+                                            </th>
+                                            <th>
+                                                @Html.DisplayNameFor(model => item.EndDate)
+                                            </th>
+                                            <th>
+                                                @Html.DisplayNameFor(model => item.DesiredEndDate)
+                                            </th>
+                                            <th>
+                                                @Html.DisplayNameFor(model => item.Note)
+                                            </th>
+                                            <th>
+                                                @Html.DisplayNameFor(model => item.Points)
+                                            </th>
+                                            <th>
+                                                @Html.DisplayNameFor(model => item.IsFinished)
+                                            </th>
+                                            <th>
+                                                @Html.DisplayNameFor(model => item.UserName)
+                                            </th>
+
+                                            <th></th>
+                                        </tr>
+                                    }
+                                    <tr>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.Type)
+                                        </td>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.Description)
+                                        </td>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.StartDate)
+                                        </td>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.EndDate)
+                                        </td>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.DesiredEndDate)
+                                        </td>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.Note)
+                                        </td>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.Points)
+                                        </td>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.IsFinished)
+                                        </td>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.UserName)
+                                        </td>
+                                        <td>
+                                            <a class="btn btn-primary" id="AcceptButton" onclick="AcceptMission ('@item.TaskID', '@item.UserID')">Accept</a>
+                                            <a class="btn btn-primary" id="RefuseButton" onclick="RefuseMission ('@item.TaskID', '@item.UserID')">Refuse</a>
+                                        </td>
+                                    </tr>
+                                }
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $data = {};
+            $.ajax({
+                type: "POST",
+                url: Router.action('Manager', 'GetAADUserImageAsync'),
+                data: $data
+            }).done(function (responseData, textStatus, jqXHR) {
+                if (responseData.Success) {
+                    $("#userImage")[0].src = responseData.Base64StringImage;
+                }
+                else {
+                    $("#userImage")[0].src = "Images/noUserImage.png"
+                }
+            })
+        });
+
+        function AcceptMission(TaskID, UserID) {
+             var Data = {
+                TaskID: TaskID,
+                UserID: UserID
+             };
+
+                $.ajax({
+                //imposto il tipo di invio dati (GET O POST)
+                type: "POST",
+                //Dove devo inviare i dati recuperati dal form?
+                url: "@Url.Action("AcceptMission", "Manager")",
+                //Quali dati devo inviare? e che tipo
+                data: Data,
+                success: function (data) {
+                    alert(data.messaggio);
+                    if (data.flag == true) {
+                        window.location.reload();
+                    }
+                },
+                error: function () {
+                    alert("Chiamata fallita, riprova");
+                    //sempre meglio impostare una callback in caso di fallimento
+                }
+
+                });
+        }
+
+        function RefuseMission(TaskID, UserID) {
+            $('#showModal .modal-body').load(Router.action('Manager', 'RefuseModalNote', { TaskID: TaskID , UserID: UserID }));
+            $('#showModal').modal("show");
+        }
 
 
 
-
-
-</script>
+    </script>
