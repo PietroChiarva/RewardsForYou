@@ -234,7 +234,7 @@
         <div id="collapse4" class="panel-collapse collapse">
             <div class="panel-body">
                 <div class="container-fluid">
-                    <div class="container-fluid" id="ChooseRewardsContainer" style="margin-top:5px;overflow-x:auto;width:100%;">
+                    <div class="container-fluid" id="AskRewards" style="margin-top:5px;overflow-x:auto;width:100%;">
                         @Html.Action("_ChooseRewards");
                     </div>
                 </div>
@@ -286,4 +286,34 @@
 
             });
     }
+
+
+    function AskRewards(RewardsID, UserID){
+        var Data = {
+        RewardsID: RewardsID,
+        UserID: UserID
+        };
+
+     $.ajax({
+                //imposto il tipo di invio dati (GET O POST)
+                type: "POST",
+                //Dove devo inviare i dati recuperati dal form?
+                url: "@Url.Action("_PartialTakeReward", "Employee")",
+                //Quali dati devo inviare? e che tipo
+                data: Data,
+                success: function (data) {
+                    alert(data.messaggio);
+                    if (data.flag == true) {
+                        $('#NoticeButton').enable("false");
+                    }
+                },
+                error: function () {
+                    alert("Chiamata fallita, riprova");
+                    //sempre meglio impostare una callback in caso di fallimento
+                }
+
+            });
+    }
+
+
 </script>
