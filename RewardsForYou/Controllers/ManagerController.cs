@@ -238,15 +238,15 @@ namespace RewardsForYou.Controllers
             using (RewardsForYouEntities db = new RewardsForYouEntities())
             {
 
-                userRewards = db.NoticeRewardsTakes.Include(n => n.UsersRewards)
+                userRewards = db.NoticeRewardsTakes.Include(n => n.Rewards)
                    .Include(n => n.Users).Where(l => l.ManagerID == UserID && l.Status == 2)
                    .Select(l => new UsersRewardsExtended()
                    {
-                       RewardsID = l.UsersRewards.Rewards.RewardsID,
-                       Type = l.UsersRewards.Rewards.Type,
-                       Description = l.UsersRewards.Rewards.Description,
-                       Points= l.UsersRewards.Rewards.Points,
-                       Availability = l.UsersRewards.Rewards.Availability,
+                       RewardsID = l.Rewards.RewardsID,
+                       Type = l.Rewards.Type,
+                       Description = l.Rewards.Description,
+                       Points= l.Rewards.Points,
+                       Availability = l.Rewards.Availability,
                        UserName = l.Users.Name + " " + l.Users.Surname,
                        UserID = l.Users.UserID
                        
@@ -406,7 +406,7 @@ namespace RewardsForYou.Controllers
         public ActionResult AcceptRewards(int RewardsID, int UserID)
         {
            
-            UsersRewards usersRewards = null;
+            UsersRewards usersRewards = new UsersRewards();
             NoticeRewardsTakes noticeRewards = null;
             Rewards rewards = null;
             Users user = null;
@@ -415,18 +415,18 @@ namespace RewardsForYou.Controllers
 
             using (RewardsForYouEntities db = new RewardsForYouEntities())
             {
-                usersRewards = db.UsersRewards.Where(l => l.RewardsID == RewardsID && l.UserID == UserID).FirstOrDefault();
-                noticeRewards = db.NoticeRewardsTakes.Where(l => l.UsersRewardsID == usersRewards.UserRewardsID && l.UserID == UserID).FirstOrDefault();
-                rewards= db.Rewards.Where(l => l.RewardsID == RewardsID).FirstOrDefault();
-                user = db.Users.Where(l => l.UserID == UserID).FirstOrDefault();
-
-                Users userUpdated = db.Users.Find(UserID);
-                availabilityReward = db.Rewards.Find(RewardsID);
                 rewards = db.Rewards.Where(l => l.RewardsID == RewardsID).FirstOrDefault();
                 user = db.Users.Where(l => l.UserID == UserID).FirstOrDefault();
 
+                //usersRewards = db.UsersRewards.Where(l => l.RewardsID == RewardsID && l.UserID == UserID).FirstOrDefault();
+                noticeRewards = db.NoticeRewardsTakes.Where(l => l.RewardsID == rewards.RewardsID && l.UserID == UserID).FirstOrDefault();
+               
+                Users userUpdated = db.Users.Find(UserID);
+                availabilityReward = db.Rewards.Find(RewardsID);
+           
 
-                if (usersRewards != null && noticeRewards != null)
+
+                if ( noticeRewards != null)
                 {
                     //user.UserPoints = user.UserPoints + task.Points;
                     //noticeRewards.Status = 0;
@@ -444,13 +444,15 @@ namespace RewardsForYou.Controllers
                     usersRewards.UserID = user.UserID;
                     usersRewards.RewardsID = rewards.RewardsID;   
                     usersRewards.RewardsDate = DateTime.Now;
+                    usersRewards.Note = "";
                     db.UsersRewards.Add(usersRewards);
+                    noticeRewards.Status = 0;
                     db.SaveChanges();
 
 
 
 
-                    return Json(new { message = $"Rewards Aggiunti con successo", flag = true });
+                    return Json(new { message = $"Rewards Aggiunto con successo", flag = true });
 
                 }
             }
@@ -461,22 +463,22 @@ namespace RewardsForYou.Controllers
         public ActionResult RefuseRewards(int RewardsID, int UserID)
         {
             NoticeRewardsTakes noticeRewards = null;
-            UsersRewards usersRewards = null;
+            Rewards usersRewards = null;
             using (RewardsForYouEntities db = new RewardsForYouEntities())
             {
-                usersRewards = db.UsersRewards.Where(l => l.RewardsID == RewardsID && l.UserID == UserID).FirstOrDefault();
-                noticeRewards = db.NoticeRewardsTakes.Where(l => l.UserID == UserID && l.UsersRewardsID == usersRewards.UserRewardsID).FirstOrDefault();
+                usersRewards = db.Rewards.Where(l => l.RewardsID == RewardsID).FirstOrDefault();
+                noticeRewards = db.NoticeRewardsTakes.Where(l => l.UserID == UserID && l.RewardsID == usersRewards.RewardsID).FirstOrDefault();
             }
             return PartialView(noticeRewards);
         }
 
-        public ActionResult DoRefuseRewards(int UsersRewardsID, int UserID)
+        public ActionResult DoRefuseRewards(int RewardsID, int UserID)
         {
             NoticeRewardsTakes noticeRewards = null;
             using (RewardsForYouEntities db = new RewardsForYouEntities())
             {
-                noticeRewards = db.NoticeRewardsTakes.Where(l => l.UsersRewardsID== UsersRewardsID && l.UserID == UserID).FirstOrDefault();
-                noticeRewards.Status = 2;
+                noticeRewards = db.NoticeRewardsTakes.Where(l => l.RewardsID== RewardsID && l.UserID == UserID).FirstOrDefault();
+                noticeRewards.Status = 1;
                 db.SaveChanges();
             }
 

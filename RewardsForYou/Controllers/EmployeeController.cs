@@ -163,6 +163,8 @@ namespace RewardsForYou.Controllers
                     userRewards = db.Rewards.Where(l => l.RewardsID == RewardsID).FirstOrDefault();
                     //userReward = db.UsersRewards.Where(l => l.UserID == UserID && l.RewardsID == RewardsID).FirstOrDefault();
                     noticeRewards.UserID = UserID;
+                    noticeRewards.ManagerID = managerEmail.UserID;
+                    noticeRewards.RewardsID = reward.RewardsID;
                     noticeRewards.Date = DateTime.Now;
                     noticeRewards.Status = 2;
                     db.NoticeRewardsTakes.Add(noticeRewards);

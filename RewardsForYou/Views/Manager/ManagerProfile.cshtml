@@ -200,7 +200,7 @@
                                                 @Html.DisplayFor(modelItem => item.UserName)
                                             </td>
                                             <td>
-                                                <a class="btn btn-primary" id="AcceptButton" onclick="AcceptRewards ('@item.RewardsID, '@item.UserID')">Accept</a>
+                                                <a class="btn btn-primary" id="AcceptButton" onclick="AcceptRewards ('@item.RewardsID', '@item.UserID')">Accept</a>
                                             </td>
                                             <td>
                                                 <a class="btn btn-primary" id="RefuseButton" onclick="RefuseRewards ('@item.RewardsID', '@item.UserID')">Refuse</a>
@@ -279,7 +279,7 @@
                 //Quali dati devo inviare? e che tipo
                 data: Data,
                 success: function (data) {
-                    alert(data.messagge);
+                    alert(data.message);
                     if (data.flag == true) {
                         window.location.reload();
                     }
