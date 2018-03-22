@@ -80,9 +80,7 @@
                                             <th>
                                                 @Html.DisplayNameFor(model => item.DesiredEndDate)
                                             </th>
-                                            <th>
-                                                @Html.DisplayNameFor(model => item.Note)
-                                            </th>
+                                           
                                             <th>
                                                 @Html.DisplayNameFor(model => item.Points)
                                             </th>
@@ -92,43 +90,45 @@
                                             <th>
                                                 @Html.DisplayNameFor(model => item.UserName)
                                             </th>
+                                            <th></th>
 
                                             <th></th>
                                         </tr>
                                     }
-                                    <tr>
-                                        <td>
-                                            @Html.DisplayFor(modelItem => item.Type)
-                                        </td>
-                                        <td>
-                                            @Html.DisplayFor(modelItem => item.Description)
-                                        </td>
-                                        <td>
-                                            @Html.DisplayFor(modelItem => item.StartDate)
-                                        </td>
-                                        <td>
-                                            @Html.DisplayFor(modelItem => item.EndDate)
-                                        </td>
-                                        <td>
-                                            @Html.DisplayFor(modelItem => item.DesiredEndDate)
-                                        </td>
-                                        <td>
-                                            @Html.DisplayFor(modelItem => item.Note)
-                                        </td>
-                                        <td>
-                                            @Html.DisplayFor(modelItem => item.Points)
-                                        </td>
-                                        <td>
-                                            @Html.DisplayFor(modelItem => item.IsFinished)
-                                        </td>
-                                        <td>
-                                            @Html.DisplayFor(modelItem => item.UserName)
-                                        </td>
-                                        <td>
-                                            <a class="btn btn-primary" id="AcceptButton" onclick="AcceptMission ('@item.TaskID', '@item.UserID')">Accept</a>
+                                        <tr>
+                                            <td>
+                                                @Html.DisplayFor(modelItem => item.Type)
+                                            </td>
+                                            <td>
+                                                @Html.DisplayFor(modelItem => item.Description)
+                                            </td>
+                                            <td>
+                                                @Html.DisplayFor(modelItem => item.StartDate)
+                                            </td>
+                                            <td>
+                                                @Html.DisplayFor(modelItem => item.EndDate)
+                                            </td>
+                                            <td>
+                                                @Html.DisplayFor(modelItem => item.DesiredEndDate)
+                                            </td>
+
+                                            <td>
+                                                @Html.DisplayFor(modelItem => item.Points)
+                                            </td>
+                                            <td>
+                                                @Html.DisplayFor(modelItem => item.IsFinished)
+                                            </td>
+                                            <td>
+                                                @Html.DisplayFor(modelItem => item.UserName)
+                                            </td>
+                                            <td>
+                                                <a class="btn btn-primary" id="AcceptButton" onclick="AcceptMission ('@item.TaskID', '@item.UserID')">Accept</a>
+
+                                            </td>
+                                            <td>
                                             <a class="btn btn-primary" id="RefuseButton" onclick="RefuseMission ('@item.TaskID', '@item.UserID')">Refuse</a>
-                                        </td>
-                                    </tr>
+                                            </td>
+                                        </tr>
                                 }
                             </table>
                         </div>

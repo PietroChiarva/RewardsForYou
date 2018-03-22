@@ -209,7 +209,7 @@ namespace RewardsForYou.Controllers
             {
 
 
-
+                // status 0 = accettato, 1= rifiutato, 2= in sospeso
                 mission = db.NoticeMissionEnded.Include(n => n.Missions)
                     .Include(n => n.Users).Where(l => l.ManagerID == UserID && l.Status == 2)
                     .Select(l => new MissionExtended()
@@ -325,6 +325,7 @@ namespace RewardsForYou.Controllers
             return View(viewModel);
         }
 
+        // status 0 = accettato, 1= rifiutato, 2= in sospeso
         public ActionResult AcceptMission(int TaskID, int UserID)
         {
             Missions mission = null;
@@ -341,7 +342,7 @@ namespace RewardsForYou.Controllers
                 if (mission != null && noticeMission != null)
                 {
                     user.UserPoints = user.UserPoints + task.Points;
-                    mission.Status = 0;
+                    mission.Status = 1;
                     task.Finished = true;
                     noticeMission.Status = 0;
                     db.SaveChanges();
