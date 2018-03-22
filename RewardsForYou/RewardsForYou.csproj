@@ -234,6 +234,8 @@
     <Compile Include="Models\NoticeRewardsTakes.cs">
       <DependentUpon>RewardsForYou.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\SendEmail\emailSender.cs" />
+    <Compile Include="Models\SendEmail\Settings.cs" />
     <Compile Include="Models\UsersRewardsExtended.cs" />
     <Compile Include="SendEmail\emailSender.cs" />
     <Compile Include="Models\ListUserClass.cs" />

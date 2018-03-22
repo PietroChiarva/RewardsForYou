@@ -364,8 +364,9 @@ namespace RewardsForYou.Controllers
                 if (mission != null && noticeMission != null)
                 {
                     user.UserPoints = user.UserPoints + task.Points;
-                    db.Missions.Remove(mission);
-                    db.NoticeMissionEnded.Remove(noticeMission);
+                    mission.Status = 1;
+                    task.Finished = true;
+                    noticeMission.Status = 0;
                     db.SaveChanges();
                     return Json(new { message = $"Missione accettata con successo", flag = true });
 
@@ -375,32 +376,31 @@ namespace RewardsForYou.Controllers
             return Json(new { message = $"Missione non accettata per qualche problema", flag = false });
         }
 
-        public ActionResult AcceptRewards(int RewardsID, int UserID)
+        public ActionResult RefuseNote(int TaskID, int UserID)
         {
-            UsersRewards usersReward = null;
-            NoticeRewardsTakes noticeRewards = null;
-            Users user = null;
-            Rewards rewards = null;
-
+            NoticeMissionEnded notice = null;
+            Missions mission = null;
             using (RewardsForYouEntities db = new RewardsForYouEntities())
             {
-                usersReward = db.UsersRewards.Where(l => l.RewardsID == RewardsID && l.UserID == UserID).FirstOrDefault();
-                noticeRewards = db.NoticeRewardsTakes.Where(l =>l.UsersRewardsID == usersReward.UserRewardsID && l.UserID == UserID).FirstOrDefault();
-                rewards = db.Rewards.Where(l => l.RewardsID == RewardsID).FirstOrDefault();
-                user = db.Users.Where(l => l.UserID == UserID).FirstOrDefault();
-                if (usersReward != null && noticeRewards != null)
-                {
-                    user.UserPoints = user.UserPoints + rewards.Points;
-                    db.UsersRewards.Remove(usersReward);
-                    db.NoticeRewardsTakes.Remove(noticeRewards);
-                    db.SaveChanges();
-                    return Json(new { message = $"Missione accettata con successo", flag = true });
+                mission = db.Missions.Where(l => l.TaskID == TaskID && l.UserID == UserID).FirstOrDefault();
+                notice = db.NoticeMissionEnded.Where(l => l.UserID == UserID && l.MissionID == mission.MissionID).FirstOrDefault();
+            }
+            return PartialView(notice);
+        }
 
-                }
+        public ActionResult DoRefuse(int MissionID, int UserID)
+        {
+            NoticeMissionEnded notice = null;
+            using (RewardsForYouEntities db = new RewardsForYouEntities())
+            {
+                notice = db.NoticeMissionEnded.Where(l => l.MissionID == MissionID && l.UserID == UserID).FirstOrDefault();
+                notice.Status = 1;
+                db.SaveChanges();
             }
 
-            return Json(new { message = $"Missione non accettata per qualche problema", flag = false });
+            return RedirectToAction("ManagerProfile", notice.ManagerID);
         }
+
 
 
         //UserImage
