@@ -569,6 +569,8 @@
     <Content Include="Views\Manager\ManagerTaskandReward.cshtml" />
     <Content Include="Views\Amministrator\AddTask.cshtml" />
     <Content Include="Views\Manager\Details.cshtml" />
+    <Content Include="Views\Manager\RefuseNote.cshtml" />
+    <Content Include="Views\Manager\RefuseRewards.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
