@@ -242,7 +242,7 @@ namespace RewardsForYou.Controllers
                 }
                 else
                 {
-                    return Json(new { messaggio = $"Richiesta gia inviata!", flag = true });
+                    return Json(new { messaggio = $"Richiesta gia inviata!", flag = false });
 
                 }
             }
