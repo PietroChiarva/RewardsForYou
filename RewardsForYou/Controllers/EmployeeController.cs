@@ -235,9 +235,14 @@ namespace RewardsForYou.Controllers
                     notice.UserID = UserID;
                     notice.Date = DateTime.Now;
                     notice.Status = 2;
-                    notice.ManagerID = notice.ManagerID;
+                    notice.ManagerID = managerEmail.UserID;
                     db.NoticeMissionEnded.Add(notice);
                     db.SaveChanges();
+
+                }
+                else
+                {
+                    return Json(new { messaggio = $"Richiesta gia inviata!", flag = true });
 
                 }
             }
