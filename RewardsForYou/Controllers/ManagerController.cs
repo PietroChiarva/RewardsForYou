@@ -67,10 +67,13 @@ namespace RewardsForYou.Controllers
                 //t = db.Missions.Include(m => m.Tasks).Where(l => l.UserID == UserID).ToList();
 
                 t = db.Missions.Include(m => m.Tasks).Where(l => l.UserID == UserID).ToList();
-
+                
                 foreach (Missions m in t)
                 {
-                    task.Add(m.Tasks);
+                    if (m.Status == 0)
+                    {
+                        task.Add(m.Tasks);
+                    }
                 }
 
                 return View(task);
