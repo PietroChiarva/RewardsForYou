@@ -179,6 +179,7 @@ namespace RewardsForYou.Controllers
             Users x = null;
 
             List<MissionExtended> mission = new List<MissionExtended>();
+            List<UsersRewardsExtended> userRewards = new List<UsersRewardsExtended>();
 
 
 
@@ -209,7 +210,7 @@ namespace RewardsForYou.Controllers
             {
 
 
-                // status 0 = accettato, 1= rifiutato, 2= in sospeso
+
                 mission = db.NoticeMissionEnded.Include(n => n.Missions)
                     .Include(n => n.Users).Where(l => l.ManagerID == UserID && l.Status == 2)
                     .Select(l => new MissionExtended()
@@ -230,8 +231,30 @@ namespace RewardsForYou.Controllers
 
 
             }
+            
+            using (RewardsForYouEntities db = new RewardsForYouEntities())
+            {
+
+                userRewards = db.NoticeRewardsTakes.Include(n => n.UsersRewards)
+                   .Include(n => n.Users).Where(l => l.ManagerID == UserID && l.Status == 2)
+                   .Select(l => new UsersRewardsExtended()
+                   {
+                       RewardsID = l.UsersRewards.Rewards.RewardsID,
+                       Type = l.UsersRewards.Rewards.Type,
+                       Description = l.UsersRewards.Rewards.Description,
+                       Points= l.UsersRewards.Rewards.Points,
+                       Availability = l.UsersRewards.Rewards.Availability,
+                       UserName = l.Users.Name + " " + l.Users.Surname,
+                       UserID = l.Users.UserID
+                       
+                   })
+                   .ToList();
+
+            }
+
             viewModel.User = x;
             viewModel.Mission = mission;
+            viewModel.Rewardsed = userRewards;
 
             return View(viewModel);
         }
@@ -325,7 +348,6 @@ namespace RewardsForYou.Controllers
             return View(viewModel);
         }
 
-        // status 0 = accettato, 1= rifiutato, 2= in sospeso
         public ActionResult AcceptMission(int TaskID, int UserID)
         {
             Missions mission = null;
@@ -363,7 +385,7 @@ namespace RewardsForYou.Controllers
                 mission = db.Missions.Where(l => l.TaskID == TaskID && l.UserID == UserID).FirstOrDefault();
                 notice = db.NoticeMissionEnded.Where(l => l.UserID == UserID && l.MissionID == mission.MissionID).FirstOrDefault();
             }
-                return PartialView(notice);
+            return PartialView(notice);
         }
 
         public ActionResult DoRefuse(int MissionID, int UserID)
@@ -378,7 +400,6 @@ namespace RewardsForYou.Controllers
 
             return RedirectToAction("ManagerProfile", notice.ManagerID);
         }
-
 
 
 
