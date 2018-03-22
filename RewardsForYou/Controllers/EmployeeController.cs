@@ -66,7 +66,7 @@ namespace RewardsForYou.Controllers
             using (RewardsForYouEntities db = new RewardsForYouEntities())
             {
                 //get tasks of the user
-                task = db.Missions.Include(m => m.Tasks).Where(l => l.UserID == UserID).Select(l => new MissionExtended()
+                task = db.Missions.Include(m => m.Tasks).Where(l => l.UserID == UserID && l.Status == 0).Select(l => new MissionExtended()
                 {
                     TaskID = l.TaskID,
                     Type = l.Tasks.Type,
@@ -242,7 +242,7 @@ namespace RewardsForYou.Controllers
                 }
                 else
                 {
-                    return Json(new { messaggio = $"Richiesta gia inviata!", flag = true });
+                    return Json(new { messaggio = $"Richiesta gia inviata!", flag = false });
 
                 }
             }
