@@ -24,6 +24,7 @@
         <EntityTypeShape EntityType="RewardsForYouModel.NoticeRewardsTakes" Width="1.5" PointX="10.5" PointY="5.125" />
         <AssociationConnector Association="RewardsForYouModel.FK_NoticeRewardsTakes_Users" />
         <AssociationConnector Association="RewardsForYouModel.FK_NoticeRewardsTakes_UsersRewards" />
+        <AssociationConnector Association="RewardsForYouModel.FK_NoticeRewardsTakes_Users1" />
         </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

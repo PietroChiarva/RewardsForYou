@@ -165,7 +165,7 @@ namespace RewardsForYou.Controllers
                     noticeRewards.UserID = UserID;
                     noticeRewards.UsersRewardsID = userReward.UserRewardsID;
                     noticeRewards.Date = DateTime.Now;
-                    noticeRewards.Status = 1;
+                    noticeRewards.Status = 2;
                     db.NoticeRewardsTakes.Add(noticeRewards);
                     db.SaveChanges();
 

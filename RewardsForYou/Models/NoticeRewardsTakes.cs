@@ -19,8 +19,10 @@ namespace RewardsForYou.Models
         public int UsersRewardsID { get; set; }
         public System.DateTime Date { get; set; }
         public int Status { get; set; }
+        public int ManagerID { get; set; }
     
         public virtual Users Users { get; set; }
         public virtual UsersRewards UsersRewards { get; set; }
+        public virtual Users Users1 { get; set; }
     }
 }

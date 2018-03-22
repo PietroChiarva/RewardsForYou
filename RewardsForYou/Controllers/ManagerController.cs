@@ -179,6 +179,7 @@ namespace RewardsForYou.Controllers
             Users x = null;
 
             List<MissionExtended> mission = new List<MissionExtended>();
+            List<UsersRewardsExtended> userRewards = new List<UsersRewardsExtended>();
 
 
 
@@ -230,8 +231,30 @@ namespace RewardsForYou.Controllers
 
 
             }
+            
+            using (RewardsForYouEntities db = new RewardsForYouEntities())
+            {
+
+                userRewards = db.NoticeRewardsTakes.Include(n => n.UsersRewards)
+                   .Include(n => n.Users).Where(l => l.ManagerID == UserID && l.Status == 2)
+                   .Select(l => new UsersRewardsExtended()
+                   {
+                       RewardsID = l.UsersRewards.Rewards.RewardsID,
+                       Type = l.UsersRewards.Rewards.Type,
+                       Description = l.UsersRewards.Rewards.Description,
+                       Points= l.UsersRewards.Rewards.Points,
+                       Availability = l.UsersRewards.Rewards.Availability,
+                       UserName = l.Users.Name + " " + l.Users.Surname,
+                       UserID = l.Users.UserID
+                       
+                   })
+                   .ToList();
+
+            }
+
             viewModel.User = x;
             viewModel.Mission = mission;
+            viewModel.Rewardsed = userRewards;
 
             return View(viewModel);
         }
@@ -352,7 +375,32 @@ namespace RewardsForYou.Controllers
             return Json(new { message = $"Missione non accettata per qualche problema", flag = false });
         }
 
+        public ActionResult AcceptRewards(int RewardsID, int UserID)
+        {
+            UsersRewards usersReward = null;
+            NoticeRewardsTakes noticeRewards = null;
+            Users user = null;
+            Rewards rewards = null;
 
+            using (RewardsForYouEntities db = new RewardsForYouEntities())
+            {
+                usersReward = db.UsersRewards.Where(l => l.RewardsID == RewardsID && l.UserID == UserID).FirstOrDefault();
+                noticeRewards = db.NoticeRewardsTakes.Where(l =>l.UsersRewardsID == usersReward.UserRewardsID && l.UserID == UserID).FirstOrDefault();
+                rewards = db.Rewards.Where(l => l.RewardsID == RewardsID).FirstOrDefault();
+                user = db.Users.Where(l => l.UserID == UserID).FirstOrDefault();
+                if (usersReward != null && noticeRewards != null)
+                {
+                    user.UserPoints = user.UserPoints + rewards.Points;
+                    db.UsersRewards.Remove(usersReward);
+                    db.NoticeRewardsTakes.Remove(noticeRewards);
+                    db.SaveChanges();
+                    return Json(new { message = $"Missione accettata con successo", flag = true });
+
+                }
+            }
+
+            return Json(new { message = $"Missione non accettata per qualche problema", flag = false });
+        }
 
 
         //UserImage
