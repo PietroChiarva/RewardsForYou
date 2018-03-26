@@ -7,97 +7,61 @@
     <link rel="stylesheet" href="/lib/bootstrap.min.css">
     <script src="/lib/jquery-1.12.2.min.js"></script>
     <script src="/lib/bootstrap.min.js"></script>
+
+    <style>
+        body {
+            font-family: Arial, Helvetica, sans-serif;
+            font-size: 20px;
+        }
+
+        #myBtn {
+            display: none;
+            position: fixed;
+            bottom: 15px;
+            right: 30px;
+            z-index: 99;
+            font-size: 18px;
+            border: none;
+            outline: none;
+            background-color: red;
+            color: white;
+            cursor: pointer;
+            padding: 15px;
+            border-radius: 4px;
+        }
+
+            #myBtn:hover {
+                background-color: #0000ff;
+            }
+    </style>
+
+
 </head>
 
 
+<body>
 
+    <h2>Manager page</h2>
 
-<h2>Manager page</h2>
-
-<!--User details-->
-<div class="container">
-    <div class="panel-group">
-        <div class="panel panel-default">
-            <div class="panel-heading">
-                <h4 class="panel-title">
-                    <a data-toggle="collapse" href="#collapse1" class="list-group-item active" align="center"><h4>List's Tasks</h4></a>
-                </h4>
-            </div>
-            <div id="collapse1" class="panel-collapse collapse">
-                <div class="panel-body">
-                    <table class="table">
-
-
-                        @foreach (var item in Model.Task)
-
-                    {
-                        if (Model.Task.IndexOf(item) == 0 || Model.Task.Count == 0)
-                        {
-                            <tr>
-                                <th>
-                                    @Html.DisplayNameFor(model => item.Type)
-                                </th>
-                                <th>
-                                    @Html.DisplayNameFor(model => item.Description)
-                                </th>
-                                <th>
-                                    @Html.DisplayNameFor(model => item.ExpiryDate)
-                                </th>
-                                <th>
-                                    @Html.DisplayNameFor(model => item.Points)
-                                </th>
-                                <th>
-                                    @Html.DisplayNameFor(model => item.Finished)
-                                </th>
-                               
-                            </tr>
-                    }
-                    <tr>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.Type)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.Description)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.ExpiryDate)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.Points)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.Finished)
-                        </td>
-
-                    </tr>
-            }
-
-                    </table>
+    <!--User details-->
+    <div class="container">
+        <div class="panel-group">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h4 class="panel-title">
+                        <a data-toggle="collapse" href="#collapse1" class="list-group-item active" align="center"><h4>List's Tasks</h4></a>
+                    </h4>
                 </div>
-            </div>
-        </div>
+                <div id="collapse1" class="panel-collapse collapse">
+                    <div class="panel-body">
+                        <table class="table">
 
 
-        <div class="panel panel-default">
-            <div class="panel-heading">
-                <h4 class="panel-title">
-                    <a data-toggle="collapse" href="#collapse2" class="list-group-item active" align="center"><h4>List's Rewards</h4></a>
-                </h4>
-            </div>
-            <div id="collapse2" class="panel-collapse collapse">
-                <div class="panel-body">
+                            @foreach (var item in Model.Task)
 
-                    <h4>Employee Rewards</h4>
-                    <div class="container-fluid">
-                        <div class="container-fluid" id="ListRewards" style="margin-top:5px;overflow-x:auto;width:100%;">
-                            <table class="table">
-
-
-                                @foreach (var item in Model.Reward)
-                                 {
-
-                                    if (Model.Reward.Count == 0 || Model.Reward.IndexOf(item) == 0)
-                                    {
+                            {
+                                if (Model.Task.IndexOf(item) == 0 || Model.Task.Count == 0)
+                                {
                                     <tr>
                                         <th>
                                             @Html.DisplayNameFor(model => item.Type)
@@ -106,35 +70,100 @@
                                             @Html.DisplayNameFor(model => item.Description)
                                         </th>
                                         <th>
+                                            @Html.DisplayNameFor(model => item.ExpiryDate)
+                                        </th>
+                                        <th>
                                             @Html.DisplayNameFor(model => item.Points)
                                         </th>
                                         <th>
-                                            @Html.DisplayNameFor(model => item.Availability)
+                                            @Html.DisplayNameFor(model => item.Finished)
                                         </th>
-                                        <th></th>
+
                                     </tr>
-                                     }
+                                }
+                                <tr>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.Type)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.Description)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.ExpiryDate)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.Points)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.Finished)
+                                    </td>
 
-                            <tr>
-                                <td>
-                                    @Html.DisplayFor(modelItem => item.Type)
-                                </td>
-                                <td>
-                                    @Html.DisplayFor(modelItem => item.Description)
-                                </td>
-                                <td>
-                                    @Html.DisplayFor(modelItem => item.Points)
-                                </td>
-                                <td>
-                                    @Html.DisplayFor(modelItem => item.Availability)
-                                </td>
+                                </tr>
+                            }
 
-                            </tr>
-                                 }
-
-                            </table>
-                        </div>
+                        </table>
                     </div>
+                </div>
+            </div>
+
+
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h4 class="panel-title">
+                        <a data-toggle="collapse" href="#collapse2" class="list-group-item active" align="center"><h4>List's Rewards</h4></a>
+                    </h4>
+                </div>
+                <div id="collapse2" class="panel-collapse collapse">
+                    <div class="panel-body">
+
+                        <h4>Employee Rewards</h4>
+                        <div class="container-fluid">
+                            <div class="container-fluid" id="ListRewards" style="margin-top:5px;overflow-x:auto;width:100%;">
+                                <table class="table">
+
+
+                                    @foreach (var item in Model.Reward)
+                                    {
+
+                                        if (Model.Reward.Count == 0 || Model.Reward.IndexOf(item) == 0)
+                                        {
+                                            <tr>
+                                                <th>
+                                                    @Html.DisplayNameFor(model => item.Type)
+                                                </th>
+                                                <th>
+                                                    @Html.DisplayNameFor(model => item.Description)
+                                                </th>
+                                                <th>
+                                                    @Html.DisplayNameFor(model => item.Points)
+                                                </th>
+                                                <th>
+                                                    @Html.DisplayNameFor(model => item.Availability)
+                                                </th>
+                                                <th></th>
+                                            </tr>
+                                        }
+
+                                        <tr>
+                                            <td>
+                                                @Html.DisplayFor(modelItem => item.Type)
+                                            </td>
+                                            <td>
+                                                @Html.DisplayFor(modelItem => item.Description)
+                                            </td>
+                                            <td>
+                                                @Html.DisplayFor(modelItem => item.Points)
+                                            </td>
+                                            <td>
+                                                @Html.DisplayFor(modelItem => item.Availability)
+                                            </td>
+
+                                        </tr>
+                                    }
+
+                                </table>
+                            </div>
+                        </div>
                     </div>
 
                 </div>
@@ -143,6 +172,30 @@
     </div>
 
 
-<div>
-    @Html.ActionLink("Back to List", "Index")
-</div>
+    <div>
+        @Html.ActionLink("Back to List", "Index")
+
+        <button align="rigth" onclick="topFunction()" id="myBtn" title="Go to top">Su</button>
+    </div>
+</body>
+
+
+
+<script>
+    // When the user scrolls down 20px from the top of the document, show the button
+    window.onscroll = function () { scrollFunction() };
+
+    function scrollFunction() {
+        if (document.body.scrollTop > 20 || document.documentElement.scrollTop > 20) {
+            document.getElementById("myBtn").style.display = "block";
+        } else {
+            document.getElementById("myBtn").style.display = "none";
+        }
+    }
+
+    // When the user clicks on the button, scroll to the top of the document
+    function topFunction() {
+        document.body.scrollTop = 0;
+        document.documentElement.scrollTop = 0;
+    }
+</script>

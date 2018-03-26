@@ -1,82 +1,88 @@
 ﻿@model IEnumerable<RewardsForYou.Models.Users>
 
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- Add icon library -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+</head>
 
-<table class="table">
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.Serial)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Name)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Surname)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.EMail)
-        </th>
-        @*<th>
-            @Html.DisplayNameFor(model => model.Manager)
-        </th>*@
-        <th>
-            @Html.DisplayNameFor(model => model.UserPoints)
-        </th>
-        @*<th>
-            @Html.DisplayNameFor(model => model.Roles.Role)
-        </th>*@
-        @*<th>
-            @Html.DisplayNameFor(model => model.Users1.Serial)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Users2.Serial)
-        </th>
-        <th></th>*@
-    </tr>
+    <table class="table">
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Serial)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Name)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Surname)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.EMail)
+            </th>
+            @*<th>
+                    @Html.DisplayNameFor(model => model.Manager)
+                </th>*@
+            <th>
+                @Html.DisplayNameFor(model => model.UserPoints)
+            </th>
+            @*<th>
+                    @Html.DisplayNameFor(model => model.Roles.Role)
+                </th>*@
+            @*<th>
+                    @Html.DisplayNameFor(model => model.Users1.Serial)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Users2.Serial)
+                </th>
+                <th></th>*@
+        </tr>
 
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.Serial)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Name)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Surname)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.EMail)
-        </td>
-        @*<td>
-            @Html.DisplayFor(modelItem => item.Manager)
-        </td>*@
-        <td>
-            @Html.DisplayFor(modelItem => item.UserPoints)
-        </td>
-        @*<td>
-            @Html.DisplayFor(modelItem => item.Roles.Role)
-        </td>*@
-        @*<td>
-            @Html.DisplayFor(modelItem => item.Users1.Serial)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Users2.Serial)
-        </td>*@
-        <td>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Serial)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Name)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Surname)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.EMail)
+                </td>
+                @*<td>
+                        @Html.DisplayFor(modelItem => item.Manager)
+                    </td>*@
+                <td>
+                    @Html.DisplayFor(modelItem => item.UserPoints)
+                </td>
+                @*<td>
+                        @Html.DisplayFor(modelItem => item.Roles.Role)
+                    </td>*@
+                @*<td>
+                        @Html.DisplayFor(modelItem => item.Users1.Serial)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Users2.Serial)
+                    </td>*@
+                <td>
 
-            @*@Html.ActionLink("Delete", "Delete", new { id = item.UserID })*@
-            <a onclick="ShowDeleteModal( '@item.Serial', '@item.EMail')"
-               class="btn btn-primary">Delete</a>
+                    @*@Html.ActionLink("Delete", "Delete", new { id = item.UserID })*@
+                    <a onclick="ShowDeleteModal( '@item.Serial', '@item.EMail')"
+                       class="btn btn-primary"><i class="fa fa-trash"></i> Delete</a>
 
-        </td>
-    </tr>
-}
+                </td>
+            </tr>
+        }
 
-</table>
+    </table>
 
-<script>
-    function ShowDeleteModal(Serial, EMail) {
-        $('#showModal .modal-body').load(Router.action('Amministrator', '_PartialDelete', { Serial: Serial, EMail: EMail }));
-        $('#showModal').modal("show");
-    }
-</script>
+    <script>
+        function ShowDeleteModal(Serial, EMail) {
+            $('#showModal .modal-body').load(Router.action('Amministrator', '_PartialDelete', { Serial: Serial, EMail: EMail }));
+            $('#showModal').modal("show");
+        }
+    </script>

@@ -2,114 +2,166 @@
 
 
 
-@*<head>
+
+<head>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="/lib/bootstrap.min.css">
     <script src="/lib/jquery-1.12.2.min.js"></script>
     <script src="/lib/bootstrap.min.js"></script>
-</head>*@
 
-<h2>List of Employee</h2>
+    <style>
+        body {
+            font-family: Arial, Helvetica, sans-serif;
+            font-size: 20px;
+        }
 
-<div class="container">
-    <div class="panel-group">
-        <div class="panel panel-default">
-            <div class="panel-heading">
-                <h4 class="panel-title">
-                    <a data-toggle="collapse" href="#collapse1" class="list-group-item active" align="center"><h4>List's Employee</h4></a>
-                </h4>
-            </div>
-            <div id="collapse1" class="panel-collapse collapse">
-                <div class="panel-body">
-                    <table class="table">
-                        <tr>
-                            <th>
-                                @Html.DisplayNameFor(model => model.Serial)
-                            </th>
-                            <th>
-                                @Html.DisplayNameFor(model => model.Name)
-                            </th>
-                            <th>
-                                @Html.DisplayNameFor(model => model.Surname)
-                            </th>
-                            <th>
-                                @Html.DisplayNameFor(model => model.EMail)
-                            </th>
-                        </tr>
+        #myBtn {
+            display: none;
+            position: fixed;
+            bottom: 15px;
+            right: 30px;
+            z-index: 99;
+            font-size: 18px;
+            border: none;
+            outline: none;
+            background-color: red;
+            color: white;
+            cursor: pointer;
+            padding: 15px;
+            border-radius: 4px;
+        }
 
-                        @foreach (var item in Model)
-                        {
+            #myBtn:hover {
+                background-color: #0000ff;
+            }
+    </style>
 
+
+</head>
+
+<body>
+    <h2>List of Employee</h2>
+
+    <div class="container">
+        <div class="panel-group">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h4 class="panel-title">
+                        <a data-toggle="collapse" href="#collapse1" class="list-group-item active" align="center"><h4>List's Employee</h4></a>
+                    </h4>
+                </div>
+                <div id="collapse1" class="panel-collapse collapse">
+                    <div class="panel-body">
+                        <table class="table">
                             <tr>
-                                <td>
-                                    @Html.DisplayFor(modelItem => item.Serial)
-                                </td>
-                                <td>
-                                    @Html.DisplayFor(modelItem => item.Name)
-                                </td>
-                                <td>
-                                    @Html.DisplayFor(modelItem => item.Surname)
-                                </td>
-                                <td>
-                                    @Html.DisplayFor(modelItem => item.EMail)
-                                </td>
-                               
-                                <td>
-                                    <a class="btn btn-primary" onclick="ShowMissionModal ('@item.UserID')">Details Employee</a>    
-                                    <a class="btn btn-primary" onclick="ShowViewModal ('@item.UserID')">View Task</a>
-                                    <a class="btn btn-primary" onclick="ShowAssegnaModal ('@item.UserID')">+</a>
-                                </td>
+                                <th>
+                                    @Html.DisplayNameFor(model => model.Serial)
+                                </th>
+                                <th>
+                                    @Html.DisplayNameFor(model => model.Name)
+                                </th>
+                                <th>
+                                    @Html.DisplayNameFor(model => model.Surname)
+                                </th>
+                                <th>
+                                    @Html.DisplayNameFor(model => model.EMail)
+                                </th>
                             </tr>
-                        }
 
-                    </table>
+                            @foreach (var item in Model)
+                            {
+
+                                <tr>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.Serial)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.Name)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.Surname)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.EMail)
+                                    </td>
+
+                                    <td>
+                                        <a class="btn btn-primary" onclick="ShowMissionModal ('@item.UserID')">Details Employee</a>
+                                        <a class="btn btn-primary" onclick="ShowViewModal ('@item.UserID')">View Task</a>
+                                        <a class="btn btn-primary" onclick="ShowAssegnaModal ('@item.UserID')">+</a>
+                                    </td>
+                                </tr>
+                            }
+
+                        </table>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
-</div>
 
-                    </br>
-                    </br>
+    </br>
+    </br>
 
-                    <div>
-                        @Html.ActionLink("Back to List", "Index")
-                    </div>
+    <div>
+        @Html.ActionLink("Back to List", "Index")
 
-                    <script type="text/javascript">
-                        function ShowMissionModal(UserID) {
+        <button align="rigth" onclick="topFunction()" id="myBtn" title="Go to top">Su</button>
+    </div>
+</body>
+<script type="text/javascript">
+    function ShowMissionModal(UserID) {
 
-                            window.open(Router.action('Manager', 'Details', { UserID: UserID }));
-                            //$('#showModal .modal-body').load(Router.action('Employee', 'Index', { UserID: UserID }));
-                            //$('#showModal').modal("show");
-
-
-                        }
-
-                        //function ShowAddModal(UserID) {
-
-                        //    $('#showModal .modal-body').load(Router.action('Manager', 'AddTask', { UserID: UserID}));
-                        //    $('#showModal').modal("show");
+        window.open(Router.action('Manager', 'Details', { UserID: UserID }));
+        //$('#showModal .modal-body').load(Router.action('Employee', 'Index', { UserID: UserID }));
+        //$('#showModal').modal("show");
 
 
-                        //}
+    }
 
-                        function ShowViewModal(UserID) {
+    //function ShowAddModal(UserID) {
 
-                            $('#showModal .modal-body').load(Router.action('Manager', 'ViewTask', { UserID: UserID }));
-                            $('#showModal').modal("show");
-
-                        }
-
-                        function ShowAssegnaModal(UserID) {
-
-                            $('#showModal .modal-body').load(Router.action('Manager', 'AssegnaTask', { UserID: UserID }));
-                            $('#showModal').modal("show");
-
-                        }
+    //    $('#showModal .modal-body').load(Router.action('Manager', 'AddTask', { UserID: UserID}));
+    //    $('#showModal').modal("show");
 
 
+    //}
 
-                    </script>
+    function ShowViewModal(UserID) {
 
-                    @*TaskID: TaskID, Type: Type, Description: Description, ExpiryDate: ExpiryDate, Points: Points, Finished: Finished*@
+        $('#showModal .modal-body').load(Router.action('Manager', 'ViewTask', { UserID: UserID }));
+        $('#showModal').modal("show");
+
+    }
+
+    function ShowAssegnaModal(UserID) {
+
+        $('#showModal .modal-body').load(Router.action('Manager', 'AssegnaTask', { UserID: UserID }));
+        $('#showModal').modal("show");
+
+    }
+
+
+
+    // When the user scrolls down 20px from the top of the document, show the button
+    window.onscroll = function () { scrollFunction() };
+
+    function scrollFunction() {
+        if (document.body.scrollTop > 20 || document.documentElement.scrollTop > 20) {
+            document.getElementById("myBtn").style.display = "block";
+        } else {
+            document.getElementById("myBtn").style.display = "none";
+        }
+    }
+
+    // When the user clicks on the button, scroll to the top of the document
+    function topFunction() {
+        document.body.scrollTop = 0;
+        document.documentElement.scrollTop = 0;
+    }
+
+
+
+</script>
+
+@*TaskID: TaskID, Type: Type, Description: Description, ExpiryDate: ExpiryDate, Points: Points, Finished: Finished*@
