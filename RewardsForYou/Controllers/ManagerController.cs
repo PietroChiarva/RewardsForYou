@@ -76,7 +76,7 @@ namespace RewardsForYou.Controllers
                     }
                 }
 
-                return View(task);
+                return PartialView(task);
             }
 
         }
@@ -96,7 +96,7 @@ namespace RewardsForYou.Controllers
             }
             tasksUsers.UsersID = UserID;
 
-            return View(tasksUsers);
+            return PartialView(tasksUsers);
 
         }
 

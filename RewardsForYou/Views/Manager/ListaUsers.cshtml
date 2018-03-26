@@ -55,11 +55,7 @@
                                 </td>
                                
                                 <td>
-                                    @*<a href="@Url.Action("ListaUsers","Manager")" new { id=item.UserID }) class="btn btn-primary">+</a>
-                                        <a href="@Url.Action("ListaUsers","Manager")" new { id=item.UserID }) class="btn btn-primary">Details Employee</a>*@
-
-                                    <a class="btn btn-primary" onclick="ShowMissionModal ('@item.UserID')">Details Employee</a>
-                                    @*<a class="btn btn-primary" onclick="ShowAddModal ('@item.UserID')">Add Task</a>*@
+                                    <a class="btn btn-primary" onclick="ShowMissionModal ('@item.UserID')">Details Employee</a>    
                                     <a class="btn btn-primary" onclick="ShowViewModal ('@item.UserID')">View Task</a>
                                     <a class="btn btn-primary" onclick="ShowAssegnaModal ('@item.UserID')">+</a>
                                 </td>

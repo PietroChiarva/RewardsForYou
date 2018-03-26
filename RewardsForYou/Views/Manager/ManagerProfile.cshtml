@@ -127,7 +127,7 @@
 
                                                 </td>
                                                 <td>
-                                                    <a class="btn btn-primary" id="RefuseButton" onclick="RefuseMission ('@item.TaskID', '@item.UserID')">Refuse</a>
+                                                    <a class="btn btn-primary" id="RefuseButton" onclick="RefuseNote ('@item.TaskID', '@item.UserID')">Refuse</a>
                                                 </td>
                                             </tr>
                                         }
@@ -200,10 +200,10 @@
                                                 @Html.DisplayFor(modelItem => item.UserName)
                                             </td>
                                             <td>
-                                                <a class="btn btn-primary" id="AcceptButton" onclick="AcceptRewards ('@item.RewardsID', '@item.UserID')">Accept</a>
+                                                <a class="btn btn-primary" id="AcceptButtonRewards" onclick="AcceptRewards ('@item.RewardsID', '@item.UserID')">Accept</a>
                                             </td>
                                             <td>
-                                                <a class="btn btn-primary" id="RefuseButton" onclick="RefuseRewards ('@item.RewardsID', '@item.UserID')">Refuse</a>
+                                                <a class="btn btn-primary" id="RefuseButtonRewards" onclick="RefuseRewards ('@item.RewardsID', '@item.UserID')">Refuse</a>
                                             </td>
                                         </tr>
                                     }
@@ -216,6 +216,13 @@
         </div>
     </div>
 </div>
+
+
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>
+
+
 <script type="text/javascript">
     $(document).ready(function () {
       
@@ -248,7 +255,7 @@
                 //Quali dati devo inviare? e che tipo
                 data: Data,
                 success: function (data) {
-                    alert(data.messagge);
+                    alert(data.message);
                     if (data.flag == true) {
                         window.location.reload();
                     }
@@ -261,15 +268,15 @@
                 });
         }
 
-        function RefuseMission(TaskID, UserID) {
+        function RefuseNote(TaskID, UserID) {
             $('#showModal .modal-body').load(Router.action('Manager', 'RefuseNote', { TaskID: TaskID , UserID: UserID }));
             $('#showModal').modal("show");
         }
-
+    //Rewards
         function AcceptRewards(RewardsID, UserID) {
              var Data = {
                  RewardsID: RewardsID,
-                UserID: UserID
+                 UserID: UserID
              };
 
                 $.ajax({
