@@ -185,7 +185,7 @@ namespace RewardsForYou.Controllers
                 }
                 else
                 {
-                    return Json(new {  messaggio = $"Richiesta invalida,i tuoi punti non sono sufficienti", flag = true });
+                    return Json(new {  messaggio = $"Richiesta invalida,i tuoi punti non sono sufficienti", flag = false });
 
                     //sottrazione dei punti allo user
                     //userUpdated.UserPoints = user.UserPoints - reward.Points;
