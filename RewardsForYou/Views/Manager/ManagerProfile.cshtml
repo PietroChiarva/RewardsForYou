@@ -1,70 +1,202 @@
 ﻿@model RewardsForYou.Models.ViewModel
 
-<p>
-    <h4>Manager Profile</h4>
-</p>
+
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="/lib/bootstrap.min.css">
+    <script src="/lib/jquery-1.12.2.min.js"></script>
+    <script src="/lib/bootstrap.min.js"></script>
+
+    <style>
+        body {
+            font-family: Arial, Helvetica, sans-serif;
+            font-size: 20px;
+        }
+
+        #myBtn {
+            display: none;
+            position: fixed;
+            bottom: 15px;
+            right: 30px;
+            z-index: 99;
+            font-size: 18px;
+            border: none;
+            outline: none;
+            background-color: red;
+            color: white;
+            cursor: pointer;
+            padding: 15px;
+            border-radius: 4px;
+        }
+
+            #myBtn:hover {
+                background-color: #0000ff;
+            }
+
+  
+    </style>
+
+
+</head>
+
+
+<body>
+    <p>
+        <h4>Manager Profile</h4>
+    </p>
 
 
 
-<div class="container-fluid">
-    <span class="helper"><img id="userImage" src="~/Images/loading.gif" class="img" /></span>
+    <div class="container-fluid">
+        <span class="helper"><img id="userImage" src="~/Images/loading.gif" class="img" /></span>
 
-    <div class="container-fluid" id="DetailsUser" style="margin-top:5px;overflow-x:auto;width:100%;">
-        <table class="table">
-            <tr>
-                <th>
-                    @Html.DisplayNameFor(model => model.User.Serial)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.User.Name)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.User.Surname)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.User.EMail)
-                </th>
-
-
-            </tr>
-
-            <tr>
-                <td>
-                    @Html.DisplayFor(modelItem => Model.User.Serial)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => Model.User.Name)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => Model.User.Surname)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => Model.User.EMail)
-                </td>
+        <div class="container-fluid" id="DetailsUser" style="margin-top:5px;overflow-x:auto;width:100%;">
+            <table class="table">
+                <tr>
+                    <th>
+                        @Html.DisplayNameFor(model => model.User.Serial)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.User.Name)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.User.Surname)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.User.EMail)
+                    </th>
 
 
-            </tr>
+                </tr>
 
-        </table>
-    </div>
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => Model.User.Serial)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => Model.User.Name)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => Model.User.Surname)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => Model.User.EMail)
+                    </td>
 
-    <div class="container">
-        <div class="panel-group">
-            <div class="panel panel-default">
-                <div class="panel-heading">
-                    <h4 class="panel-title">
-                        <a data-toggle="collapse" href="#collapse1" class="list-group-item active" align="center"> <h4>Mission Notify</h4></a>
-                    </h4>
-                </div>
-                <div id="collapse1" class="panel-collapse collapse">
-                    <div class="panel-body">
+
+                </tr>
+
+            </table>
+        </div>
+
+        <div class="container">
+            <div class="panel-group">
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <h4 class="panel-title">
+                            <a data-toggle="collapse" href="#collapse1" class="list-group-item active" align="center"> <h4>Mission Notify</h4></a>
+                        </h4>
+                    </div>
+                    <div id="collapse1" class="panel-collapse collapse">
                         <div class="panel-body">
+                            <div class="panel-body">
+                                <div class="container-fluid">
+                                    <div class="container-fluid" id="RewardsNotice" style="margin-top:5px;overflow-x:auto;width:100%;">
+                                        <table class="table">
+                                            @foreach (var item in Model.Mission)
+                                            {
+                                                if (Model.Mission.IndexOf(item) == 0 || Model.Mission.Count == 0)
+                                                {
+                                                    <tr>
+                                                        <th>
+                                                            @Html.DisplayNameFor(model => item.Type)
+                                                        </th>
+                                                        <th>
+                                                            @Html.DisplayNameFor(model => item.Description)
+                                                        </th>
+                                                        <th>
+                                                            @Html.DisplayNameFor(model => item.StartDate)
+                                                        </th>
+                                                        <th>
+                                                            @Html.DisplayNameFor(model => item.EndDate)
+                                                        </th>
+                                                        <th>
+                                                            @Html.DisplayNameFor(model => item.DesiredEndDate)
+                                                        </th>
+                                                        <th>
+                                                            @Html.DisplayNameFor(model => item.Points)
+                                                        </th>
+                                                        <th>
+                                                            @Html.DisplayNameFor(model => item.IsFinished)
+                                                        </th>
+                                                        <th>
+                                                            @Html.DisplayNameFor(model => item.UserName)
+                                                        </th>
+                                                        <th></th>
+                                                        <th></th>
+
+                                                    </tr>
+                                                }
+                                                <tr>
+                                                    <td>
+                                                        @Html.DisplayFor(modelItem => item.Type)
+                                                    </td>
+                                                    <td>
+                                                        @Html.DisplayFor(modelItem => item.Description)
+                                                    </td>
+                                                    <td>
+                                                        @Html.DisplayFor(modelItem => item.StartDate)
+                                                    </td>
+                                                    <td>
+                                                        @Html.DisplayFor(modelItem => item.EndDate)
+                                                    </td>
+                                                    <td>
+                                                        @Html.DisplayFor(modelItem => item.DesiredEndDate)
+                                                    </td>
+
+                                                    <td>
+                                                        @Html.DisplayFor(modelItem => item.Points)
+                                                    </td>
+                                                    <td>
+                                                        @Html.DisplayFor(modelItem => item.IsFinished)
+                                                    </td>
+                                                    <td>
+                                                        @Html.DisplayFor(modelItem => item.UserName)
+                                                    </td>
+                                                    <td>
+                                                        <a class="btn btn-primary" id="AcceptButton" onclick="AcceptMission ('@item.TaskID', '@item.UserID')">Accept</a>
+
+                                                    </td>
+                                                    <td>
+                                                        <a class="btn btn-primary" id="RefuseButton" onclick="RefuseNote ('@item.TaskID', '@item.UserID')">Refuse</a>
+                                                    </td>
+                                                </tr>
+                                            }
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <h4 class="panel-title">
+                            <a data-toggle="collapse" href="#collapse2" class="list-group-item active" align="center"> <h4>Rewards Notify</h4></a>
+                        </h4>
+                    </div>
+                    <div id="collapse2" class="panel-collapse collapse">
+                        <div class="panel-body">
+
                             <div class="container-fluid">
                                 <div class="container-fluid" id="RewardsNotice" style="margin-top:5px;overflow-x:auto;width:100%;">
                                     <table class="table">
-                                        @foreach (var item in Model.Mission)
+
+                                        @foreach (var item in Model.Rewardsed)
                                         {
-                                            if (Model.Mission.IndexOf(item) == 0 || Model.Mission.Count == 0)
+                                            if (Model.Rewardsed.IndexOf(item) == 0 || Model.Rewardsed.Count == 0)
                                             {
                                                 <tr>
                                                     <th>
@@ -73,21 +205,14 @@
                                                     <th>
                                                         @Html.DisplayNameFor(model => item.Description)
                                                     </th>
-                                                    <th>
-                                                        @Html.DisplayNameFor(model => item.StartDate)
-                                                    </th>
-                                                    <th>
-                                                        @Html.DisplayNameFor(model => item.EndDate)
-                                                    </th>
-                                                    <th>
-                                                        @Html.DisplayNameFor(model => item.DesiredEndDate)
-                                                    </th>
+
                                                     <th>
                                                         @Html.DisplayNameFor(model => item.Points)
                                                     </th>
                                                     <th>
-                                                        @Html.DisplayNameFor(model => item.IsFinished)
+                                                        @Html.DisplayNameFor(model => item.Availability)
                                                     </th>
+
                                                     <th>
                                                         @Html.DisplayNameFor(model => item.UserName)
                                                     </th>
@@ -95,7 +220,9 @@
                                                     <th></th>
 
                                                 </tr>
+
                                             }
+
                                             <tr>
                                                 <td>
                                                     @Html.DisplayFor(modelItem => item.Type)
@@ -103,31 +230,21 @@
                                                 <td>
                                                     @Html.DisplayFor(modelItem => item.Description)
                                                 </td>
-                                                <td>
-                                                    @Html.DisplayFor(modelItem => item.StartDate)
-                                                </td>
-                                                <td>
-                                                    @Html.DisplayFor(modelItem => item.EndDate)
-                                                </td>
-                                                <td>
-                                                    @Html.DisplayFor(modelItem => item.DesiredEndDate)
-                                                </td>
 
                                                 <td>
                                                     @Html.DisplayFor(modelItem => item.Points)
                                                 </td>
                                                 <td>
-                                                    @Html.DisplayFor(modelItem => item.IsFinished)
+                                                    @Html.DisplayFor(modelItem => item.Availability)
                                                 </td>
                                                 <td>
                                                     @Html.DisplayFor(modelItem => item.UserName)
                                                 </td>
                                                 <td>
-                                                    <a class="btn btn-primary" id="AcceptButton" onclick="AcceptMission ('@item.TaskID', '@item.UserID')">Accept</a>
-
+                                                    <a class="btn btn-primary" id="AcceptButtonRewards" onclick="AcceptRewards ('@item.RewardsID', '@item.UserID')">Accept</a>
                                                 </td>
                                                 <td>
-                                                    <a class="btn btn-primary" id="RefuseButton" onclick="RefuseNote ('@item.TaskID', '@item.UserID')">Refuse</a>
+                                                    <a class="btn btn-primary" id="RefuseButtonRewards" onclick="RefuseRewards ('@item.RewardsID', '@item.UserID')">Refuse</a>
                                                 </td>
                                             </tr>
                                         }
@@ -137,93 +254,19 @@
                         </div>
                     </div>
                 </div>
-
-            </div>
-
-            <div class="panel panel-default">
-                <div class="panel-heading">
-                    <h4 class="panel-title">
-                        <a data-toggle="collapse" href="#collapse2" class="list-group-item active" align="center"> <h4>Rewards Notify</h4></a>
-                    </h4>
-                </div>
-                <div id="collapse2" class="panel-collapse collapse">
-                    <div class="panel-body">
-
-                        <div class="container-fluid">
-                            <div class="container-fluid" id="RewardsNotice" style="margin-top:5px;overflow-x:auto;width:100%;">
-                                <table class="table">
-
-                                    @foreach (var item in Model.Rewardsed)
-                                    {
-                                        if (Model.Rewardsed.IndexOf(item) == 0 || Model.Rewardsed.Count == 0)
-                                        {
-                                            <tr>
-                                                <th>
-                                                    @Html.DisplayNameFor(model => item.Type)
-                                                </th>
-                                                <th>
-                                                    @Html.DisplayNameFor(model => item.Description)
-                                                </th>
-
-                                                <th>
-                                                    @Html.DisplayNameFor(model => item.Points)
-                                                </th>
-                                                <th>
-                                                    @Html.DisplayNameFor(model => item.Availability)
-                                                </th>
-
-                                                <th>
-                                                    @Html.DisplayNameFor(model => item.UserName)
-                                                </th>
-                                                <th></th>
-                                                <th></th>
-
-                                            </tr>
-
-                                        }
-
-                                        <tr>
-                                            <td>
-                                                @Html.DisplayFor(modelItem => item.Type)
-                                            </td>
-                                            <td>
-                                                @Html.DisplayFor(modelItem => item.Description)
-                                            </td>
-
-                                            <td>
-                                                @Html.DisplayFor(modelItem => item.Points)
-                                            </td>
-                                            <td>
-                                                @Html.DisplayFor(modelItem => item.Availability)
-                                            </td>
-                                            <td>
-                                                @Html.DisplayFor(modelItem => item.UserName)
-                                            </td>
-                                            <td>
-                                                <a class="btn btn-primary" id="AcceptButtonRewards" onclick="AcceptRewards ('@item.RewardsID', '@item.UserID')">Accept</a>
-                                            </td>
-                                            <td>
-                                                <a class="btn btn-primary" id="RefuseButtonRewards" onclick="RefuseRewards ('@item.RewardsID', '@item.UserID')">Refuse</a>
-                                            </td>
-                                        </tr>
-                                    }
-                                </table>
-                            </div>
-                        </div>
-                    </div>
-                </div>
             </div>
         </div>
     </div>
-</div>
 
 
-<div>
-    @Html.ActionLink("Back to List", "Index")
-</div>
+    <div>
+        @Html.ActionLink("Back to List", "Index")
 
+        <button align="rigth" onclick="topFunction()" id="myBtn" title="Go to top">Su</button>
+    </div>
 
-<script type="text/javascript">
+    </body>
+        <script type="text/javascript">
         $(document).ready(function () {
             $data = {};
             $.ajax({
@@ -305,5 +348,24 @@
         }
 
 
+            // When the user scrolls down 20px from the top of the document, show the button
+            window.onscroll = function () { scrollFunction() };
 
-</script>
+            function scrollFunction() {
+                if (document.body.scrollTop > 20 || document.documentElement.scrollTop > 20) {
+                    document.getElementById("myBtn").style.display = "block";
+                } else {
+                    document.getElementById("myBtn").style.display = "none";
+                }
+            }
+
+            // When the user clicks on the button, scroll to the top of the document
+            function topFunction() {
+                document.body.scrollTop = 0;
+                document.documentElement.scrollTop = 0;
+            }
+
+
+        </script>
+
+       
