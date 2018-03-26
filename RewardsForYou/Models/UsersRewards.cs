@@ -14,12 +14,6 @@ namespace RewardsForYou.Models
     
     public partial class UsersRewards
     {
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public UsersRewards()
-        {
-            this.NoticeRewardsTakes = new HashSet<NoticeRewardsTakes>();
-        }
-    
         public int UserRewardsID { get; set; }
         public int UserID { get; set; }
         public int RewardsID { get; set; }
@@ -28,7 +22,5 @@ namespace RewardsForYou.Models
     
         public virtual Rewards Rewards { get; set; }
         public virtual Users Users { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<NoticeRewardsTakes> NoticeRewardsTakes { get; set; }
     }
 }

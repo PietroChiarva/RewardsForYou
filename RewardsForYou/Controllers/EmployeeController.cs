@@ -161,9 +161,10 @@ namespace RewardsForYou.Controllers
                     userEmail = db.Users.Where(l => l.UserID == UserID).FirstOrDefault();
                     managerEmail = db.Users.Where(l => l.UserID == userEmail.ManagerUserID).FirstOrDefault();
                     userRewards = db.Rewards.Where(l => l.RewardsID == RewardsID).FirstOrDefault();
-                    userReward = db.UsersRewards.Where(l => l.UserID == UserID && l.RewardsID == RewardsID).FirstOrDefault();
+                    //userReward = db.UsersRewards.Where(l => l.UserID == UserID && l.RewardsID == RewardsID).FirstOrDefault();
                     noticeRewards.UserID = UserID;
-                    noticeRewards.UsersRewardsID = userReward.UserRewardsID;
+                    noticeRewards.ManagerID = managerEmail.UserID;
+                    noticeRewards.RewardsID = reward.RewardsID;
                     noticeRewards.Date = DateTime.Now;
                     noticeRewards.Status = 2;
                     db.NoticeRewardsTakes.Add(noticeRewards);
@@ -184,7 +185,7 @@ namespace RewardsForYou.Controllers
                 }
                 else
                 {
-                    return Json(new {  messaggio = $"Richiest invalida,i tuoi punti non sono sufficienti", flag = true });
+                    return Json(new {  messaggio = $"Richiesta invalida,i tuoi punti non sono sufficienti", flag = true });
 
                     //sottrazione dei punti allo user
                     //userUpdated.UserPoints = user.UserPoints - reward.Points;
@@ -196,7 +197,7 @@ namespace RewardsForYou.Controllers
                     //userReward.UserID = user.UserID;
                     //userReward.RewardsID = reward.RewardsID;
                     //userReward.Note = "";
-                    //userReward.RewardsDate = DateTime.Now;
+                    //userReward.RewarrdsDate = DateTime.Now;
                     //db.UsersRewards.Add(userReward);
                     //db.SaveChanges();
                     //return Json(new { messaggio = $"{reward.Type} aggiunto/a con successo", flag = true });

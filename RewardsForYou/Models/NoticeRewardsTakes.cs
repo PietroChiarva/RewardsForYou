@@ -14,15 +14,15 @@ namespace RewardsForYou.Models
     
     public partial class NoticeRewardsTakes
     {
-        public int NoticeRewardsTakesID { get; set; }
         public int UserID { get; set; }
-        public int UsersRewardsID { get; set; }
+        public int RewardsID { get; set; }
         public System.DateTime Date { get; set; }
         public int Status { get; set; }
         public int ManagerID { get; set; }
+        public int RewardsTakeID { get; set; }
     
+        public virtual Rewards Rewards { get; set; }
         public virtual Users Users { get; set; }
-        public virtual UsersRewards UsersRewards { get; set; }
         public virtual Users Users1 { get; set; }
     }
 }

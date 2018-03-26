@@ -1,11 +1,11 @@
 ﻿@model RewardsForYou.Models.NoticeRewardsTakes
 
 
-<h3>Are you sure to refuse this Rewards?</h3>
+<h3>Are you sure to refuse the mission?</h3>
 @using (Html.BeginForm("DoRefuseRewards", "Manager", null, FormMethod.Post))
 {
 
-    @Html.HiddenFor(model => model.UsersRewardsID)
+    @Html.HiddenFor(model => model.RewardsID)
     @Html.HiddenFor(model => model.UserID)
 
 
