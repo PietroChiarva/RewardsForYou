@@ -8,10 +8,10 @@
     <script src="/lib/bootstrap.min.js"></script>
 
     <style>
-        body {
+        /*body {
             font-family: Arial, Helvetica, sans-serif;
             font-size: 20px;
-        }
+        }*/
 
         #myBtn {
             display: none;
@@ -102,22 +102,113 @@
 
     @*Manager notice MIssion and rewards*@
 
-
-    <div class="panel panel-default">
-        <div class="panel-heading">
-            <h4 class="panel-title">
-                <a data-toggle="collapse" href="#collapse1" class="list-group-item active" align="center"> <h4>Mission Notify</h4></a>
-            </h4>
-        </div>
-        <div id="collapse1" class="panel-collapse collapse">
-            <div class="panel-body">
+    <div class="panel-group">
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <h4 class="panel-title">
+                    <a data-toggle="collapse" href="#collapse1" class="list-group-item active" align="center"> Mission Notify</a>
+                </h4>
+            </div>
+            <div id="collapse1" class="panel-collapse collapse">
                 <div class="panel-body">
+                    <div class="panel-body">
+                        <div class="container-fluid">
+                            <div class="container-fluid" id="RewardsNotice" style="margin-top:5px;overflow-x:auto;width:100%;">
+                                <table class="table">
+                                    @foreach (var item in Model.Mission)
+                                    {
+                                        if (Model.Mission.IndexOf(item) == 0 || Model.Mission.Count == 0)
+                                        {
+                                            <tr>
+                                                <th>
+                                                    @Html.DisplayNameFor(model => item.Type)
+                                                </th>
+                                                <th>
+                                                    @Html.DisplayNameFor(model => item.Description)
+                                                </th>
+                                                <th>
+                                                    @Html.DisplayNameFor(model => item.StartDate)
+                                                </th>
+                                                <th>
+                                                    @Html.DisplayNameFor(model => item.EndDate)
+                                                </th>
+                                                <th>
+                                                    @Html.DisplayNameFor(model => item.DesiredEndDate)
+                                                </th>
+                                                <th>
+                                                    @Html.DisplayNameFor(model => item.Points)
+                                                </th>
+                                                <th>
+                                                    @Html.DisplayNameFor(model => item.IsFinished)
+                                                </th>
+                                                <th>
+                                                    @Html.DisplayNameFor(model => item.UserName)
+                                                </th>
+                                                <th></th>
+                                                <th></th>
+
+                                            </tr>
+                                        }
+                                        <tr>
+                                            <td>
+                                                @Html.DisplayFor(modelItem => item.Type)
+                                            </td>
+                                            <td>
+                                                @Html.DisplayFor(modelItem => item.Description)
+                                            </td>
+                                            <td>
+                                                @Html.DisplayFor(modelItem => item.StartDate)
+                                            </td>
+                                            <td>
+                                                @Html.DisplayFor(modelItem => item.EndDate)
+                                            </td>
+                                            <td>
+                                                @Html.DisplayFor(modelItem => item.DesiredEndDate)
+                                            </td>
+
+                                            <td>
+                                                @Html.DisplayFor(modelItem => item.Points)
+                                            </td>
+                                            <td>
+                                                @Html.DisplayFor(modelItem => item.IsFinished)
+                                            </td>
+                                            <td>
+                                                @Html.DisplayFor(modelItem => item.UserName)
+                                            </td>
+                                            <td>
+                                                <a class="btn btn-primary" id="AcceptButton" onclick="AcceptMission ('@item.TaskID', '@item.UserID')">Accept</a>
+
+                                            </td>
+                                            <td>
+                                                <a class="btn btn-primary" id="RefuseButton" onclick="RefuseNote ('@item.TaskID', '@item.UserID')">Refuse</a>
+                                            </td>
+                                        </tr>
+                                    }
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <h4 class="panel-title">
+                    <a data-toggle="collapse" href="#collapse2" class="list-group-item active" align="center"> Rewards Notify</a>
+                </h4>
+            </div>
+            <div id="collapse2" class="panel-collapse collapse">
+                <div class="panel-body">
+
                     <div class="container-fluid">
                         <div class="container-fluid" id="RewardsNotice" style="margin-top:5px;overflow-x:auto;width:100%;">
                             <table class="table">
-                                @foreach (var item in Model.Mission)
+
+                                @foreach (var item in Model.Rewardsed)
                                 {
-                                    if (Model.Mission.IndexOf(item) == 0 || Model.Mission.Count == 0)
+                                    if (Model.Rewardsed.IndexOf(item) == 0 || Model.Rewardsed.Count == 0)
                                     {
                                         <tr>
                                             <th>
@@ -126,21 +217,14 @@
                                             <th>
                                                 @Html.DisplayNameFor(model => item.Description)
                                             </th>
-                                            <th>
-                                                @Html.DisplayNameFor(model => item.StartDate)
-                                            </th>
-                                            <th>
-                                                @Html.DisplayNameFor(model => item.EndDate)
-                                            </th>
-                                            <th>
-                                                @Html.DisplayNameFor(model => item.DesiredEndDate)
-                                            </th>
+
                                             <th>
                                                 @Html.DisplayNameFor(model => item.Points)
                                             </th>
                                             <th>
-                                                @Html.DisplayNameFor(model => item.IsFinished)
+                                                @Html.DisplayNameFor(model => item.Availability)
                                             </th>
+
                                             <th>
                                                 @Html.DisplayNameFor(model => item.UserName)
                                             </th>
@@ -148,7 +232,9 @@
                                             <th></th>
 
                                         </tr>
+
                                     }
+
                                     <tr>
                                         <td>
                                             @Html.DisplayFor(modelItem => item.Type)
@@ -156,31 +242,21 @@
                                         <td>
                                             @Html.DisplayFor(modelItem => item.Description)
                                         </td>
-                                        <td>
-                                            @Html.DisplayFor(modelItem => item.StartDate)
-                                        </td>
-                                        <td>
-                                            @Html.DisplayFor(modelItem => item.EndDate)
-                                        </td>
-                                        <td>
-                                            @Html.DisplayFor(modelItem => item.DesiredEndDate)
-                                        </td>
 
                                         <td>
                                             @Html.DisplayFor(modelItem => item.Points)
                                         </td>
                                         <td>
-                                            @Html.DisplayFor(modelItem => item.IsFinished)
+                                            @Html.DisplayFor(modelItem => item.Availability)
                                         </td>
                                         <td>
                                             @Html.DisplayFor(modelItem => item.UserName)
                                         </td>
                                         <td>
-                                            <a class="btn btn-primary" id="AcceptButton" onclick="AcceptMission ('@item.TaskID', '@item.UserID')">Accept</a>
-
+                                            <a class="btn btn-primary" id="AcceptButtonRewards" onclick="AcceptRewards ('@item.RewardsID', '@item.UserID')">Accept</a>
                                         </td>
                                         <td>
-                                            <a class="btn btn-primary" id="RefuseButton" onclick="RefuseNote ('@item.TaskID', '@item.UserID')">Refuse</a>
+                                            <a class="btn btn-primary" id="RefuseButtonRewards" onclick="RefuseRewards ('@item.RewardsID', '@item.UserID')">Refuse</a>
                                         </td>
                                     </tr>
                                 }
@@ -191,93 +267,17 @@
             </div>
         </div>
 
-    </div>
-
-    <div class="panel panel-default">
-        <div class="panel-heading">
-            <h4 class="panel-title">
-                <a data-toggle="collapse" href="#collapse2" class="list-group-item active" align="center"> <h4>Rewards Notify</h4></a>
-            </h4>
-        </div>
-        <div id="collapse2" class="panel-collapse collapse">
-            <div class="panel-body">
-
-                <div class="container-fluid">
-                    <div class="container-fluid" id="RewardsNotice" style="margin-top:5px;overflow-x:auto;width:100%;">
-                        <table class="table">
-
-                            @foreach (var item in Model.Rewardsed)
-                            {
-                                if (Model.Rewardsed.IndexOf(item) == 0 || Model.Rewardsed.Count == 0)
-                                {
-                                    <tr>
-                                        <th>
-                                            @Html.DisplayNameFor(model => item.Type)
-                                        </th>
-                                        <th>
-                                            @Html.DisplayNameFor(model => item.Description)
-                                        </th>
-
-                                        <th>
-                                            @Html.DisplayNameFor(model => item.Points)
-                                        </th>
-                                        <th>
-                                            @Html.DisplayNameFor(model => item.Availability)
-                                        </th>
-
-                                        <th>
-                                            @Html.DisplayNameFor(model => item.UserName)
-                                        </th>
-                                        <th></th>
-                                        <th></th>
-
-                                    </tr>
-
-                                }
-
-                                <tr>
-                                    <td>
-                                        @Html.DisplayFor(modelItem => item.Type)
-                                    </td>
-                                    <td>
-                                        @Html.DisplayFor(modelItem => item.Description)
-                                    </td>
-
-                                    <td>
-                                        @Html.DisplayFor(modelItem => item.Points)
-                                    </td>
-                                    <td>
-                                        @Html.DisplayFor(modelItem => item.Availability)
-                                    </td>
-                                    <td>
-                                        @Html.DisplayFor(modelItem => item.UserName)
-                                    </td>
-                                    <td>
-                                        <a class="btn btn-primary" id="AcceptButtonRewards" onclick="AcceptRewards ('@item.RewardsID', '@item.UserID')">Accept</a>
-                                    </td>
-                                    <td>
-                                        <a class="btn btn-primary" id="RefuseButtonRewards" onclick="RefuseRewards ('@item.RewardsID', '@item.UserID')">Refuse</a>
-                                    </td>
-                                </tr>
-                            }
-                        </table>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
 
 
+        <!--User Task details-->
 
-    <!--User Task details-->
-    <div class="panel-group">
         <div class="panel panel-default">
             <div class="panel-heading">
                 <h4 class="panel-title">
-                    <a data-toggle="collapse" href="#collapse2" class="list-group-item active" align="center"> <h4>Manager Tasks</h4></a>
+                    <a data-toggle="collapse" href="#collapse3" class="list-group-item active" align="center"> Manager Tasks</a>
                 </h4>
             </div>
-            <div id="collapse2" class="panel-collapse collapse">
+            <div id="collapse3" class="panel-collapse collapse">
                 <div class="panel-body">
                     <div class="container-fluid">
                         <div class="container-fluid" id="UserTasks" style="margin-top:5px;overflow-x:auto;width:100%;">
@@ -363,10 +363,10 @@
         <div class="panel panel-default">
             <div class="panel-heading">
                 <h4 class="panel-title">
-                    <a data-toggle="collapse" href="#collapse3" class="list-group-item active" align="center"><h4>Manager Rewards</h4></a>
+                    <a data-toggle="collapse" href="#collapse4" class="list-group-item active" align="center">Manager Rewards</a>
                 </h4>
             </div>
-            <div id="collapse3" class="panel-collapse collapse">
+            <div id="collapse4" class="panel-collapse collapse">
                 <div class="panel-body">
                     <div class="container-fluid">
                         <div class="container-fluid" id="UserRewards" style="margin-top:5px;overflow-x:auto;width:100%;">
@@ -424,10 +424,10 @@
         <div class="panel panel-default">
             <div class="panel-heading">
                 <h4 class="panel-title">
-                    <a data-toggle="collapse" href="#collapse4" class="list-group-item active" align="center"><h4>Available Rewards</h4></a>
+                    <a data-toggle="collapse" href="#collapse5" class="list-group-item active" align="center">Available Rewards</a>
                 </h4>
             </div>
-            <div id="collapse4" class="panel-collapse collapse">
+            <div id="collapse5" class="panel-collapse collapse">
                 <div class="panel-body">
                     <div class="container-fluid">
                         <div class="container-fluid" id="AskRewards" style="margin-top:5px;overflow-x:auto;width:100%;">
@@ -443,7 +443,7 @@
     <div>
         @Html.ActionLink("Back to List", "Index")
 
-        <button align="rigth" onclick="topFunction()" id="myBtn" title="Go to top">Su</button>
+        @*<button align="rigth" onclick="topFunction()" id="myBtn" title="Go to top">Su</button>*@
     </div>
 
 </body>
