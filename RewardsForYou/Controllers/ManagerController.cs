@@ -402,19 +402,19 @@ namespace RewardsForYou.Controllers
 
         public ActionResult AcceptRewards(int RewardsID, int UserID)
         {
-           
+
             UsersRewards usersRewards = null;
             NoticeRewardsTakes noticeRewards = null;
             Rewards rewards = null;
             Users user = null;
             Rewards availabilityReward = new Rewards();
-           
+
 
             using (RewardsForYouEntities db = new RewardsForYouEntities())
             {
                 usersRewards = db.UsersRewards.Where(l => l.RewardsID == RewardsID && l.UserID == UserID).FirstOrDefault();
                 noticeRewards = db.NoticeRewardsTakes.Where(l => l.UsersRewardsID == usersRewards.UserRewardsID && l.UserID == UserID).FirstOrDefault();
-                rewards= db.Rewards.Where(l => l.RewardsID == RewardsID).FirstOrDefault();
+                rewards = db.Rewards.Where(l => l.RewardsID == RewardsID).FirstOrDefault();
                 user = db.Users.Where(l => l.UserID == UserID).FirstOrDefault();
 
                 Users userUpdated = db.Users.Find(UserID);
@@ -425,11 +425,7 @@ namespace RewardsForYou.Controllers
 
                 if (usersRewards != null && noticeRewards != null)
                 {
-                    //user.UserPoints = user.UserPoints + task.Points;
-                    //noticeRewards.Status = 0;
-                    //rewards. = true;
-                    //noticeMission.Status = 0;
-                    //db.SaveChanges();
+                   
 
                     //sottrazione dei punti allo user
                     userUpdated.UserPoints = user.UserPoints - rewards.Points;
@@ -439,20 +435,17 @@ namespace RewardsForYou.Controllers
 
                     //Inserisco il nuovo reward dell'utente nel db
                     usersRewards.UserID = user.UserID;
-                    usersRewards.RewardsID = rewards.RewardsID;   
+                    usersRewards.RewardsID = rewards.RewardsID;
                     usersRewards.RewardsDate = DateTime.Now;
                     db.UsersRewards.Add(usersRewards);
                     db.SaveChanges();
-
-
-
-
                     return Json(new { message = $"Rewards Aggiunti con successo", flag = true });
 
                 }
-            }
 
+            }
             return Json(new { message = $"Rewards non accettati per qualche problema", flag = false });
+          
         }
 
         public ActionResult RefuseRewards(int RewardsID, int UserID)
