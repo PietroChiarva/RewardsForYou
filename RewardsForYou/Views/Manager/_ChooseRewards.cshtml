@@ -1,0 +1,76 @@
+﻿@model RewardsForYou.Models.UserRewardModel
+
+
+<table class="table">
+    @foreach (var item in Model.rewards)
+    {
+
+        if (Model.rewards.Count == 0 || Model.rewards.IndexOf(item) == 0)
+        {
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => item.Type)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => item.Description)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => item.Points)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => item.Availability)
+                </th>
+                <th></th>
+            </tr>
+        }
+    }
+    @foreach (var item in Model.rewards)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Type)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Description)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Points)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Availability)
+            </td>
+            <td>
+                <a onclick="TakeRewards( '@item.RewardsID', '@Model.UserID')"
+                   class="btn btn-primary">Take the rewards</a>
+            </td>
+
+        </tr>
+    }
+
+</table>
+<script>
+    function TakeRewards(RewardsID, UserID) {
+        var Data = {
+            RewardsID: RewardsID,
+            UserID: UserID
+        };
+
+        $.ajax({
+                type: "POST",
+                url: "@Url.Action("_PartialTakeReward", "Employee")",
+                data: JSON.stringify(Data),
+                contentType: "application/json; charset=utf-8",
+                success: function (data) {
+                    alert(data.messaggio);
+                    if (data.flag == true) {
+                        window.location.reload();
+                    }
+
+                },
+                error: function () {
+                    alert("Error!");
+                }
+
+            });
+    }
+</script>

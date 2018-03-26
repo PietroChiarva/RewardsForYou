@@ -10,6 +10,7 @@ namespace RewardsForYou.Models
     
         public Users User { get; set; }
         public List<MissionExtended> Mission { get; set; } 
+        public List<MissionExtended> Tasks { get; set; }
         public List<UsersRewardsExtended> Rewardsed { get; set; }
         public List<Tasks> Task { get; set; }
         public List<Rewards> Reward { get; set; }
