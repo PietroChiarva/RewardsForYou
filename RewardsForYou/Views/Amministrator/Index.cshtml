@@ -46,6 +46,10 @@
                     opacity: 1;
                     right: 0;
                 }
+
+                h3{
+                    text-align: center;
+                }
     </style>
 
 
@@ -57,13 +61,13 @@
     <div class="jumbotron">
 
         <div class="row">
-
-
+       
+            <h3>Insert, Search and Delete Users</h3>
             <div class="col-md-6">
                 <div class="card" id="Amministrator">
                     <div class="card-body text-center">
                         <h5 class="card-title"></h5>
-                        <a href="@Url.Action("InsertNewUsers","Amministrator")" class="button" style="vertical-align: middle"><span>Insert New User</span></a>
+                        <a href="@Url.Action("InsertNewUsers","Amministrator")" class="button" style="vertical-align: middle"><span>Insert new User</span></a>
                     </div>
                 </div>
             </div>
@@ -72,7 +76,7 @@
                 <div class="card" id="Amministrator">
                     <div class="card-body text-center">
                         <h5 class="card-title"></h5>
-                        <a href="@Url.Action("SearchDeleteUser","Amministrator")" class="button" style="vertical-align: middle"><span>Delete and User</span></a>
+                        <a href="@Url.Action("SearchDeleteUser","Amministrator")" class="button" style="vertical-align: middle"><span>Delete Search</span></a>
                     </div>
                 </div>
             </div>
@@ -80,13 +84,14 @@
         </div>
 
         <div class="row">
-
+            <br />
+            <h3>Insert, Search and Delete Tasks</h3>
             <div class="col-md-6">
                 <div class="card" id="Amministrator">
                     <div class="card-body text-center">
                         <h5 class="card-title"></h5>
 
-                        <a href="@Url.Action("AddTask","Amministrator")" class="button" style="vertical-align: middle"><span>Insert New Task</span></a>
+                        <a href="@Url.Action("AddTask","Amministrator")" class="button" style="vertical-align: middle"><span>Insert new Task</span></a>
                     </div>
                 </div>
             </div>
@@ -96,7 +101,7 @@
                 <div class="card" id="Amministrator">
                     <div class="card-body text-center">
                         <h5 class="card-title"></h5>
-                        <a href="@Url.Action("SearchDeleteTasks","Amministrator")" class="button" style="vertical-align: middle"><span>Delete and Tasks</span></a>
+                        <a href="@Url.Action("SearchDeleteTasks","Amministrator")" class="button" style="vertical-align: middle"><span>Delete Search</span></a>
                     </div>
                 </div>
             </div>
@@ -106,12 +111,14 @@
 
         <div class="row">
 
+            <br />
+            <h3>Insert, Search and Delete Rewards</h3>
             <div class="col-md-6">
                 <div class="card" id="Amministrator">
                     <div class="card-body text-center">
                         <h5 class="card-title"></h5>
 
-                        <a href="@Url.Action("AddRewards","Amministrator")" class="button" style="vertical-align: middle"><span>Insert New Rewards</span></a>
+                        <a href="@Url.Action("AddRewards","Amministrator")" class="button" style="vertical-align: middle"><span>Insert new Reward</span></a>
                     </div>
                 </div>
             </div>
@@ -122,12 +129,12 @@
                     <div class="card-body text-center">
                         <h5 class="card-title"></h5>
 
-                        <a href="@Url.Action("SearchDeleteRewards","Amministrator")" class="button" style="vertical-align: middle"><span>Delete Rewards</span></a>
+                        <a href="@Url.Action("SearchDeleteRewards","Amministrator")" class="button" style="vertical-align: middle"><span>Delete Search</span></a>
                     </div>
                 </div>
             </div>
 
-         </div>
+        </div>
 
     </div>
 

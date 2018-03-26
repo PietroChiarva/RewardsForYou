@@ -23,7 +23,7 @@ namespace RewardsForYou.Controllers
         public ActionResult Index()
         {
             using (RewardsForYouEntities db = new RewardsForYouEntities())
-            { 
+            {
                 int userID = (int)Session["UserID"];
                 return View();
             }
@@ -46,16 +46,16 @@ namespace RewardsForYou.Controllers
 
                 //ViewBag.RoleList = new SelectList(db.Roles.Select(r=> new { Value = r.RoleID.ToString(), Text = r.Role }).ToList(), null);
                 ViewBag.RoleList = db.Roles.Select(r => new SelectListItem() { Value = r.RoleID.ToString(), Text = r.Role }).ToList();
-               
-                ViewBag.ManagerList = usermanager.Select(r=> new SelectListItem() { Value = r.UserID.ToString(), Text = r.Name + " "+ r.Surname }).ToList();
-                
-                }
+
+                ViewBag.ManagerList = usermanager.Select(r => new SelectListItem() { Value = r.UserID.ToString(), Text = r.Name + " " + r.Surname }).ToList();
+
+            }
             return View();
         }
 
         public ActionResult _JsonInsertNewUsers(Users data)
         {
-          
+
             if (!string.IsNullOrEmpty(data.Serial) && !string.IsNullOrEmpty(data.Name) && !string.IsNullOrEmpty(data.Surname) && !string.IsNullOrEmpty(data.EMail) && data.RoleID != 0 && data.ManagerUserID != 0)
             {
                 using (RewardsForYouEntities db = new RewardsForYouEntities())
@@ -63,7 +63,7 @@ namespace RewardsForYou.Controllers
                     db.Users.Add(data);
 
                     db.SaveChanges();
-                    
+
 
 
                 }
@@ -71,7 +71,7 @@ namespace RewardsForYou.Controllers
             }
             else
             {
-                return Json(new { messaggio = $"Dati mancanti o non validi" , flag = false});
+                return Json(new { messaggio = $"Dati mancanti o non validi", flag = false });
             }
         }
 
@@ -87,9 +87,9 @@ namespace RewardsForYou.Controllers
         public ActionResult _JsonAddRewards(Rewards data)
         {
 
-            
-            
-            if (!string.IsNullOrEmpty(data.Type) && !string.IsNullOrEmpty(data.Description)  && data.Points != 0 && data.Availability != 0)
+
+
+            if (!string.IsNullOrEmpty(data.Type) && !string.IsNullOrEmpty(data.Description) && data.Points != 0 && data.Availability != 0)
             {
                 using (RewardsForYouEntities db = new RewardsForYouEntities())
                 {
@@ -100,7 +100,7 @@ namespace RewardsForYou.Controllers
 
 
                 }
-                return Json(new { messaggio = $"Rewards {data.RewardsID} aggiunto/a con successo",flag = true });
+                return Json(new { messaggio = $"Rewards {data.RewardsID} aggiunto/a con successo", flag = true });
             }
             else
             {
@@ -117,43 +117,43 @@ namespace RewardsForYou.Controllers
 
             using (RewardsForYouEntities db = new RewardsForYouEntities())
             {
-             
-                    IQueryable<Users> x = null;
-                    if (data.Serial != null)
-                    {
-                    x = db.Users.Where(l => l.Serial == data.Serial); 
-                    }
-                    else
-                    {
-                        x = db.Users;
-                    }
 
-                    if (data.EMail!= null)
-                    {
-                        x = db.Users.Where(l => l.EMail == data.EMail);
-                    }
+                IQueryable<Users> x = null;
+                if (data.Serial != null)
+                {
+                    x = db.Users.Where(l => l.Serial == data.Serial);
+                }
+                else
+                {
+                    x = db.Users;
+                }
+
+                if (data.EMail != null)
+                {
+                    x = db.Users.Where(l => l.EMail == data.EMail);
+                }
 
                 //get the name of the manager
                 //manager = db.Users.Where(l => l.UserID == l.ManagerUserID).ToList().Select(l=> string.Format("{0} {1}",l.Name,l.Surname)).ToList();
-                
 
-            
+
+
 
                 data.Lista = x.ToList();
 
                 //controllo se lo user è stato eliminato
-                foreach(Users item in x)
+                foreach (Users item in x)
                 {
-                    if(item.FiredDate != null)  
+                    if (item.FiredDate != null)
                     {
                         data.Lista.Remove(item);
-                        
-                        
+
+
                     }
                 }
-                
 
-                
+
+
 
                 return View("SearchDeleteUser", data);
             }
@@ -190,7 +190,7 @@ namespace RewardsForYou.Controllers
             return RedirectToAction("SearchDeleteUser", new SearchDeleteUser());
         }
 
-    
+
         //Search and Delete Rewards
         public ActionResult SearchDeleteRewards(SearchDeleteReward data)
         {
@@ -239,7 +239,7 @@ namespace RewardsForYou.Controllers
             {
                 deletedReward = db.Rewards.Where(l => l.Description == Description).FirstOrDefault();
 
-                
+
                 if (deletedReward != null)
                 {
                     db.Rewards.Remove(deletedReward);
@@ -265,7 +265,7 @@ namespace RewardsForYou.Controllers
                 {
                     x = db.Tasks;
                 }
-                if(data.Type != null)
+                if (data.Type != null)
                 {
                     x = db.Tasks.Where(l => l.Type == data.Type);
                 }
@@ -301,14 +301,14 @@ namespace RewardsForYou.Controllers
             {
                 deletedTask = db.Tasks.Where(l => l.Description == Description && l.Type == Type).FirstOrDefault();
                 deletedMission = db.Missions.Where(l => l.TaskID == deletedTask.TaskID).FirstOrDefault();
-          
+
                 if (deletedTask != null && deletedMission != null)
                 {
                     db.Tasks.Remove(deletedTask);
                     db.Missions.Remove(deletedMission);
                     db.SaveChanges();
                 }
-                else if(deletedTask != null)
+                else if (deletedTask != null)
                 {
                     db.Tasks.Remove(deletedTask);
                     db.SaveChanges();
@@ -321,24 +321,24 @@ namespace RewardsForYou.Controllers
         public ActionResult TakeJsonUsers(string Serial, string EMail)
         {
             List<Users> users = null;
-           
+
             using (RewardsForYouEntities db = new RewardsForYouEntities())
             {
                 users = db.Users.Where(l => l.FiredDate != null).ToList();
-                
+
 
                 foreach (Users u in users)
                 {
                     if ((u.Serial == Serial || u.EMail == EMail) || (u.Serial == Serial && u.EMail == EMail))
                     {
 
-                        return Json(new { message = $"L'utente è stato licenziato in data: {u.FiredDate}"});
+                        return Json(new { message = $"L'utente è stato licenziato in data: {u.FiredDate}" });
                     }
 
                 }
 
             }
-            
+
             return SearchDeleteUser(new SearchDeleteUser());
         }
 
@@ -353,7 +353,7 @@ namespace RewardsForYou.Controllers
         public ActionResult JsonAddTask(Tasks data)
         {
 
-            if (!string.IsNullOrEmpty(data.Type) && !string.IsNullOrEmpty(data.Description) && data.ExpiryDate.HasValue && data.TimeSpan != 0 && data.Points != 0 )
+            if (!string.IsNullOrEmpty(data.Type) && !string.IsNullOrEmpty(data.Description) && data.ExpiryDate.HasValue && data.TimeSpan != 0 && data.Points != 0)
             {
                 using (RewardsForYouEntities db = new RewardsForYouEntities())
                 {
@@ -367,7 +367,7 @@ namespace RewardsForYou.Controllers
                 return Json(new { messaggio = $"Task {data.TaskID} aggiunto/a con successo", flag = true });
             }
 
-            
+
             else
             {
                 return Json(new { messaggio = $"Dati mancanti o non validi", flag = false });

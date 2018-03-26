@@ -6,6 +6,10 @@
 
 <h2>SearchDeleteRewards</h2>
 
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>
+
 @using (Html.BeginForm())
 {
 
@@ -33,15 +37,12 @@
         </div>
     </div>
 }
-          
 
-               <div class="container-fluid" id="SearchViewContainer" style="margin-top:5px;overflow-x:auto;width:100%;">
-                    @{Html.RenderPartial("_SearchDeleteRewards", Model.Lista);}
-                </div>
-                
-            
-       
 
-        <div>
-            @Html.ActionLink("Back to List", "Index")
-        </div>
+<div class="container-fluid" id="SearchViewContainer" style="margin-top:5px;overflow-x:auto;width:100%;">
+    @{Html.RenderPartial("_SearchDeleteRewards", Model.Lista);}
+</div>
+
+
+
+
