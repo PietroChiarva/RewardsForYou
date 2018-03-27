@@ -4,8 +4,7 @@
     <h2>Add the Task at employee </h2>
 </p>
 
-@using (Html.BeginForm("_DoAddTaskJson", "ListaUsers", null, FormMethod.Post))
-{
+
 <table class="table">
 
 
@@ -55,13 +54,13 @@
     }
 
 </table>
-}
+
 
     <script type="text/javascript">
 
     
         function AddTask(TaskID, UserID) {
-            $("#navbar").css("display", "none");
+            
             //creo l'oggetto associando le variabili
         var DatiTask = {
             TaskID: TaskID,

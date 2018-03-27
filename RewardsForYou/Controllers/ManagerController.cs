@@ -91,7 +91,7 @@ namespace RewardsForYou.Controllers
 
             using (RewardsForYouEntities db = new RewardsForYouEntities())
             {
-                tasksUsers.task = db.Tasks.Where(l => l.Finished == false).ToList();
+                tasksUsers.task = db.Tasks.ToList();
 
             }
             tasksUsers.UsersID = UserID;
@@ -110,6 +110,7 @@ namespace RewardsForYou.Controllers
             Users user = null;
             List<Missions> missions = null;
             Missions m = null;
+         
 
 
             using (RewardsForYouEntities db = new RewardsForYouEntities())
@@ -120,6 +121,7 @@ namespace RewardsForYou.Controllers
 
                 //controllo se il task è stato gia assegnato
                 m = db.Missions.Where(l => l.TaskID == task.TaskID && l.UserID == user.UserID && l.Status == 0).FirstOrDefault();
+                
 
                 if (m != null)
                 {
