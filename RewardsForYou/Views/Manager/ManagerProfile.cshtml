@@ -456,6 +456,7 @@
 <script type="text/javascript">
         $(document).ready(function () {
             $data = {};
+            $data["EMail"] = '@Model.User.EMail';
             $.ajax({
                 type: "POST",
                 url: Router.action('Manager', 'GetAADUserImageAsync'),

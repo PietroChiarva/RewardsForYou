@@ -690,11 +690,10 @@ namespace RewardsForYou.Controllers
 
         //UserImage
         [HttpPost]
-        public async Task<JsonResult> GetAADUserImageAsync()
+        public async Task<JsonResult> GetAADUserImageAsync(string EMail)
         {
             JsonResult ret = null;
             string tenantID = ClaimsPrincipal.Current.FindFirst("http://schemas.microsoft.com/identity/claims/tenantid").Value;
-            string userObjectID = ClaimsPrincipal.Current.FindFirst("http://schemas.microsoft.com/identity/claims/objectidentifier").Value;
             try
             {
                 string graphResourceID = "https://graph.windows.net/";
@@ -707,9 +706,15 @@ namespace RewardsForYou.Controllers
 
                 // use the token for querying the graph to get the user details
 
+                var result1 = await activeDirectoryClient.Users.ExecuteAsync(); ;
+
                 var result = await activeDirectoryClient.Users
-                    .Where(u => u.ObjectId.Equals(userObjectID))
+                    .Where(u => u.UserPrincipalName.Equals(EMail))
                     .ExecuteAsync();
+
+                //var result = await activeDirectoryClient.Users
+                //    .Where(u => u.ObjectId.Equals(userObjectID))
+                //    .ExecuteAsync();
                 IUser user = result.CurrentPage.ToList().First();
 
                 DataServiceStreamResponse photo = await user.ThumbnailPhoto.DownloadAsync();
@@ -743,6 +748,66 @@ namespace RewardsForYou.Controllers
             }
             return ret;
         }
+
+
+
+
+
+
+        //[HttpPost]
+        //public async Task<JsonResult> GetAADUserImageAsync()
+        //{
+        //    JsonResult ret = null;
+        //    string tenantID = ClaimsPrincipal.Current.FindFirst("http://schemas.microsoft.com/identity/claims/tenantid").Value;
+        //    string userObjectID = ClaimsPrincipal.Current.FindFirst("http://schemas.microsoft.com/identity/claims/objectidentifier").Value;
+        //    try
+        //    {
+        //        string graphResourceID = "https://graph.windows.net/";
+        //        UserProfileController userProfileController = new UserProfileController();
+
+        //        Uri servicePointUri = new Uri(graphResourceID);
+        //        Uri serviceRoot = new Uri(servicePointUri, tenantID);
+        //        ActiveDirectoryClient activeDirectoryClient = new ActiveDirectoryClient(serviceRoot,
+        //              async () => await userProfileController.GetTokenForApplication());
+
+        //        // use the token for querying the graph to get the user details
+
+        //        var result = await activeDirectoryClient.Users
+        //            .Where(u => u.ObjectId.Equals(userObjectID))
+        //            .ExecuteAsync();
+        //        IUser user = result.CurrentPage.ToList().First();
+
+        //        DataServiceStreamResponse photo = await user.ThumbnailPhoto.DownloadAsync();
+        //        using (MemoryStream s = new MemoryStream())
+        //        {
+        //            photo.Stream.CopyTo(s);
+        //            var encodedImage = Convert.ToBase64String(s.ToArray());
+        //            ret = Json(new
+        //            {
+        //                Success = true,
+        //                Base64StringImage = String.Format("data:image/gif;base64,{0}", encodedImage)
+        //            });
+        //        }
+        //    }
+        //    catch (AdalException e)
+        //    {
+        //        ret = Json(new
+        //        {
+        //            Success = false,
+        //            Message = e.Message
+        //        });
+        //    }
+        //    // if the above failed, the user needs to explicitly re-authenticate for the app to obtain the required token
+        //    catch (Exception e)
+        //    {
+        //        ret = Json(new
+        //        {
+        //            Success = false,
+        //            Message = e.Message
+        //        });
+        //    }
+        //    return ret;
+        //}
 
 
     }

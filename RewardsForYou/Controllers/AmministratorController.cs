@@ -234,13 +234,22 @@ namespace RewardsForYou.Controllers
         {
 
             Rewards deletedReward = null;
+            UsersRewards userReward = null;
+            NoticeRewardsTakes noticeReward = null;
 
             using (RewardsForYouEntities db = new RewardsForYouEntities())
             {
                 deletedReward = db.Rewards.Where(l => l.Description == Description).FirstOrDefault();
+                userReward = db.UsersRewards.Where(l => l.RewardsID == deletedReward.RewardsID).FirstOrDefault();
+                noticeReward = db.NoticeRewardsTakes.Where(l => l.RewardsID == deletedReward.RewardsID).FirstOrDefault();
 
 
-                if (deletedReward != null)
+                if ((deletedReward != null && userReward != null) || (noticeReward != null) || (userReward != null))
+                {
+                    TempData["msg"] = "<script>alert('Il Reward non può esere cancellato perchè un impiegato ne è in possesso o è in attesa di essere ricevuto');</script>";
+                   
+                }
+                else
                 {
                     db.Rewards.Remove(deletedReward);
                     db.SaveChanges();
@@ -294,19 +303,19 @@ namespace RewardsForYou.Controllers
 
             Tasks deletedTask = null;
             Missions deletedMission = null;
+            NoticeMissionEnded noticeMission = null;
 
             using (RewardsForYouEntities db = new RewardsForYouEntities())
             {
                 deletedTask = db.Tasks.Where(l => l.Description == Description && l.Type == Type).FirstOrDefault();
                 deletedMission = db.Missions.Where(l => l.TaskID == deletedTask.TaskID).FirstOrDefault();
+                noticeMission = db.NoticeMissionEnded.Where(l => l.MissionID == deletedMission.MissionID).FirstOrDefault();
 
-                if (deletedTask != null && deletedMission != null)
+                if ((deletedTask != null && deletedMission != null) || (noticeMission != null))
                 {
-                    db.Tasks.Remove(deletedTask);
-                    db.Missions.Remove(deletedMission);
-                    db.SaveChanges();
+                    TempData["msg"] = "<script>alert('Il Task non può esere cancellato perchè è stato eseguito o è in fase di esecuzione');</script>";
                 }
-                else if (deletedTask != null)
+                else
                 {
                     db.Tasks.Remove(deletedTask);
                     db.SaveChanges();
