@@ -66,7 +66,7 @@ namespace RewardsForYou.Controllers
 
                 //t = db.Missions.Include(m => m.Tasks).Where(l => l.UserID == UserID).ToList();
 
-                t = db.Missions.Include(m => m.Tasks).Where(l => l.UserID == UserID).ToList();
+                t = db.Missions.Include(m => m.Tasks).Where(l => l.UserID == UserID && l.Tasks.Finished == false).ToList();
                 
                 foreach (Missions m in t)
                 {
@@ -91,7 +91,7 @@ namespace RewardsForYou.Controllers
 
             using (RewardsForYouEntities db = new RewardsForYouEntities())
             {
-                tasksUsers.task = db.Tasks.ToList();
+                tasksUsers.task = db.Tasks.Where(l => l.Finished == false).ToList();
 
             }
             tasksUsers.UsersID = UserID;
@@ -219,7 +219,7 @@ namespace RewardsForYou.Controllers
             using (RewardsForYouEntities db = new RewardsForYouEntities())
             {
                 //get tasks of the user
-                task = db.Missions.Include(m => m.Tasks).Where(l => l.UserID == UserID && l.Status == 0).Select(l => new MissionExtended()
+                task = db.Missions.Include(m => m.Tasks).Where(l => l.UserID == UserID).Select(l => new MissionExtended()
                 {
                     TaskID = l.TaskID,
                     Type = l.Tasks.Type,
