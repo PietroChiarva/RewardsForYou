@@ -179,10 +179,12 @@
                                         <td>
                                             @Html.DisplayFor(modelItem => item.IsFinished)
                                         </td>
-
+                                        @if (item.IsFinished == false)
+                                        {
                                         <td>
                                             <a class="btn btn-primary" id="NoticeButton" onclick="NoticeMission ('@item.TaskID', '@Model.User.UserID')">Finish the mission</a>
                                         </td>
+                                        }
                                     </tr>
                                 }
 
