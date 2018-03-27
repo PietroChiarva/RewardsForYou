@@ -275,8 +275,6 @@ namespace RewardsForYou.Controllers
 
                 data.Lista = x.ToList();
 
-
-
                 return View("SearchDeleteTasks", data);
             }
         }
