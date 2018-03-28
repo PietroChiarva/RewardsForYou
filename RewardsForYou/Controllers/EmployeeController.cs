@@ -264,6 +264,18 @@ namespace RewardsForYou.Controllers
             }
         }
 
+        public ActionResult Ranking(int UserID)
+        {
+            List<Users> userList = new List<Users>();
+            
+            using (RewardsForYouEntities db = new RewardsForYouEntities())
+            {
+                userList = db.Users.OrderByDescending(l => l.UserPoints).ToList();
+            }
+
+                return View(userList);
+        }
+
 
 
 

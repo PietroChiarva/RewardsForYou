@@ -103,7 +103,9 @@
 
         </table>
     </div>
-
+     <div>
+        <a class="btn btn-primary" id="ButtonClassifica" onclick="GoToRanking ('@Model.User.UserID')">Classfica degli Employee</a>
+    </div>
     @*Manager notice MIssion and rewards*@
 
     <div class="panel-group">
@@ -470,7 +472,9 @@
                 }
             })
             });
-
+        function GoToRanking(UserID) {
+            window.open(Router.action('Employee', 'Ranking', { UserID: UserID }));
+        }
             function NoticeMission(TaskID, UserID){
         var Data = {
         TaskID: TaskID,

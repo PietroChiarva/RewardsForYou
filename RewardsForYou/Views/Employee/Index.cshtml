@@ -104,7 +104,9 @@
             </div>
         </div>
     </div>
-
+    <div>
+        <a class="btn btn-primary" id="ButtonClassifica" onclick="GoToRanking ('@Model.User.UserID')">Classifica Punti  <img src="~/Images/rank.png" /></a>
+    </div>
 
     <!--User Task details-->
     <div class="panel-group">
@@ -181,9 +183,9 @@
                                         </td>
                                         @if (item.IsFinished == false)
                                         {
-                                        <td>
-                                            <a class="btn btn-primary" id="NoticeButton" onclick="NoticeMission ('@item.TaskID', '@Model.User.UserID')">Finish the mission</a>
-                                        </td>
+                                            <td>
+                                                <a class="btn btn-primary" id="NoticeButton" onclick="NoticeMission ('@item.TaskID', '@Model.User.UserID')">Finish the mission</a>
+                                            </td>
                                         }
                                     </tr>
                                 }
@@ -355,6 +357,10 @@
                 }
 
             });
+    }
+
+    function GoToRanking(UserID) {
+        window.open(Router.action('Employee', 'Ranking', { UserID: UserID }));
     }
 
 

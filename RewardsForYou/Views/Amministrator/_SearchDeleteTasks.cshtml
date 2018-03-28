@@ -50,7 +50,9 @@
             </td>
             <td>
                 <a onclick="ShowDeleteModal( '@item.Description', '@item.Type')"
-                   class="btn btn-primary"><i class="fa fa-trash"></i>Delete</a>
+                   class="btn btn-primary"><i class="fa fa-trash"></i></a>
+                <a onclick="ShowUpdateModal( '@item.Description', '@item.Type')"
+                   class="btn btn-primary"><img src="~/Images/edit.png" /></a>
             </td>
         </tr>
     }
@@ -60,6 +62,10 @@
 <script>
     function ShowDeleteModal(Description, Type) {
         $('#showModal .modal-body').load(Router.action('Amministrator', '_PartialDeleteTasks', { Description: Description, Type: Type }));
+        $('#showModal').modal("show");
+    }
+    function ShowUpdateModal(Description, Type) {
+        $('#showModal .modal-body').load(Router.action('Amministrator', '_PartialUpdateView', { Description: Description, Type: Type }));
         $('#showModal').modal("show");
     }
 </script>

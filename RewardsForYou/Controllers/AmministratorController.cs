@@ -189,7 +189,33 @@ namespace RewardsForYou.Controllers
             }
             return RedirectToAction("SearchDeleteUser", new SearchDeleteUser());
         }
+        public ActionResult _PartialUpdateUser(string Serial, string EMail)
+        {
+            Users updateUser = null;
+            using (RewardsForYouEntities db = new RewardsForYouEntities())
+            {
+                updateUser = db.Users.Where(l => l.Serial == Serial && l.EMail == EMail).FirstOrDefault();
+            }
+                return PartialView(updateUser);
+        }
 
+        public ActionResult DoUpdateUser(Users data)
+        {
+            Users userUpdate = null;
+            using (RewardsForYouEntities db = new RewardsForYouEntities())
+            {
+                userUpdate = db.Users.Where(l => l.UserID == data.UserID).FirstOrDefault();
+                userUpdate.Serial = data.Serial;
+                userUpdate.Name = data.Name;
+                userUpdate.Surname = data.Surname;
+                userUpdate.UserPoints = data.UserPoints;
+               // userUpdate.ManagerUserID = data.ManagerUserID;
+                userUpdate.EMail = data.EMail;
+                //userUpdate.RoleID = data.RoleID;
+                db.SaveChanges();
+            }
+                return RedirectToAction("SearchDeleteUser", new SearchDeleteUser());
+        }
 
         //Search and Delete Rewards
         public ActionResult SearchDeleteRewards(SearchDeleteReward data)
@@ -257,7 +283,30 @@ namespace RewardsForYou.Controllers
             }
             return RedirectToAction("SearchDeleteRewards", new SearchDeleteReward());
         }
+        public ActionResult _PartialUpdateRewards(string Description)
+        {
+            Rewards updateReward = null;
+            using (RewardsForYouEntities db = new RewardsForYouEntities())
+            {
+                updateReward = db.Rewards.Where(l => l.Description == Description).FirstOrDefault();
+            }
+                return PartialView(updateReward);
+        }
 
+        public ActionResult DoUpdateReward(Rewards data)
+        {
+            Rewards updateReward = null;
+            using (RewardsForYouEntities db = new RewardsForYouEntities())
+            {
+                updateReward = db.Rewards.Where(l => l.RewardsID == data.RewardsID).FirstOrDefault();
+                updateReward.Type = data.Type;
+                updateReward.Description = data.Description;
+                updateReward.Availability = data.Availability;
+                updateReward.Points = data.Points;
+                db.SaveChanges();
+            }
+            return RedirectToAction("SearchDeleteRewards", new SearchDeleteReward());
+        }
         //Search and Delete Tasks
         public ActionResult SearchDeleteTasks(SearchDeleteTask data)
         {
@@ -323,7 +372,36 @@ namespace RewardsForYou.Controllers
             }
             return RedirectToAction("SearchDeleteTasks", new SearchDeleteTask());
         }
+         public ActionResult _PartialUpdateView(string Description, string Type)
+        {
+            Tasks updateTask = null;
+            using (RewardsForYouEntities db = new RewardsForYouEntities())
+            {
+                updateTask = db.Tasks.Where(l => l.Description == Description && l.Type == Type).FirstOrDefault();
+            }
 
+                return PartialView(updateTask);
+        }
+
+        public ActionResult DoUpdate(Tasks data)
+        {
+            Tasks updateTask = null;
+            using (RewardsForYouEntities db = new RewardsForYouEntities())
+            {
+                updateTask = db.Tasks.Where(l => l.Description == data.Description && l.Type == data.Type).FirstOrDefault();
+
+                updateTask.Description = data.Description;
+                updateTask.Type = data.Type;
+                updateTask.TimeSpan = data.TimeSpan;
+                updateTask.Points = data.Points;
+                updateTask.ExpiryDate = data.ExpiryDate;
+                db.SaveChanges();
+            }
+
+
+
+            return RedirectToAction("SearchDeleteTasks", new SearchDeleteTask());
+        }
 
         public ActionResult TakeJsonUsers(string Serial, string EMail)
         {
