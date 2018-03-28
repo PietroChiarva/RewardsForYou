@@ -292,6 +292,10 @@
     <Compile Include="Controllers\EmployeeDetails.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="App_Data\aspnet-RewardsForYou-b686880c-b2d8-4735-b34f-12c1296f4a71.mdf" />
+    <Content Include="App_Data\aspnet-RewardsForYou-b686880c-b2d8-4735-b34f-12c1296f4a71_log.ldf">
+      <DependentUpon>aspnet-RewardsForYou-b686880c-b2d8-4735-b34f-12c1296f4a71.mdf</DependentUpon>
+    </Content>
     <Content Include="bin\Antlr3.Runtime.dll" />
     <Content Include="bin\Antlr3.Runtime.pdb" />
     <Content Include="bin\de\Microsoft.Data.Edm.resources.dll" />
@@ -585,7 +589,6 @@
     <Content Include="Views\Employee\Ranking.cshtml" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="App_Data\" />
     <Folder Include="Views\EmployeeDetails\" />
   </ItemGroup>
   <ItemGroup>

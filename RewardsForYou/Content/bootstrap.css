@@ -1689,6 +1689,7 @@ input[type="number"]::-webkit-inner-spin-button {
   height: auto;
 }
 
+
 .form-control:-moz-placeholder {
   color: #999999;
 }
@@ -1707,7 +1708,7 @@ input[type="number"]::-webkit-inner-spin-button {
 
 .form-control {
   display: block;
-  width: 100%;
+  width:100%;
   height: 34px;
   padding: 6px 12px;
   font-size: 14px;
@@ -1981,9 +1982,9 @@ textarea.input-lg {
 }
 
 @media (min-width: 768px) {
-  .form-horizontal .control-label {
-    text-align: right;
-  }
+    .form-horizontal .control-label {
+        text-align: right;
+    }
 }
 
 .btn {

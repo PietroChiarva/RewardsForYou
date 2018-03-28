@@ -16,6 +16,10 @@
     white-space: normal;
 }
 
+.navbar-inverse {
+    background-color: #888888 !important;
+}
+
 /* Set width on the form input elements since they're 100% wide by default */
 input,
 select,
@@ -34,4 +38,23 @@ textarea {
     vertical-align: middle;
     max-height: 100px;
     max-width: 100px;
+}
+
+#RoleID {
+    width: 200px;
+    box-sizing: border-box;
+    border: 2px solid #ccc;
+    border-radius: 4px;
+    font-size: 16px;
+    background-color: white;
+
+}
+
+#ManagerUserID {
+    width: 200px;
+    box-sizing: border-box;
+    border: 2px solid #ccc;
+    border-radius: 4px;
+    font-size: 16px;
+    background-color: white;
 }
