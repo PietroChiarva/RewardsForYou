@@ -21,6 +21,26 @@
             #myBtn:hover {
                 background-color: #0000ff;
             }
+
+        input[type=text] {
+            width: 200px;
+            box-sizing: border-box;
+            border: 2px solid #ccc;
+            border-radius: 4px;
+            font-size: 16px;
+            background-color: white;
+            background-image: url('searchicon.png');
+            background-position: 10px 10px;
+            background-repeat: no-repeat;
+            padding: 12px 20px 12px 40px;
+            -webkit-transition: width 0.4s ease-in-out;
+            transition: width 0.4s ease-in-out;
+        }
+
+            input[type=text]:focus {
+                width: 100%;
+            }
+
     </style>
 
 <h2>Search and Delete Users</h2>
@@ -35,7 +55,7 @@
         <div class="form-group">
             @Html.LabelFor(model => model.Serial, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.Serial, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.EditorFor(model => model.Serial, new { htmlAttributes = new { type = "text", name = "search", placeholder = "Search.." ,@class = "form-control" } })
                 @Html.ValidationMessageFor(model => model.Serial, "", new { @class = "text-danger" })
             </div>
         </div>
@@ -43,7 +63,7 @@
         <div class="form-group">
             @Html.LabelFor(model => model.EMail, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.EMail, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.EditorFor(model => model.EMail, new { htmlAttributes = new { type = "text", name = "search", placeholder = "Search..", @class = "form-control" } })
                 @Html.ValidationMessageFor(model => model.EMail, "", new { @class = "text-danger" })
             </div>
         </div>
@@ -111,6 +131,8 @@
     function CheckUser() {
         var Data = {
             Serial: $('#Serial').val(),
+            Name: $('#Name').val(),
+            Surname: $('#Surname').val(),
             EMail: $('#EMail').val()
         };
 

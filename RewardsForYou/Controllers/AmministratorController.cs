@@ -375,7 +375,42 @@ namespace RewardsForYou.Controllers
 
         }
 
+        public ActionResult EditUsers(string Serial, string Name, string Surname, string EMail) => View();
 
+        public ActionResult DoEditUsers(Users data)
+        {
+            Users user = null;
+            using (RewardsForYouEntities db = new RewardsForYouEntities())
+            {
+                user = db.Users.Where(l =>  l.Serial == data.Serial && l.Name == data.Name && l.Surname == data.Surname && l.EMail == data.EMail).FirstOrDefault();
 
+                if (user != null)
+                {
+                    user.Serial= data.Serial;
+
+                }
+                else
+                {
+              
+                  
+                   
+                    user.Serial = data.Serial;
+                    user.Name = data.Name;
+                    user.Surname = data.Surname;
+                    user.EMail = data.EMail;
+
+                    db.Users.Add(user);
+                    db.SaveChanges();
+                }
+
+                
+            }
+            return RedirectToAction("SearchDeleteUser",new SearchDeleteUser());
+        }
+
+        public ActionResult _PartialEditUsers(string Serial, string Name, string Surname, string EMail)
+        {
+            return PartialView();
+        }
     }
 }
