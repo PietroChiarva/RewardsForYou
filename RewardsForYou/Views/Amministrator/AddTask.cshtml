@@ -1,7 +1,67 @@
 ﻿@model RewardsForYou.Models.Tasks
 
 
-    
+<style>
+    #myBtn {
+        display: none;
+        position: fixed;
+        bottom: 15px;
+        right: 30px;
+        z-index: 99;
+        font-size: 18px;
+        border: none;
+        outline: none;
+        background-color: red;
+        color: white;
+        cursor: pointer;
+        padding: 15px;
+        border-radius: 4px;
+    }
+
+        #myBtn:hover {
+            background-color: #0000ff;
+        }
+
+    input[type=text] {
+        width: 200px;
+        box-sizing: border-box;
+        border: 2px solid #ccc;
+        border-radius: 4px;
+        font-size: 16px;
+        background-color: white;
+        background-image: url('searchicon.png');
+        background-position: 10px 10px;
+        background-repeat: no-repeat;
+        padding: 12px 20px 12px 40px;
+        -webkit-transition: width 0.4s ease-in-out;
+        transition: width 0.4s ease-in-out;
+    }
+
+        input[type=text]:focus {
+            width: 100%;
+        }
+
+    input[type=date] {
+        width: 200px;
+        height: 40px;
+        box-sizing: border-box;
+        border: 2px solid #ccc;
+        border-radius: 4px;
+        font-size: 16px;
+        background-color: white;
+   
+        /*background-position: 10px 10px;*/
+        /*background-repeat: no-repeat;*/
+        /*padding: 12px 20px 12px 40px;*/
+        /*-webkit-transition: width 0.4s ease-in-out;
+        transition: width 0.4s ease-in-out;*/
+    }
+
+        /*input[type=date]:focus {
+            width: 100%;
+        }*/
+</style>
+
 
 <div class="form-horizontal">
     <h4>Tasks</h4>
@@ -10,7 +70,7 @@
     <div class="form-group">
         @Html.LabelFor(model => model.Type, htmlAttributes: new { @class = "control-label col-md-2" })
         <div class="col-md-10">
-            @Html.EditorFor(model => model.Type, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.EditorFor(model => model.Type, new { htmlAttributes = new { type = "text", name = "search",@class = "form-control" } })
             @Html.ValidationMessageFor(model => model.Type, "", new { @class = "text-danger" })
         </div>
     </div>
@@ -18,7 +78,7 @@
     <div class="form-group">
         @Html.LabelFor(model => model.Description, htmlAttributes: new { @class = "control-label col-md-2" })
         <div class="col-md-10">
-            @Html.EditorFor(model => model.Description, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.EditorFor(model => model.Description, new { htmlAttributes = new { type = "text", name = "search", @class = "form-control" } })
             @Html.ValidationMessageFor(model => model.Description, "", new { @class = "text-danger" })
         </div>
     </div>
@@ -26,7 +86,7 @@
     <div class="form-group">
         @Html.LabelFor(model => model.ExpiryDate, htmlAttributes: new { @class = "control-label col-md-2" })
         <div class="col-md-10">
-            @Html.EditorFor(model => model.ExpiryDate, new { htmlAttributes = new { type = "date", @class = "form-control" } })
+            @Html.EditorFor(model => model.ExpiryDate, new { htmlAttributes = new { type = "date",  @class = "form-control" } })
             @Html.ValidationMessageFor(model => model.ExpiryDate, "", new { @class = "text-danger" })
         </div>
     </div>
@@ -34,7 +94,7 @@
     <div class="form-group">
         @Html.LabelFor(model => model.TimeSpan, htmlAttributes: new { @class = "control-label col-md-2" })
         <div class="col-md-10">
-            @Html.EditorFor(model => model.TimeSpan, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.EditorFor(model => model.TimeSpan, new { htmlAttributes = new { type = "text", name = "search",   @class = "form-control" } })
             @Html.ValidationMessageFor(model => model.TimeSpan, "", new { @class = "text-danger" })
         </div>
     </div>
@@ -42,7 +102,7 @@
     <div class="form-group">
         @Html.LabelFor(model => model.Points, htmlAttributes: new { @class = "control-label col-md-2" })
         <div class="col-md-10">
-            @Html.EditorFor(model => model.Points, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.EditorFor(model => model.Points, new { htmlAttributes = new { type = "text", name = "search",  @class = "form-control" } })
             @Html.ValidationMessageFor(model => model.Points, "", new { @class = "text-danger" })
         </div>
     </div>
@@ -67,7 +127,7 @@
 <script type="text/javascript">
 
     function InsertTask() {
-       
+
             //creo l'oggetto associando le variabili
             var DatiTask = {
                 TaskID: $('#TaskID').val(),

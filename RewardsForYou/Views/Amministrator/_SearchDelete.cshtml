@@ -71,10 +71,11 @@
                 <td>
 
                     @*@Html.ActionLink("Delete", "Delete", new { id = item.UserID })*@
-                    <a onclick="ShowDeleteModal( '@item.Serial', '@item.EMail')"
-                       class="btn btn-primary"><i class="fa fa-trash"></i>Delete</a>
                     <a onclick="ShowUpdateModal( '@item.Serial', '@item.EMail')"
-                       class="btn btn-primary"><img src="~/Images/edit.png" /></a>
+                       class="btn btn-primary"><img src="~/Images/edit1.png" /></a>
+                    <a onclick="ShowDeleteModal( '@item.Serial', '@item.EMail')"
+                       class="btn btn-primary"><img src="~/Images/delete1.png" /></a>
+
 
                 </td>
             </tr>
