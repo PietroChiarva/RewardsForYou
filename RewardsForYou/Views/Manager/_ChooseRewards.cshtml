@@ -1,6 +1,8 @@
 ﻿@model RewardsForYou.Models.UserRewardModel
 
 
+
+
 <table class="table">
     @foreach (var item in Model.rewards)
     {
@@ -40,8 +42,10 @@
                 @Html.DisplayFor(modelItem => item.Availability)
             </td>
             <td>
-                <a onclick="TakeRewards( '@item.RewardsID', '@Model.UserID')"
-                   class="btn btn-primary">Take the rewards</a>
+                    <a  onclick="TakeRewards( '@item.RewardsID', '@Model.UserID')"
+                       class="btn btn-primary">Take the rewards</a>
+                  
+               
             </td>
 
         </tr>
