@@ -1,0 +1,67 @@
+﻿@model IEnumerable<RewardsForYou.Models.Users>
+
+@{
+    ViewBag.Title = "Ranking";
+}
+
+<h2>Ranking</h2>
+
+
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Serial)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Name)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Surname)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.EMail)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.UserPoints)
+        </th>
+       
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Serial)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Name)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Surname)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.EMail)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.UserPoints)
+        </td>
+        
+        <td>
+            <a class="btn btn-primary" onclick="ShowTaskModal ('@item.UserID')">Task attivi</a>
+        </td>
+           
+       
+    </tr>
+}
+
+</table>
+
+
+<script>
+    function ShowTaskModal(UserID) {
+
+        $('#showModal .modal-body').load(Router.action('Manager', 'ViewTask', { UserID: UserID }));
+        $('#showModal').modal("show");
+
+    }
+</script>
