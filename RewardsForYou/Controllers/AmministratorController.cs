@@ -191,10 +191,18 @@ namespace RewardsForYou.Controllers
         }
         public ActionResult _PartialUpdateUser(string Serial, string EMail)
         {
+            List<Roles> role = new List<Roles>();
+            List<Users> usermanager = new List<Users>();
             Users updateUser = null;
             using (RewardsForYouEntities db = new RewardsForYouEntities())
             {
                 updateUser = db.Users.Where(l => l.Serial == Serial && l.EMail == EMail).FirstOrDefault();
+                usermanager = db.Users.Where(l => l.RoleID == 2).ToList();
+
+                
+                ViewBag.RoleList = db.Roles.Select(r => new SelectListItem() { Value = r.RoleID.ToString(), Text = r.Role }).ToList();
+
+                ViewBag.ManagerList = usermanager.Select(r => new SelectListItem() { Value = r.UserID.ToString(), Text = r.Name + " " + r.Surname }).ToList();
             }
                 return PartialView(updateUser);
         }
