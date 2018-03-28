@@ -19,6 +19,8 @@ namespace RewardsForYou.Models
         public List<Missions> MissionDesiredDate { get; set; }
         public List<object> MissionArray { get; set; }
         public List<NoticeMissionEnded> noticeMissions { get; set; }
+        public String RoleName { get; set; }
+        public SearchDeleteUser UserList { get; set; }
 
       
 

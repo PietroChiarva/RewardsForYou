@@ -115,6 +115,7 @@ namespace RewardsForYou.Controllers
             //List<String> manager = new List<String>();
             //String managerUser = null;
 
+
             using (RewardsForYouEntities db = new RewardsForYouEntities())
             {
 
@@ -217,9 +218,9 @@ namespace RewardsForYou.Controllers
                 userUpdate.Name = data.Name;
                 userUpdate.Surname = data.Surname;
                 userUpdate.UserPoints = data.UserPoints;
-               // userUpdate.ManagerUserID = data.ManagerUserID;
+                userUpdate.ManagerUserID = data.ManagerUserID;
                 userUpdate.EMail = data.EMail;
-                //userUpdate.RoleID = data.RoleID;
+                userUpdate.RoleID = data.RoleID;
                 db.SaveChanges();
             }
                 return RedirectToAction("SearchDeleteUser", new SearchDeleteUser());
