@@ -34,9 +34,12 @@
             #myBtn:hover {
                 background-color: #0000ff;
             }
+        #userDetails{
+            padding-left:20px;
+        }
     </style>
 
-
+    
 </head>
 
 
@@ -45,75 +48,139 @@
 
     <!--User details-->
     <div class="container">
-        <span class="helper"><img id="userImage" src="~/Images/loading.gif" class="img" /></span>
-        <div class="container-fluid">
-            <div class="container-fluid" id="DetailsUser" style="margin-top:5px;overflow-x:auto;width:100%;">
-                <table class="table">
-                    <tr>
-                        <th>
-                            @Html.DisplayNameFor(model => model.User.Serial)
-                        </th>
-                        <th>
-                            @Html.DisplayNameFor(model => model.User.Name)
-                        </th>
-                        <th>
-                            @Html.DisplayNameFor(model => model.User.Surname)
-                        </th>
-                        <th>
-                            @Html.DisplayNameFor(model => model.User.EMail)
-                        </th>
-                        <th>
-                            @Html.DisplayNameFor(model => model.ManagerName)
-                        </th>
+        <div class="row">
 
-                        <th>
-                            @Html.DisplayNameFor(model => model.User.UserPoints)
-                        </th>
+            <div class="col-lg-2" style="background-color:lightgray; text-align:center; padding:5px; height:160px;">
+                <span class="helper"><img id="userImage" src="~/Images/loading.gif" class="img" /></span>
+            </div>
 
+            <div class="col-lg-2" style="background-color:lightgray; text-align:center; padding:5px; height:160px;">
+                <h4>@Html.DisplayNameFor(model => model.User.UserPoints)</h4>
+                <h1>@Html.DisplayFor(model => model.User.UserPoints)</h1>
 
+                <a class="btn btn-primary" id="ButtonClassifica" onclick="GoToRanking ('@Model.User.UserID')">Classifica Punti  <img src="~/Images/rank.png" /></a>
+            </div>
 
-                        <th></th>
-                    </tr>
+            <div class="col-lg-1">
 
-
-                    <tr>
-                        <td>
-                            @Html.DisplayFor(modelItem => Model.User.Serial)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => Model.User.Name)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => Model.User.Surname)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => Model.User.EMail)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => Model.ManagerName)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => Model.User.UserPoints)
-                        </td>
-
-
-                    </tr>
-
-
-                </table>
+            </div>
+            <br />
+           
+            <div class="col-lg-7" id="userDetails">
+                <div>
+                    <div class="row link-row">
+                        <strong>@Html.DisplayNameFor(model => model.User.Serial):</strong>
+                        @Html.DisplayFor(modelItem => Model.User.Serial)
+                    </div>
+                    <div class="row link-row">
+                        <strong>@Html.DisplayNameFor(model => model.User.Name):</strong>
+                        @Html.DisplayFor(modelItem => Model.User.Name)
+                    </div>
+                    <div class="row link-row">
+                        <strong>@Html.DisplayNameFor(model => model.User.Surname):</strong>
+                        @Html.DisplayFor(modelItem => Model.User.Surname)
+                    </div>
+                    <div class="row link-row">
+                        <strong>@Html.DisplayNameFor(model => model.User.EMail):</strong>
+                        @Html.DisplayFor(modelItem => Model.User.EMail)
+                    </div>
+                    <div class="row link-row">
+                        <strong>@Html.DisplayNameFor(model => model.ManagerName):</strong>
+                        @Html.DisplayFor(modelItem => Model.ManagerName)
+                    </div>
+                </div>
             </div>
         </div>
     </div>
-    <div>
+    @*<div class="container">
+                <div class="row">
+                    <div class="col-6">
+                        <span class="helper"><img id="userImage" src="~/Images/loading.gif" class="img" /></span>
+                    </div>
+                    <div class="col-6">
+                <div class="container-fluid" id="DetailsUser" style="margin-top:5px;overflow-x:auto;width:100%;">
+                    <table class="table">
+                        <tr>
+                            <th>
+                                @Html.DisplayNameFor(model => model.User.Serial)
+                            </th>
+                            <td>
+                                @Html.DisplayFor(modelItem => Model.User.Serial)
+                            </td>
+                        </tr>
+                        <tr>
+                            <th>
+                                @Html.DisplayNameFor(model => model.User.Name)
+                            </th>
+                            <td>
+                                @Html.DisplayFor(modelItem => Model.User.Name)
+                            </td>
+                        </tr>
+                        <tr>
+                            <th>
+                                @Html.DisplayNameFor(model => model.User.Surname)
+                            </th>
+                            <td>
+                                @Html.DisplayFor(modelItem => Model.User.Surname)
+                            </td>
+                        </tr>
+                    </table>
+
+                </div>
+                        </div>
+        </div>
+
+                <div class="container-fluid" id="DetailsUser" style="margin-top:5px;overflow-x:auto;width:100%;">
+                    <table>
+                        <tr>
+                            <th>
+                                @Html.DisplayNameFor(model => model.User.EMail)
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.ManagerName)
+                            </th>
+
+                            <th>
+                                @Html.DisplayNameFor(model => model.User.UserPoints)
+                            </th>
+
+
+
+                            <th></th>
+                        </tr>
+
+
+                        <tr>
+
+
+
+                            <td>
+                                @Html.DisplayFor(modelItem => Model.User.EMail)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => Model.ManagerName)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => Model.User.UserPoints)
+                            </td>
+
+
+                        </tr>
+
+
+                    </table>
+                </div>
+                </div>*@
+    @*<div>
         <a class="btn btn-primary" id="ButtonClassifica" onclick="GoToRanking ('@Model.User.UserID')">Classifica Punti  <img src="~/Images/rank.png" /></a>
-    </div>
+    </div>*@
 
     <!--User Task details-->
     <div class="panel-group">
         <div class="panel panel-default">
             <div class="panel-heading">
                 <h4 class="panel-title">
-                    <a data-toggle="collapse" href="#collapse2" class="list-group-item active" align="center"> <h4>Employee Tasks</h4></a>
+                    <a data-toggle="collapse" href="#collapse2" class="list-group-item active" align="center"> Employee Tasks</a>
                 </h4>
             </div>
             <div id="collapse2" class="panel-collapse collapse">
@@ -204,7 +271,7 @@
         <div class="panel panel-default">
             <div class="panel-heading">
                 <h4 class="panel-title">
-                    <a data-toggle="collapse" href="#collapse3" class="list-group-item active" align="center"><h4>Employee Rewards</h4></a>
+                    <a data-toggle="collapse" href="#collapse3" class="list-group-item active" align="center">Employee Rewards</a>
                 </h4>
             </div>
             <div id="collapse3" class="panel-collapse collapse">
@@ -263,7 +330,7 @@
         <div class="panel panel-default">
             <div class="panel-heading">
                 <h4 class="panel-title">
-                    <a data-toggle="collapse" href="#collapse4" class="list-group-item active" align="center"><h4>Available Rewards</h4></a>
+                    <a data-toggle="collapse" href="#collapse4" class="list-group-item active" align="center">Available Rewards</a>
                 </h4>
             </div>
             <div id="collapse4" class="panel-collapse collapse">
