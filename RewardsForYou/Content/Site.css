@@ -17,15 +17,21 @@
 }
 
 .navbar-inverse {
-    background-color: #888888 !important;
+    background-color: #428bca !important;
+    border: 2px solid transparent;
 }
-
-/* Set width on the form input elements since they're 100% wide by default */
-input,
-select,
-textarea {
-    max-width: 280px;
-}
+    .navbar-inverse .navbar-nav > li > a {
+        color: #F5F5DC;
+    }
+    .navbar-inverse .navbar-brand {
+        color: #F5F5DC;
+    }
+    /* Set width on the form input elements since they're 100% wide by default */
+    input,
+    select,
+    textarea {
+        max-width: 280px;
+    }
 
 
 .helper {
@@ -36,8 +42,8 @@ textarea {
 
 .img {
     vertical-align: middle;
-    max-height: 100px;
-    max-width: 100px;
+    max-height: 150px;
+    max-width: 150px;
 }
 
 #RoleID {
