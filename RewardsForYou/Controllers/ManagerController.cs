@@ -596,10 +596,12 @@ namespace RewardsForYou.Controllers
         public ActionResult DoRefuse(int MissionID, int UserID)
         {
             NoticeMissionEnded notice = null;
+            
             using (RewardsForYouEntities db = new RewardsForYouEntities())
             {
                 notice = db.NoticeMissionEnded.Where(l => l.MissionID == MissionID && l.UserID == UserID).FirstOrDefault();
                 notice.Status = 1;
+
                 db.SaveChanges();
             }
 
