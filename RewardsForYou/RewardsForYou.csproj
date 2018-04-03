@@ -20,7 +20,7 @@
     <MvcBuildViews>false</MvcBuildViews>
     <UseIISExpress>true</UseIISExpress>
     <Use64BitIISExpress />
-    <IISExpressSSLPort>44358</IISExpressSSLPort>
+    <IISExpressSSLPort>44317</IISExpressSSLPort>
     <IISExpressAnonymousAuthentication />
     <IISExpressWindowsAuthentication />
     <IISExpressUseClassicPipelineMode />
@@ -478,14 +478,21 @@
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
+    <Content Include="Images\addtask.png" />
+    <Content Include="Images\card.png" />
+    <Content Include="Images\card1.png" />
     <Content Include="Images\delete.png" />
     <Content Include="Images\delete1.png" />
     <Content Include="Images\edit.png" />
     <Content Include="Images\edit1.png" />
+    <Content Include="Images\employee.png" />
+    <Content Include="Images\listtask.png" />
     <Content Include="Images\loading.gif" />
     <Content Include="Images\noUserImage.png" />
     <Content Include="Images\podium.png" />
     <Content Include="Images\rank.png" />
+    <Content Include="Images\view.png" />
+    <Content Include="Images\view1.png" />
     <Content Include="Models\RewardsForYou.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>RewardsForYou.Context.cs</LastGenOutput>
@@ -588,6 +595,7 @@
     <Content Include="Views\Amministrator\_PartialUpdateUser.cshtml" />
     <Content Include="Views\Amministrator\_PartialUpdateView.cshtml" />
     <Content Include="Views\Employee\Ranking.cshtml" />
+    <Content Include="Views\Home\Login.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Views\EmployeeDetails\" />
