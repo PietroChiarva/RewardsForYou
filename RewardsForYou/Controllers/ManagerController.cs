@@ -641,7 +641,7 @@ namespace RewardsForYou.Controllers
 
                     //sottrazione dei punti allo user
                     userUpdated.UserPoints = userUpdated.UserPoints - rewards.Points;
-
+                    
                     //diminuzione dell'availability del reward
                     availabilityReward.Availability = availabilityReward.Availability - 1;
 
