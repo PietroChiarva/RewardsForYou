@@ -160,7 +160,7 @@
         <div class="panel panel-default">
             <div class="panel-heading">
                 <h4 class="panel-title">
-                    <a data-toggle="collapse" href="#collapse1" class="list-group-item active" align="center"> Mission Notify</a>
+                    <a data-toggle="collapse" href="#collapse1" class="list-group-item active" align="center"><img src="~/Images/notify.png" /> Mission</a>
                 </h4>
             </div>
             <div id="collapse1" class="panel-collapse collapse">
@@ -250,7 +250,7 @@
         <div class="panel panel-default">
             <div class="panel-heading">
                 <h4 class="panel-title">
-                    <a data-toggle="collapse" href="#collapse2" class="list-group-item active" align="center"> Rewards Notify</a>
+                    <a data-toggle="collapse" href="#collapse2" class="list-group-item active" align="center"><img src="~/Images/notify.png" /> Rewards</a>
                 </h4>
             </div>
             <div id="collapse2" class="panel-collapse collapse">
@@ -307,10 +307,10 @@
                                             @Html.DisplayFor(modelItem => item.UserName)
                                         </td>
                                         <td>
-                                            <a class="btn btn-primary" id="AcceptButtonRewards" onclick="AcceptRewards ('@item.RewardsID', '@item.UserID')">Accept</a>
+                                            <a class="btn btn-primary" id="AcceptButtonRewards" onclick="AcceptRewards ('@item.RewardsID', '@item.UserID')"><img src="~/Images/accept.png" /></a>
                                         </td>
                                         <td>
-                                            <a class="btn btn-primary" id="RefuseButtonRewards" onclick="RefuseRewards ('@item.RewardsID', '@item.UserID')">Refuse</a>
+                                            <a class="btn btn-primary" id="RefuseButtonRewards" onclick="RefuseRewards ('@item.RewardsID', '@item.UserID')"><img src="~/Images/denied.png" /></a>
                                         </td>
                                     </tr>
                                 }
@@ -328,7 +328,7 @@
         <div class="panel panel-default">
             <div class="panel-heading">
                 <h4 class="panel-title">
-                    <a data-toggle="collapse" href="#collapse3" class="list-group-item active" align="center"> Manager Tasks</a>
+                    <a data-toggle="collapse" href="#collapse3" class="list-group-item active" align="center"><img src="~/Images/tasklist.png" /> Manager</a>
                 </h4>
             </div>
             <div id="collapse3" class="panel-collapse collapse">
@@ -399,7 +399,7 @@
                                         @if (item.IsFinished == false)
                                         {
                                             <td>
-                                                <a class="btn btn-primary" id="NoticeButton" onclick="NoticeMission ('@item.TaskID', '@Model.User.UserID')">Finish the mission</a>
+                                                <a class="btn btn-primary" id="NoticeButton" onclick="NoticeMission ('@item.TaskID', '@Model.User.UserID')"><img src="~/Images/taskcomplete1.png" /></a>
                                             </td>
                                         }
                                     </tr>
@@ -419,7 +419,7 @@
         <div class="panel panel-default">
             <div class="panel-heading">
                 <h4 class="panel-title">
-                    <a data-toggle="collapse" href="#collapse4" class="list-group-item active" align="center">Manager Rewards</a>
+                    <a data-toggle="collapse" href="#collapse4" class="list-group-item active" align="center"><img src="~/Images/reward.png" /> Manager</a>
                 </h4>
             </div>
             <div id="collapse4" class="panel-collapse collapse">

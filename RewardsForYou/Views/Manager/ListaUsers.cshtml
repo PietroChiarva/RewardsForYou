@@ -59,14 +59,38 @@
             font-size: 18px;
         }
 
+
+       /*cambiare colori righe*/
+
+ 
+
+        #myTable tr:nth-child(even) {
+            background-color: #f2f2f2;
+        }
+
+        /*#myTable tr:hover {
+            background-color: #ddd;
+        }*/
+
+            #myTable th {
+                padding-top: 15px;
+                padding-bottom: 15px;
+                text-align: left;
+                color: black;
+            }
+
+
+
     </style>
 
 
 </head>
 
 <body>
-    <h2>List of Employee</h2>
 
+
+    <h2>List of Employee</h2>
+    <div align="right">@Html.ActionLink("Back to home", "Index")</div>
     <div class="container">
 
         <input type="text" id="myInput" onkeyup="myFunction()" placeholder="Search for names.." title="Type in a name">
@@ -94,32 +118,38 @@
                                 <th>
                                     @Html.DisplayNameFor(model => model.EMail)
                                 </th>
+
+                                <th>
+                                    <a></a>
+                                    <a></a>
+                                    <a></a>
+                                </th>
                             </tr>
 
                             @foreach (var item in Model)
-                        {
+                            {
 
-                            <tr>
-                                <td>
-                                    @Html.DisplayFor(modelItem => item.Serial)
-                                </td>
-                                <td>
-                                    @Html.DisplayFor(modelItem => item.Name)
-                                </td>
-                                <td>
-                                    @Html.DisplayFor(modelItem => item.Surname)
-                                </td>
-                                <td>
-                                    @Html.DisplayFor(modelItem => item.EMail)
-                                </td>
+                                <tr>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.Serial)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.Name)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.Surname)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.EMail)
+                                    </td>
 
-                                <td>
-                                    <a class="btn btn-primary" onclick="ShowMissionModal ('@item.UserID')"><img src="~/Images/card1.png" /></a>
-                                    <a class="btn btn-primary" onclick="ShowViewModal ('@item.UserID')"><img src="~/Images/view1.png" /> Task</a>
-                                    <a class="btn btn-primary" onclick="ShowAssegnaModal ('@item.UserID')"><img src="~/Images/listtask.png" /></a>
-                                </td>
-                            </tr>
-                    }
+                                    <td>
+                                        <a class="btn btn-primary" onclick="ShowMissionModal ('@item.UserID')"><img src="~/Images/card1.png" /></a>
+                                        <a class="btn btn-primary" onclick="ShowViewModal ('@item.UserID')"><img src="~/Images/view1.png" /> Task</a>
+                                        <a class="btn btn-primary" onclick="ShowAssegnaModal ('@item.UserID')"><img src="~/Images/listtask.png" /></a>
+                                    </td>
+                                </tr>
+                            }
 
                         </table>
                     </div>
@@ -128,10 +158,10 @@
         </div>
     </div>
 
- 
 
+    
     <div>
-        @Html.ActionLink("Back to List", "Index")
+        @Html.ActionLink("Back to home", "Index")
 
         <button align="rigth" onclick="topFunction()" id="myBtn" title="Go to top">Su</button>
     </div>
