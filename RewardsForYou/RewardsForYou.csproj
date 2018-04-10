@@ -481,6 +481,7 @@
     <Content Include="Images\accept.png" />
     <Content Include="Images\addnewtask.png" />
     <Content Include="Images\addtask.png" />
+    <Content Include="Images\amazon.png" />
     <Content Include="Images\card.png" />
     <Content Include="Images\card1.png" />
     <Content Include="Images\carrello.png" />
